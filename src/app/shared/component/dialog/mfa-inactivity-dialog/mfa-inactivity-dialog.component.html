@@ -6,6 +6,6 @@
   <app-text-control label="MFA code" [(ngModel)]="text"></app-text-control>
   <div class="flex gap-3">
     <app-button (buttonClick)="handleYesClick()">Confirm</app-button>
-    <app-button [type]="'ternary'" (buttonClick)="handleNoClick()">Logout</app-button>
+    <app-button variant="secondary" (buttonClick)="handleNoClick()">Logout</app-button>
   </div>
 </div>
