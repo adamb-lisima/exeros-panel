@@ -161,52 +161,6 @@
 
 // ── Settings Inner Panel (shared across sub-pages) ──
 :host ::ng-deep {
-  .border-r.border-neutral-400 {
-    border-right: 1px solid #eef0f3 !important;
-    background: #fafbfc;
-    border-radius: 14px;
-    padding: 20px !important;
-    margin-right: 12px;
-  }
-
   .flex.flex-col.gap-5.p-5 { padding: 0 !important; gap: 24px !important; }
   .flex.gap-5 { gap: 24px !important; }
-
-  .text-xl.font-bold, .font-bold {
-    font-size: 16px;
-    font-weight: 600;
-    letter-spacing: -0.01em;
-    color: #111827;
-  }
-
-  .text-sm.font-medium { font-size: 13.5px; }
-
-  table {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
-
-    tr { transition: background 150ms ease; &:hover { background: #fafbfc; } }
-    td { padding: 12px 8px; font-size: 13.5px; }
-
-    .border-b.border-neutral-400, .border-b.border-neutral-100 { border-bottom-color: #f0f1f3 !important; }
-
-    thead {
-      .border-b.border-neutral-400, .border-b.border-neutral-100 { border-bottom-color: #e5e7eb !important; }
-      td { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #9ca3af; padding: 10px 8px; }
-    }
-  }
-
-  .border-neutral-400 { border-color: #eef0f3 !important; }
-  .text-neutral-400 { color: #9ca3af !important; }
-
-  .text-sm.text-brand-500.font-semibold {
-    font-size: 13px;
-    font-weight: 600;
-    color: #ee8444;
-    text-decoration: none;
-    &:hover { color: #df5f18; }
-  }
-
-  app-paginator { margin-top: 8px; }
 }

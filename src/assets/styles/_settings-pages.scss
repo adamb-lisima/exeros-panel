@@ -1,9 +1,9 @@
 // ══════════════════════════════════════════════════
 // Settings Sub-Page Premium Styles
-// Applied globally to reach into child components
+// Global stylesheet — reaches into child components
 // ══════════════════════════════════════════════════
 
-// ── Sub-page wrapper: remove default padding, use parent's ──
+// ── Master wrapper: all settings sub-page hosts ──
 app-settings-core-fleets,
 app-settings-core-roles,
 app-settings-core-driver,
@@ -18,244 +18,465 @@ app-settings-core-providers,
 app-settings-core-admins,
 app-settings-core-app-settings {
   display: block;
+}
 
-  // ── Search bar ──
-  app-text-control {
-    max-width: 480px;
+// ── Search bar max-width ──
+app-settings-core-fleets app-text-control,
+app-settings-core-roles app-text-control,
+app-settings-core-driver app-text-control,
+app-settings-core-companies app-text-control,
+app-settings-core-notifications app-text-control {
+  max-width: 480px;
+}
+
+// ══════════════════════════════════════════════════
+// INNER TREE PANELS (left sidebar within sub-pages)
+// ══════════════════════════════════════════════════
+
+app-settings-core-fleets > div > div.flex.gap-5 > div.w-72,
+app-settings-core-roles > div > div.flex.gap-5 > div.w-72,
+app-settings-core-driver > div > div.flex.gap-5 > div.w-72,
+app-settings-core-companies > div > div.flex.gap-5 > div.w-72,
+app-settings-core-notifications > div > div.flex.gap-5 > div.w-72,
+app-settings-core-reports > div > div.flex.gap-5 > div.flex.flex-col.gap-6,
+app-settings-core-admin-notices > div > div.flex.gap-5 > div.w-72,
+app-settings-core-shared-clips > div > div.flex.gap-5 > div.w-72,
+app-settings-core-safety-scores > div > div.flex.gap-5 > div.flex.flex-col.gap-6 {
+  border-right: 1px solid #eef0f3 !important;
+  background: #f8f9fb;
+  border-radius: 14px;
+  padding: 20px !important;
+  margin-right: 4px;
+}
+
+// ══════════════════════════════════════════════════
+// SECTION TITLES
+// ══════════════════════════════════════════════════
+
+app-settings-core-fleets .text-xl,
+app-settings-core-roles .text-xl,
+app-settings-core-companies .text-xl,
+app-settings-core-shared-clips .text-xl,
+app-settings-core-safety-scores .text-xl,
+app-settings-core-admins .text-xl,
+app-settings-core-providers .text-xl,
+app-settings-core-event-strategies h2 {
+  font-size: 18px !important;
+  font-weight: 600 !important;
+  color: #111827 !important;
+  letter-spacing: -0.02em;
+}
+
+app-settings-core-fleets .font-bold,
+app-settings-core-roles .font-bold,
+app-settings-core-driver .font-bold,
+app-settings-core-companies .font-bold,
+app-settings-core-notifications .font-bold,
+app-settings-core-shared-clips .font-bold,
+app-settings-core-safety-scores .font-bold,
+app-settings-core-event-strategies .font-bold {
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.01em;
+  color: #111827 !important;
+}
+
+// ══════════════════════════════════════════════════
+// ALL TABLES — Premium overhaul
+// ══════════════════════════════════════════════════
+
+app-settings-core-fleets table,
+app-settings-core-fleets-fleet table,
+app-settings-core-fleets-vehicle table,
+app-settings-core-roles table,
+app-settings-core-roles-users-list table,
+app-settings-core-roles-assigned-users-list table,
+app-settings-core-driver table,
+app-settings-core-driver-list table,
+app-settings-core-driver-assigned-driver-list table,
+app-settings-core-companies table,
+app-settings-core-companies-list table,
+app-settings-core-companies-company table,
+app-settings-core-companies-fleet-access-assigned-users-list table,
+app-settings-core-notifications table,
+app-settings-core-shared-clips table,
+app-settings-core-admins table,
+app-settings-core-providers table,
+app-settings-core-event-strategies table,
+app-settings-core-event-strategies-list table,
+app-settings-core-reports table,
+app-settings-core-reports-list table,
+app-settings-core-reports-selected-report table,
+app-settings-core-notice-list table {
+  width: 100%;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  background: #fff;
+  border-radius: 12px !important;
+  overflow: hidden;
+  border: 1px solid #f0f1f3 !important;
+
+  // ── Table header ──
+  thead tr,
+  thead tr.border-b,
+  tr.border-b.border-neutral-400:first-child,
+  tr.text-left.border-b {
+    border-bottom: 2px solid #eef0f3 !important;
+    background: #f8f9fb !important;
   }
 
-  // ── Inner tree panel (left sidebar within sub-pages) ──
-  .border-r.border-neutral-100,
-  .border-r.border-neutral-400 {
-    border-right: 1px solid #eef0f3 !important;
-    background: #f8f9fb;
-    border-radius: 14px;
-    padding: 20px !important;
+  thead td,
+  thead th {
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.06em !important;
+    color: #9ca3af !important;
+    padding: 12px 16px !important;
+    white-space: nowrap;
+    border-bottom: none !important;
+    text-align: left;
   }
 
-  // ── Section titles ──
-  .text-xl.font-medium,
-  .text-xl.font-bold {
-    font-size: 18px;
-    font-weight: 600;
-    color: #111827;
-    letter-spacing: -0.02em;
-  }
-
-  .font-bold {
-    font-weight: 600;
-    color: #1f2937;
-  }
-
-  // ── All tables inside settings sub-pages ──
-  table,
-  table.table-auto {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
-    background: #fff;
-    border-radius: 12px;
-    overflow: hidden;
-    border: 1px solid #f0f1f3;
-
-    thead {
-      tr, tr.border-b {
-        border-bottom: 2px solid #eef0f3 !important;
-        background: #f8f9fb;
-      }
-
-      td, th {
-        font-size: 11px !important;
-        font-weight: 600 !important;
-        text-transform: uppercase;
-        letter-spacing: 0.06em;
-        color: #9ca3af !important;
-        padding: 12px 16px !important;
-        white-space: nowrap;
-        border-bottom: none;
-      }
-    }
-
-    tbody {
-      tr {
-        border-bottom: 1px solid #f5f6f8 !important;
-        transition: background 150ms ease;
-
-        &:hover {
-          background: #fafbfc;
-        }
-
-        &:last-child {
-          border-bottom: none !important;
-        }
-      }
-
-      td {
-        padding: 14px 16px !important;
-        font-size: 13.5px;
-        color: #374151;
-        border-bottom: none;
-      }
-    }
-
-    // ── Remove old border classes ──
-    .border-b.border-neutral-400,
-    .border-b.border-neutral-100 {
-      border-bottom-color: #f0f1f3 !important;
-    }
-  }
-
-  // ── Action links (Edit, Delete, Reset Password, etc.) ──
-  .text-brand-500.text-sm.font-semibold,
-  .text-sm.text-brand-500.font-semibold {
-    font-size: 12.5px !important;
-    font-weight: 600;
-    color: #ee8444 !important;
-    text-decoration: none !important;
-    padding: 4px 10px !important;
-    border-radius: 6px;
-    transition: all 150ms ease;
-    display: inline-block;
-
-    &:hover {
-      background: rgba(238, 132, 68, 0.08);
-      color: #df5f18 !important;
-    }
-  }
-
-  // ── Three-dot menu trigger ──
-  [matMenuTriggerFor] {
-    border-radius: 8px !important;
+  // ── Table body rows ──
+  tbody tr {
+    border-bottom: 1px solid #f5f6f8 !important;
     transition: background 150ms ease;
 
     &:hover {
-      background: #f3f4f6 !important;
+      background: #fafbfc !important;
+    }
+
+    &:last-child {
+      border-bottom: none !important;
     }
   }
 
-  // ── Info label/value pairs ──
-  .text-sm.text-neutral-400 {
-    font-size: 13px;
-    color: #9ca3af;
+  tbody td {
+    padding: 14px 16px !important;
+    font-size: 13.5px !important;
+    color: #374151 !important;
+    border-bottom: none !important;
   }
 
-  // ── Commission status badges ──
-  .bg-success-500--30,
-  .bg-error-50,
-  .bg-warning-500--30 {
-    border-radius: 20px !important;
-    padding: 4px 14px !important;
-    font-size: 12px !important;
-    font-weight: 500;
-    letter-spacing: 0.02em;
+  // ── Remove old border classes ──
+  .border-b.border-neutral-400,
+  .border-b.border-neutral-100 {
+    border-bottom-color: #f0f1f3 !important;
   }
 
-  // ── Fleet/Company detail header ──
-  .flex.items-center.gap-6 {
-    padding-bottom: 16px;
-    border-bottom: 1px solid #f0f1f3;
-    margin-bottom: 8px;
-  }
-
-  // ── Fleet info stats ──
-  .flex.gap-24 {
-    background: #f8f9fb;
-    border-radius: 12px;
-    padding: 16px 20px;
-    gap: 40px !important;
-  }
-
-  // ── Assigned section header (Assigned vehicles, Assigned users) ──
-  .flex.justify-between.items-center {
-    padding: 12px 0;
-  }
-
-  // ── Delete action at bottom ──
-  > div > div > span.text-sm.text-brand-500.font-semibold.cursor-pointer {
-    font-size: 13px;
-    color: #ef4444 !important;
-    font-weight: 500;
-
-    &:hover {
-      color: #dc2626 !important;
-    }
-  }
-
-  // ── Paginator spacing ──
-  app-paginator {
-    margin-top: 12px;
+  // ── Empty first th (spacer) ──
+  thead > th:empty {
+    display: none;
   }
 }
 
-// ── Escalation table specific (notifications page) ──
-app-settings-core-notifications {
-  // Assigned users expanded section
-  .flex.flex-col.gap-4.px-8.pb-4 {
-    background: #f8f9fb;
-    border-radius: 10px;
-    padding: 16px 20px !important;
-    margin: 4px 8px 8px;
+// ══════════════════════════════════════════════════
+// ACTION LINKS (Edit, Delete, Reset Password, etc.)
+// ══════════════════════════════════════════════════
 
-    .text-sm.text-neutral-700.font-medium {
-      font-size: 13px;
-      font-weight: 600;
-      color: #374151;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      margin-bottom: 4px;
-    }
+app-settings-core-roles-users-list .text-brand-500.text-sm.font-semibold,
+app-settings-core-roles-assigned-users-list .text-brand-500.text-sm.font-semibold,
+app-settings-core-companies-list .text-brand-500.text-sm.font-semibold,
+app-settings-core-companies-company .text-brand-500.text-sm.font-semibold,
+app-settings-core-companies-fleet-access-assigned-users-list .text-brand-500.text-sm.font-semibold,
+app-settings-core-admins .text-brand-500.text-sm.font-semibold,
+app-settings-core-providers .text-brand-500.text-sm.font-semibold,
+app-settings-core-notifications .text-brand-500.text-sm.font-semibold {
+  font-size: 12.5px !important;
+  font-weight: 600 !important;
+  color: #ee8444 !important;
+  text-decoration: none !important;
+  padding: 4px 10px !important;
+  border-radius: 6px !important;
+  transition: all 150ms ease;
+  display: inline-block;
+
+  &:hover {
+    background: rgba(238, 132, 68, 0.08) !important;
+    color: #df5f18 !important;
+    text-decoration: none !important;
+  }
+}
+
+// ── Three-dot menu trigger ──
+app-settings-core-fleets-fleet [matMenuTriggerFor],
+app-settings-core-fleets-vehicle [matMenuTriggerFor],
+app-settings-core-driver-list [matMenuTriggerFor],
+app-settings-core-driver-assigned-driver-list [matMenuTriggerFor],
+app-settings-core-event-strategies-list [matMenuTriggerFor] {
+  border-radius: 8px !important;
+  transition: background 150ms ease;
+  width: 28px !important;
+  height: 28px !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    background: #f3f4f6 !important;
+  }
+}
+
+// ══════════════════════════════════════════════════
+// COMMISSION STATUS BADGES
+// ══════════════════════════════════════════════════
+
+app-settings-core-fleets-fleet .bg-success-500--30,
+app-settings-core-fleets-fleet .bg-error-50,
+app-settings-core-fleets-fleet .bg-warning-500--30,
+app-settings-core-fleets-vehicle .bg-success-500--30,
+app-settings-core-fleets-vehicle .bg-error-50,
+app-settings-core-fleets-vehicle .bg-warning-500--30 {
+  border-radius: 20px !important;
+  padding: 4px 14px !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.02em;
+}
+
+// ── Event strategy stream badges ──
+app-settings-core-event-strategies-list .bg-success-50,
+app-settings-core-event-strategies-list .bg-info-50 {
+  border-radius: 20px !important;
+  padding: 3px 12px !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.03em;
+}
+
+// ══════════════════════════════════════════════════
+// FLEET / COMPANY DETAIL HEADERS
+// ══════════════════════════════════════════════════
+
+app-settings-core-fleets-fleet > div > .flex.items-center.gap-6,
+app-settings-core-roles-assigned-users-list > div > .flex.items-center.gap-6,
+app-settings-core-shared-clips .flex.items-center.gap-6,
+app-settings-core-admins .flex.items-center.gap-6,
+app-settings-core-providers .flex.items-center.gap-6 {
+  padding-bottom: 16px;
+  border-bottom: 1px solid #f0f1f3;
+  margin-bottom: 8px;
+}
+
+// ── Fleet info stats ──
+app-settings-core-fleets-fleet > div > .flex.gap-24 {
+  background: #f8f9fb;
+  border-radius: 12px;
+  padding: 16px 20px !important;
+  gap: 40px !important;
+}
+
+// ── Paginator spacing ──
+app-settings-core-fleets app-paginator,
+app-settings-core-roles app-paginator,
+app-settings-core-driver app-paginator,
+app-settings-core-companies app-paginator,
+app-settings-core-reports app-paginator,
+app-settings-core-admin-notices app-paginator,
+app-settings-core-admins app-paginator,
+app-settings-core-providers app-paginator,
+app-settings-core-event-strategies app-paginator {
+  margin-top: 12px;
+}
+
+// ── Delete fleet/role link at bottom ──
+app-settings-core-fleets .text-sm.text-brand-500.font-semibold.cursor-pointer,
+app-settings-core-roles .text-sm.text-brand-500.font-semibold.underline.cursor-pointer,
+app-settings-core-reports .text-sm.text-brand-500.font-semibold.cursor-pointer {
+  font-size: 13px !important;
+  color: #ef4444 !important;
+  font-weight: 500 !important;
+  text-decoration: none !important;
+  padding: 6px 14px;
+  border-radius: 8px;
+  transition: all 150ms ease;
+
+  &:hover {
+    background: rgba(239, 68, 68, 0.06) !important;
+    color: #dc2626 !important;
+  }
+}
+
+// ══════════════════════════════════════════════════
+// NOTIFICATIONS / ESCALATIONS PAGE
+// ══════════════════════════════════════════════════
+
+// ── Assigned users expanded section ──
+app-settings-core-notifications .flex.flex-col.gap-4.px-8.pb-4 {
+  background: #f8f9fb;
+  border-radius: 10px;
+  padding: 16px 20px !important;
+  margin: 4px 8px 8px;
+}
+
+app-settings-core-notifications .flex.flex-col.gap-4.px-8.pb-4 .text-sm.text-neutral-700.font-medium {
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: #374151 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+}
+
+// ── Event group headers ──
+app-settings-core-notifications .text-xs.text-neutral-700 {
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #6b7280 !important;
+}
+
+// ══════════════════════════════════════════════════
+// SAFETY SCORES PAGE
+// ══════════════════════════════════════════════════
+
+app-settings-core-safety-scores .grid.grid-cols-2 {
+  border: 1px solid #f0f1f3 !important;
+  border-radius: 12px !important;
+  overflow: hidden;
+
+  > span,
+  > div {
+    padding: 12px 16px !important;
+    border-bottom-color: #f0f1f3 !important;
   }
 
-  // Event group headers
-  .text-xs.text-neutral-700 {
-    font-size: 11px;
-    font-weight: 600;
+  > span.text-xs {
+    background: #f8f9fb !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    color: #6b7280;
   }
 }
 
-// ── Safety scores page ──
-app-settings-core-safety-scores {
-  .grid.grid-cols-2 {
-    border: 1px solid #f0f1f3;
-    border-radius: 12px;
-    overflow: hidden;
+// ── Score profile detail ──
+app-settings-core-safety-scores .flex.gap-5.mt-6 {
+  background: #f8f9fb;
+  border-radius: 12px;
+  padding: 16px 20px;
+}
 
-    > span, > div {
-      padding: 12px 16px !important;
-      border-bottom-color: #f0f1f3 !important;
-    }
+// ══════════════════════════════════════════════════
+// SHARED CLIPS PAGE
+// ══════════════════════════════════════════════════
 
-    > span.text-xs {
-      background: #f8f9fb;
-      font-size: 11px !important;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-    }
+app-settings-core-shared-clips .flex.items-center.mt-5.gap-2 {
+  background: #f8f9fb;
+  border-radius: 10px;
+  padding: 12px 16px;
+}
+
+// ══════════════════════════════════════════════════
+// PROVIDERS & ADMINS PAGES
+// ══════════════════════════════════════════════════
+
+app-settings-core-providers > div,
+app-settings-core-admins > div {
+  padding: 20px 0 !important;
+}
+
+// ══════════════════════════════════════════════════
+// ADMIN NOTICES PAGE
+// ══════════════════════════════════════════════════
+
+app-settings-core-admin-notices .flex.items-center.gap-1 span {
+  transition: color 150ms ease;
+  padding: 4px 8px;
+  border-radius: 6px;
+
+  &:hover {
+    background: rgba(238, 132, 68, 0.06);
   }
 }
 
-// ── Providers & Admins pages ──
-app-settings-core-providers,
-app-settings-core-admins {
-  .flex-1.flex.flex-col.pb-5 {
-    gap: 20px;
+// ══════════════════════════════════════════════════
+// REPORTS PAGE — tree items
+// ══════════════════════════════════════════════════
 
-    .flex.items-center.gap-6 {
-      border-bottom: none;
-      margin-bottom: 0;
-    }
+app-settings-core-reports .text-sm.font-medium.cursor-pointer {
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: all 150ms ease;
+
+  &:hover {
+    background: rgba(238, 132, 68, 0.06);
   }
 }
 
-// ── Shared clips page ──
-app-settings-core-shared-clips {
-  .flex.items-center.mt-5.gap-2 {
-    background: #f8f9fb;
-    border-radius: 10px;
-    padding: 12px 16px;
-  }
+// ══════════════════════════════════════════════════
+// EVENT STRATEGIES PAGE
+// ══════════════════════════════════════════════════
+
+app-settings-core-event-strategies .flex.justify-between.items-center {
+  padding-bottom: 16px;
+  border-bottom: 1px solid #f0f1f3;
+  margin-bottom: 8px;
+}
+
+// ── No data message ──
+app-settings-core-event-strategies-list .text-center.py-8 {
+  padding: 40px 20px !important;
+  color: #9ca3af !important;
+  font-size: 14px;
+  background: #fafbfc;
+  border-radius: 12px;
+  border: 1px dashed #e5e7eb;
+}
+
+// ══════════════════════════════════════════════════
+// NEUTRAL-400 BORDER CLEANUP (global)
+// ══════════════════════════════════════════════════
+
+app-settings-core-fleets .border-neutral-400,
+app-settings-core-roles .border-neutral-400,
+app-settings-core-driver .border-neutral-400,
+app-settings-core-companies .border-neutral-400,
+app-settings-core-notifications .border-neutral-400,
+app-settings-core-shared-clips .border-neutral-400,
+app-settings-core-admins .border-neutral-400,
+app-settings-core-providers .border-neutral-400,
+app-settings-core-safety-scores .border-neutral-400,
+app-settings-core-event-strategies .border-neutral-400,
+app-settings-core-reports .border-neutral-400,
+app-settings-core-admin-notices .border-neutral-400,
+app-settings-core-fleets-fleet .border-neutral-400,
+app-settings-core-fleets-vehicle .border-neutral-400,
+app-settings-core-roles-users-list .border-neutral-400,
+app-settings-core-roles-assigned-users-list .border-neutral-400,
+app-settings-core-driver-list .border-neutral-400,
+app-settings-core-driver-assigned-driver-list .border-neutral-400,
+app-settings-core-companies-list .border-neutral-400,
+app-settings-core-companies-company .border-neutral-400,
+app-settings-core-companies-fleet-access-assigned-users-list .border-neutral-400,
+app-settings-core-event-strategies-list .border-neutral-400,
+app-settings-core-reports-list .border-neutral-400,
+app-settings-core-notice-list .border-neutral-400 {
+  border-color: #eef0f3 !important;
+}
+
+// ══════════════════════════════════════════════════
+// NEUTRAL-400 TEXT COLOR CLEANUP
+// ══════════════════════════════════════════════════
+
+app-settings-core-fleets .text-neutral-400,
+app-settings-core-roles .text-neutral-400,
+app-settings-core-driver .text-neutral-400,
+app-settings-core-companies .text-neutral-400,
+app-settings-core-notifications .text-neutral-400,
+app-settings-core-shared-clips .text-neutral-400,
+app-settings-core-admins .text-neutral-400,
+app-settings-core-providers .text-neutral-400,
+app-settings-core-safety-scores .text-neutral-400,
+app-settings-core-event-strategies .text-neutral-400,
+app-settings-core-reports .text-neutral-400,
+app-settings-core-fleets-fleet .text-neutral-400,
+app-settings-core-fleets-vehicle .text-neutral-400,
+app-settings-core-roles-users-list .text-neutral-400,
+app-settings-core-roles-assigned-users-list .text-neutral-400,
+app-settings-core-driver-list .text-neutral-400,
+app-settings-core-companies-list .text-neutral-400 {
+  color: #9ca3af !important;
 }
