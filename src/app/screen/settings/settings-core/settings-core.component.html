@@ -1,7 +1,7 @@
 <ng-container *ngIf="loggedInUser$ | async as loggedInUser">
-  <div class="flex h-full bg-surface-base rounded-md overflow-hidden">
+  <div class="settings-shell">
     <!-- Left Sidebar -->
-    <nav class="flex-[0_0_240px] flex flex-col gap-1 p-4 border-r border-neutral-200 overflow-y-auto settings-sidebar" aria-label="Settings navigation">
+    <nav class="settings-sidebar" aria-label="Settings navigation">
       <ng-container *ngFor="let group of visibleSectionGroups; let isLast = last">
         <div class="flex flex-col gap-1">
           <span class="settings-sidebar__group-label">{{ group.label }}</span>
@@ -14,12 +14,12 @@
             {{ tab.label }}
           </a>
         </div>
-        <span *ngIf="!isLast" class="block h-px bg-neutral-200 mx-3 my-2"></span>
+        <span *ngIf="!isLast" class="settings-sidebar__divider"></span>
       </ng-container>
     </nav>
 
     <!-- Right Content Area -->
-    <div class="flex-1 p-6 overflow-y-auto">
+    <div class="settings-content">
       <ng-container [ngSwitch]="module">
         <app-settings-core-profile *ngSwitchCase="'profile'"></app-settings-core-profile>
         <app-settings-core-notifications *ngSwitchCase="'notifications'"></app-settings-core-notifications>

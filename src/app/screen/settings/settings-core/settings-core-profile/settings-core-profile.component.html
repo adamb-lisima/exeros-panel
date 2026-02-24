@@ -1,51 +1,81 @@
 <ng-container *ngIf="loggedInUser$ | async as loggedInUser">
-  <div *appHasPermission="[[accessGroup.SETTINGS_PROFILE]]" class="flex flex-col">
-    <div class="flex justify-between items-center">
-      <span class="text-xl font-bold">Profile information</span>
-      <app-button (buttonClick)="handleEditClick()">
-        <span class="text-sm text-white font-semibold">Edit profile</span>
-      </app-button>
-    </div>
-    <div class="flex gap-24 mt-5">
-      <img *ngIf="loggedInUser.avatar as avatar" class="h-fit rounded-lg aspect-square object-contain" [ngSrc]="avatar" width="144" height="144" alt="avatar" />
-      <div class="flex gap-5">
-        <div class="flex flex-col items-end gap-2">
-          <span class="text-sm text-neutral-400">Name:</span>
-          <span class="text-sm text-neutral-400">Role:</span>
-          <span class="text-sm text-neutral-400">E-mail:</span>
-          <span class="text-sm text-neutral-400">Password:</span>
-          <div class="h-[20px]"></div>
-          <span class="text-sm text-neutral-400">Is MFA enabled:</span>
-        </div>
-        <div class="flex flex-col items-start gap-2">
-          <span class="text-sm font-medium">{{ loggedInUser.name }}</span>
-          <span class="text-sm font-medium">{{ loggedInUser.role }}</span>
-          <span class="text-sm font-medium">{{ loggedInUser.email }}</span>
-          <span class="text-sm font-medium">********************</span>
-          <div class="text-sm text-brand-500 underline font-semibold cursor-pointer" (click)="handleChangePasswordClick()" (keydown.enter)="handleChangePasswordClick()">Change password</div>
-          <span class="text-sm font-medium">{{ loggedInUser.is_mfa_enabled ? 'YES' : 'NO' }}</span>
-          <div *ngIf="!loggedInUser.is_mfa_enabled || loggedInUser.can_mfa_be_disabled" class="text-sm text-brand-500 underline font-semibold cursor-pointer" (click)="handleMFAClick(loggedInUser.is_mfa_enabled)" (keydown.enter)="handleMFAClick(loggedInUser.is_mfa_enabled)">{{ loggedInUser.is_mfa_enabled ? 'Disable' : 'Enable' }} MFA</div>
-        </div>
+  <div *appHasPermission="[[accessGroup.SETTINGS_PROFILE]]" class="flex flex-col gap-8">
+
+    <!-- Profile Card -->
+    <div class="settings-card">
+      <div class="settings-card__header">
+        <span class="settings-card__title">Profile information</span>
+        <app-button (buttonClick)="handleEditClick()">
+          <span class="text-sm text-white font-semibold">Edit profile</span>
+        </app-button>
       </div>
-    </div>
-    <div class="flex flex-col gap-6 mt-10">
-      <span class="text-xl font-bold">Email notifications</span>
-      <div class="flex flex-col gap-4">
-        <span class="text-sm">Receiving email notifications for:</span>
-        <div *ngIf="notifications$ | async as notifications" class="flex flex-col gap-2">
-          <div *ngFor="let notification of notifications" class="flex items-center gap-2">
-            <img [ngSrc]="notification.src" width="24" height="24" [alt]="notification.name" />
-            <p class="text-sm font-medium">{{ notification.name }}</p>
+      <div class="settings-card__body">
+        <div class="flex gap-10 items-start">
+          <!-- Avatar -->
+          <div class="settings-avatar" *ngIf="loggedInUser.avatar as avatar">
+            <img class="settings-avatar__img" [ngSrc]="avatar" width="120" height="120" alt="avatar" />
+          </div>
+          <!-- Info Grid -->
+          <div class="settings-info-grid">
+            <div class="settings-info-row">
+              <span class="settings-info-row__label">Name</span>
+              <span class="settings-info-row__value">{{ loggedInUser.name }}</span>
+            </div>
+            <div class="settings-info-row">
+              <span class="settings-info-row__label">Role</span>
+              <span class="settings-info-row__value">{{ loggedInUser.role }}</span>
+            </div>
+            <div class="settings-info-row">
+              <span class="settings-info-row__label">E-mail</span>
+              <span class="settings-info-row__value">{{ loggedInUser.email }}</span>
+            </div>
+            <div class="settings-info-row">
+              <span class="settings-info-row__label">Password</span>
+              <div class="flex items-center gap-3">
+                <span class="settings-info-row__value">••••••••••••</span>
+                <span class="settings-link" (click)="handleChangePasswordClick()" (keydown.enter)="handleChangePasswordClick()">Change</span>
+              </div>
+            </div>
+            <div class="settings-info-row">
+              <span class="settings-info-row__label">MFA enabled</span>
+              <div class="flex items-center gap-3">
+                <span class="settings-info-row__value" [class.text-green-600]="loggedInUser.is_mfa_enabled" [class.text-red-500]="!loggedInUser.is_mfa_enabled">{{ loggedInUser.is_mfa_enabled ? 'Yes' : 'No' }}</span>
+                <span *ngIf="!loggedInUser.is_mfa_enabled || loggedInUser.can_mfa_be_disabled" class="settings-link" (click)="handleMFAClick(loggedInUser.is_mfa_enabled)" (keydown.enter)="handleMFAClick(loggedInUser.is_mfa_enabled)">{{ loggedInUser.is_mfa_enabled ? 'Disable' : 'Enable' }}</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="flex flex-col gap-6 mt-10">
-      <span class="text-xl font-bold">Application settings</span>
-      <div class="flex items-center gap-4">
-        <span class="text-sm">Application view</span>
-        <app-select-control [showHintSpace]="false" [options]="themes" [formControl]="themeControl"></app-select-control>
+
+    <!-- Email Notifications Card -->
+    <div class="settings-card">
+      <div class="settings-card__header">
+        <span class="settings-card__title">Email notifications</span>
+      </div>
+      <div class="settings-card__body">
+        <span class="text-sm text-neutral-500 mb-4 block">Receiving email notifications for:</span>
+        <div *ngIf="notifications$ | async as notifications" class="flex flex-col gap-3">
+          <div *ngFor="let notification of notifications" class="flex items-center gap-3 py-2 px-3 rounded-lg bg-neutral-50">
+            <img [ngSrc]="notification.src" width="22" height="22" [alt]="notification.name" />
+            <p class="text-sm font-medium text-neutral-700">{{ notification.name }}</p>
+          </div>
+        </div>
       </div>
     </div>
+
+    <!-- Application Settings Card -->
+    <div class="settings-card">
+      <div class="settings-card__header">
+        <span class="settings-card__title">Application settings</span>
+      </div>
+      <div class="settings-card__body">
+        <div class="flex items-center gap-4">
+          <span class="text-sm text-neutral-600">Application view</span>
+          <app-select-control [showHintSpace]="false" [options]="themes" [formControl]="themeControl"></app-select-control>
+        </div>
+      </div>
+    </div>
+
   </div>
 </ng-container>

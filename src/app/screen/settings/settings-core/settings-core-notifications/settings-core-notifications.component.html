@@ -2,7 +2,7 @@
   <app-text-control class="w-[534px]" label="Search escalation or user" [prefixIcon]="'search'" [formControl]="searchControl"></app-text-control>
   <div class="flex gap-5">
     <ng-container *appHasPermission="[[accessGroup.SETTINGS_NOTIFICATION_SETTINGS]]">
-      <div class="w-72 flex flex-col gap-6 p-5 border-r border-neutral-400">
+      <div class="w-72 flex flex-col gap-6 p-5 border-r border-neutral-100">
         <div class="h-[500px] flex flex-col gap-2 overflow-y-auto">
           <div class="flex items-center gap-1">
             <div class="w-5 text-brand-500">
@@ -26,7 +26,7 @@
         <thead>
           <th></th>
         </thead>
-        <tr class="text-left border-b border-neutral-400">
+        <tr class="text-left border-b border-neutral-100">
           <td class="pl-2 py-2 w-full text-xs text-neutral-400">Event name</td>
           <td class="text-sm text-neutral-400">Escalated&nbsp;with</td>
           <td></td>
@@ -34,7 +34,7 @@
         </tr>
         <tbody *ngIf="tempEscalations$ | async as escalations">
           <ng-container *ngFor="let main of escalations.main">
-            <tr [ngClass]="openedEvent === main.id || openedTempEvent.includes(main.id) ? '' : 'border-b border-neutral-400'">
+            <tr [ngClass]="openedEvent === main.id || openedTempEvent.includes(main.id) ? '' : 'border-b border-neutral-100'">
               <td class="pl-2 py-4 w-full">
                 <div class="flex gap-2">
                   <img [ngSrc]="main.icon" width="24" height="24" [alt]="main.name" />
@@ -60,7 +60,7 @@
                 <span *ngIf="selectedSettingsId" class="text-sm text-brand-500 font-semibold underline cursor-pointer" (click)="handleEditClick(main, main.users)" (keydown.enter)="handleEditClick(main, main.users)"> Edit </span>
               </td>
             </tr>
-            <tr *ngIf="openedEvent === main.id || openedTempEvent.includes(main.id)" class="border-b border-neutral-400" colspan="4">
+            <tr *ngIf="openedEvent === main.id || openedTempEvent.includes(main.id)" class="border-b border-neutral-100" colspan="4">
               <div class="flex flex-col gap-4 px-8 pb-4">
                 <span class="text-sm text-neutral-700 font-medium">Assigned users</span>
                 <div class="flex flex-wrap gap-y-4">
@@ -80,12 +80,12 @@
           </ng-container>
           <ng-container *ngFor="let eventGroup of escalations.groups">
             <tr class>
-              <td class="pt-4 pl-2 border-b border-neutral-400" colspan="4">
+              <td class="pt-4 pl-2 border-b border-neutral-100" colspan="4">
                 <span class="text-xs text-neutral-700"> {{ eventGroup.name }} </span>
               </td>
             </tr>
             <ng-container *ngFor="let event of eventGroup.events">
-              <tr [ngClass]="openedEvent === event.id || openedTempEvent.includes(event.id) ? '' : 'border-b border-neutral-400'">
+              <tr [ngClass]="openedEvent === event.id || openedTempEvent.includes(event.id) ? '' : 'border-b border-neutral-100'">
                 <td class="w-full pl-2 py-4">
                   <div class="flex gap-2">
                     <img [ngSrc]="event.icon" width="24" height="24" [alt]="event.name" />
@@ -111,7 +111,7 @@
                   <span *ngIf="selectedSettingsId" class="text-sm text-brand-500 font-semibold underline cursor-pointer" (click)="handleEditClick(event, event.users)" (keydown.enter)="handleEditClick(event, event.users)"> Edit </span>
                 </td>
               </tr>
-              <tr *ngIf="openedEvent === event.id || openedTempEvent.includes(event.id)" class="border-b border-neutral-400" colspan="4">
+              <tr *ngIf="openedEvent === event.id || openedTempEvent.includes(event.id)" class="border-b border-neutral-100" colspan="4">
                 <div class="flex flex-col gap-4 px-8 pb-4">
                   <span class="text-sm text-neutral-700 font-medium">Assigned users</span>
                   <div class="flex flex-wrap gap-y-4">

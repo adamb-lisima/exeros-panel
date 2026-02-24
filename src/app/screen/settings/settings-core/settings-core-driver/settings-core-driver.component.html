@@ -1,7 +1,7 @@
 <div *appHasPermission="[[accessGroup.SETTINGS_DRIVER_MANAGEMENTS]]" class="flex flex-col gap-5 p-5">
   <app-text-control class="w-[534px]" label="Search driver" [prefixIcon]="'search'" [formControl]="searchControl"></app-text-control>
   <div class="flex gap-5">
-    <div *appIsSuperAdmin="true" class="w-72 flex flex-col gap-6 p-5 border-r border-neutral-400">
+    <div *appIsSuperAdmin="true" class="w-72 flex flex-col gap-6 p-5 border-r border-neutral-100">
       <div class="h-[500px] flex flex-col gap-2 overflow-y-auto">
         <div class="flex items-center gap-1">
           <div class="w-5 text-brand-500">
