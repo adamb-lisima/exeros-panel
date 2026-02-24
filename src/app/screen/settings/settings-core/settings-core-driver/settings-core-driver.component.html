@@ -1,23 +1,23 @@
 <div *appHasPermission="[[accessGroup.SETTINGS_DRIVER_MANAGEMENTS]]" class="flex flex-col gap-5 p-5">
   <app-text-control class="w-[534px]" label="Search driver" [prefixIcon]="'search'" [formControl]="searchControl"></app-text-control>
   <div class="flex gap-5">
-    <div *appIsSuperAdmin="true" class="w-72 flex flex-col gap-6 p-5 border-r border-bright-gray">
+    <div *appIsSuperAdmin="true" class="w-72 flex flex-col gap-6 p-5 border-r border-neutral-400">
       <div class="h-[500px] flex flex-col gap-2 overflow-y-auto">
         <div class="flex items-center gap-1">
-          <div class="w-5 text-main-primary">
+          <div class="w-5 text-brand-500">
             <svg width="6" height="4" viewBox="0 0 6 4" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M2.56327 3.10069L0.927679 1.46511C0.706698 1.24412 0.655941 0.988631 0.775408 0.698656C0.894874 0.408667 1.11222 0.263672 1.42746 0.263672H4.68852C5.00374 0.263672 5.22109 0.408667 5.34057 0.698656C5.46003 0.988631 5.40927 1.24412 5.18827 1.46511L3.5527 3.10069C3.47642 3.17697 3.39845 3.23138 3.31879 3.26392C3.23915 3.29645 3.15221 3.31272 3.05798 3.31272C2.96375 3.31272 2.87682 3.29645 2.79716 3.26392C2.71752 3.23138 2.63956 3.17697 2.56327 3.10069Z" fill="currentColor" />
             </svg>
           </div>
-          <span class="text-sm text-main-primary font-medium cursor-pointer" (click)="handleAllDriversClick()" (keydown.enter)="handleAllDriversClick()">All drivers</span>
+          <span class="text-sm text-brand-500 font-medium cursor-pointer" (click)="handleAllDriversClick()" (keydown.enter)="handleAllDriversClick()">All drivers</span>
         </div>
         <ng-container *ngFor="let company of companyElements$ | async">
           <div class="flex items-center ml-4 gap-1 cursor-pointer" (click)="handleCompanyClick(company)" (keydown.enter)="handleCompanyClick(company)">
-            <div class="w-5" [ngClass]="selectedCompany?.id === company.id ? 'text-main-primary' : 'text-dark-electric-blue'">
+            <div class="w-5" [ngClass]="selectedCompany?.id === company.id ? 'text-brand-500' : 'text-neutral-700'">
               <ng-container *ngIf="selectedCompanyId === company.id; else close"> </ng-container>
               <ng-template #close> </ng-template>
             </div>
-            <span class="text-sm font-medium" [ngClass]="selectedCompany?.id === company.id ? 'text-main-primary' : 'text-dark-electric-blue'"> {{ company.name }}</span>
+            <span class="text-sm font-medium" [ngClass]="selectedCompany?.id === company.id ? 'text-brand-500' : 'text-neutral-700'"> {{ company.name }}</span>
           </div>
           <ng-container *ngIf="selectedCompanyId === company.id"> </ng-container>
         </ng-container>

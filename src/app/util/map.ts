@@ -12,13 +12,13 @@ const firstCharacterPipe = new FirstCharacterPipe();
 
 const driverTag = (driver: MapVehiclesElement['driver'] | undefined) => {
   if (driver) {
-    const bg = driver.id % 3 === 0 ? 'bg-main-primary' : driver.id % 3 === 1 ? 'bg-extra-three' : 'bg-extra-four';
+    const bg = driver.id % 3 === 0 ? 'bg-brand-500' : driver.id % 3 === 1 ? 'bg-info-500' : 'bg-warning-500';
     return `
       <div class='flex items-center gap-1'>
         <div class='w-[16px] h-[16px] flex justify-center items-center rounded-full ${bg}'>
           <p class='font-medium text-xs text-white'> ${firstCharacterPipe.transform(driver.name)}</p>
         </div>
-        <p class='font-medium text-xs text-dark-electric-blue'>${driver.name}</p>
+        <p class='font-medium text-xs text-neutral-700'>${driver.name}</p>
       </div>
     `;
   }
@@ -39,8 +39,8 @@ const MapUtil = {
       vehicleId: vehicle.vehicle_id,
       coordinates: vehicle.last_coordinates,
       direction: vehicle.direction,
-      fillColorVariable: vehicle.active ? '--main-primary' : '--manatee',
-      strokeColorVariable: vehicle.active ? '--main-primary' : '--manatee',
+      fillColorVariable: vehicle.active ? '--brand-500' : '--neutral-400',
+      strokeColorVariable: vehicle.active ? '--brand-500' : '--neutral-400',
       type: 'navigation',
       infoWindow: `
         <div class='flex flex-col gap-1 m-1'>
@@ -85,7 +85,7 @@ const MapUtil = {
       infoWindow: `
         <div class='flex flex-col gap-1 m-1'>
           <p class=" font-semibold text-xs">${location.registration_plate}</p>
-          <p class='font-medium text-xs text-dark-electric-blue'>${location.event_type}</p>
+          <p class='font-medium text-xs text-neutral-700'>${location.event_type}</p>
           <p class='text-xs text-gray-500'>${location.occurence_time}</p>
         </div>
       `

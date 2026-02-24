@@ -1,5 +1,5 @@
 <div class="p-6">
-  <div *ngIf="error$ | async as error" class="p-5 mb-6 text-red-600">
+  <div *ngIf="error$ | async as error" class="p-5 mb-6 text-error-600">
     <p>{{ error }}</p>
   </div>
 
@@ -13,7 +13,7 @@
         <h1 class="text-2xl font-semibold mb-6">{{ content.title }}</h1>
 
         <div class="mb-4" *ngIf="content.description">
-          <p class="text-gray-600">{{ content.description }}</p>
+          <p class="text-neutral-600">{{ content.description }}</p>
         </div>
 
         <div class="guide-content">
@@ -28,7 +28,7 @@
           </ng-container>
         </div>
 
-        <div class="mt-10 pt-6 border-t border-chinese-silver flex justify-between">
+        <div class="mt-10 pt-6 border-t border-neutral-300 flex justify-between">
           <button *ngIf="prevSlug" (click)="navigateToPage(prevSlug)" class="px-4 py-3 cursor-pointer hover:bg-indigo-100 hover:text-indigo-700 hover:font-medium transition-colors duration-150 flex items-center">
             <i class="fas fa-chevron-left mr-2"></i>
             Previous

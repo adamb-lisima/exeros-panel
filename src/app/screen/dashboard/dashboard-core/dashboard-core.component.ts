@@ -11,6 +11,7 @@ import { AccessGroup } from '../../settings/settings.model';
 export class DashboardCoreComponent {
   accessGroup = AccessGroup;
   dashboard$ = this.store.select(DashboardSelectors.dashboard);
+  dashboardLoading$ = this.store.select(DashboardSelectors.dashboardLoading);
 
   constructor(private readonly store: Store<AppState>) {}
 }

@@ -1,7 +1,16 @@
-<div class="h-full flex flex-col gap-6 py-1 rounded" [class.bg-white]="!transparent" [ngClass]="{ 'loader loader--infinite-scroll': loading }">
+<div class="h-full flex flex-col gap-6 py-1 rounded" [class.bg-white]="!transparent">
   <ng-content select="[header]"></ng-content>
   <ng-content select="[filters]"></ng-content>
-  <div #listElement class="flex flex-col overflow-auto" [ngClass]="{ 'gap-3': listGap, 'divide-y divide-bright-gray': listDivider }" (scroll)="handleListScroll(listElement)">
-    <ng-content select="[list]"></ng-content>
-  </div>
+  <ng-container *ngIf="loading; else listContent">
+    <div class="flex flex-col gap-3 p-2">
+      <app-skeleton-loader variant="table-row"></app-skeleton-loader>
+      <app-skeleton-loader variant="table-row"></app-skeleton-loader>
+      <app-skeleton-loader variant="table-row"></app-skeleton-loader>
+    </div>
+  </ng-container>
+  <ng-template #listContent>
+    <div #listElement class="flex flex-col overflow-auto" [ngClass]="{ 'gap-3': listGap, 'divide-y divide-neutral-200': listDivider }" (scroll)="handleListScroll(listElement)">
+      <ng-content select="[list]"></ng-content>
+    </div>
+  </ng-template>
 </div>

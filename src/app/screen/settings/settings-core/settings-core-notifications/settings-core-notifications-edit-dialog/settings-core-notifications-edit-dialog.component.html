@@ -4,17 +4,17 @@
 
     <ng-container *ngIf="isStandardNotificationType">
       <table>
-        <thead class="border-b border-bright-gray">
+        <thead class="border-b border-neutral-400">
           <td class="w-6"><app-checkbox-control [ngModel]="allUsers" (ngModelChange)="handleAllUsersClick($event)"></app-checkbox-control></td>
-          <td class="text-xs text-manatee py-3">Name</td>
-          <td class="text-xs text-manatee">Email</td>
+          <td class="text-xs text-neutral-400 py-3">Name</td>
+          <td class="text-xs text-neutral-400">Email</td>
           <th></th>
         </thead>
         <tbody>
           <tr *ngFor="let user of tempUsers">
             <td><app-checkbox-control [ngModel]="user.checked" (ngModelChange)="handleCheckboxChange($event, user.id)"></app-checkbox-control></td>
             <td class="text-sm">{{ user.name }}</td>
-            <td class="text-sm text-dark-electric-blue">{{ user.email }}</td>
+            <td class="text-sm text-neutral-700">{{ user.email }}</td>
           </tr>
         </tbody>
       </table>
@@ -22,13 +22,13 @@
 
     <ng-container *ngIf="!isStandardNotificationType">
       <table>
-        <thead class="border-b border-bright-gray">
+        <thead class="border-b border-neutral-400">
           <td class="w-6"><app-checkbox-control [ngModel]="allUsers" (ngModelChange)="handleAllUsersClick($event)"></app-checkbox-control></td>
-          <td class="text-xs text-manatee py-3">Name and E-mail Address</td>
+          <td class="text-xs text-neutral-400 py-3">Name and E-mail Address</td>
           <td class="w-6"><app-checkbox-control [ngModel]="allOccurredUsers" (ngModelChange)="handleAllOccurredUsersClick($event)"></app-checkbox-control></td>
-          <td class="text-xs text-manatee">Event Occurred</td>
+          <td class="text-xs text-neutral-400">Event Occurred</td>
           <td class="w-6"><app-checkbox-control [ngModel]="allEscalatedUsers" (ngModelChange)="handleAllEscalatedUsersClick($event)"></app-checkbox-control></td>
-          <td class="text-xs text-manatee">Event Escalated</td>
+          <td class="text-xs text-neutral-400">Event Escalated</td>
           <th></th>
         </thead>
         <tbody>
@@ -36,7 +36,7 @@
             <td><app-checkbox-control [ngModel]="user.checked" (ngModelChange)="handleCheckboxChange($event, user.id)"></app-checkbox-control></td>
             <td class="text-sm">
               <div class="flex flex-col py-2" [ngClass]="{ 'opacity-50': !user.checked }">
-                <span>{{ user.name }}</span> <span class="font-normal text-dark-electric-blue">{{ user.email }}</span>
+                <span>{{ user.name }}</span> <span class="font-normal text-neutral-700">{{ user.email }}</span>
               </div>
             </td>
             <td class="w-6">

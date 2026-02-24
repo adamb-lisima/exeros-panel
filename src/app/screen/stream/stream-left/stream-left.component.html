@@ -1,7 +1,11 @@
-<div class="h-full w-[500px] flex flex-col p-5 border-r border-r-platinum overflow-auto bg-cultured" *appHasPermission="[[accessGroup.STREAM_VIEWER]]">
-  <ng-container>
+<div
+  class="h-full w-[500px] flex flex-col border-r border-r-neutral-200 overflow-hidden bg-neutral-50"
+  *appHasPermission="[[accessGroup.STREAM_VIEWER]]"
+  @slideInPanel
+>
+  <div class="flex flex-col h-full overflow-auto p-5">
     <app-stream-left-vehicles-search></app-stream-left-vehicles-search>
-    <span class="flex-[0_0_1px] -mx-5 bg-platinum"></span>
+    <span class="flex-[0_0_1px] -mx-5 bg-neutral-200"></span>
     <app-stream-left-vehicles-list class="h-full overflow-auto"></app-stream-left-vehicles-list>
-  </ng-container>
+  </div>
 </div>

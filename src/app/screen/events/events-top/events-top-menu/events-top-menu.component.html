@@ -1,11 +1,11 @@
 <ng-container *appHasPermission="[[accessGroup.EVENTS_EDITOR]]">
-  <div class="h-[48px] w-[48px] flex justify-center items-center gap-1 px-3 rounded cursor-pointer border border-manatee bg-white" [cdkMenuTriggerFor]="menu">
-    <div class="w-[2.5px] h-[2.5px] rounded-full bg-outer-space opacity-60"></div>
-    <div class="w-[2.5px] h-[2.5px] rounded-full bg-outer-space opacity-60"></div>
-    <div class="w-[2.5px] h-[2.5px] rounded-full bg-outer-space opacity-60"></div>
+  <div class="h-[48px] w-[48px] flex justify-center items-center gap-1 px-3 rounded cursor-pointer border border-neutral-400 bg-white" [cdkMenuTriggerFor]="menu">
+    <div class="w-[2.5px] h-[2.5px] rounded-full bg-neutral-800 opacity-60"></div>
+    <div class="w-[2.5px] h-[2.5px] rounded-full bg-neutral-800 opacity-60"></div>
+    <div class="w-[2.5px] h-[2.5px] rounded-full bg-neutral-800 opacity-60"></div>
   </div>
   <ng-template #menu>
-    <div class="flex flex-col border border-platinum rounded-md bg-white shadow-lg" cdkMenu>
+    <div class="flex flex-col border border-neutral-200 rounded-md bg-white shadow-lg" cdkMenu>
       <a class="px-4 py-2 font-medium text-xs cursor-pointer" (click)="handleExportClick()" cdkMenuItem>Export</a>
       <a class="px-4 py-2 font-medium text-xs cursor-pointer" (click)="handleDownloadClick()" cdkMenuItem>Download</a>
       <a class="px-4 py-2 font-medium text-xs cursor-pointer" (click)="handleExtendClick()" cdkMenuItem>Extend duration</a>

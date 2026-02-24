@@ -183,8 +183,8 @@ export class StreamPlaybackMapComponent implements OnDestroy {
         coordinates: currentGpsPoint.coordinates,
         direction: currentGpsPoint.direction,
         type: 'navigation',
-        fillColorVariable: '--main-primary',
-        strokeColorVariable: '--main-primary'
+        fillColorVariable: '--brand-500',
+        strokeColorVariable: '--brand-500'
       });
     }
 

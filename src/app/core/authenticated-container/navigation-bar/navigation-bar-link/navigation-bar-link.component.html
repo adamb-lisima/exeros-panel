@@ -1,28 +1,27 @@
-<div [routerLink]="['/', link]" [routerLinkActive]="''" #mainRouteActive="routerLinkActive">
+<div [routerLink]="link ? ['/', link] : null" [routerLinkActive]="''" #mainRouteActive="routerLinkActive">
   <ng-container *ngIf="{ isActive: shouldBeActive(mainRouteActive.isActive, subRouteActive.isActive) } as ctx">
     <a
-      class="group flex items-center justify-between py-2 px-3 rounded-lg cursor-pointer hover:bg-cultured"
+      class="group flex items-center justify-between py-2 px-3 rounded-lg cursor-pointer hover:bg-neutral-50"
       [ngClass]="{
-        'text-black bg-cultured': ctx.isActive,
-        '': !isCollapsed,
+        'text-black bg-neutral-50': ctx.isActive,
         'justify-center': isCollapsed
-      }">
-      <div class="flex items-center gap-2 flex-grow" [ngClass]="{ 'gap-2': !isCollapsed, 'justify-center w-full': isCollapsed }">
-        <div class="text-new-gray group-hover:text-black w-5 h-5" [ngClass]="{ '!text-black': ctx.isActive }">
+      }"
+      [attr.aria-label]="isCollapsed ? tooltipLabel : null"
+      [matTooltip]="isCollapsed ? tooltipLabel : ''"
+      matTooltipPosition="right">
+      <div class="flex items-center gap-2 flex-grow" [ngClass]="{ 'justify-center w-full': isCollapsed }">
+        <div class="text-neutral-500 group-hover:text-black w-5 h-5 flex-shrink-0" [ngClass]="{ '!text-black': ctx.isActive }" aria-hidden="true">
           <ng-content></ng-content>
         </div>
-        <div class="transition-all duration-200 overflow-hidden">
+        <div *ngIf="!isCollapsed" class="transition-all duration-200 overflow-hidden">
           <p
-            class="font-normal text-sm text-new-gray group-hover:text-black"
-            [ngClass]="{
-              '!text-black': ctx.isActive,
-              hidden: isCollapsed
-            }">
+            class="font-normal text-sm text-neutral-500 group-hover:text-black whitespace-nowrap"
+            [ngClass]="{ '!text-black': ctx.isActive }">
             {{ text }}
           </p>
         </div>
       </div>
-      <div *ngIf="badge && !isCollapsed" class="py-1 px-2 rounded-lg bg-bright-gray ml-auto">
+      <div *ngIf="badge && !isCollapsed" class="py-1 px-2 rounded-lg bg-neutral-400 ml-auto">
         <p class="opacity-80 font-medium text-xs">{{ badge }}</p>
       </div>
     </a>

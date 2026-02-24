@@ -24,9 +24,9 @@ interface CalendarCell {
       :host ::ng-deep select {
         appearance: none;
         -webkit-appearance: none;
-        background-color: var(--white);
-        color: var(--black);
-        border-color: var(--platinum);
+        background-color: var(--neutral-0);
+        color: var(--neutral-950);
+        border-color: var(--neutral-200);
         background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
         background-repeat: no-repeat;
         background-position: right 0.5rem center;
@@ -34,9 +34,9 @@ interface CalendarCell {
       }
 
       :host ::ng-deep select option {
-        background-color: var(--white);
-        color: var(--black);
-        border: 1px solid var(--platinum);
+        background-color: var(--neutral-0);
+        color: var(--neutral-950);
+        border: 1px solid var(--neutral-200);
         border-radius: 0.375rem;
       }
 
@@ -49,8 +49,8 @@ interface CalendarCell {
       :host ::ng-deep select option:focus,
       :host ::ng-deep select option:active,
       :host ::ng-deep select option:checked {
-        background-color: var(--bright-gray);
-        color: var(--arsenic);
+        background-color: var(--neutral-100);
+        color: var(--neutral-700);
       }
 
       :host ::ng-deep select::-webkit-scrollbar {
@@ -58,17 +58,17 @@ interface CalendarCell {
       }
 
       :host ::ng-deep select::-webkit-scrollbar-track {
-        background: var(--anti-flash-white);
+        background: var(--neutral-100);
         border-radius: 4px;
       }
 
       :host ::ng-deep select::-webkit-scrollbar-thumb {
-        background: var(--chinese-silver);
+        background: var(--neutral-300);
         border-radius: 4px;
       }
 
       :host ::ng-deep select::-webkit-scrollbar-thumb:hover {
-        background: var(--manatee);
+        background: var(--neutral-400);
       }
     `
   ]

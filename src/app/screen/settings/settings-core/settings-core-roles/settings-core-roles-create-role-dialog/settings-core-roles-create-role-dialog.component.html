@@ -4,12 +4,12 @@
     <app-select-control *ngIf="reviewerLevels$ | async as options" [options]="options" label="Reviewer Level*" [formControl]="reviewerLevel"></app-select-control>
     <div class="flex flex-col gap-2">
       <span class="font-medium">Assign modules</span>
-      <div class="flex items-center py-2 pr-3 border-b border-bright-gray">
-        <div class="text-manatee">
+      <div class="flex items-center py-2 pr-3 border-b border-neutral-400">
+        <div class="text-neutral-400">
           <app-checkbox-control [ngModel]="allModules" (ngModelChange)="handleCheckAllModulesClick($event)"></app-checkbox-control>
         </div>
-        <span class="text-xs text-manatee">Module</span>
-        <span class="w-32 ml-auto text-xs text-manatee">Access mode</span>
+        <span class="text-xs text-neutral-400">Module</span>
+        <span class="w-32 ml-auto text-xs text-neutral-400">Access mode</span>
       </div>
       <div class="h-[250px] flex flex-col gap-2 pr-2 overflow-y-auto">
         <app-modules-list-element name="Dashboard" [value]="accessGroupsForm.controls.dashboard.value !== ''" (clickCheck)="handleCheckModuleClick('dashboard', $event)">
@@ -150,17 +150,17 @@
     </div>
     <div class="flex flex-col gap-8">
       <div class="flex items-center gap-1 cursor-pointer" (click)="isOpen = !isOpen" (keydown.enter)="isOpen = !isOpen">
-        <span class="text-sm text-main-primary font-semibold">Give accesses to specific events</span>
+        <span class="text-sm text-brand-500 font-semibold">Give accesses to specific events</span>
         <ng-container *ngIf="isOpen; then up; else down"></ng-container>
         <ng-template #up>
-          <div class="text-main-primary">
+          <div class="text-brand-500">
             <svg width="6" height="5" viewBox="0 0 6 5" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M0.92313 4.22334C0.562863 4.22334 0.314464 4.05763 0.17793 3.72622C0.0413969 3.39482 0.0994052 3.10283 0.351955 2.85027L2.2212 0.981042C2.30839 0.893858 2.39749 0.831675 2.48851 0.794492C2.57954 0.757308 2.6789 0.738716 2.78658 0.738716C2.89428 0.738716 2.99364 0.757308 3.08465 0.794492C3.17569 0.831675 3.2648 0.893858 3.35198 0.981042L5.22121 2.85027C5.47377 3.10283 5.53179 3.39482 5.39526 3.72622C5.25871 4.05763 5.0103 4.22334 4.65005 4.22334H0.92313Z" fill="currentColor" />
             </svg>
           </div>
         </ng-template>
         <ng-template #down>
-          <div class="text-main-primary">
+          <div class="text-brand-500">
             <svg width="7" height="5" viewBox="0 0 7 5" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M3.0723 3.82935L1.20305 1.96013C0.950502 1.70756 0.892494 1.41558 1.02903 1.08418C1.16556 0.75276 1.41396 0.587051 1.77423 0.587051H5.50115C5.8614 0.587051 6.1098 0.75276 6.24635 1.08418C6.38289 1.41558 6.32487 1.70756 6.0723 1.96013L4.20308 3.82935C4.11589 3.91654 4.02679 3.97872 3.93575 4.0159C3.84474 4.05308 3.74538 4.07168 3.63768 4.07168C3.52999 4.07168 3.43064 4.05308 3.3396 4.0159C3.24859 3.97872 3.15949 3.91654 3.0723 3.82935Z" fill="currentColor" />
             </svg>
@@ -168,13 +168,13 @@
         </ng-template>
       </div>
       <div *ngIf="isOpen" class="flex flex-col">
-        <div class="flex items-center gap-4 border-b border-bright-gray">
+        <div class="flex items-center gap-4 border-b border-neutral-400">
           <app-checkbox-control [ngModel]="allEvents" (ngModelChange)="handleAllEventsClick($event)"></app-checkbox-control>
-          <span class="text-xs text-manatee">Events</span>
+          <span class="text-xs text-neutral-400">Events</span>
         </div>
         <div class="h-52 flex flex-col overflow-y-auto">
           <div *ngFor="let eventTypesGroup of configData.event_types_groups">
-            <span class="text-xs text-manatee">{{ eventTypesGroup.name }}</span>
+            <span class="text-xs text-neutral-400">{{ eventTypesGroup.name }}</span>
             <div *ngFor="let item of eventTypesGroup.items" class="flex items-center gap-4">
               <app-checkbox-control [formControl]="getEventControl(item.default_name)"></app-checkbox-control>
               <div class="flex items-center gap-2">
@@ -185,7 +185,7 @@
           </div>
         </div>
       </div>
-      <span class="text-xs text-dim-gray">* - mandatory fields</span>
+      <span class="text-xs text-neutral-500">* - mandatory fields</span>
     </div>
   </div>
   <div class="flex flex-1 justify-end" footer>

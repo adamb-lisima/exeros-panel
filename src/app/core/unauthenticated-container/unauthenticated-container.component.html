@@ -1,5 +1,33 @@
-<div class="flex flex-col h-full">
-  <div [ngClass]="isWideLayoutRoute() ? 'w-full p-0 flex flex-col' : ' justify-center w-[450px] p-5 bg-white rounded-xl m-auto'">
+<!-- Wide layout for clip routes -->
+<ng-container *ngIf="isWideLayoutRoute(); else splitLayout">
+  <div class="flex flex-col h-full w-full p-0">
     <router-outlet></router-outlet>
   </div>
-</div>
+</ng-container>
+
+<!-- Split layout: brand panel (left) + form (right) -->
+<ng-template #splitLayout>
+  <div class="unauth-split">
+    <!-- Brand visual panel -->
+    <div class="unauth-split__brand">
+      <div class="unauth-split__brand-content">
+        <img
+          src="assets/svg/logo-icon.svg"
+          alt="Exeros Panel"
+          class="unauth-split__logo"
+        />
+        <h1 class="unauth-split__tagline">Fleet Management Platform</h1>
+        <p class="unauth-split__subtitle">
+          Monitor, manage, and analyze your fleet in real time.
+        </p>
+      </div>
+    </div>
+
+    <!-- Form panel -->
+    <div class="unauth-split__form">
+      <div class="unauth-split__form-inner">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</ng-template>

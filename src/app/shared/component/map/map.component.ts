@@ -12,7 +12,7 @@ import RouteConst from '../../../const/route';
 
 type DrawnShape = google.maps.Marker | google.maps.Polygon | google.maps.Polyline | google.maps.Rectangle | google.maps.Circle;
 
-interface Marker {
+export interface Marker {
   id?: string | number;
   vehicleId?: number;
   position?: google.maps.LatLngLiteral;
@@ -124,14 +124,14 @@ export class MapComponent implements AfterViewInit, OnDestroy {
   };
 
   readonly polylineOptions: google.maps.PolylineOptions = {
-    strokeColor: ColorUtil.get('--extra-three'),
+    strokeColor: ColorUtil.get('--info-500'),
     strokeWeight: 3,
     strokeOpacity: 0.7,
     zIndex: 1
   };
 
   readonly segmentPolylineOptions: google.maps.PolylineOptions = {
-    strokeColor: ColorUtil.get('--extra-three'),
+    strokeColor: ColorUtil.get('--info-500'),
     strokeWeight: 3,
     strokeOpacity: 0.7,
     clickable: true,
@@ -139,7 +139,7 @@ export class MapComponent implements AfterViewInit, OnDestroy {
   };
 
   readonly activeSegmentPolylineOptions: google.maps.PolylineOptions = {
-    strokeColor: ColorUtil.get('--main-primary'),
+    strokeColor: ColorUtil.get('--brand-500'),
     strokeWeight: 4,
     strokeOpacity: 1,
     zIndex: 3
@@ -156,6 +156,7 @@ export class MapComponent implements AfterViewInit, OnDestroy {
 
   @Output() mapReady = new EventEmitter<google.maps.Map>();
   @Output() segmentClick = new EventEmitter<RouteSegment>();
+  @Output() markerClicked = new EventEmitter<Marker>();
 
   @Input() zoom = 7;
   @Input() rounded = false;
@@ -260,8 +261,11 @@ export class MapComponent implements AfterViewInit, OnDestroy {
   }
 
   handleMarkerClick(marker: Marker) {
-    if (marker.vehicleId) {
-      this.router.navigate(['/', RouteConst.stream, marker.vehicleId]);
+    this.markerClicked.emit(marker);
+    if (!this.markerClicked.observed) {
+      if (marker.vehicleId) {
+        this.router.navigate(['/', RouteConst.stream, marker.vehicleId]);
+      }
     }
     marker.onClick?.();
   }
@@ -290,8 +294,8 @@ export class MapComponent implements AfterViewInit, OnDestroy {
           fillOpacity: 1,
           scale: 1.3,
           rotation: (marker.direction ?? 0) - 45,
-          fillColor: ColorUtil.get(marker.fillColorVariable ?? '--main-primary'),
-          strokeColor: ColorUtil.get(marker.strokeColorVariable ?? '--main-primary')
+          fillColor: ColorUtil.get(marker.fillColorVariable ?? '--brand-500'),
+          strokeColor: ColorUtil.get(marker.strokeColorVariable ?? '--brand-500')
         };
       case 'start':
         return { url: 'assets/svg/map-start-icon.svg', anchor: new google.maps.Point(46.5, 47) };
@@ -315,8 +319,8 @@ export class MapComponent implements AfterViewInit, OnDestroy {
           fillOpacity: 1,
           scale: 1.3,
           rotation: (marker.direction ?? 0) - 45,
-          fillColor: ColorUtil.get(marker.fillColorVariable ?? '--main-primary'),
-          strokeColor: ColorUtil.get(marker.strokeColorVariable ?? '--main-primary')
+          fillColor: ColorUtil.get(marker.fillColorVariable ?? '--brand-500'),
+          strokeColor: ColorUtil.get(marker.strokeColorVariable ?? '--brand-500')
         };
       case 'start':
         return { url: 'assets/svg/map-start-icon.svg', anchor: new google.maps.Point(46.5, 47) };

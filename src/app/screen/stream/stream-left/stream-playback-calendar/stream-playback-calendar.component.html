@@ -3,18 +3,18 @@
     <app-select-control *ngIf="vehicleOptions$ | async as vehicleOptions" label="Vehicle" [options]="vehicleOptions" [formControl]="vehicleControl" [showHintSpace]="false" class="flex-1 [&_.select-container]:h-8 [&_.select-container]:px-2 [&_.select-container]:text-sm"> </app-select-control>
 
     <app-select-control label="Stream type" [options]="streamOptions" [formControl]="streamTypeControl" [showHintSpace]="false" class="flex-1 [&_.select-container]:h-8 [&_.select-container]:px-2 [&_.select-container]:text-sm"> </app-select-control>
-    <button class="h-8 w-8 flex items-start justify-center p-1.5 hover:bg-anti-flash-white rounded-md transition-colors" (click)="toggleCollapse()">
+    <button class="h-8 w-8 flex items-start justify-center p-1.5 hover:bg-neutral-100 rounded-md transition-colors" (click)="toggleCollapse()">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path [attr.d]="isCollapsed ? 'M19 9l-7 7-7-7' : 'M19 15l-7-7-7 7'" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
       </svg>
     </button>
   </div>
 
-  <div *ngIf="isCollapsed && selectedDate" class="mt-0.5 text-gray-600 text-sm font-medium">Selected date: {{ selectedDate.toFormat('dd.MM.yyyy') }}</div>
+  <div *ngIf="isCollapsed && selectedDate" class="mt-0.5 text-neutral-600 text-sm font-medium">Selected date: {{ selectedDate.toFormat('dd.MM.yyyy') }}</div>
 
   <div class="overflow-hidden transition-all duration-300" [class.h-0]="isCollapsed" [class.max-h-[600px]]="!isCollapsed">
     <div class="pt-2">
-      <p class="text-xs text-gray-500 mb-2">Select date to preview events</p>
+      <p class="text-xs text-neutral-500 mb-2">Select date to preview events</p>
       <app-calendar [calendarInput]="calendarInput$ | async" (monthChange)="handleMonthChange($event)" (daySelect)="handleDaySelect($event)"> </app-calendar>
     </div>
   </div>

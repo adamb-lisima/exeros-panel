@@ -1,0 +1,19 @@
+<div
+  class="card"
+  [ngClass]="'card--' + variant"
+  [class.card--loading]="loading">
+  <ng-container *ngIf="!loading; else skeletonTpl">
+    <div class="card__header">
+      <ng-content select="[card-header]"></ng-content>
+    </div>
+    <div class="card__body">
+      <ng-content select="[card-body]"></ng-content>
+    </div>
+    <div class="card__footer">
+      <ng-content select="[card-footer]"></ng-content>
+    </div>
+  </ng-container>
+  <ng-template #skeletonTpl>
+    <app-skeleton-loader [variant]="skeletonVariant"></app-skeleton-loader>
+  </ng-template>
+</div>

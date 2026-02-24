@@ -1,49 +1,74 @@
 <ng-container *appHasPermission="[[accessGroup.DASHBOARD_VIEWER]]">
-  <div *ngIf="dashboard$ | async as dashboard" class="grid grid-cols-4 auto-rows-max gap-4">
-    <div class="exeros-fragment row-start-1 flex flex-col gap-6">
-      <p class="font-semibold text-sm">Driver Checks</p>
-      <div class="flex justify-between items-center">
-        <p class="text-xl">{{ dashboard.driver_checks }}%</p>
-        <img ngSrc="assets/svg/icons-gray-back/4-1.svg" width="40" height="40" alt="icon" />
-      </div>
-    </div>
-    <div class="exeros-fragment row-start-1 flex flex-col gap-6">
-      <p class="font-semibold text-sm">Accidents</p>
-      <div class="flex justify-between items-center">
-        <p class="text-xl">{{ dashboard.accident_qty }}</p>
-        <div class="text-extra-one">
-          <img ngSrc="assets/svg/icons-gray-back/54.svg" width="40" height="40" alt="icon" />
+  <ng-container *ngIf="{ dashboard: dashboard$ | async, loading: dashboardLoading$ | async } as vm">
+    <div class="grid grid-cols-4 auto-rows-auto gap-4 stagger-fade-in">
+      <!-- KPI Cards Row -->
+      <app-card variant="metric" [loading]="!!vm.loading && !vm.dashboard">
+        <div card-body>
+          <app-card-metric
+            [value]="(vm.dashboard?.driver_checks ?? 0) + '%'"
+            label="Driver Checks">
+          </app-card-metric>
         </div>
-      </div>
+      </app-card>
+
+      <app-card variant="metric" [loading]="!!vm.loading && !vm.dashboard">
+        <div card-body>
+          <app-card-metric
+            [value]="vm.dashboard?.accident_qty ?? 0"
+            label="Accidents">
+          </app-card-metric>
+        </div>
+      </app-card>
+
+      <app-card variant="metric" [loading]="!!vm.loading && !vm.dashboard">
+        <div card-body>
+          <app-card-metric
+            [value]="(vm.dashboard?.distance_driven ?? 0 | truncate | number : '1.0-0') + ' Miles'"
+            label="Distance Driven">
+          </app-card-metric>
+        </div>
+      </app-card>
+
+      <app-card variant="metric" [loading]="!!vm.loading && !vm.dashboard">
+        <div card-body>
+          <app-card-metric
+            [value]="(vm.dashboard?.mdvr?.active_count ?? 0) + '/' + (vm.dashboard?.mdvr?.all_count ?? 0)"
+            label="Online History">
+          </app-card-metric>
+        </div>
+      </app-card>
+
+      <!-- Chart Cards Row -->
+      <app-card class="col-span-2" variant="chart" [loading]="!!vm.loading && !vm.dashboard">
+        <div card-body>
+          <app-dashboard-core-driving-time></app-dashboard-core-driving-time>
+        </div>
+      </app-card>
+
+      <app-card class="col-span-2" variant="chart" [loading]="!!vm.loading && !vm.dashboard">
+        <div card-body>
+          <app-dashboard-core-events></app-dashboard-core-events>
+        </div>
+      </app-card>
+
+      <!-- Data Cards Row -->
+      <app-card [loading]="!!vm.loading && !vm.dashboard">
+        <div card-body class="min-h-[400px]">
+          <app-dashboard-core-vehicles-checks></app-dashboard-core-vehicles-checks>
+        </div>
+      </app-card>
+
+      <app-card [loading]="!!vm.loading && !vm.dashboard">
+        <div card-body class="min-h-[400px]">
+          <app-dashboard-core-accidents></app-dashboard-core-accidents>
+        </div>
+      </app-card>
+
+      <app-card class="col-span-2" [loading]="!!vm.loading && !vm.dashboard">
+        <div card-body class="min-h-[400px]">
+          <app-dashboard-core-map></app-dashboard-core-map>
+        </div>
+      </app-card>
     </div>
-    <div class="exeros-fragment row-start-1 flex flex-col gap-6">
-      <p class="font-semibold text-sm">Distance Driven</p>
-      <div class="flex justify-between items-center">
-        <p class="text-xl">{{ dashboard.distance_driven | truncate | number : '1.0-0' }} Miles</p>
-        <img ngSrc="assets/svg/icons-gray-back/3.svg" width="40" height="40" alt="icon" />
-      </div>
-    </div>
-    <div class="exeros-fragment row-start-1 flex flex-col gap-6">
-      <p class="font-semibold text-sm">Online History</p>
-      <div class="flex justify-between items-center">
-        <p class="text-xl">{{ dashboard.mdvr.active_count }}/{{ dashboard.mdvr.all_count }}</p>
-        <img ngSrc="assets/svg/icons-gray-back/1.svg" width="40" height="40" alt="icon" />
-      </div>
-    </div>
-    <div class="exeros-fragment row-start-2 col-span-2 h-[340px]">
-      <app-dashboard-core-driving-time></app-dashboard-core-driving-time>
-    </div>
-    <div class="exeros-fragment row-start-2 col-span-2 h-[340px]">
-      <app-dashboard-core-events></app-dashboard-core-events>
-    </div>
-    <div class="exeros-fragment row-start-3 h-[550px]">
-      <app-dashboard-core-vehicles-checks></app-dashboard-core-vehicles-checks>
-    </div>
-    <div class="exeros-fragment row-start-3 h-[550px]">
-      <app-dashboard-core-accidents></app-dashboard-core-accidents>
-    </div>
-    <div class="exeros-fragment row-start-3 col-span-2 h-[550px]">
-      <app-dashboard-core-map></app-dashboard-core-map>
-    </div>
-  </div>
+  </ng-container>
 </ng-container>

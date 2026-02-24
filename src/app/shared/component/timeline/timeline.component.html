@@ -14,7 +14,7 @@
       </g>
     </svg>
 
-    <div class="border rounded-lg border-main-primary p-1 cursor-pointer">
+    <div class="border rounded-lg border-brand-500 p-1 cursor-pointer">
       <ng-container *ngIf="!isPlaying">
         <svg (click)="togglePlayPause(true)" (keydown.enter)="togglePlayPause(true)" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <mask id="mask0_2440_3294" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
@@ -48,7 +48,7 @@
     </svg>
   </div>
   <div timelineTabMenuItem #timelineTabMenuItem class="flex items-center cursor-pointer" [cdkMenuPosition]="[{ originX: 'center', originY: 'bottom', overlayX: 'center', overlayY: 'top', offsetX: 0, offsetY: 10 }]" [cdkMenuTriggerFor]="menu" (click)="downloadClick()" (keydown.enter)="downloadClick()">
-    <div [appTooltip]="showTooltip ? 'A clip is a selected part <br /> of a video that you can: <br />  • turn into an event, <br /> • download, <br /> • or share.' : undefined" class="bg-main-primary text-white border-main-primary rounded-lg px-4 py-1.5 items-center flex flex-row">
+    <div [appTooltip]="showTooltip ? 'A clip is a selected part <br /> of a video that you can: <br />  • turn into an event, <br /> • download, <br /> • or share.' : undefined" class="bg-brand-500 text-white border-brand-500 rounded-lg px-4 py-1.5 items-center flex flex-row">
       <span>Create clip</span>
       <span>
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -67,9 +67,9 @@
 <ng-template #menu>
   <div class="w-[130px] flex flex-col gap-2 py-3 bg-white justify-center shadow-lg">
     <button
-      class="px-3 py-1 hover:bg-new-gray-200 text-sm w-full text-left"
+      class="px-3 py-1 hover:bg-neutral-200 text-sm w-full text-left"
       [ngClass]="{
-        'bg-new-gray-300': playbackDownloadActive,
+        'bg-neutral-300': playbackDownloadActive,
         'cursor-pointer': !clipToEventActive && !playbackShareActive,
         'cursor-not-allowed opacity-50': clipToEventActive || playbackShareActive
       }"
@@ -79,9 +79,9 @@
     </button>
 
     <button
-      class="px-3 py-1 hover:bg-new-gray-200 text-sm w-full text-left"
+      class="px-3 py-1 hover:bg-neutral-200 text-sm w-full text-left"
       [ngClass]="{
-        'bg-new-gray-300': playbackShareActive,
+        'bg-neutral-300': playbackShareActive,
         'cursor-pointer': !clipToEventActive && !playbackDownloadActive,
         'cursor-not-allowed opacity-50': clipToEventActive || playbackDownloadActive
       }"
@@ -91,9 +91,9 @@
     </button>
 
     <button
-      class="px-3 py-1 hover:bg-new-gray-200 text-sm w-full text-left"
+      class="px-3 py-1 hover:bg-neutral-200 text-sm w-full text-left"
       [ngClass]="{
-        'bg-new-gray-300': clipToEventActive,
+        'bg-neutral-300': clipToEventActive,
         'cursor-pointer': !playbackShareActive && !playbackDownloadActive,
         'cursor-not-allowed opacity-50': playbackShareActive || playbackDownloadActive
       }"

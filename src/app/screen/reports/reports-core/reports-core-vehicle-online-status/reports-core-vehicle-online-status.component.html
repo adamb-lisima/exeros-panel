@@ -1,30 +1,32 @@
 <ng-container>
   <app-infinity-scroll>
     <ng-container header>
-      <div class="flex flex-col gap-8">
-        <div class="flex flex-col gap-8">
-          <div class="min-h-[40px] flex flex-wrap justify-between items-center gap-2">
-            <p class="font-semibold text-xl whitespace-nowrap">Vehicle Online Status</p>
-            <ng-container>
-              <div *appHasPermission="[[accessGroup.VEHICLE_ONLINE_STATUS_REPORTS_DOWNLOADER]]" class="flex gap-2">
-                <div class="h-[40px] w-[40px] flex justify-center items-center rounded cursor-pointer border border-platinum text-extra-one" (click)="handleExportDistanceClick()" (keydown.enter)="handleExportDistanceClick()">
-                  <img src="assets/svg/xls-file-icon.svg" alt="Export as PDF" width="24" height="24" />
-                </div>
+      <div class="flex flex-col gap-4">
+        <div class="flex flex-wrap justify-between items-center gap-2">
+          <ng-container>
+            <div *appHasPermission="[[accessGroup.VEHICLE_ONLINE_STATUS_REPORTS_DOWNLOADER]]" class="flex gap-2">
+              <div class="h-[40px] w-[40px] flex justify-center items-center rounded cursor-pointer border border-neutral-200 text-success-500" (click)="handleExportDistanceClick()" (keydown.enter)="handleExportDistanceClick()">
+                <img src="assets/svg/xls-file-icon.svg" alt="Export as XLSX" width="24" height="24" />
               </div>
-            </ng-container>
-          </div>
+            </div>
+          </ng-container>
         </div>
-        <div class="flex items-center pb-2 border-b border-b-bright-gray">
-          <p class="flex-[0_0_50%] text-sm text-sonic-silver">Date</p>
-          <p class="flex-[0_0_50%] text-sm text-sonic-silver">Number of online vehicles</p>
+        <div class="flex items-center pb-2 border-b border-b-neutral-400">
+          <p class="flex-[0_0_50%] text-sm text-neutral-500">Date</p>
+          <p class="flex-[0_0_50%] text-sm text-neutral-500">Number of online vehicles</p>
         </div>
       </div>
     </ng-container>
     <ng-container list>
-      <div *ngFor="let vehicle of vehicles$ | async" class="flex items-center py-4">
-        <p class="flex-[0_0_50%] font-semibold text-sm">{{ vehicle.date }}</p>
-        <p class="flex-[0_0_50%] font-semibold text-sm">{{ vehicle.count_of_online }}</p>
-      </div>
+      <ng-container *ngIf="(vehicles$ | async)?.length; else emptyOnlineStatus">
+        <div *ngFor="let vehicle of vehicles$ | async" class="flex items-center py-4">
+          <p class="flex-[0_0_50%] font-semibold text-sm">{{ vehicle.date }}</p>
+          <p class="flex-[0_0_50%] font-semibold text-sm">{{ vehicle.count_of_online }}</p>
+        </div>
+      </ng-container>
+      <ng-template #emptyOnlineStatus>
+        <app-empty-state heading="No online status data" description="No vehicle online status data available for the selected date range."></app-empty-state>
+      </ng-template>
     </ng-container>
   </app-infinity-scroll>
 </ng-container>

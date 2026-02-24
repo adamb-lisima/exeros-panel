@@ -69,7 +69,7 @@ export class LineChartComponent implements OnChanges {
     dataLabels: {
       enabled: false
     },
-    colors: ['var(--main-primary)'],
+    colors: ['var(--brand-500)'],
     title: {
       text: '',
       align: 'left',

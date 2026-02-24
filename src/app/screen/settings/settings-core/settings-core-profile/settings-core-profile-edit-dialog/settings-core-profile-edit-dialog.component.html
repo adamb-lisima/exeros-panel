@@ -6,7 +6,7 @@
       <app-text-control [ngModel]="email" [disabled]="true" label="E-mail*"></app-text-control>
     </div>
     <div class="flex flex-col gap-2">
-      <span class="text-xs text-dim-gray">Add your avatar</span>
+      <span class="text-xs text-neutral-500">Add your avatar</span>
       <div *ngIf="file" class="flex gap-2">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <mask id="mask0_140_9623" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
@@ -18,17 +18,17 @@
         </svg>
         <div class="flex flex-col">
           <span class="text-xs font-medium">{{ file.name }}</span>
-          <span class="text-xs text-dim-gray">{{ file.size | humanizeFileSize }}</span>
+          <span class="text-xs text-neutral-500">{{ file.size | humanizeFileSize }}</span>
         </div>
       </div>
       <label class="flex cursor-pointer">
-        <span class="py-2 px-4 border-2 border-main-primary rounded-lg text-sm text-main-primary font-semibold select-none">Change file</span>
+        <span class="py-2 px-4 border-2 border-brand-500 rounded-lg text-sm text-brand-500 font-semibold select-none">Change file</span>
         <input type="file" accept="image/png,image/jpeg" hidden (change)="handleAvatarChange($any($event.target).files[0])" />
       </label>
     </div>
-    <span class="text-xs text-dim-gray">* - mandatory fields</span>
+    <span class="text-xs text-neutral-500">* - mandatory fields</span>
     <div class="flex flex-col gap-2">
-      <span class="text-sm text-sonic-silver">Email notifications</span>
+      <span class="text-sm text-neutral-500">Email notifications</span>
       <span class="text-sm">Choose about which events you want to receive email notifications</span>
       <div class="flex flex-col gap-2">
         <div *ngFor="let notification of emailNotifications" class="flex items-center gap-4">

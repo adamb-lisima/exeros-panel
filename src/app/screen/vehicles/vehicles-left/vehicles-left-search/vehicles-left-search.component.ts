@@ -45,7 +45,7 @@ export class VehiclesLeftSearchComponent implements OnInit, OnDestroy {
       vehicles.map(vehicle => ({
         value: vehicle.id,
         label: vehicle.registration_plate,
-        colorClass: vehicle.status === 'Active' ? 'text-extra-one' : undefined
+        colorClass: vehicle.status === 'Active' ? 'text-success-500' : undefined
       }))
     ),
     shareReplay({ bufferSize: 1, refCount: true })
@@ -126,5 +126,14 @@ export class VehiclesLeftSearchComponent implements OnInit, OnDestroy {
     this.sub.unsubscribe();
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  resetFilters(): void {
+    this.paramsGroup.patchValue({
+      fleet_id: 1,
+      driver_id: undefined,
+      vehicle_id: undefined
+    });
+    this.isOpen = false;
   }
 }

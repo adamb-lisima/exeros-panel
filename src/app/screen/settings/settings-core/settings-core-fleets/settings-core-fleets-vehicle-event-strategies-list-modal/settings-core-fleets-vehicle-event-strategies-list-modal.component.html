@@ -15,33 +15,33 @@
   <div class="max-h-[60vh] overflow-y-auto">
     <table class="table-auto w-full" *ngIf="(strategies$ | async)?.length">
       <thead class="sticky top-0 bg-white z-10">
-        <tr class="border-b border-bright-gray">
-          <th class="px-2 py-2 text-xs text-manatee font-medium">Template Name</th>
-          <th class="px-2 text-xs text-manatee">Alarm Type</th>
-          <th class="px-2 text-xs text-manatee">Time Before/After</th>
-          <th class="px-2 text-xs text-manatee">Assigned</th>
+        <tr class="border-b border-neutral-400">
+          <th class="px-2 py-2 text-xs text-neutral-400 font-medium">Template Name</th>
+          <th class="px-2 text-xs text-neutral-400">Alarm Type</th>
+          <th class="px-2 text-xs text-neutral-400">Time Before/After</th>
+          <th class="px-2 text-xs text-neutral-400">Assigned</th>
           <th class="px-2"></th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let strategy of strategies$ | async" class="border-b border-bright-gray hover:bg-gray-50">
+        <tr *ngFor="let strategy of strategies$ | async" class="border-b border-neutral-400 hover:bg-neutral-50">
           <td class="px-2 py-4 text-sm">
-            <div class="font-medium text-main-primary">{{ strategy.name + ' (' + getAlarmTypeName(strategy.alarm_type_id) + ')' }}</div>
-            <div class="text-xs text-gray-500">ID: {{ strategy.id }}</div>
+            <div class="font-medium text-brand-500">{{ strategy.name + ' (' + getAlarmTypeName(strategy.alarm_type_id) + ')' }}</div>
+            <div class="text-xs text-neutral-500">ID: {{ strategy.id }}</div>
           </td>
           <td class="px-2 text-sm">{{ getAlarmTypeName(strategy.alarm_type_id) }}</td>
           <td class="px-2 text-sm">{{ strategy.time_before }}s / {{ strategy.time_after }}s</td>
           <td class="px-2 text-sm">
-            <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">
+            <span class="text-xs bg-success-50 text-success-500 px-2 py-1 rounded">
               {{ strategy.created_at | date : 'short' }}
             </span>
           </td>
           <td class="px-2">
             <div class="relative">
-              <div [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger" (click)="$event.stopPropagation()" (keydown.enter)="$event.stopPropagation()" class="flex flex-col items-center gap-1 py-3 px-1.5 rounded-md cursor-pointer hover:bg-anti-flash-white w-5">
-                <div class="w-[2.5px] h-[2.5px] rounded-full bg-main-primary"></div>
-                <div class="w-[2.5px] h-[2.5px] rounded-full bg-main-primary"></div>
-                <div class="w-[2.5px] h-[2.5px] rounded-full bg-main-primary"></div>
+              <div [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger" (click)="$event.stopPropagation()" (keydown.enter)="$event.stopPropagation()" class="flex flex-col items-center gap-1 py-3 px-1.5 rounded-md cursor-pointer hover:bg-neutral-100 w-5">
+                <div class="w-[2.5px] h-[2.5px] rounded-full bg-brand-500"></div>
+                <div class="w-[2.5px] h-[2.5px] rounded-full bg-brand-500"></div>
+                <div class="w-[2.5px] h-[2.5px] rounded-full bg-brand-500"></div>
               </div>
 
               <mat-menu #menu="matMenu" [hasBackdrop]="true">
@@ -49,7 +49,7 @@
                   <button mat-menu-item (click)="handleDeleteStrategyClick(strategy)">
                     <div class="flex flex-row">
                       <img ngSrc="assets/svg/new-icons/trash.svg" width="20" height="20" alt="icon" />
-                      <p class="text-main-primary underline text-sm font-medium">Remove</p>
+                      <p class="text-brand-500 underline text-sm font-medium">Remove</p>
                     </div>
                   </button>
                 </div>
@@ -60,6 +60,6 @@
       </tbody>
     </table>
 
-    <div *ngIf="!(strategies$ | async)?.length" class="text-center py-8 text-gray-500">No event strategy templates assigned to this vehicle. Click "Assign Template" to add one.</div>
+    <div *ngIf="!(strategies$ | async)?.length" class="text-center py-8 text-neutral-500">No event strategy templates assigned to this vehicle. Click "Assign Template" to add one.</div>
   </div>
 </div>

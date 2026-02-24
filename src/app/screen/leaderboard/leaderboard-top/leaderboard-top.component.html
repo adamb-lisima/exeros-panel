@@ -1,7 +1,7 @@
 <div class="w-full flex justify-between">
   <h1 class="font-medium text-[32px] leading-[40px] pt-2 pl-2">Leaderboard</h1>
   <div class="flex items-center gap-2 mt-2">
-    <div *appHasPermission="[[accessGroup.LEADERBOARD_DOWNLOADER]]" class="h-[46px] w-[46px] flex justify-center items-center rounded cursor-pointer border border-new-gray-400 bg-white text-extra-two" (click)="handleExportClick()" (keydown.enter)="handleExportClick()" appTooltip="Export to PDF">
+    <div *appHasPermission="[[accessGroup.LEADERBOARD_DOWNLOADER]]" class="h-[46px] w-[46px] flex justify-center items-center rounded cursor-pointer border border-neutral-500-400 bg-white text-error-500" (click)="handleExportClick()" (keydown.enter)="handleExportClick()" appTooltip="Export to PDF">
       <img src="assets/svg/pdf-file-icon.svg" width="24" height="24" alt="pdf" />
     </div>
     <app-tree-control *ngIf="fleetOptions$ | async as options" class="min-w-80" label="Fleet" [options]="options" [formControl]="bodyGroup.controls.fleet_id" [showHintSpace]="false"></app-tree-control>

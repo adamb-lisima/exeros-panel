@@ -1,14 +1,14 @@
 <div class="h-[450px] w-[600px] flex flex-col gap-5 overflow-auto rounded-md bg-white">
   <div class="flex justify-between items-center px-5 pt-5">
     <p class="font-medium">Edit Camera channels</p>
-    <div class="rounded-md cursor-pointer bg-anti-flash-white" (click)="handleCloseClick()" (keydown.enter)="handleCloseClick()">
+    <div class="rounded-md cursor-pointer bg-neutral-100" (click)="handleCloseClick()" (keydown.enter)="handleCloseClick()">
       <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M12.7279 21.2129L21.2132 12.7276" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
         <path d="M21.2132 21.2138L12.7279 12.7285" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
       </svg>
     </div>
   </div>
-  <span class="w-full flex-[0_0_1px] bg-platinum"></span>
+  <span class="w-full flex-[0_0_1px] bg-neutral-200"></span>
   <ng-container *ngIf="formGroups$ | async as formGroups">
     <div class="flex flex-col gap-3 px-5">
       <div class="flex text-center">
@@ -25,7 +25,7 @@
       </div>
     </div>
     <ng-container *ngIf="formGroups.length">
-      <span class="w-full flex-[0_0_1px] bg-platinum"></span>
+      <span class="w-full flex-[0_0_1px] bg-neutral-200"></span>
       <div class="flex justify-end px-5 pb-5">
         <app-button (buttonClick)="handleUpdateClick(formGroups)">Update</app-button>
       </div>

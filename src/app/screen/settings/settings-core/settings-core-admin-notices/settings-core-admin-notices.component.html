@@ -1,21 +1,21 @@
 <div class="flex flex-col gap-5">
   <div class="flex gap-5">
-    <div class="w-72 flex flex-col gap-6 p-5 border-r border-bright-gray">
+    <div class="w-72 flex flex-col gap-6 p-5 border-r border-neutral-400">
       <div class="h-[500px] flex flex-col gap-2 overflow-y-auto">
         <app-button (buttonClick)="handleCreateAdminNoticeClick()">
           <span class="w-48 text-sm text-white font-semibold">Create new notice</span>
         </app-button>
         <div class="flex items-center gap-1 pt-6">
-          <span [ngClass]="{ 'text-main-primary': currentStatus === null, 'text-dark-electric-blue': true }" (click)="resetFilters()" (keydown.enter)="resetFilters()" class="text-sm font-normal cursor-pointer">All notices</span>
+          <span [ngClass]="{ 'text-brand-500': currentStatus === null, 'text-neutral-700': true }" (click)="resetFilters()" (keydown.enter)="resetFilters()" class="text-sm font-normal cursor-pointer">All notices</span>
         </div>
         <div class="flex items-center gap-1 cursor-pointer">
-          <span [ngClass]="{ 'text-main-primary': currentStatus === 'completed', 'text-dark-electric-blue': true }" (click)="filterByStatus('completed')" (keydown.enter)="filterByStatus('completed')" class="text-sm font-normal cursor-pointer">Sent</span>
+          <span [ngClass]="{ 'text-brand-500': currentStatus === 'completed', 'text-neutral-700': true }" (click)="filterByStatus('completed')" (keydown.enter)="filterByStatus('completed')" class="text-sm font-normal cursor-pointer">Sent</span>
         </div>
         <div class="flex items-center gap-1 cursor-pointer">
-          <span [ngClass]="{ 'text-main-primary': currentStatus === 'pending', 'text-dark-electric-blue': true }" (click)="filterByStatus('pending')" (keydown.enter)="filterByStatus('pending')" class="text-sm font-normal cursor-pointer">Planned</span>
+          <span [ngClass]="{ 'text-brand-500': currentStatus === 'pending', 'text-neutral-700': true }" (click)="filterByStatus('pending')" (keydown.enter)="filterByStatus('pending')" class="text-sm font-normal cursor-pointer">Planned</span>
         </div>
         <div class="flex items-center gap-1 cursor-pointer">
-          <span [ngClass]="{ 'text-main-primary': currentStatus === 'draft', 'text-dark-electric-blue': true }" (click)="filterByStatus('draft')" (keydown.enter)="filterByStatus('draft')" class="text-sm font-normal cursor-pointer">Drafts</span>
+          <span [ngClass]="{ 'text-brand-500': currentStatus === 'draft', 'text-neutral-700': true }" (click)="filterByStatus('draft')" (keydown.enter)="filterByStatus('draft')" class="text-sm font-normal cursor-pointer">Drafts</span>
         </div>
       </div>
     </div>

@@ -1,55 +1,55 @@
 <div class="w-full p-5">
   <ng-container *ngIf="type === 'create'">
     <div class="flex justify-between relative">
-      <div [ngClass]="{ 'bg-main-primary': step >= 1, 'bg-new-gray-300': step < 1 }" class="absolute h-0.5 w-20 bg-main-primary top-4 left-[-20px]"></div>
+      <div [ngClass]="{ 'bg-brand-500': step >= 1, 'bg-neutral-300': step < 1 }" class="absolute h-0.5 w-20 bg-brand-500 top-4 left-[-20px]"></div>
 
       <div class="px-10 justify-center flex flex-col">
-        <div [ngClass]="{ 'bg-main-primary': step >= 1, 'bg-new-gray-300': step < 1 }" class="relative z-10 text-sm w-8 h-8 text-white rounded-full items-center justify-center flex">1</div>
+        <div [ngClass]="{ 'bg-brand-500': step >= 1, 'bg-neutral-300': step < 1 }" class="relative z-10 text-sm w-8 h-8 text-white rounded-full items-center justify-center flex">1</div>
         <span class="text-xs flex justify-center text-center ml-[-10px]">Vehicle lookup</span>
       </div>
 
-      <div [ngClass]="{ 'bg-main-primary': step >= 2, 'bg-new-gray-300': step < 2 }" class="absolute h-0.5 w-36 top-4 left-14"></div>
+      <div [ngClass]="{ 'bg-brand-500': step >= 2, 'bg-neutral-300': step < 2 }" class="absolute h-0.5 w-36 top-4 left-14"></div>
 
       <div class="px-8 justify-center">
-        <div [ngClass]="{ 'bg-main-primary': step >= 2, 'bg-new-gray-300': step < 2 }" class="relative z-10 text-sm w-8 h-8 text-white rounded-full items-center justify-center flex">2</div>
+        <div [ngClass]="{ 'bg-brand-500': step >= 2, 'bg-neutral-300': step < 2 }" class="relative z-10 text-sm w-8 h-8 text-white rounded-full items-center justify-center flex">2</div>
         <span class="text-xs flex justify-center ml-[-10px] text-center">General info</span>
       </div>
 
-      <div [ngClass]="{ 'bg-main-primary': step >= 3, 'bg-new-gray-300': step < 3 }" class="absolute h-0.5 w-36 top-4 right-48"></div>
+      <div [ngClass]="{ 'bg-brand-500': step >= 3, 'bg-neutral-300': step < 3 }" class="absolute h-0.5 w-36 top-4 right-48"></div>
 
       <div class="px-10 justify-center">
-        <div [ngClass]="{ 'bg-main-primary': step >= 3, 'bg-new-gray-300': step < 3 }" class="relative z-10 text-sm w-8 h-8 text-white rounded-full items-center justify-center flex">3</div>
+        <div [ngClass]="{ 'bg-brand-500': step >= 3, 'bg-neutral-300': step < 3 }" class="relative z-10 text-sm w-8 h-8 text-white rounded-full items-center justify-center flex">3</div>
         <span class="text-xs flex justify-center ml-[-10px]">Providers</span>
       </div>
 
-      <div [ngClass]="{ 'bg-main-primary': step >= 4, 'bg-new-gray-300': step < 4 }" class="absolute h-0.5 w-28 top-4 right-20"></div>
+      <div [ngClass]="{ 'bg-brand-500': step >= 4, 'bg-neutral-300': step < 4 }" class="absolute h-0.5 w-28 top-4 right-20"></div>
 
       <div class="px-12 justify-center">
-        <div [ngClass]="{ 'bg-main-primary': step >= 4, 'bg-new-gray-300': step < 4 }" class="relative z-10 text-sm w-8 h-8 text-white rounded-full items-center justify-center flex">4</div>
+        <div [ngClass]="{ 'bg-brand-500': step >= 4, 'bg-neutral-300': step < 4 }" class="relative z-10 text-sm w-8 h-8 text-white rounded-full items-center justify-center flex">4</div>
         <span class="text-xs flex ml-[-5px]">Success</span>
       </div>
 
-      <div [ngClass]="{ 'bg-main-primary': step >= 4, 'bg-new-gray-300': step < 4 }" class="absolute h-0.5 w-32 top-4 right-[-65px]"></div>
+      <div [ngClass]="{ 'bg-brand-500': step >= 4, 'bg-neutral-300': step < 4 }" class="absolute h-0.5 w-32 top-4 right-[-65px]"></div>
     </div>
   </ng-container>
 
   <ng-container *ngIf="type === 'edit'">
     <div class="flex mx-20 justify-center relative">
-      <div [ngClass]="{ 'bg-main-primary': step >= 1, 'bg-new-gray-300': step < 1 }" class="absolute h-0.5 w-36 top-4 left-[-75px]"></div>
+      <div [ngClass]="{ 'bg-brand-500': step >= 1, 'bg-neutral-300': step < 1 }" class="absolute h-0.5 w-36 top-4 left-[-75px]"></div>
 
       <div class="px-16 justify-center">
-        <div [ngClass]="{ 'bg-main-primary': step >= 1, 'bg-new-gray-300': step < 1 }" class="relative z-10 text-sm w-8 h-8 text-white rounded-full items-center justify-center flex">1</div>
+        <div [ngClass]="{ 'bg-brand-500': step >= 1, 'bg-neutral-300': step < 1 }" class="relative z-10 text-sm w-8 h-8 text-white rounded-full items-center justify-center flex">1</div>
         <span class="text-xs flex justify-center ml-[-10px] text-center">General info</span>
       </div>
 
-      <div [ngClass]="{ 'bg-main-primary': step >= 2, 'bg-new-gray-300': step < 2 }" class="absolute h-0.5 w-40 top-4 right-24"></div>
+      <div [ngClass]="{ 'bg-brand-500': step >= 2, 'bg-neutral-300': step < 2 }" class="absolute h-0.5 w-40 top-4 right-24"></div>
 
       <div class="px-16 justify-center">
-        <div [ngClass]="{ 'bg-main-primary': step >= 2, 'bg-new-gray-300': step < 2 }" class="relative z-10 text-sm w-8 h-8 text-white rounded-full items-center justify-center flex">2</div>
+        <div [ngClass]="{ 'bg-brand-500': step >= 2, 'bg-neutral-300': step < 2 }" class="relative z-10 text-sm w-8 h-8 text-white rounded-full items-center justify-center flex">2</div>
         <span class="text-xs flex justify-center ml-[-10px]">Providers</span>
       </div>
 
-      <div [ngClass]="{ 'bg-main-primary': step >= 2, 'bg-new-gray-300': step < 2 }" class="absolute h-0.5 w-36 top-4 right-[-55px]"></div>
+      <div [ngClass]="{ 'bg-brand-500': step >= 2, 'bg-neutral-300': step < 2 }" class="absolute h-0.5 w-36 top-4 right-[-55px]"></div>
     </div>
   </ng-container>
 </div>

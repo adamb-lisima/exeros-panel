@@ -4,10 +4,10 @@
     <div class="flex flex-col">
       <div class="flex items-end gap-1 mb-1">
         <ng-container *ngIf="current_star_rating$ | async as rating; else noScore">
-          <p class="font-bold text-xl text-main-primary">{{ rating | number : '1.2-2' }}</p>
+          <p class="font-bold text-xl text-brand-500">{{ rating | number : '1.2-2' }}</p>
         </ng-container>
         <ng-template #noScore>
-          <p class="font-bold text-xl text-main-primary">-</p>
+          <p class="font-bold text-xl text-brand-500">-</p>
         </ng-template>
       </div>
       <ng-container *ngIf="current_star_rating$ | async as rating; else zeroStars">

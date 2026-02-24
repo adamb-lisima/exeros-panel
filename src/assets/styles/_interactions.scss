@@ -1,0 +1,71 @@
+// ==========================================================================
+// Global Focus Ring & Interaction State Styles
+// ==========================================================================
+
+// ---------------------------------------------------------------------------
+// 15.1 — Focus-visible ring for all interactive elements
+// ---------------------------------------------------------------------------
+button,
+a,
+input,
+select,
+textarea,
+[role='tab'],
+[role='menuitem'],
+[routerLink],
+.nav-item {
+  &:focus-visible {
+    outline: 2px solid var(--brand-500);
+    outline-offset: 2px;
+  }
+
+  &:focus:not(:focus-visible) {
+    outline: none;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 15.2 — Hover state utilities
+// ---------------------------------------------------------------------------
+.hover-lift {
+  transition: box-shadow var(--duration-normal) var(--ease-default),
+    transform var(--duration-normal) var(--ease-default);
+
+  &:hover {
+    box-shadow: var(--elevation-md);
+    transform: translateY(-1px);
+  }
+}
+
+.hover-darken {
+  transition: filter var(--duration-fast) var(--ease-default);
+
+  &:hover {
+    filter: brightness(0.9);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 15.4 — Staggered card fade-in animation utility
+// ---------------------------------------------------------------------------
+@keyframes cardFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.stagger-fade-in > * {
+  opacity: 0;
+  animation: cardFadeIn var(--duration-normal) var(--ease-default) forwards;
+
+  @for $i from 1 through 20 {
+    &:nth-child(#{$i}) {
+      animation-delay: #{($i - 1) * 50}ms;
+    }
+  }
+}

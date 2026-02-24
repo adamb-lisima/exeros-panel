@@ -1,7 +1,7 @@
 <div *ngIf="driver$ | async as driver" class="w-full flex justify-between mt-2">
   <p class="font-bold text-xl">{{ driver.name }}</p>
   <div class="flex items-center gap-2">
-    <div *appHasPermission="[[accessGroup.LEADERBOARD_DOWNLOADER]]" class="h-[46px] w-[46px] flex justify-center items-center rounded cursor-pointer border border-new-gray-400 bg-white text-extra-two" (click)="handleExportClick()" (keydown.enter)="handleExportClick()" appTooltip="Export to PDF">
+    <div *appHasPermission="[[accessGroup.LEADERBOARD_DOWNLOADER]]" class="h-[46px] w-[46px] flex justify-center items-center rounded cursor-pointer border border-neutral-500-400 bg-white text-error-500" (click)="handleExportClick()" (keydown.enter)="handleExportClick()" appTooltip="Export to PDF">
       <img src="assets/svg/pdf-file-icon.svg" width="24" height="24" alt="pdf" />
     </div>
     <div class="h-[48px] w-[165px] flex items-center justify-between gap-2 p-3 rounded cursor-pointer bg-white custom-select" [cdkMenuTriggerFor]="menu">
@@ -30,6 +30,6 @@
     <a *ngFor="let range of RANGES; trackByField: 'id'" class="p-2 font-medium text-sm cursor-pointer" cdkMenuItem (click)="handleDaysClick(range.id)">
       {{ range.text }}
     </a>
-    <span class="flex-[0_0_1px] w-full bg-platinum"></span>
+    <span class="flex-[0_0_1px] w-full bg-neutral-200"></span>
   </div>
 </ng-template>

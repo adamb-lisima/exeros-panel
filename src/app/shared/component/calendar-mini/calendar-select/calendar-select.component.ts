@@ -12,20 +12,20 @@ import { SelectControl } from '../../control/select-control/select-control.model
         padding: 0 0.5rem;
         font-size: 0.875rem;
         border-radius: 0.25rem;
-        border: 1px solid var(--platinum);
-        background-color: var(--white);
-        color: var(--black);
+        border: 1px solid var(--neutral-200);
+        background-color: var(--neutral-0);
+        color: var(--neutral-950);
         transition: border-color 0.2s ease;
       }
 
       .select-container:hover:not(.disabled) {
-        border-color: var(--chinese-silver);
+        border-color: var(--neutral-300);
       }
 
       .select-container.disabled {
         cursor: not-allowed;
-        background-color: var(--cultured);
-        color: var(--manatee);
+        background-color: var(--neutral-50);
+        color: var(--neutral-400);
       }
 
       .select-menu {
@@ -34,11 +34,11 @@ import { SelectControl } from '../../control/select-control/select-control.model
         width: 100%;
         margin-top: 0.25rem;
         padding: 0.25rem 0;
-        background-color: var(--white);
-        color: var(--black);
+        background-color: var(--neutral-0);
+        color: var(--neutral-950);
         border-radius: 0.375rem;
         box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-        border: 1px solid var(--platinum);
+        border: 1px solid var(--neutral-200);
         max-height: 15rem;
         overflow-y: auto;
       }
@@ -52,26 +52,26 @@ import { SelectControl } from '../../control/select-control/select-control.model
         cursor: pointer;
         border: none;
         background: none;
-        color: var(--black);
+        color: var(--neutral-950);
       }
 
       .select-option:hover:not(.disabled) {
-        background-color: var(--bright-gray);
+        background-color: var(--neutral-100);
       }
 
       .select-option:focus {
         outline: none;
-        background-color: var(--bright-gray);
+        background-color: var(--neutral-100);
       }
 
       .select-option.selected {
-        background-color: var(--bright-gray);
+        background-color: var(--neutral-100);
         font-weight: 500;
       }
 
       .select-option.disabled {
         cursor: not-allowed;
-        color: var(--manatee);
+        color: var(--neutral-400);
       }
 
       /* Custom scrollbar styles */
@@ -80,7 +80,7 @@ import { SelectControl } from '../../control/select-control/select-control.model
       }
 
       .select-menu::-webkit-scrollbar-thumb {
-        background-color: var(--chinese-silver);
+        background-color: var(--neutral-300);
         border-radius: 3px;
       }
 
@@ -91,7 +91,7 @@ import { SelectControl } from '../../control/select-control/select-control.model
       /* Firefox scrollbar */
       .select-menu {
         scrollbar-width: thin;
-        scrollbar-color: var(--chinese-silver) transparent;
+        scrollbar-color: var(--neutral-300) transparent;
       }
     `
   ],

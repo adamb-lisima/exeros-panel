@@ -1,5 +1,5 @@
 <div class="flex justify-between items-center">
-  <div class="flex items-center p-1.5 rounded-lg bg-bright-gray">
+  <div class="flex items-center p-1.5 rounded-lg bg-neutral-400">
     <p *appHasPermission="[[driversViewerAccess]]" class="px-4 py-2 rounded-md cursor-pointer font-bold opacity-50" (keydown.enter)="handleDriversClick()" (click)="handleDriversClick()">Drivers</p>
     <a *appHasPermission="[[vehiclesViewerAccess]]" class="px-4 py-2 rounded-md font-bold bg-white">Vehicle</a>
   </div>

@@ -1,0 +1,37 @@
+<div class="error-page">
+  <div class="error-page__illustration">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      stroke-width="1.5"
+      width="80"
+      height="80"
+      aria-hidden="true"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        [attr.d]="illustrationPath"
+      />
+    </svg>
+    <span class="error-page__code">{{ errorCode }}</span>
+  </div>
+  <h1 class="error-page__heading">{{ defaultHeading }}</h1>
+  <p class="error-page__description">{{ defaultDescription }}</p>
+  <div class="error-page__actions">
+    <app-button
+      variant="primary"
+      (buttonClick)="retry.emit()"
+    >
+      Try again
+    </app-button>
+    <app-button
+      variant="secondary"
+      (buttonClick)="goHome.emit()"
+    >
+      Go to Dashboard
+    </app-button>
+  </div>
+</div>

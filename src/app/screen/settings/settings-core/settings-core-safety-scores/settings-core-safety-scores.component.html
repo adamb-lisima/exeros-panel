@@ -1,6 +1,6 @@
 <div class="flex flex-col gap-5">
   <div class="flex gap-5">
-    <div class="flex flex-col gap-6 p-5 border-r border-bright-gray">
+    <div class="flex flex-col gap-6 p-5 border-r border-neutral-400">
       <app-button *ngIf="selectedCompany$ | async as selectedCompany" (buttonClick)="handleCreateNewScoringClick(selectedCompany.id)">
         <span class="w-48 text-sm text-white font-semibold">Create new scoring</span>
       </app-button>
@@ -8,15 +8,15 @@
         <ng-container *ngFor="let company of companyElements$ | async">
           <ng-container *ngIf="selectedCompany$ | async as selectedCompany">
             <div class="flex items-center gap-1" (click)="handleSelectCompanyClick(company)" (keydown.enter)="handleSelectCompanyClick(company)">
-              <div class="w-5 flex justify-center transform transition-transform" [ngClass]="selectedCompany?.id === company.id ? 'rotate-90 text-main-primary' : 'text-dark-electric-blue'">
+              <div class="w-5 flex justify-center transform transition-transform" [ngClass]="selectedCompany?.id === company.id ? 'rotate-90 text-brand-500' : 'text-neutral-700'">
                 <svg width="4" height="5" viewBox="0 0 4 5" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M1.38894 4.63006C1.16794 4.85105 0.91246 4.90181 0.622485 4.78233C0.332495 4.66286 0.1875 4.44552 0.1875 4.1303V0.869218C0.1875 0.553999 0.332495 0.336657 0.622485 0.21719C0.91246 0.0977087 1.16794 0.148466 1.38894 0.369462L3.02451 2.00506C3.1008 2.08133 3.15521 2.15929 3.18774 2.23894C3.22028 2.31858 3.23655 2.40552 3.23655 2.49976C3.23655 2.594 3.22028 2.68093 3.18774 2.76057C3.15521 2.84023 3.1008 2.91819 3.02451 2.99446L1.38894 4.63006Z" fill="currentColor" />
                 </svg>
               </div>
-              <span [ngClass]="selectedCompany?.id === company.id ? 'text-main-primary' : 'text-dark-electric-blue'" class="text-sm font-medium cursor-pointer">{{ company.name }}</span>
+              <span [ngClass]="selectedCompany?.id === company.id ? 'text-brand-500' : 'text-neutral-700'" class="text-sm font-medium cursor-pointer">{{ company.name }}</span>
             </div>
             <div *ngIf="selectedCompany?.id === company.id && company.score_profiles?.length" class="flex flex-col gap-2 ml-9">
-              <span *ngFor="let scoreProfile of company.score_profiles" (click)="handleToggleDetailsClick(scoreProfile)" (keydown.enter)="handleToggleDetailsClick(scoreProfile)" [ngClass]="(selectedScoreProfile$ | async)?.id === scoreProfile.id ? 'text-main-primary' : 'text-dark-electric-blue'" class="text-sm font-medium cursor-pointer">{{ scoreProfile.name }}</span>
+              <span *ngFor="let scoreProfile of company.score_profiles" (click)="handleToggleDetailsClick(scoreProfile)" (keydown.enter)="handleToggleDetailsClick(scoreProfile)" [ngClass]="(selectedScoreProfile$ | async)?.id === scoreProfile.id ? 'text-brand-500' : 'text-neutral-700'" class="text-sm font-medium cursor-pointer">{{ scoreProfile.name }}</span>
             </div>
           </ng-container>
         </ng-container>
@@ -27,7 +27,7 @@
         <ng-container *ngIf="selectedScoreProfile$ | async as selectedScoreProfile; else companyInfo">
           <span class="text-xl font-medium">{{ selectedScoreProfile.name }}</span>
           <div class="flex gap-5 mt-6">
-            <span class="text-sm text-manatee">Branches assigned:</span>
+            <span class="text-sm text-neutral-400">Branches assigned:</span>
             <div class="flex flex-col">
               <span *ngFor="let branch of branchesAssign$ | async" class="text-sm font-medium">{{ branch }}</span>
             </div>
@@ -37,7 +37,7 @@
           <ng-container *ngIf="fleetTree$ | async as fleets">
             <span class="text-xl font-medium">{{ selectedCompany?.name }}</span>
             <p class="flex gap-5 mt-6">
-              <span class="text-sm text-manatee">Scoring:</span>
+              <span class="text-sm text-neutral-400">Scoring:</span>
               <span class="text-sm">{{ selectedCompany?.score_profiles?.length ?? 0 }}</span>
             </p>
             <div class="flex flex-col gap-4 mt-8">
@@ -57,13 +57,13 @@
       <ng-template #fleets>
         <ng-container *ngIf="fleetTree$ | async as fleets">
           <div class="grid grid-cols-2 auto-rows-auto mt-2">
-            <span class="text-xs text-manatee p-2 border-b border-bright-gray">Branch</span>
-            <span class="text-xs text-manatee p-2 border-b border-bright-gray">Scoring</span>
+            <span class="text-xs text-neutral-400 p-2 border-b border-neutral-400">Branch</span>
+            <span class="text-xs text-neutral-400 p-2 border-b border-neutral-400">Scoring</span>
             <ng-container *ngFor="let item of fleets">
-              <div class="p-2 border-b border-bright-gray">
+              <div class="p-2 border-b border-neutral-400">
                 <span class="text-sm">{{ item.label }}</span>
               </div>
-              <div class="p-2 border-b border-bright-gray">
+              <div class="p-2 border-b border-neutral-400">
                 <span class="text-sm">{{ item.profile?.name }}</span>
               </div>
               <ng-container *ngIf="item.children?.length">
@@ -79,10 +79,10 @@
 
 <ng-template #branch let-fleet="fleet" let-index="index">
   <ng-container *ngFor="let item of fleet">
-    <div class="p-2 border-b border-bright-gray">
+    <div class="p-2 border-b border-neutral-400">
       <span class="text-sm" [ngStyle]="{ 'margin-left': index * 20 + 'px' }">{{ item.label }}</span>
     </div>
-    <div class="p-2 border-b border-bright-gray">
+    <div class="p-2 border-b border-neutral-400">
       <span class="text-sm">{{ item.profile?.name }}</span>
     </div>
     <ng-container *ngIf="item.children?.length">

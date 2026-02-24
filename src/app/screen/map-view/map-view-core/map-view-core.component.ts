@@ -20,9 +20,16 @@ import { StreamSelectors } from '../../stream/stream.selectors';
 import { StreamService } from '../../stream/stream.service';
 import { VehiclesSelectors } from '../../vehicles/vehicles.selectors';
 
+export interface VehicleInfoCard {
+  vehicle: MapVehiclesElement;
+  x: number;
+  y: number;
+}
+
 @Component({
   selector: 'app-map-view-core',
   templateUrl: './map-view-core.component.html',
+  styleUrls: ['./map-view-core.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MapViewCoreComponent implements OnInit, OnDestroy {
@@ -57,6 +64,10 @@ export class MapViewCoreComponent implements OnInit, OnDestroy {
 
   vehicle$ = this.store.select(VehiclesSelectors.vehicle);
   private readonly sub?: Subscription;
+
+  /** Info card overlay state */
+  selectedVehicleInfo: VehicleInfoCard | null = null;
+  private allMapVehicles: MapVehiclesElement[] = [];
 
   ngOnInit(): void {
     this.mapDateTime$.pipe(takeUntil(this.destroy$)).subscribe(timeRange => {
@@ -93,6 +104,7 @@ export class MapViewCoreComponent implements OnInit, OnDestroy {
       .subscribe(vehicles => {
         this.initialLoadComplete = true;
         this.allVehicles = vehicles;
+        this.allMapVehicles = vehicles;
 
         this.store.dispatch(CommonObjectsActions.setUpdatedMapVehicles({ data: vehicles }));
       });
@@ -104,6 +116,7 @@ export class MapViewCoreComponent implements OnInit, OnDestroy {
         if (!this.initialLoadComplete) return;
 
         this.allVehicles = vehicles;
+        this.allMapVehicles = vehicles;
 
         this.store.dispatch(CommonObjectsActions.setUpdatedMapVehicles({ data: vehicles }));
       });
@@ -219,6 +232,54 @@ export class MapViewCoreComponent implements OnInit, OnDestroy {
 
   onMapReady(map: google.maps.Map) {
     this.map = map;
+
+    map.addListener('click', () => {
+      this.closeInfoCard();
+    });
+  }
+
+  onMarkerClick(marker: any): void {
+    if (!marker?.vehicleId || !this.map) return;
+
+    const vehicle = this.allMapVehicles.find(v => v.device_id === marker.id);
+    if (!vehicle) return;
+
+    const latLng = marker.position;
+    if (!latLng) return;
+
+    const projection = this.map.getProjection();
+    const bounds = this.map.getBounds();
+    const topRight = projection?.fromLatLngToPoint(bounds?.getNorthEast()!);
+    const bottomLeft = projection?.fromLatLngToPoint(bounds?.getSouthWest()!);
+    const scale = Math.pow(2, this.map.getZoom()!);
+    const worldPoint = projection?.fromLatLngToPoint(new google.maps.LatLng(latLng.lat, latLng.lng));
+
+    if (topRight && bottomLeft && worldPoint && scale) {
+      const x = (worldPoint.x - bottomLeft.x) * scale;
+      const y = (worldPoint.y - topRight.y) * scale;
+
+      this.selectedVehicleInfo = { vehicle, x, y: y - 10 };
+      this.cdr.markForCheck();
+    }
+  }
+
+  closeInfoCard(): void {
+    this.selectedVehicleInfo = null;
+    this.cdr.markForCheck();
+  }
+
+  navigateToStream(vehicleId: number): void {
+    this.router.navigate(['/', RouteConst.stream, vehicleId]);
+  }
+
+  navigateToPlayback(vehicleId: number): void {
+    this.store.dispatch(StreamActions.setLastVisitedTab({ route: RouteConst.mapView }));
+    sessionStorage.setItem('lastVisitedTab', RouteConst.mapView);
+    this.router.navigate(['/', RouteConst.playbacks, vehicleId]);
+  }
+
+  getDriverInitial(name: string): string {
+    return name ? name.charAt(0).toUpperCase() : '';
   }
 
   onShapeComplete(event: google.maps.drawing.OverlayCompleteEvent) {

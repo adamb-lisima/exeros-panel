@@ -1,0 +1,16 @@
+<div class="empty-state">
+  <img
+    *ngIf="illustration"
+    class="empty-state__illustration"
+    [src]="illustration"
+    alt=""
+    aria-hidden="true" />
+  <h3 class="empty-state__heading">{{ heading }}</h3>
+  <p class="empty-state__description">{{ description }}</p>
+  <app-button
+    *ngIf="ctaLabel"
+    variant="primary"
+    (buttonClick)="ctaClick.emit()">
+    {{ ctaLabel }}
+  </app-button>
+</div>

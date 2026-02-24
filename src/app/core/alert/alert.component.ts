@@ -1,16 +1,14 @@
-import { animate, state, style, transition, trigger } from '@angular/animations';
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { filter, Subject, switchMap, tap, timer } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 import { AlertActions } from 'src/app/store/alert/alert.actions';
 import { AlertSelectors } from 'src/app/store/alert/alert.selectors';
 
 @Component({
   selector: 'app-alert',
   templateUrl: './alert.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [trigger('fade', [state('in', style({ opacity: 1 })), transition(':enter', [style({ opacity: 0 }), animate(400)]), transition(':leave', animate(400, style({ opacity: 0 })))])]
+  styleUrls: ['./alert.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AlertComponent implements OnInit, OnDestroy {
   alert$ = this.store.select(AlertSelectors.alert);
@@ -18,27 +16,18 @@ export class AlertComponent implements OnInit, OnDestroy {
 
   constructor(private readonly store: Store) {}
 
-  ngOnInit(): void {
-    this.store
-      .select(AlertSelectors.alert)
-      .pipe(
-        filter(alert => !!alert),
-        switchMap(() => timer(5000).pipe(tap(() => this.removeAlert()))),
-        takeUntil(this.destroy$)
-      )
-      .subscribe();
-  }
+  ngOnInit(): void {}
 
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
   }
 
-  handleCloseClick() {
-    this.removeAlert();
+  getToastVariant(type: 'error' | 'success'): 'error' | 'success' {
+    return type;
   }
 
-  private removeAlert() {
+  handleDismissed(): void {
     this.store.dispatch(AlertActions.hide());
   }
 }

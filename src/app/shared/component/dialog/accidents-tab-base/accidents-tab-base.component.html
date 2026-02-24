@@ -17,15 +17,15 @@
             <div class="flex flex-col gap-2">
               <p class="font-semibold">{{ accident.vehicle.registration_plate }}</p>
               <div class="flex items-center gap-2">
-                <p class="font-semibold text-xs text-arsenic">{{ accident.driver.name }}</p>
-                <svg class="text-dark-electric-blue" width="2" height="2" viewBox="0 0 2 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <p class="font-semibold text-xs text-neutral-700">{{ accident.driver.name }}</p>
+                <svg class="text-neutral-700" width="2" height="2" viewBox="0 0 2 2" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <circle cx="1" cy="1" r="1" fill="currentColor" />
                 </svg>
-                <p class="text-xs text-dark-electric-blue">{{ accident.date | dateFormat : 'serverDateTimeFormat' : 'clientDateTimeFormat' }}</p>
+                <p class="text-xs text-neutral-700">{{ accident.date | dateFormat : 'serverDateTimeFormat' : 'clientDateTimeFormat' }}</p>
               </div>
             </div>
           </div>
-          <div *appHasPermission="[[accidentsDownloaderAccess]]" class="rounded cursor-pointer text-extra-two" (click)="handleExportItemClick($event, accident.id)" (keydown.enter)="handleExportItemKeyDown(accident.id)">
+          <div *appHasPermission="[[accidentsDownloaderAccess]]" class="rounded cursor-pointer text-error-500" (click)="handleExportItemClick($event, accident.id)" (keydown.enter)="handleExportItemKeyDown(accident.id)">
             <img src="assets/svg/pdf-file-icon.svg" width="30" height="30" alt="pdf" />
           </div>
         </div>

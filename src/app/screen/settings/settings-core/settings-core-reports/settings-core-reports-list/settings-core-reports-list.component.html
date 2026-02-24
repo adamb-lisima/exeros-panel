@@ -3,24 +3,24 @@
   <table class="table-auto">
     <thead>
       <th></th>
-      <tr class="border-b border-bright-gray">
-        <td class="px-2 py-2 text-xs text-manatee">Name</td>
-        <td class="px-2 text-xs text-manatee">Frequency</td>
-        <td class="px-2 text-xs text-manatee">Status</td>
-        <td class="px-2 text-xs text-manatee">Type</td>
+      <tr class="border-b border-neutral-400">
+        <td class="px-2 py-2 text-xs text-neutral-400">Name</td>
+        <td class="px-2 text-xs text-neutral-400">Frequency</td>
+        <td class="px-2 text-xs text-neutral-400">Status</td>
+        <td class="px-2 text-xs text-neutral-400">Type</td>
         <td class="px-2"></td>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let report of data?.data" class="border-b border-bright-gray">
-        <td class="px-2 py-4 text-main-primary text-sm font-semibold underline cursor-pointer" (click)="handleNameClick(report)" (keydown.enter)="handleNameClick(report)">{{ report.name }}</td>
+      <tr *ngFor="let report of data?.data" class="border-b border-neutral-400">
+        <td class="px-2 py-4 text-brand-500 text-sm font-semibold underline cursor-pointer" (click)="handleNameClick(report)" (keydown.enter)="handleNameClick(report)">{{ report.name }}</td>
         <td class="px-2 py-4 text-sm">{{ report.type }}</td>
         <td class="px-2 py-4 text-sm">{{ report.status }}</td>
         <td class="px-2 py-4 text-sm">{{ report.report_type }}</td>
         <td class="px-2">
           <div class="flex">
-            <span class="px-2 text-main-primary text-sm font-semibold underline cursor-pointer" (click)="handleEditReportClick(report)" (keydown.enter)="handleEditReportClick(report)">Edit</span>
-            <span class="px-2 text-main-primary text-sm font-semibold underline cursor-pointer" (click)="handleDeleteReportClick(report)" (keydown.enter)="handleDeleteReportClick(report)">Delete</span>
+            <span class="px-2 text-brand-500 text-sm font-semibold underline cursor-pointer" (click)="handleEditReportClick(report)" (keydown.enter)="handleEditReportClick(report)">Edit</span>
+            <span class="px-2 text-brand-500 text-sm font-semibold underline cursor-pointer" (click)="handleDeleteReportClick(report)" (keydown.enter)="handleDeleteReportClick(report)">Delete</span>
           </div>
         </td>
       </tr>

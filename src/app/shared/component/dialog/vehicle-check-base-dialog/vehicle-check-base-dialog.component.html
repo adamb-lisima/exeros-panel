@@ -4,21 +4,21 @@
       <ng-container *ngIf="vehicleCheck.trip as trip; else withoutTripTemplate">
         <div class="flex-1 flex items-center gap-4">
           <p class="font-medium">Vehicle Check - {{ trip.vehicle_registration_plate }}</p>
-          <span class="h-[25px] flex-[0_0_1px] bg-manatee"></span>
+          <span class="h-[25px] flex-[0_0_1px] bg-neutral-400"></span>
           <p class="text-sm">{{ trip.created_at | dateFormat : 'serverDateTimeFormat' : 'clientDateTimeFormat' }}</p>
         </div>
       </ng-container>
       <ng-template #withoutTripTemplate>
         <p class="font-medium">Vehicle Check</p>
       </ng-template>
-      <div class="rounded-md cursor-pointer bg-anti-flash-white" (click)="handleCloseClick()" (keydown.enter)="handleCloseClick()">
+      <div class="rounded-md cursor-pointer bg-neutral-100" (click)="handleCloseClick()" (keydown.enter)="handleCloseClick()">
         <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M12.7279 21.2129L21.2132 12.7276" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
           <path d="M21.2132 21.2138L12.7279 12.7285" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
       </div>
     </div>
-    <span class="w-full flex-[0_0_1px] bg-platinum"></span>
+    <span class="w-full flex-[0_0_1px] bg-neutral-200"></span>
     <div class="flex flex-col gap-8 pb-8 mx-14 overflow-auto">
       <div class="flex justify-between items-center">
         <p class="font-medium text-xl">Exterior Inspection</p>
@@ -34,7 +34,7 @@
         </div>
       </div>
       <div *ngFor="let inspection of vehicleCheck.inspections; trackByField: 'id'" class="flex flex-col gap-8">
-        <div class="flex-[0_0_65px] flex justify-between items-center px-4 rounded-md" [ngClass]="inspection.status === 'PASSED' ? 'bg-light-steel-blue' : 'bg-extra-two--30'">
+        <div class="flex-[0_0_65px] flex justify-between items-center px-4 rounded-md" [ngClass]="inspection.status === 'PASSED' ? 'bg-neutral-300' : 'bg-error-50'">
           <p class="">{{ inspection.inspection_name }}</p>
           <div class="flex items-center gap-2">
             <ng-container *ngIf="inspection.status === 'PASSED'; else failedTemplate">
@@ -47,7 +47,7 @@
             </ng-template>
           </div>
         </div>
-        <div class="flex flex-col divide-y divide-bright-gray">
+        <div class="flex flex-col divide-y divide-neutral-200">
           <div class="flex pb-4">
             <p class="flex-1">Checked</p>
             <p class="flex-1">{{ inspection.checked_parts }}</p>

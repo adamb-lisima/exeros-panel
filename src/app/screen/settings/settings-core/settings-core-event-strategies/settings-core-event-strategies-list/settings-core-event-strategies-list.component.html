@@ -2,49 +2,49 @@
   <div *ngIf="data$ | async as response" class="overflow-x-auto">
     <table class="table-auto w-full" *ngIf="response.data?.length; else noData">
       <thead class="sticky top-0 bg-white z-10">
-        <tr class="border-b border-bright-gray">
-          <th class="px-2 py-2 text-xs text-manatee">ID</th>
-          <th class="px-2 text-xs text-manatee">Name</th>
-          <th class="px-2 text-xs text-manatee">Alarm Type</th>
-          <th class="px-2 text-xs text-manatee">Time Before/After</th>
-          <th class="px-2 text-xs text-manatee">Streams</th>
-          <th class="px-2 text-xs text-manatee">Created</th>
+        <tr class="border-b border-neutral-400">
+          <th class="px-2 py-2 text-xs text-neutral-400">ID</th>
+          <th class="px-2 text-xs text-neutral-400">Name</th>
+          <th class="px-2 text-xs text-neutral-400">Alarm Type</th>
+          <th class="px-2 text-xs text-neutral-400">Time Before/After</th>
+          <th class="px-2 text-xs text-neutral-400">Streams</th>
+          <th class="px-2 text-xs text-neutral-400">Created</th>
           <th class="px-2"></th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let strategy of response.data" class="border-b border-bright-gray hover:bg-anti-flash-white">
+        <tr *ngFor="let strategy of response.data" class="border-b border-neutral-400 hover:bg-neutral-100">
           <td class="px-2 py-4 text-sm">{{ strategy.id }}</td>
           <td class="px-2 text-sm">{{ strategy.name }}</td>
           <td class="px-2 text-sm">{{ getAlarmTypeName(strategy.alarm_type_id) }}</td>
           <td class="px-2 text-sm">{{ strategy.time_before }}s / {{ strategy.time_after }}s</td>
           <td class="px-2 text-sm">
             <div class="flex gap-2">
-              <span *ngIf="strategy.main_stream" class="px-2 py-1 bg-green-100 text-green-800 rounded text-xs">Main</span>
+              <span *ngIf="strategy.main_stream" class="px-2 py-1 bg-success-50 text-success-500 rounded text-xs">Main</span>
               <span *ngIf="strategy.sub_stream" class="px-2 py-1 bg-blue-100 text-blue-800 rounded text-xs">Sub</span>
             </div>
           </td>
           <td class="px-2 text-sm">{{ strategy.created_at | dateFormat : 'serverDateTimeFormat' : 'clientDateTimeFormat' }}</td>
           <td class="px-2">
             <div class="relative">
-              <div [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger" (click)="$event.stopPropagation()" (keydown.enter)="$event.stopPropagation()" class="flex flex-col items-center gap-1 py-3 px-1.5 rounded-md cursor-pointer hover:bg-anti-flash-white w-5">
-                <div class="w-[2.5px] h-[2.5px] rounded-full bg-main-primary"></div>
-                <div class="w-[2.5px] h-[2.5px] rounded-full bg-main-primary"></div>
-                <div class="w-[2.5px] h-[2.5px] rounded-full bg-main-primary"></div>
+              <div [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger" (click)="$event.stopPropagation()" (keydown.enter)="$event.stopPropagation()" class="flex flex-col items-center gap-1 py-3 px-1.5 rounded-md cursor-pointer hover:bg-neutral-100 w-5">
+                <div class="w-[2.5px] h-[2.5px] rounded-full bg-brand-500"></div>
+                <div class="w-[2.5px] h-[2.5px] rounded-full bg-brand-500"></div>
+                <div class="w-[2.5px] h-[2.5px] rounded-full bg-brand-500"></div>
               </div>
 
               <mat-menu #menu="matMenu" [hasBackdrop]="true">
                 <div (click)="$event.stopPropagation()" (keydown.enter)="$event.stopPropagation()">
                   <button mat-menu-item (click)="handleEditClick(strategy)">
                     <div class="flex flex-row items-center gap-2">
-                      <img class="color-main-primary" ngSrc="assets/svg/new-icons/edit.svg" width="20" height="20" alt="icon" />
-                      <p class="text-main-primary underline text-sm font-medium">Edit</p>
+                      <img class="color-brand-500" ngSrc="assets/svg/new-icons/edit.svg" width="20" height="20" alt="icon" />
+                      <p class="text-brand-500 underline text-sm font-medium">Edit</p>
                     </div>
                   </button>
                   <button mat-menu-item (click)="handleDeleteClick(strategy)">
                     <div class="flex flex-row items-center gap-2">
                       <img ngSrc="assets/svg/new-icons/trash.svg" width="20" height="20" alt="icon" />
-                      <p class="text-main-primary underline text-sm font-medium">Delete</p>
+                      <p class="text-brand-500 underline text-sm font-medium">Delete</p>
                     </div>
                   </button>
                 </div>
@@ -56,7 +56,7 @@
     </table>
 
     <ng-template #noData>
-      <div class="text-center py-8 text-gray-500">No event strategies found. Click "Create new strategy" to create one.</div>
+      <div class="text-center py-8 text-neutral-500">No event strategies found. Click "Create new strategy" to create one.</div>
     </ng-template>
   </div>
 </div>

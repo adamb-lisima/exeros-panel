@@ -7,28 +7,28 @@
           *ngFor="let provider of providersFormArray.controls; let i = index"
           class="items-center space-x-4 flex-1 mb-2 border rounded-lg"
           [ngClass]="{
-            'border-main-primary !rounded-lg': activeProviderIndex === i,
-            'border-new-gray-400 !rounded-lg': activeProviderIndex !== i
+            'border-brand-500 !rounded-lg': activeProviderIndex === i,
+            'border-neutral-500-400 !rounded-lg': activeProviderIndex !== i
           }"
           (click)="setActiveProvider(i)"
           (keydown.enter)="setActiveProvider(i)">
-          <div class="flex flex-row items-center p-4 gap-2" [ngClass]="{ 'bg-main-primary--10': activeProviderIndex === i, 'bg-new-gray-50 rounded-t-lg': activeProviderIndex !== i }">
+          <div class="flex flex-row items-center p-4 gap-2" [ngClass]="{ 'bg-brand-50': activeProviderIndex === i, 'bg-neutral-50 rounded-t-lg': activeProviderIndex !== i }">
             <button
               type="button"
               class="flex justify-center cursor-pointer"
               [disabled]="i === 0"
               (click)="moveProviderUp(i); $event.stopPropagation()"
               [ngClass]="{
-                'text-new-gray-300': i === 0,
-                'text-main-primary': i !== 0 && activeProviderIndex === i,
-                'text-new-gray-400': i !== 0 && activeProviderIndex !== i
+                'text-neutral-300': i === 0,
+                'text-brand-500': i !== 0 && activeProviderIndex === i,
+                'text-neutral-400': i !== 0 && activeProviderIndex !== i
               }">
               <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M6.00219 2.18632L1.92919 6.25957C1.79069 6.3979 1.61661 6.46873 1.40694 6.47207C1.19744 6.47523 1.02019 6.4044 0.875194 6.25957C0.730361 6.11457 0.657944 5.9389 0.657944 5.73257C0.657944 5.52623 0.730361 5.35057 0.875194 5.20557L5.36944 0.711316C5.46311 0.617816 5.56186 0.551816 5.66569 0.513316C5.76953 0.474816 5.88169 0.455566 6.00219 0.455566C6.12269 0.455566 6.23486 0.474816 6.33869 0.513316C6.44253 0.551816 6.54128 0.617816 6.63494 0.711316L11.1292 5.20557C11.2675 5.34407 11.3384 5.51815 11.3417 5.72782C11.3449 5.93732 11.274 6.11457 11.1292 6.25957C10.9842 6.4044 10.8085 6.47682 10.6022 6.47682C10.3959 6.47682 10.2202 6.4044 10.0752 6.25957L6.00219 2.18632Z" [attr.fill]="i === 0 ? '#cccccc' : activeProviderIndex === i ? '#EE8444' : '#888888'" />
               </svg>
             </button>
 
-            <span class="h-8 w-8 rounded-full font-normal text-sm py-1 flex items-center justify-center text-white" [ngClass]="{ 'bg-main-primary': activeProviderIndex === i, 'bg-new-gray-500': activeProviderIndex !== i }">
+            <span class="h-8 w-8 rounded-full font-normal text-sm py-1 flex items-center justify-center text-white" [ngClass]="{ 'bg-brand-500': activeProviderIndex === i, 'bg-neutral-500': activeProviderIndex !== i }">
               {{ i + 1 }}
             </span>
 
@@ -38,9 +38,9 @@
               [disabled]="i === providersFormArray.controls.length - 1"
               (click)="moveProviderDown(i); $event.stopPropagation()"
               [ngClass]="{
-                'text-new-gray-300': i === providersFormArray.controls.length - 1,
-                'text-main-primary': i !== providersFormArray.controls.length - 1 && activeProviderIndex === i,
-                'text-new-gray-400': i !== providersFormArray.controls.length - 1 && activeProviderIndex !== i
+                'text-neutral-300': i === providersFormArray.controls.length - 1,
+                'text-brand-500': i !== providersFormArray.controls.length - 1 && activeProviderIndex === i,
+                'text-neutral-400': i !== providersFormArray.controls.length - 1 && activeProviderIndex !== i
               }">
               <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M5.99781 4.7463L10.0708 0.67305C10.2093 0.534717 10.3834 0.463884 10.5931 0.46055C10.8026 0.457384 10.9798 0.528216 11.1248 0.67305C11.2696 0.81805 11.3421 0.993717 11.3421 1.20005C11.3421 1.40638 11.2696 1.58205 11.1248 1.72705L6.63056 6.2213C6.53689 6.3148 6.43814 6.3808 6.33431 6.4193C6.23047 6.4578 6.11831 6.47705 5.99781 6.47705C5.87731 6.47705 5.76514 6.4578 5.66131 6.4193C5.55747 6.3808 5.45872 6.3148 5.36506 6.2213L0.870805 1.72705C0.732471 1.58855 0.661638 1.41447 0.658305 1.2048C0.655138 0.995301 0.725971 0.81805 0.870805 0.67305C1.0158 0.528217 1.19147 0.455801 1.3978 0.455801C1.60414 0.4558 1.77981 0.528217 1.92481 0.67305L5.99781 4.7463Z" [attr.fill]="i === providersFormArray.controls.length - 1 ? '#cccccc' : activeProviderIndex === i ? '#EE8444' : '#888888'" />
@@ -48,7 +48,7 @@
             </button>
 
             <div class="ml-2">
-              <span class="text-sm font-medium" [ngClass]="{ 'text-main-primary': activeProviderIndex === i, 'text-new-gray-500': activeProviderIndex !== i }"> Provider Configuration </span>
+              <span class="text-sm font-medium" [ngClass]="{ 'text-brand-500': activeProviderIndex === i, 'text-neutral-500': activeProviderIndex !== i }"> Provider Configuration </span>
               <div class="flex flex-col text-sm" *ngIf="provider.get('provider_id')?.value">
                 <span class="font-normal text-xs">
                   {{ provider.get('provider_id')?.value ? getProviderLabel(provider.get('provider_id')?.value) || 'Unknown provider' : '' }}
@@ -57,7 +57,7 @@
               </div>
             </div>
 
-            <button class="text-red-500 hover:text-red-700 ml-auto" (click)="removeProvider(i); $event.stopPropagation()" type="button">
+            <button class="text-error-500 hover:text-error-600 ml-auto" (click)="removeProvider(i); $event.stopPropagation()" type="button">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <mask id="mask0_41_503" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
                   <rect width="24" height="24" fill="#D9D9D9" />
@@ -82,7 +82,7 @@
                   <app-select-control label="Device" [formControl]="provider.controls.device_id" [options]="(getDeviceOptions(i) | async) || []"></app-select-control>
 
                   <div *ngIf="isDeviceOptionsLoading(i)" class="absolute right-2 top-1/3 transform -translate-y-1/2">
-                    <svg class="animate-spin h-5 w-5 text-main-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <svg class="animate-spin h-5 w-5 text-brand-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                       <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                       <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                     </svg>
@@ -96,18 +96,18 @@
               <app-text-control label="Transmit port" [formControl]="getTransmitPortControl(provider)"></app-text-control>
               <div class="flex flex-col">
                 <div class="flex items-center gap-3 cursor-pointer" (click)="isChannelSetOpen = !isChannelSetOpen" (keydown.enter)="isChannelSetOpen = !isChannelSetOpen">
-                  <span class="text-sm text-main-primary font-semibold">Channel set</span>
+                  <span class="text-sm text-brand-500 font-semibold">Channel set</span>
                   <ng-container *ngIf="isChannelSetOpen; then arrowDown; else arrowUp"> </ng-container>
                 </div>
                 <div *ngIf="isChannelSetOpen" class="flex flex-col mt-2">
                   <table class="border-separate border-spacing-1">
-                    <thead class="border-b border-bright-gray">
+                    <thead class="border-b border-neutral-400">
                       <td class="w-6">
                         <div>
                           <app-checkbox-control [ngModel]="allChannels" (ngModelChange)="handleAllChannelsClick($event)"></app-checkbox-control>
                         </div>
                       </td>
-                      <td class="text-xs text-manatee py-3 cursor-pointer" (click)="handleChannelAliasClick()" (keydown.enter)="handleChannelAliasClick()">Channel alias</td>
+                      <td class="text-xs text-neutral-400 py-3 cursor-pointer" (click)="handleChannelAliasClick()" (keydown.enter)="handleChannelAliasClick()">Channel alias</td>
                       <th></th>
                     </thead>
                     <tbody>
@@ -158,7 +158,7 @@
 
               <div class="flex flex-col">
                 <div class="flex items-center gap-3 cursor-pointer" (click)="isSimCardOpen = !isSimCardOpen" (keydown.enter)="isSimCardOpen = !isSimCardOpen">
-                  <span class="text-sm text-main-primary font-semibold">Sim card</span>
+                  <span class="text-sm text-brand-500 font-semibold">Sim card</span>
                   <ng-container *ngIf="isSimCardOpen; then arrowDown; else arrowUp"></ng-container>
                 </div>
                 <div *ngIf="isSimCardOpen" class="flex flex-col mt-2">
@@ -170,7 +170,7 @@
               </div>
               <div class="flex flex-col">
                 <div class="flex items-center gap-3 cursor-pointer" (click)="isVehicleFileOpen = !isVehicleFileOpen" (keydown.enter)="isVehicleFileOpen = !isVehicleFileOpen">
-                  <span class="text-sm text-main-primary font-semibold">Vehicle file</span>
+                  <span class="text-sm text-brand-500 font-semibold">Vehicle file</span>
                   <ng-container *ngIf="isVehicleFileOpen; then arrowDown; else arrowUp"></ng-container>
                 </div>
                 <div *ngIf="isVehicleFileOpen" class="flex flex-col mt-2">
@@ -190,7 +190,7 @@
               </div>
               <div class="flex flex-col">
                 <div class="flex items-center gap-3 cursor-pointer" (click)="isEquipmentFileOpen = !isEquipmentFileOpen" (keydown.enter)="isEquipmentFileOpen = !isEquipmentFileOpen">
-                  <span class="text-sm text-main-primary font-semibold">Equipment file</span>
+                  <span class="text-sm text-brand-500 font-semibold">Equipment file</span>
                   <ng-container *ngIf="isEquipmentFileOpen; then arrowDown; else arrowUp"></ng-container>
                 </div>
               </div>

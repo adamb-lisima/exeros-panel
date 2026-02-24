@@ -208,5 +208,5 @@ export class BarChartComponent implements OnDestroy {
     this._overlayData = undefined;
   }
 
-  barColor$ = combineLatest([this._options$]).pipe(map(([options]) => options.barColor ?? 'var(--extra-three)'));
+  barColor$ = combineLatest([this._options$]).pipe(map(([options]) => options.barColor ?? 'var(--info-500)'));
 }

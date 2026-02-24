@@ -1,4 +1,4 @@
-<div class="h-full" [ngClass]="{ 'loader loader--main': (vm$ | async)?.loadingNumber, 'bg-cultured': !iframeService.isIframe }">
+<div class="h-full" [ngClass]="{ 'bg-neutral-50': !iframeService.isIframe }">
   <app-alert></app-alert>
 
   <ng-container *ngIf="isGuidePage">

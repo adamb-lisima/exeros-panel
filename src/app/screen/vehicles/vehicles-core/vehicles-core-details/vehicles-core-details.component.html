@@ -1,164 +1,164 @@
 <div *ngIf="vehicle$ | async as vehicle" class="h-full flex flex-col gap-6">
   <div class="flex items-center gap-8">
-    <div class="pb-3 cursor-pointer border-b-2 font-semibold text-sm" [ngClass]="selectedTab === 'details' ? 'border-b-main-primary' : 'border-b-transparent text-dim-gray'" (click)="handleTabClick('details')" (keydown.enter)="handleTabClick('details')">Telemetry Details</div>
-    <div class="pb-3 cursor-pointer border-b-2 font-semibold text-sm" [ngClass]="selectedTab === 'vehicle' ? 'border-b-main-primary' : 'border-b-transparent text-dim-gray'" (click)="handleTabClick('vehicle')" (keydown.enter)="handleTabClick('vehicle')">Vehicle Details</div>
-    <div class="pb-3 cursor-pointer border-b-2 font-semibold text-sm" [ngClass]="selectedTab === 'mdvr' ? 'border-b-main-primary' : 'border-b-transparent text-dim-gray'" (click)="handleTabClick('mdvr')" (keydown.enter)="handleTabClick('mdvr')">MDVR Details</div>
+    <div class="pb-3 cursor-pointer border-b-2 font-semibold text-sm" [ngClass]="selectedTab === 'details' ? 'border-b-brand-500' : 'border-b-transparent text-neutral-500'" (click)="handleTabClick('details')" (keydown.enter)="handleTabClick('details')">Telemetry Details</div>
+    <div class="pb-3 cursor-pointer border-b-2 font-semibold text-sm" [ngClass]="selectedTab === 'vehicle' ? 'border-b-brand-500' : 'border-b-transparent text-neutral-500'" (click)="handleTabClick('vehicle')" (keydown.enter)="handleTabClick('vehicle')">Vehicle Details</div>
+    <div class="pb-3 cursor-pointer border-b-2 font-semibold text-sm" [ngClass]="selectedTab === 'mdvr' ? 'border-b-brand-500' : 'border-b-transparent text-neutral-500'" (click)="handleTabClick('mdvr')" (keydown.enter)="handleTabClick('mdvr')">MDVR Details</div>
   </div>
   <div *ngIf="selectedTab === 'vehicle'" class="h-full flex flex-col gap-6">
     <div class="h-full flex-1 flex items-center gap-6">
-      <div class="h-full flex-1 flex flex-col justify-center gap-2 p-4 rounded-md border border-platinum">
+      <div class="h-full flex-1 flex flex-col justify-center gap-2 p-4 rounded-md border border-neutral-200">
         <p class="font-semibold text-xs opacity-50">Type</p>
-        <p class="font-semibold text-sm text-extra-three">{{ vehicle.type }}</p>
+        <p class="font-semibold text-sm text-info-500">{{ vehicle.type }}</p>
       </div>
-      <div class="h-full flex-1 flex flex-col justify-center gap-2 p-4 rounded-md border border-platinum">
+      <div class="h-full flex-1 flex flex-col justify-center gap-2 p-4 rounded-md border border-neutral-200">
         <p class="font-semibold text-xs opacity-50">Make</p>
-        <p class="font-semibold text-sm text-extra-three">{{ vehicle.brand_name }}</p>
+        <p class="font-semibold text-sm text-info-500">{{ vehicle.brand_name }}</p>
       </div>
-      <div class="h-full flex-1 flex flex-col justify-center gap-2 p-4 rounded-md border border-platinum">
+      <div class="h-full flex-1 flex flex-col justify-center gap-2 p-4 rounded-md border border-neutral-200">
         <p class="font-semibold text-xs opacity-50">Model</p>
-        <p class="font-semibold text-sm text-extra-three">{{ vehicle.model_name }}</p>
+        <p class="font-semibold text-sm text-info-500">{{ vehicle.model_name }}</p>
       </div>
     </div>
     <div class="h-full flex-1 flex items-center gap-6">
-      <div class="h-full flex-1 flex flex-col justify-center gap-2 p-4 rounded-md border border-platinum">
+      <div class="h-full flex-1 flex flex-col justify-center gap-2 p-4 rounded-md border border-neutral-200">
         <p class="font-semibold text-xs opacity-50">Registration</p>
-        <p class="font-semibold text-sm text-extra-one">{{ vehicle.registration_plate }}</p>
+        <p class="font-semibold text-sm text-success-500">{{ vehicle.registration_plate }}</p>
       </div>
-      <div class="h-full flex-1 flex flex-col justify-center gap-2 p-4 rounded-md border border-platinum">
+      <div class="h-full flex-1 flex flex-col justify-center gap-2 p-4 rounded-md border border-neutral-200">
         <p class="font-semibold text-xs opacity-50">Service Due</p>
-        <p class="font-semibold text-sm text-extra-one">{{ vehicle.service_due ? (vehicle.service_due | dateFormat : 'serverDateFormat' : 'clientDateFormat') : 'unknown' }}</p>
+        <p class="font-semibold text-sm text-success-500">{{ vehicle.service_due ? (vehicle.service_due | dateFormat : 'serverDateFormat' : 'clientDateFormat') : 'unknown' }}</p>
       </div>
-      <div class="h-full flex-1 flex flex-col justify-center gap-2 p-4 rounded-md border border-platinum">
+      <div class="h-full flex-1 flex flex-col justify-center gap-2 p-4 rounded-md border border-neutral-200">
         <p class="font-semibold text-xs opacity-50">MOT due</p>
-        <p class="font-semibold text-sm text-extra-one">{{ vehicle.mot_expiry_due ? (vehicle.mot_expiry_due | dateFormat : 'serverDateFormat' : 'clientDateFormat') : 'unknown' }}</p>
+        <p class="font-semibold text-sm text-success-500">{{ vehicle.mot_expiry_due ? (vehicle.mot_expiry_due | dateFormat : 'serverDateFormat' : 'clientDateFormat') : 'unknown' }}</p>
       </div>
     </div>
   </div>
   <div *ngIf="selectedTab === 'mdvr'" class="h-full flex flex-col gap-6">
     <div class="h-full flex-1 flex items-center gap-6">
-      <div class="h-full flex-1 flex flex-col justify-center gap-2 p-4 rounded-md border border-platinum">
+      <div class="h-full flex-1 flex flex-col justify-center gap-2 p-4 rounded-md border border-neutral-200">
         <p class="font-semibold text-xs opacity-50">Fleet</p>
-        <p class="font-semibold text-sm text-extra-three">{{ vehicle.fleet_name }}</p>
+        <p class="font-semibold text-sm text-info-500">{{ vehicle.fleet_name }}</p>
       </div>
     </div>
     <div class="h-full flex-1 flex items-center gap-6">
-      <div class="h-full flex-1 flex flex-col justify-center gap-2 p-4 rounded-md border border-platinum">
+      <div class="h-full flex-1 flex flex-col justify-center gap-2 p-4 rounded-md border border-neutral-200">
         <p class="font-semibold text-xs opacity-50">Imei</p>
-        <p class="font-semibold text-sm text-extra-one">{{ vehicle.imei ?? 'unknown' }}</p>
+        <p class="font-semibold text-sm text-success-500">{{ vehicle.imei ?? 'unknown' }}</p>
       </div>
-      <div class="h-full flex-1 flex flex-col justify-center gap-2 p-4 rounded-md border border-platinum">
+      <div class="h-full flex-1 flex flex-col justify-center gap-2 p-4 rounded-md border border-neutral-200">
         <p class="font-semibold text-xs opacity-50">Channels</p>
-        <p class="font-semibold text-sm text-extra-one">{{ vehicle.channels }}</p>
+        <p class="font-semibold text-sm text-success-500">{{ vehicle.channels }}</p>
       </div>
-      <div class="h-full flex-1 flex flex-col justify-center gap-2 p-4 rounded-md border border-platinum">
+      <div class="h-full flex-1 flex flex-col justify-center gap-2 p-4 rounded-md border border-neutral-200">
         <p class="font-semibold text-xs opacity-50">Serial Number</p>
-        <p class="font-semibold text-sm text-extra-one">{{ vehicle.serial_number }}</p>
+        <p class="font-semibold text-sm text-success-500">{{ vehicle.serial_number }}</p>
       </div>
     </div>
   </div>
   <div *ngIf="selectedTab === 'details'" class="h-full flex flex-col gap-6 overflow-auto">
     <div class="mr-2 h-full flex-1 flex items-center gap-6">
-      <div class="h-full flex-1 flex flex-col justify-center gap-2 p-4 rounded-md border border-platinum" [ngClass]="{ 'bg-chinese-silver': vehicle?.telemetry?.vin === null || vehicle?.telemetry?.vin === undefined }">
+      <div class="h-full flex-1 flex flex-col justify-center gap-2 p-4 rounded-md border border-neutral-200" [ngClass]="{ 'bg-neutral-300': vehicle?.telemetry?.vin === null || vehicle?.telemetry?.vin === undefined }">
         <p class="font-semibold text-xs opacity-50">VIN</p>
-        <p class="font-semibold text-sm text-extra-three">{{ vehicle.telemetry?.vin ?? '-' }}</p>
+        <p class="font-semibold text-sm text-info-500">{{ vehicle.telemetry?.vin ?? '-' }}</p>
       </div>
-      <div class="h-full flex-1 flex flex-col justify-center gap-2 p-4 rounded-md border border-platinum" [ngClass]="{ 'bg-chinese-silver': vehicle?.telemetry?.millage === null || vehicle?.telemetry?.millage === undefined }">
+      <div class="h-full flex-1 flex flex-col justify-center gap-2 p-4 rounded-md border border-neutral-200" [ngClass]="{ 'bg-neutral-300': vehicle?.telemetry?.millage === null || vehicle?.telemetry?.millage === undefined }">
         <p class="font-semibold text-xs opacity-50">Mileage</p>
-        <p class="font-semibold text-sm text-extra-three">{{ formatMileage(vehicle?.telemetry?.millage) }}</p>
+        <p class="font-semibold text-sm text-info-500">{{ formatMileage(vehicle?.telemetry?.millage) }}</p>
       </div>
-      <div class="h-full flex-1 flex flex-col justify-center gap-2 p-4 rounded-md border border-platinum" [ngClass]="{ 'bg-chinese-silver': vehicle?.telemetry?.ignition === null || vehicle?.telemetry?.ignition === undefined }">
+      <div class="h-full flex-1 flex flex-col justify-center gap-2 p-4 rounded-md border border-neutral-200" [ngClass]="{ 'bg-neutral-300': vehicle?.telemetry?.ignition === null || vehicle?.telemetry?.ignition === undefined }">
         <p class="font-semibold text-xs opacity-50">Ignition</p>
-        <p class="font-semibold text-sm text-extra-three">{{ vehicle.telemetry?.ignition ? 'On' : 'Off' }}</p>
+        <p class="font-semibold text-sm text-info-500">{{ vehicle.telemetry?.ignition ? 'On' : 'Off' }}</p>
       </div>
     </div>
     <div class="mr-2 h-full flex-1 flex items-center gap-6">
-      <div class="h-full flex-1 flex flex-col justify-center gap-2 p-4 rounded-md border border-platinum" [ngClass]="{ 'bg-chinese-silver': vehicle?.telemetry?.fuel_level === null || vehicle?.telemetry?.fuel_level === undefined }">
+      <div class="h-full flex-1 flex flex-col justify-center gap-2 p-4 rounded-md border border-neutral-200" [ngClass]="{ 'bg-neutral-300': vehicle?.telemetry?.fuel_level === null || vehicle?.telemetry?.fuel_level === undefined }">
         <p class="font-semibold text-xs opacity-50">Fuel level</p>
-        <p class="font-semibold text-sm text-extra-one">
+        <p class="font-semibold text-sm text-success-500">
           {{ vehicle?.telemetry?.fuel_level === null || vehicle?.telemetry?.fuel_level === undefined ? '-' : vehicle.telemetry?.fuel_level + 'L' }}
         </p>
       </div>
-      <div class="h-full flex-1 flex flex-col justify-center gap-2 p-4 rounded-md border border-platinum" [ngClass]="{ 'bg-chinese-silver': vehicle?.telemetry?.fuel_percentage === null || vehicle?.telemetry?.fuel_percentage === undefined }">
+      <div class="h-full flex-1 flex flex-col justify-center gap-2 p-4 rounded-md border border-neutral-200" [ngClass]="{ 'bg-neutral-300': vehicle?.telemetry?.fuel_percentage === null || vehicle?.telemetry?.fuel_percentage === undefined }">
         <p class="font-semibold text-xs opacity-50">Fuel percentage</p>
-        <p class="font-semibold text-sm text-extra-one">{{ fuelPercentage(vehicle.telemetry?.fuel_percentage) }}</p>
+        <p class="font-semibold text-sm text-success-500">{{ fuelPercentage(vehicle.telemetry?.fuel_percentage) }}</p>
       </div>
-      <div class="h-full flex-1 flex flex-col justify-center gap-2 p-4 rounded-md border border-platinum" [ngClass]="{ 'bg-chinese-silver': vehicle?.telemetry?.hybrid_level === null || vehicle?.telemetry?.hybrid_level === undefined }">
+      <div class="h-full flex-1 flex flex-col justify-center gap-2 p-4 rounded-md border border-neutral-200" [ngClass]="{ 'bg-neutral-300': vehicle?.telemetry?.hybrid_level === null || vehicle?.telemetry?.hybrid_level === undefined }">
         <p class="font-semibold text-xs opacity-50">Hybrid level</p>
-        <p class="font-semibold text-sm text-extra-one">{{ vehicle.telemetry?.hybrid_level ?? '-' }}%</p>
+        <p class="font-semibold text-sm text-success-500">{{ vehicle.telemetry?.hybrid_level ?? '-' }}%</p>
       </div>
-      <div class="h-full flex-1 flex flex-col justify-center gap-2 p-4 rounded-md border border-platinum" [ngClass]="{ 'bg-chinese-silver': vehicle?.telemetry?.battery_voltage === null || vehicle?.telemetry?.battery_voltage === undefined }">
+      <div class="h-full flex-1 flex flex-col justify-center gap-2 p-4 rounded-md border border-neutral-200" [ngClass]="{ 'bg-neutral-300': vehicle?.telemetry?.battery_voltage === null || vehicle?.telemetry?.battery_voltage === undefined }">
         <p class="font-semibold text-xs opacity-50">Battery voltage</p>
-        <p class="font-semibold text-sm text-extra-one">{{ vehicle.telemetry?.battery_voltage ?? '-' }}V</p>
+        <p class="font-semibold text-sm text-success-500">{{ vehicle.telemetry?.battery_voltage ?? '-' }}V</p>
       </div>
     </div>
     <div class="mr-2 h-full flex-1 flex items-center gap-6">
-      <div class="h-full flex-1 flex flex-col justify-center gap-2 p-4 rounded-md border border-platinum" [ngClass]="{ 'bg-chinese-silver': vehicle?.telemetry?.temperature === null || vehicle?.telemetry?.temperature === undefined }">
+      <div class="h-full flex-1 flex flex-col justify-center gap-2 p-4 rounded-md border border-neutral-200" [ngClass]="{ 'bg-neutral-300': vehicle?.telemetry?.temperature === null || vehicle?.telemetry?.temperature === undefined }">
         <p class="font-semibold text-xs opacity-50">Temperature</p>
-        <p class="font-semibold text-sm text-extra-one">{{ vehicle.telemetry?.temperature ?? '-' }}</p>
+        <p class="font-semibold text-sm text-success-500">{{ vehicle.telemetry?.temperature ?? '-' }}</p>
       </div>
-      <div class="h-full flex-1 flex flex-col justify-center gap-2 p-4 rounded-md border border-platinum" [ngClass]="{ 'bg-chinese-silver': vehicle?.telemetry?.air_temperature === null || vehicle?.telemetry?.air_temperature === undefined }">
+      <div class="h-full flex-1 flex flex-col justify-center gap-2 p-4 rounded-md border border-neutral-200" [ngClass]="{ 'bg-neutral-300': vehicle?.telemetry?.air_temperature === null || vehicle?.telemetry?.air_temperature === undefined }">
         <p class="font-semibold text-xs opacity-50">Air temperature</p>
-        <p class="font-semibold text-sm text-extra-one">{{ vehicle.telemetry?.air_temperature ?? '-' }}</p>
+        <p class="font-semibold text-sm text-success-500">{{ vehicle.telemetry?.air_temperature ?? '-' }}</p>
       </div>
-      <div class="h-full flex-1 flex flex-col justify-center gap-2 p-4 rounded-md border border-platinum" [ngClass]="{ 'bg-chinese-silver': vehicle?.telemetry?.engine_temperature === null || vehicle?.telemetry?.engine_temperature === undefined }">
+      <div class="h-full flex-1 flex flex-col justify-center gap-2 p-4 rounded-md border border-neutral-200" [ngClass]="{ 'bg-neutral-300': vehicle?.telemetry?.engine_temperature === null || vehicle?.telemetry?.engine_temperature === undefined }">
         <p class="font-semibold text-xs opacity-50">Engine temperature</p>
-        <p class="font-semibold text-sm text-extra-one">{{ vehicle.telemetry?.engine_temperature ?? '-' }}</p>
+        <p class="font-semibold text-sm text-success-500">{{ vehicle.telemetry?.engine_temperature ?? '-' }}</p>
       </div>
-      <div class="h-full flex-1 flex flex-col justify-center gap-2 p-4 rounded-md border border-platinum" [ngClass]="{ 'bg-chinese-silver': vehicle?.telemetry?.turbocharger_temperature === null || vehicle?.telemetry?.turbocharger_temperature === undefined }">
+      <div class="h-full flex-1 flex flex-col justify-center gap-2 p-4 rounded-md border border-neutral-200" [ngClass]="{ 'bg-neutral-300': vehicle?.telemetry?.turbocharger_temperature === null || vehicle?.telemetry?.turbocharger_temperature === undefined }">
         <p class="font-semibold text-xs opacity-50">Turbocharger temperature</p>
-        <p class="font-semibold text-sm text-extra-one">{{ vehicle.telemetry?.turbocharger_temperature ?? '-' }}</p>
+        <p class="font-semibold text-sm text-success-500">{{ vehicle.telemetry?.turbocharger_temperature ?? '-' }}</p>
       </div>
-      <div class="h-full flex-1 flex flex-col justify-center gap-2 p-4 rounded-md border border-platinum" [ngClass]="{ 'bg-chinese-silver': vehicle?.telemetry?.battery_temperature === null || vehicle?.telemetry?.battery_temperature === undefined }">
+      <div class="h-full flex-1 flex flex-col justify-center gap-2 p-4 rounded-md border border-neutral-200" [ngClass]="{ 'bg-neutral-300': vehicle?.telemetry?.battery_temperature === null || vehicle?.telemetry?.battery_temperature === undefined }">
         <p class="font-semibold text-xs opacity-50">Battery temperature</p>
-        <p class="font-semibold text-sm text-extra-one">{{ vehicle.telemetry?.battery_temperature ?? '-' }}</p>
+        <p class="font-semibold text-sm text-success-500">{{ vehicle.telemetry?.battery_temperature ?? '-' }}</p>
       </div>
     </div>
     <div class="mr-2 h-full flex-1 flex items-center gap-6">
-      <div class="h-full flex-1 flex flex-col justify-center gap-2 p-4 rounded-md border border-platinum" [ngClass]="{ 'bg-chinese-silver': vehicle?.telemetry?.driver_score === null || vehicle?.telemetry?.driver_score === undefined }">
+      <div class="h-full flex-1 flex flex-col justify-center gap-2 p-4 rounded-md border border-neutral-200" [ngClass]="{ 'bg-neutral-300': vehicle?.telemetry?.driver_score === null || vehicle?.telemetry?.driver_score === undefined }">
         <p class="font-semibold text-xs opacity-50">Driver score</p>
-        <p class="font-semibold text-sm text-extra-one">{{ vehicle.telemetry?.driver_score ? (vehicle.telemetry?.driver_score | number : '1.2-2') : '-' }}</p>
+        <p class="font-semibold text-sm text-success-500">{{ vehicle.telemetry?.driver_score ? (vehicle.telemetry?.driver_score | number : '1.2-2') : '-' }}</p>
       </div>
-      <div class="h-full flex-1 flex flex-col justify-center gap-2 p-4 rounded-md border border-platinum" [ngClass]="{ 'bg-chinese-silver': vehicle?.telemetry?.eco_driving === null || vehicle?.telemetry?.eco_driving === undefined }">
+      <div class="h-full flex-1 flex flex-col justify-center gap-2 p-4 rounded-md border border-neutral-200" [ngClass]="{ 'bg-neutral-300': vehicle?.telemetry?.eco_driving === null || vehicle?.telemetry?.eco_driving === undefined }">
         <p class="font-semibold text-xs opacity-50">Eco Driving</p>
-        <p class="font-semibold text-sm text-extra-one">{{ vehicle.telemetry?.eco_driving ?? '-' }}</p>
+        <p class="font-semibold text-sm text-success-500">{{ vehicle.telemetry?.eco_driving ?? '-' }}</p>
       </div>
-      <div class="h-full flex-1 flex flex-col justify-center gap-2 p-4 rounded-md border border-platinum" [ngClass]="{ 'bg-chinese-silver': vehicle?.telemetry?.vehicle_type === null || vehicle?.telemetry?.vehicle_type === undefined }">
+      <div class="h-full flex-1 flex flex-col justify-center gap-2 p-4 rounded-md border border-neutral-200" [ngClass]="{ 'bg-neutral-300': vehicle?.telemetry?.vehicle_type === null || vehicle?.telemetry?.vehicle_type === undefined }">
         <p class="font-semibold text-xs opacity-50">Vehicle type</p>
-        <p class="font-semibold text-sm text-extra-one">{{ mapVehicleType(vehicle.telemetry?.vehicle_type ?? '-') }}</p>
+        <p class="font-semibold text-sm text-success-500">{{ mapVehicleType(vehicle.telemetry?.vehicle_type ?? '-') }}</p>
       </div>
     </div>
     <div class="mr-2 h-full flex-1 flex items-center gap-6">
-      <div class="h-full flex-1 flex flex-col justify-center gap-2 p-4 rounded-md border border-platinum" [ngClass]="{ 'bg-chinese-silver': vehicle?.telemetry?.eco_score === null || vehicle?.telemetry?.eco_score === undefined }">
+      <div class="h-full flex-1 flex flex-col justify-center gap-2 p-4 rounded-md border border-neutral-200" [ngClass]="{ 'bg-neutral-300': vehicle?.telemetry?.eco_score === null || vehicle?.telemetry?.eco_score === undefined }">
         <p class="font-semibold text-xs opacity-50">Eco Score</p>
-        <p class="font-semibold text-sm text-extra-one">{{ vehicle.telemetry?.eco_score ?? '-' }}</p>
+        <p class="font-semibold text-sm text-success-500">{{ vehicle.telemetry?.eco_score ?? '-' }}</p>
       </div>
-      <div class="h-full flex-1 flex flex-col justify-center gap-2 p-4 rounded-md border border-platinum" [ngClass]="{ 'bg-chinese-silver': vehicle?.telemetry?.rpm === null || vehicle?.telemetry?.rpm === undefined }">
+      <div class="h-full flex-1 flex flex-col justify-center gap-2 p-4 rounded-md border border-neutral-200" [ngClass]="{ 'bg-neutral-300': vehicle?.telemetry?.rpm === null || vehicle?.telemetry?.rpm === undefined }">
         <p class="font-semibold text-xs opacity-50">RPM</p>
-        <p class="font-semibold text-sm text-extra-one">{{ vehicle.telemetry?.rpm ?? '-' }}</p>
+        <p class="font-semibold text-sm text-success-500">{{ vehicle.telemetry?.rpm ?? '-' }}</p>
       </div>
-      <div class="h-full flex-1 flex flex-col justify-center gap-2 p-4 rounded-md border border-platinum" [ngClass]="{ 'bg-chinese-silver': vehicle?.telemetry?.throttle === null || vehicle?.telemetry?.throttle === undefined }">
+      <div class="h-full flex-1 flex flex-col justify-center gap-2 p-4 rounded-md border border-neutral-200" [ngClass]="{ 'bg-neutral-300': vehicle?.telemetry?.throttle === null || vehicle?.telemetry?.throttle === undefined }">
         <p class="font-semibold text-xs opacity-50">Throttle</p>
-        <p class="font-semibold text-sm text-extra-one">{{ vehicle.telemetry?.throttle ?? '-' }}</p>
+        <p class="font-semibold text-sm text-success-500">{{ vehicle.telemetry?.throttle ?? '-' }}</p>
       </div>
     </div>
     <div class="mr-2 h-full flex-1 flex items-center gap-6">
-      <div class="h-full flex-1 flex flex-col justify-center gap-2 p-4 rounded-md border border-platinum" [ngClass]="{ 'bg-chinese-silver': vehicle?.telemetry?.engine_motor_hours === null || vehicle?.telemetry?.engine_motor_hours === undefined }">
+      <div class="h-full flex-1 flex flex-col justify-center gap-2 p-4 rounded-md border border-neutral-200" [ngClass]="{ 'bg-neutral-300': vehicle?.telemetry?.engine_motor_hours === null || vehicle?.telemetry?.engine_motor_hours === undefined }">
         <p class="font-semibold text-xs opacity-50">Engine Motor Hours</p>
-        <p class="font-semibold text-sm text-extra-one">{{ vehicle.telemetry?.engine_motor_hours ?? '-' }}</p>
+        <p class="font-semibold text-sm text-success-500">{{ vehicle.telemetry?.engine_motor_hours ?? '-' }}</p>
       </div>
-      <div class="h-full flex-1 flex flex-col justify-center gap-2 p-4 rounded-md border border-platinum" [ngClass]="{ 'bg-chinese-silver': vehicle?.telemetry?.engine_coolant_temperature === null || vehicle?.telemetry?.engine_coolant_temperature === undefined }">
+      <div class="h-full flex-1 flex flex-col justify-center gap-2 p-4 rounded-md border border-neutral-200" [ngClass]="{ 'bg-neutral-300': vehicle?.telemetry?.engine_coolant_temperature === null || vehicle?.telemetry?.engine_coolant_temperature === undefined }">
         <p class="font-semibold text-xs opacity-50">Engine Coolant Temperature</p>
-        <p class="font-semibold text-sm text-extra-one">{{ vehicle.telemetry?.engine_coolant_temperature ?? '-' }}</p>
+        <p class="font-semibold text-sm text-success-500">{{ vehicle.telemetry?.engine_coolant_temperature ?? '-' }}</p>
       </div>
     </div>
     <div class="mr-2 h-full flex-1">
       <div class="grid grid-cols-3 gap-6">
         <ng-container *ngIf="vehicle?.telemetry?.additional_parameters as additionalParams">
-          <div *ngFor="let param of additionalParams | keyvalue" class="h-20 flex flex-col justify-center gap-2 p-4 rounded-md border border-platinum" [ngClass]="{ 'bg-chinese-silver': param.value === null || param.value === undefined }">
+          <div *ngFor="let param of additionalParams | keyvalue" class="h-20 flex flex-col justify-center gap-2 p-4 rounded-md border border-neutral-200" [ngClass]="{ 'bg-neutral-300': param.value === null || param.value === undefined }">
             <p class="font-semibold text-xs opacity-50">
               {{ formatParamName(param.key) }}
             </p>
-            <p class="font-semibold text-sm text-extra-one">
+            <p class="font-semibold text-sm text-success-500">
               <ng-container *ngIf="param.value !== null && param.value !== undefined; else unknownValue">
                 <ng-container *ngIf="param.value === true">On</ng-container>
                 <ng-container *ngIf="param.value === false">Off</ng-container>

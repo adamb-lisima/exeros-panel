@@ -1,12 +1,12 @@
 <ft-cloud-live *ngIf="isFtCloud" [attr.available-cameras]="JSON.stringify(availableCameras)" [attr.live-feed-status]="liveFeedStatus" [attr.max-selection]="maxSelection" [attr.config]="ftCloudConfigJson" [attr.headers]="ftCloudHeadersJson" [attr.stream-type]="ftCloudStreamType" [attr.show-controls]="showControls" #ftCloudElement> </ft-cloud-live>
 <div *ngIf="availableCameras.length === 0" class="h-full flex flex-col gap-4">
-  <div class="border border-new-gray-300 rounded-lg p-3 bg-white overflow-y-auto mb-2">
+  <div class="border border-neutral-500-300 rounded-lg p-3 bg-white overflow-y-auto mb-2">
     <p class="font-medium">No available cameras channels for this vehicle</p>
   </div>
 </div>
 <div *ngIf="isStreamax" class="h-full flex flex-col gap-4">
   <ng-container *ngIf="liveFeedStatus === 'Inactive'; else onlineTemplate">
-    <div class="border border-new-gray-300 rounded-lg p-3 bg-white overflow-y-auto mb-2">
+    <div class="border border-neutral-500-300 rounded-lg p-3 bg-white overflow-y-auto mb-2">
       <p class="font-medium">The device is offline</p>
     </div>
   </ng-container>
@@ -21,10 +21,10 @@
           <ng-container *ngFor="let camera of availableCameras | slice : 0 : (showAllChannels ? undefined : maxVisibleChannels); trackByField: 'channel'; let i = index">
             <div
               *ngIf="{ containsChannel: selectedCameras | containsProperty : 'channel' : camera.channel } as ctx"
-              class="flex gap-2 py-2 px-2 rounded-xl cursor-pointer font-normal text-sm border border-platinum bg-white select-none items-center"
+              class="flex gap-2 py-2 px-2 rounded-xl cursor-pointer font-normal text-sm border border-neutral-200 bg-white select-none items-center"
               [ngClass]="{
-                'bg-white border border-new-gray-300': ctx.containsChannel,
-                'bg-new-gray-100 border-new-gray-100': !ctx.containsChannel
+                'bg-white border border-neutral-500-300': ctx.containsChannel,
+                'bg-neutral-100 border-neutral-500-100': !ctx.containsChannel
               }"
               [appTooltip]="!ctx.containsChannel && selectedCameras.length >= maxVisibleChannels ? 'Maximum 4 cameras can be selected' : undefined"
               (click)="handleMaxChannel(ctx.containsChannel, camera) && handleChannelClick(ctx.containsChannel, camera)"
@@ -38,9 +38,9 @@
           </ng-container>
 
           <div class="relative ml-auto">
-            <div [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger" (click)="$event.stopPropagation()" (keydown.enter)="$event.stopPropagation()" class="flex items-center gap-1 py-3 px-1.5 rounded-md cursor-pointer ml-auto hover:bg-anti-flash-white">
+            <div [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger" (click)="$event.stopPropagation()" (keydown.enter)="$event.stopPropagation()" class="flex items-center gap-1 py-3 px-1.5 rounded-md cursor-pointer ml-auto hover:bg-neutral-100">
               <div *ngIf="availableCameras.length > maxVisibleChannels" class="flex cursor-pointer ml-auto mr-2 font-medium text-sm select-none items-center">
-                <span class="underline text-main-primary" *ngIf="!showAllChannels">{{ availableCameras.length - maxVisibleChannels }} {{ showAllChannels ? 'Show Less' : 'more' }}</span>
+                <span class="underline text-brand-500" *ngIf="!showAllChannels">{{ availableCameras.length - maxVisibleChannels }} {{ showAllChannels ? 'Show Less' : 'more' }}</span>
               </div>
             </div>
 
@@ -52,8 +52,8 @@
                       *ngIf="{ containsChannel: selectedCameras | containsProperty : 'channel' : camera.channel } as ctx"
                       class="flex gap-2 py-2 px-2 rounded-xl cursor-pointer font-normal text-sm border select-none items-center"
                       [ngClass]="{
-                        'bg-white border-new-gray-300': ctx.containsChannel,
-                        'bg-new-gray-100 border-new-gray-100': !ctx.containsChannel
+                        'bg-white border-neutral-500-300': ctx.containsChannel,
+                        'bg-neutral-100 border-neutral-500-100': !ctx.containsChannel
                       }"
                       [appTooltip]="!ctx.containsChannel && selectedCameras.length >= maxVisibleChannels ? 'Maximum 4 cameras can be selected' : undefined"
                       (click)="handleMaxChannel(ctx.containsChannel, camera) && handleChannelClick(ctx.containsChannel, camera)"
@@ -70,9 +70,9 @@
             </mat-menu>
           </div>
         </div>
-        <div class="border border-new-gray-300 rounded-lg min-h-[calc(75vh-200px)]">
+        <div class="border border-neutral-500-300 rounded-lg min-h-[calc(75vh-200px)]">
           <ng-container *ngIf="selectedCameras.length === 0">
-            <div class="h-[calc(75vh-200px)] flex items-center justify-center text-gray-500">
+            <div class="h-[calc(75vh-200px)] flex items-center justify-center text-neutral-500">
               <p>Select camera channels to view stream</p>
             </div>
           </ng-container>
@@ -100,7 +100,7 @@
             </div>
           </ng-template>
           <div *ngIf="showControls && selectedCameras.length > 0" class="bg-white rounded-b-lg">
-            <div class="h-8 w-8 flex mx-auto justify-center items-center border-2 border-main-primary rounded-lg text-main-primary cursor-pointer select-none" (click)="handlePlayPause()" (keydown.enter)="handlePlayPause()">
+            <div class="h-8 w-8 flex mx-auto justify-center items-center border-2 border-brand-500 rounded-lg text-brand-500 cursor-pointer select-none" (click)="handlePlayPause()" (keydown.enter)="handlePlayPause()">
               <ng-container *ngIf="!isPlaying">
                 <svg width="11" height="14" viewBox="0 0 11 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M1.9097 13.185C1.57636 13.4017 1.23886 13.4142 0.897197 13.2225C0.55553 13.0308 0.384697 12.735 0.384697 12.335V1.98499C0.384697 1.58499 0.55553 1.28916 0.897197 1.09749C1.23886 0.905822 1.57636 0.918322 1.9097 1.13499L10.0597 6.30999C10.3597 6.50999 10.5097 6.79332 10.5097 7.15999C10.5097 7.52666 10.3597 7.80999 10.0597 8.00999L1.9097 13.185Z" fill="currentColor" />
@@ -115,15 +115,15 @@
           </div>
         </div>
         <div class="flex flex-wrap justify-center gap-4">
-          <span class="flex-[0_0_1px] bg-platinum"></span>
+          <span class="flex-[0_0_1px] bg-neutral-200"></span>
         </div>
       </ng-template>
     </ng-container>
     <ng-template #noCamerasTemplate>
       <div class="flex w-full">
-        <div class="border border-new-gray-300 rounded-lg p-3 bg-white gap-3 w-full flex flex-col mb-2">
+        <div class="border border-neutral-500-300 rounded-lg p-3 bg-white gap-3 w-full flex flex-col mb-2">
           <p class="font-medium">Get the full context with camera recordings.</p>
-          <p class="text-sm">For extra information <a href="mailto:vidematics@exeros-tech.co.uk" class="text-main-primary underline">contact Exeros</a></p>
+          <p class="text-sm">For extra information <a href="mailto:vidematics@exeros-tech.co.uk" class="text-brand-500 underline">contact Exeros</a></p>
         </div>
       </div>
     </ng-template>

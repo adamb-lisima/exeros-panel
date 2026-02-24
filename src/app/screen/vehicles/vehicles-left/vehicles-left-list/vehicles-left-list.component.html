@@ -1,54 +1,89 @@
-<ng-container *ngIf="{ selectedId: selectedId$ | async } as ctx">
-  <app-infinity-scroll *ngIf="vehiclesMeta$ | async as meta" [transparent]="true" [listGap]="true" [pageMeta]="meta" [loading]="vehiclesLoading$ | async">
-    <ng-container list>
-      <div *rxFor="let vehicle of vehicles$; trackByField: 'id'" class="flex justify-between gap-1 p-4 rounded-xl cursor-pointer border bg-white" [ngClass]="ctx.selectedId === vehicle.id ? 'border-main-primary' : 'border-transparent'" (keydown.enter)="handleVehicleClick(vehicle)" (click)="handleVehicleClick(vehicle)">
-        <div class="flex items-center gap-2">
-          <ng-container [ngSwitch]="vehicle.type">
-            <img *ngSwitchCase="'HGV'" ngSrc="assets/svg/icons-gray-back/6.svg" width="40" height="40" alt="icon" />
-            <img *ngSwitchCase="'VAN'" ngSrc="assets/svg/icons-gray-back/7.svg" width="40" height="40" alt="icon" />
-            <img *ngSwitchCase="'BUS'" ngSrc="assets/svg/icons-gray-back/8.svg" width="40" height="40" alt="icon" />
-            <img *ngSwitchCase="'COMPANY_CAR'" ngSrc="assets/svg/icons-gray-back/9.svg" width="40" height="40" alt="icon" />
-            <img *ngSwitchCase="'TRAIN'" ngSrc="assets/svg/icons-gray-back/10.svg" width="40" height="40" alt="icon" />
-          </ng-container>
-          <div class="flex flex-col gap-2">
-            <div class="flex gap-2">
-              <p class="font-semibold">{{ vehicle.registration_plate }}</p>
-              <div *ngIf="vehicle.status === 'Active'" class="flex items-center gap-2 px-2 py-1 rounded-md bg-honeydew">
-                <svg class="text-extra-one" width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="4" cy="4" r="4" fill="currentColor" />
-                </svg>
-                <p class="font-medium text-xs text-extra-one">LIVE</p>
+<ng-container *ngIf="{ selectedId: selectedId$ | async, loading: vehiclesLoading$ | async } as ctx">
+  <!-- Sort dropdown -->
+  <div class="flex items-center justify-between mb-3 px-1">
+    <span class="text-caption text-neutral-500">Sort by</span>
+    <select
+      class="text-body-sm bg-surface-raised border border-neutral-200 rounded-lg px-3 py-1.5 text-neutral-700 cursor-pointer focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-1"
+      [value]="sortBy"
+      (change)="onSortChange($any($event.target).value)">
+      <option *ngFor="let opt of sortOptions" [value]="opt.value">{{ opt.label }}</option>
+    </select>
+  </div>
+
+  <!-- Loading skeleton -->
+  <ng-container *ngIf="ctx.loading">
+    <div class="flex flex-col gap-3">
+      <app-skeleton-loader *ngFor="let i of [1, 2, 3, 4, 5]" variant="table-row"></app-skeleton-loader>
+    </div>
+  </ng-container>
+
+  <!-- Vehicle list -->
+  <ng-container *ngIf="!ctx.loading">
+    <app-infinity-scroll *ngIf="vehiclesMeta$ | async as meta" [transparent]="true" [listGap]="true" [pageMeta]="meta" [loading]="false">
+      <ng-container list>
+        <ng-container *ngIf="sortedVehicles$ | async as vehicles">
+          <!-- Empty state -->
+          <app-empty-state
+            *ngIf="vehicles.length === 0"
+            heading="No vehicles found"
+            description="No vehicles match your current filters. Try adjusting your search criteria."
+            ctaLabel="Clear Filters"
+            (ctaClick)="onClearFilters()">
+          </app-empty-state>
+
+          <!-- Vehicle card rows -->
+          <div
+            *ngFor="let vehicle of vehicles; trackBy: trackById"
+            class="vehicle-card flex justify-between gap-2 p-4 rounded-xl cursor-pointer border bg-surface-raised transition-all duration-200 hover:shadow-md hover:-translate-y-px"
+            [ngClass]="ctx.selectedId === vehicle.id ? 'border-brand-500 shadow-sm' : 'border-neutral-200 shadow-sm'"
+            (keydown.enter)="handleVehicleClick(vehicle)"
+            (click)="handleVehicleClick(vehicle)">
+            <div class="flex items-center gap-3">
+              <!-- Vehicle type icon -->
+              <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-neutral-50 flex items-center justify-center">
+                <ng-container [ngSwitch]="vehicle.type">
+                  <img *ngSwitchCase="'HGV'" ngSrc="assets/svg/icons-gray-back/6.svg" width="32" height="32" alt="HGV" />
+                  <img *ngSwitchCase="'VAN'" ngSrc="assets/svg/icons-gray-back/7.svg" width="32" height="32" alt="Van" />
+                  <img *ngSwitchCase="'BUS'" ngSrc="assets/svg/icons-gray-back/8.svg" width="32" height="32" alt="Bus" />
+                  <img *ngSwitchCase="'COMPANY_CAR'" ngSrc="assets/svg/icons-gray-back/9.svg" width="32" height="32" alt="Company Car" />
+                  <img *ngSwitchCase="'TRAIN'" ngSrc="assets/svg/icons-gray-back/10.svg" width="32" height="32" alt="Train" />
+                </ng-container>
               </div>
-              <div class="flex flex-col items-center" *ngIf="vehicle.status !== 'Active'">
-                <div class="bg-old-lace flex items-center gap-2 px-2 py-1 rounded-md mr-auto">
-                  <p *ngIf="!vehicle.inactive_since" class="font-medium text-sm leading-[14px] text-main-primary">OFFLINE</p>
-                  <div [appTooltip]="'Offline since: ' + inactiveSince" *ngIf="vehicle.inactive_since as inactiveSince">
-                    <p class="font-medium text-sm leading-[14px] text-extra-two">OFFLINE {{ offlineSince(inactiveSince) }}</p>
-                  </div>
+
+              <!-- Vehicle info -->
+              <div class="flex flex-col gap-1">
+                <div class="flex items-center gap-2">
+                  <p class="font-semibold text-neutral-900">{{ vehicle.registration_plate }}</p>
+                  <app-badge
+                    [status]="getVehicleStatus(vehicle)"
+                    [label]="getStatusLabel(vehicle)">
+                  </app-badge>
                 </div>
+                <p class="text-body-sm text-neutral-500">{{ vehicle.brand_name }} {{ vehicle.model_name }}</p>
               </div>
             </div>
-            <p class="text-xs text-arsenic opacity-50">{{ vehicle.brand_name }} {{ vehicle.model_name }}</p>
-          </div>
-        </div>
-        <div class="flex flex-col justify-between">
-          <ng-container *appHasPermission="[[accessGroup.VEHICLES_EDITOR]]">
-            <div [cdkMenuTriggerFor]="menu" class="flex items-center gap-1 py-2 px-3 rounded-md cursor-pointer">
-              <div class="w-[2.5px] h-[2.5px] rounded-full bg-outer-space"></div>
-              <div class="w-[2.5px] h-[2.5px] rounded-full bg-outer-space"></div>
-              <div class="w-[2.5px] h-[2.5px] rounded-full bg-outer-space"></div>
-            </div>
-            <ng-template #menu>
-              <div class="flex flex-col border border-platinum rounded-md bg-white shadow-lg" cdkMenu>
-                <a class="px-4 py-2 text-sm cursor-pointer" (click)="handleEditCameraChannelsClick(vehicle)" cdkMenuItem>Edit Camera channels</a>
+
+            <!-- Right side: actions + status icons -->
+            <div class="flex flex-col justify-between items-end">
+              <ng-container *appHasPermission="[[accessGroup.VEHICLES_EDITOR]]">
+                <div [cdkMenuTriggerFor]="menu" class="flex items-center gap-1 py-1 px-2 rounded-md cursor-pointer hover:bg-neutral-50 transition-colors">
+                  <div class="w-[3px] h-[3px] rounded-full bg-neutral-400"></div>
+                  <div class="w-[3px] h-[3px] rounded-full bg-neutral-400"></div>
+                  <div class="w-[3px] h-[3px] rounded-full bg-neutral-400"></div>
+                </div>
+                <ng-template #menu>
+                  <div class="flex flex-col border border-neutral-200 rounded-lg bg-surface-raised shadow-md" cdkMenu>
+                    <a class="px-4 py-2 text-body-sm cursor-pointer hover:bg-neutral-50 rounded-lg transition-colors" (click)="handleEditCameraChannelsClick(vehicle)" cdkMenuItem>Edit Camera channels</a>
+                  </div>
+                </ng-template>
+              </ng-container>
+              <div class="ml-auto items-center mt-auto">
+                <app-vehicle-status-icons [hasTelematics]="vehicle.has_telematics" [hasVideo]="vehicle.has_video"></app-vehicle-status-icons>
               </div>
-            </ng-template>
-          </ng-container>
-          <div class="ml-auto items-center mt-auto">
-            <app-vehicle-status-icons [hasTelematics]="vehicle.has_telematics" [hasVideo]="vehicle.has_video"> </app-vehicle-status-icons>
+            </div>
           </div>
-        </div>
-      </div>
-    </ng-container>
-  </app-infinity-scroll>
+        </ng-container>
+      </ng-container>
+    </app-infinity-scroll>
+  </ng-container>
 </ng-container>

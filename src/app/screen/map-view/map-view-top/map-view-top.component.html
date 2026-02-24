@@ -1,11 +1,11 @@
 <ng-container *appHasPermission="[[accessGroup.MAP_VIEW]]">
   <div class="w-full flex justify-between mt-2">
     <div class="mx-2 my-3">
-      <span class="border border-main-primary text-main-primary text-xs px-3 py-2 rounded my-auto bg-white cursor-pointer" (click)="DateTimeNowHandler()" (keydown.enter)="DateTimeNowHandler()">Now</span>
+      <span class="border border-brand-500 text-brand-500 text-xs px-3 py-2 rounded my-auto bg-white cursor-pointer" (click)="DateTimeNowHandler()" (keydown.enter)="DateTimeNowHandler()">Now</span>
     </div>
     <div class="date-time-picker-container relative flex items-center" #pickerContainer (keypress)="$event.stopPropagation()" (click)="$event.stopPropagation()">
       <div *ngIf="isLoading" class="absolute right-[36px] top-[12px] z-10">
-        <div class="w-5 h-5 border-2 border-main-primary border-t-transparent rounded-full animate-spin"></div>
+        <div class="w-5 h-5 border-2 border-brand-500 border-t-transparent rounded-full animate-spin"></div>
       </div>
       <mat-form-field [ngClass]="showHintSpace ? '' : '-mb-[1.25em]'" class="w-full" [appearance]="'outline'">
         <mat-label *ngIf="label">{{ label }}</mat-label>
@@ -23,13 +23,13 @@
       </mat-form-field>
 
       <div *ngIf="isMenuOpen" class="date-time-menu-container fixed z-[9999]" [ngStyle]="{ 'top.px': dropdownPosition.top, 'left.px': dropdownPosition.left }">
-        <div class="w-[280px] flex flex-col gap-2 bg-white rounded-md p-2 text-new-gray-800" (click)="$event.stopPropagation()" (keypress)="$event.stopPropagation()" (mousedown)="$event.stopPropagation()">
+        <div class="w-[280px] flex flex-col gap-2 bg-white rounded-md p-2 text-neutral-800" (click)="$event.stopPropagation()" (keypress)="$event.stopPropagation()" (mousedown)="$event.stopPropagation()">
           <div class="calendar-container">
             <div class="flex justify-center items-center gap-2 mb-2">
-              <select class="w-[120px] h-[30px] bg-white rounded border border-new-gray-400 px-2" [(ngModel)]="selectedMonth" (change)="updateCalendar()">
+              <select class="w-[120px] h-[30px] bg-white rounded border border-neutral-500-400 px-2" [(ngModel)]="selectedMonth" (change)="updateCalendar()">
                 <option *ngFor="let month of months" [value]="month.value">{{ month.label }}</option>
               </select>
-              <select class="w-[120px] h-[30px] bg-white rounded border border-new-gray-400 px-2" [(ngModel)]="selectedYear" (change)="updateCalendar()">
+              <select class="w-[120px] h-[30px] bg-white rounded border border-neutral-500-400 px-2" [(ngModel)]="selectedYear" (change)="updateCalendar()">
                 <option *ngFor="let year of years" [value]="year.value">{{ year.label }}</option>
               </select>
             </div>
@@ -46,9 +46,9 @@
                     *ngFor="let cell of row"
                     class="h-[32px] w-[24px] relative rounded cursor-pointer"
                     [ngClass]="{
-                      'text-new-gray-400': !cell.active,
-                      'bg-main-primary text-white': cell.active && cell.day === selectedDay,
-                      'hover:bg-main-primary-10': cell.active && cell.day !== selectedDay
+                      'text-neutral-400': !cell.active,
+                      'bg-brand-500 text-white': cell.active && cell.day === selectedDay,
+                      'hover:bg-brand-500-10': cell.active && cell.day !== selectedDay
                     }"
                     (click)="handleDayClick(cell)"
                     (keydown.enter)="handleDayClick(cell)">
@@ -63,7 +63,7 @@
             <app-time-select-control [currentTime]="toTimeString" [label]="timeTo" (timeChange)="handleTimeChange($event, 'to')"></app-time-select-control>
           </div>
           <div class="flex justify-end mt-2">
-            <button class="py-2 px-4 rounded text-sm bg-main-primary text-white hover:bg-main-primary-dark transition-colors" (click)="handleSearchClick()">Search</button>
+            <button class="py-2 px-4 rounded text-sm bg-brand-500 text-white hover:bg-brand-500-dark transition-colors" (click)="handleSearchClick()">Search</button>
           </div>
         </div>
       </div>

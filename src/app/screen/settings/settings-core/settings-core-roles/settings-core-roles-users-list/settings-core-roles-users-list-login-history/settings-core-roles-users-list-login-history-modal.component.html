@@ -2,12 +2,12 @@
   <div class="flex flex-col gap-4 p-5" body>
     <table class="w-full">
       <thead>
-        <tr class="border-b border-bright-gray">
-          <th class="px-4 py-3 text-xs text-manatee text-left">Login Date and Time</th>
+        <tr class="border-b border-neutral-400">
+          <th class="px-4 py-3 text-xs text-neutral-400 text-left">Login Date and Time</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let loginDate of data.user.last_login_history" class="border-b border-bright-gray hover:bg-gray-50">
+        <tr *ngFor="let loginDate of data.user.last_login_history" class="border-b border-neutral-400 hover:bg-neutral-50">
           <td class="px-4 py-3 text-sm">
             {{ loginDate | dateFormat : 'serverDateTimeFormat' : 'clientDateTimeFormat' }}
           </td>
@@ -16,7 +16,7 @@
     </table>
 
     <div *ngIf="!data.user.last_login_history?.length" class="flex justify-center items-center py-8">
-      <span class="text-sm text-manatee">No login history available</span>
+      <span class="text-sm text-neutral-400">No login history available</span>
     </div>
   </div>
 

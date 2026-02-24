@@ -6,17 +6,17 @@
   <table class="table-auto">
     <th></th>
     <thead>
-      <tr class="border-b border-bright-gray">
+      <tr class="border-b border-neutral-400">
         <td class="px-2"></td>
-        <td class="px-2 py-2 text-xs text-manatee">Name</td>
-        <td class="px-2 text-xs text-manatee">E-mail</td>
-        <td class="px-2 text-xs text-manatee">Company</td>
-        <td class="px-2 text-xs text-manatee">Registration Plate</td>
+        <td class="px-2 py-2 text-xs text-neutral-400">Name</td>
+        <td class="px-2 text-xs text-neutral-400">E-mail</td>
+        <td class="px-2 text-xs text-neutral-400">Company</td>
+        <td class="px-2 text-xs text-neutral-400">Registration Plate</td>
         <td class="px-2"></td>
       </tr>
     </thead>
     <tbody *ngIf="data$ | async as response">
-      <tr *ngFor="let driver of response.data" class="border-b border-bright-gray">
+      <tr *ngFor="let driver of response.data" class="border-b border-neutral-400">
         <td class="px-2 text-sm"></td>
         <td class="px-2 py-4 text-sm">{{ driver.name }}</td>
         <td class="px-2 text-sm">{{ driver.email }}</td>
@@ -24,42 +24,42 @@
         <td class="px-2 text-sm">{{ driver.registration_plate }}</td>
         <td class="px-2">
           <div class="relative">
-            <div [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger" (click)="$event.stopPropagation()" (keydown.enter)="$event.stopPropagation()" class="flex flex-col items-center gap-1 py-3 px-1.5 rounded-md cursor-pointer hover:bg-anti-flash-white w-5">
-              <div class="w-[2.5px] h-[2.5px] rounded-full bg-main-primary"></div>
-              <div class="w-[2.5px] h-[2.5px] rounded-full bg-main-primary"></div>
-              <div class="w-[2.5px] h-[2.5px] rounded-full bg-main-primary"></div>
+            <div [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger" (click)="$event.stopPropagation()" (keydown.enter)="$event.stopPropagation()" class="flex flex-col items-center gap-1 py-3 px-1.5 rounded-md cursor-pointer hover:bg-neutral-100 w-5">
+              <div class="w-[2.5px] h-[2.5px] rounded-full bg-brand-500"></div>
+              <div class="w-[2.5px] h-[2.5px] rounded-full bg-brand-500"></div>
+              <div class="w-[2.5px] h-[2.5px] rounded-full bg-brand-500"></div>
             </div>
 
             <mat-menu #menu="matMenu" [hasBackdrop]="true">
               <div (click)="$event.stopPropagation()" (keydown.enter)="$event.stopPropagation()">
                 <button mat-menu-item (click)="handleEditDriverClick(driver)">
                   <div class="flex flex-row">
-                    <img class="color-main-primary" ngSrc="assets/svg/new-icons/edit.svg" width="20" height="20" alt="icon" />
-                    <p class="text-main-primary underline text-sm font-medium">Edit</p>
+                    <img class="color-brand-500" ngSrc="assets/svg/new-icons/edit.svg" width="20" height="20" alt="icon" />
+                    <p class="text-brand-500 underline text-sm font-medium">Edit</p>
                   </div>
                 </button>
                 <button mat-menu-item (click)="handleResetPasswordClick(driver)">
                   <div class="flex flex-row">
                     <img ngSrc="assets/svg/new-icons/lock-closed.svg" width="20" height="20" alt="icon" />
-                    <p class="text-main-primary underline text-sm font-medium">Reset password</p>
+                    <p class="text-brand-500 underline text-sm font-medium">Reset password</p>
                   </div>
                 </button>
                 <button mat-menu-item *ngIf="!driver.vehicle_id" (click)="handleAddVehicleClick(driver)">
                   <div class="flex flex-row">
                     <img ngSrc="assets/svg/new-icons/plus.svg" width="20" height="20" alt="icon" />
-                    <p class="text-main-primary underline text-sm font-medium">Add vehicle</p>
+                    <p class="text-brand-500 underline text-sm font-medium">Add vehicle</p>
                   </div>
                 </button>
                 <button mat-menu-item *ngIf="driver.vehicle_id" (click)="handleReleaseVehicleClick(driver)">
                   <div class="flex flex-row">
                     <img ngSrc="assets/svg/new-icons/minus-new.svg" width="20" height="20" alt="icon" />
-                    <p class="text-main-primary underline text-sm font-medium">Release vehicle</p>
+                    <p class="text-brand-500 underline text-sm font-medium">Release vehicle</p>
                   </div>
                 </button>
                 <button mat-menu-item (click)="handleDeleteDriverClick(driver)">
                   <div class="flex flex-row">
                     <img ngSrc="assets/svg/new-icons/trash.svg" width="20" height="20" alt="icon" />
-                    <p class="text-main-primary underline text-sm font-medium">Delete</p>
+                    <p class="text-brand-500 underline text-sm font-medium">Delete</p>
                   </div>
                 </button>
               </div>

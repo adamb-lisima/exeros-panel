@@ -1,13 +1,11 @@
 <ng-container *ngIf="vehicleByDeviceId$ | async as vehicleByDeviceId">
   <app-infinity-scroll>
     <ng-container header>
-      <div class="flex flex-col gap-8">
-        <div class="flex flex-col gap-8">
-          <div class="min-h-[40px] flex flex-wrap justify-between items-center gap-2">
-            <p class="font-semibold text-xl whitespace-nowrap">Alarms</p>
-            <ng-container *ngIf="SHOW_EXPORT_WITHOUT_FILTERS || bodyGroup.controls.vehicle_id.value || bodyGroup.controls.driver_id.value">
-              <div *appHasPermission="[[accessGroup.ALARMS_REPORTS_DOWNLOADER]]" class="flex gap-2">
-                <div class="h-[40px] w-[40px] flex justify-center items-center rounded cursor-pointer border border-platinum text-extra-one" (click)="handleExportAlarmsClick('xlsx')" (keydown.enter)="handleExportAlarmsClick('xlsx')">
+      <div class="flex flex-col gap-4">
+        <div class="flex flex-wrap justify-between items-center gap-2">
+          <ng-container *ngIf="SHOW_EXPORT_WITHOUT_FILTERS || bodyGroup.controls.vehicle_id.value || bodyGroup.controls.driver_id.value">
+            <div *appHasPermission="[[accessGroup.ALARMS_REPORTS_DOWNLOADER]]" class="flex gap-2">
+              <div class="h-[40px] w-[40px] flex justify-center items-center rounded cursor-pointer border border-neutral-200 text-success-500" (click)="handleExportAlarmsClick('xlsx')" (keydown.enter)="handleExportAlarmsClick('xlsx')">
                   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M15.9431 6.82653C15.862 6.53891 15.6906 6.28497 15.4542 6.10217C15.2178 5.91936 14.9289 5.81736 14.6301 5.81122C14.4702 5.80746 14.3104 5.81122 14.1317 5.81122V5.47055C14.1317 5.11653 14.1292 4.76083 14.1317 4.40889C14.1337 4.33343 14.1196 4.2584 14.0904 4.18879C14.0612 4.11918 14.0175 4.0566 13.9622 4.00519C12.668 2.73159 11.3739 1.45743 10.0797 0.182722C10.0041 0.108828 9.90228 0.0616531 9.81252 0.00195312H2.21788C1.94694 0.127198 1.86804 0.340948 1.8693 0.631516C1.87848 2.28767 1.87389 3.94382 1.87389 5.59955V5.80829H1.49816C0.590999 5.80829 -0.000559091 6.39861 -0.000976562 7.30121C-0.000976562 9.0666 -0.000976562 10.8321 -0.000976562 12.5978C-0.000976562 13.5 0.59392 14.0928 1.49733 14.0936H1.86637C1.8693 14.1533 1.87347 14.2034 1.87347 14.254C1.87347 14.6652 1.87347 15.0768 1.87347 15.488C1.87347 15.8036 2.06509 15.999 2.37652 15.999C6.1268 15.999 9.87667 15.999 13.6261 15.999C13.9409 15.999 14.1271 15.8095 14.1271 15.4897C14.1296 15.0305 14.1271 14.5746 14.1271 14.0936H14.4581C15.2814 14.0936 15.7669 13.7179 15.9748 12.9168C15.9805 12.9023 15.9874 12.8884 15.9953 12.875V7.00062C15.9807 6.94259 15.9598 6.8854 15.9431 6.82653ZM10.1791 1.775V1.63848L10.2333 1.60592L12.4246 3.89623L12.481 3.89163L12.4426 3.91501L12.4246 3.89623L12.3871 3.89915C12.3745 3.89915 12.3624 3.89915 12.3499 3.89915C11.808 3.89915 11.2664 3.89915 10.7251 3.89915C10.3598 3.89915 10.1799 3.71838 10.1795 3.35141C10.1782 2.82914 10.1791 2.30311 10.1791 1.77709V1.775ZM2.82155 0.946715H9.24142V1.1087C9.24142 1.85307 9.24142 2.59786 9.24142 3.34223C9.24142 4.24608 9.83506 4.83723 10.7376 4.83807C11.4924 4.83807 12.2473 4.83807 13.0024 4.83807H13.1844V5.79827H2.82155V0.946715ZM13.1823 15.0522H2.81904V14.1032H13.1823V15.0522ZM15.061 12.5932C15.061 12.9785 14.8844 13.1547 14.4978 13.1547H1.51445C1.10658 13.1547 0.936665 12.9844 0.936665 12.5769C0.936665 10.8218 0.936665 9.06674 0.936665 7.31165C0.936665 6.9142 1.10699 6.74471 1.50776 6.74471H14.4911C14.8915 6.74471 15.0614 6.9142 15.0614 7.31248C15.0625 9.07453 15.0628 10.8355 15.0622 12.5953L15.061 12.5932Z" fill="currentColor" />
                     <path d="M12.4812 3.89258L12.4428 3.91596L12.4248 3.89717L12.4812 3.89258Z" fill="white" />
@@ -23,32 +21,23 @@
             <app-select-control *ngIf="vehicleOptions$ | async as options" class="w-[24%]" label="Vehicle" [clearable]="true" [disabled]="!!(vehiclesLoading$ | async)" [options]="options" [formControl]="bodyGroup.controls.vehicle_id"></app-select-control>
             <app-select-control *ngIf="driverOptions$ | async as options" class="w-[24%]" label="Driver" [clearable]="true" [options]="options" [formControl]="bodyGroup.controls.driver_id"></app-select-control>
           </div>
+          <div class="flex items-center pb-2 border-b border-b-neutral-400">
+            <p class="flex-[0_0_20%] text-sm text-neutral-500">Type</p>
+            <p class="flex-[0_0_10%] text-sm text-neutral-500">Speed</p>
+            <p class="flex-[0_0_20%] text-sm text-neutral-500">Vehicle</p>
+            <p class="flex-[0_0_20%] text-sm text-neutral-500">Driver</p>
+            <p class="flex-[0_0_15%] text-sm text-neutral-500">Start Time</p>
+            <p class="flex-[0_0_15%] text-sm text-neutral-500">End Time</p>
+          </div>
         </div>
-        <div class="flex items-center pb-2 border-b border-b-bright-gray">
-          <p class="flex-[0_0_20%] text-sm text-sonic-silver">Type</p>
-          <p class="flex-[0_0_10%] text-sm text-sonic-silver">Speed</p>
-          <p class="flex-[0_0_20%] text-sm text-sonic-silver">Vehicle</p>
-          <p class="flex-[0_0_20%] text-sm text-sonic-silver">Driver</p>
-          <p class="flex-[0_0_15%] text-sm text-sonic-silver">Start Time</p>
-          <p class="flex-[0_0_15%] text-sm text-sonic-silver">End Time</p>
-        </div>
-      </div>
     </ng-container>
     <ng-container list>
-      <div *ngIf="isFilterChanging && (bodyGroup.controls.vehicle_id.value || bodyGroup.controls.driver_id.value)" class="loader loader--infinite-scroll absolute inset-0 z-10 items-center justify-center py-32">
-        <div class="spinner mb-4">
-          <div></div>
-        </div>
-      </div>
-      <div *ngIf="!bodyGroup.controls.vehicle_id.value && !bodyGroup.controls.driver_id.value" class="flex flex-col items-center justify-center py-12 text-center">
-        <div class="flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 mb-4">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-gray-400">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
-          </svg>
-        </div>
-        <h3 class="text-lg font-medium text-gray-900 mb-2">Select a filter to view alarms</h3>
-        <p class="text-sm text-gray-500 max-w-sm">Please select either a vehicle or driver from the filters above to display alarm data.</p>
-      </div>
+      <ng-container *ngIf="isFilterChanging && (bodyGroup.controls.vehicle_id.value || bodyGroup.controls.driver_id.value)">
+        <app-skeleton-loader variant="table-row"></app-skeleton-loader>
+      </ng-container>
+      <ng-container *ngIf="!bodyGroup.controls.vehicle_id.value && !bodyGroup.controls.driver_id.value">
+        <app-empty-state heading="Select a filter to view alarms" description="Please select either a vehicle or driver from the filters above to display alarm data."></app-empty-state>
+      </ng-container>
       <div *ngFor="let alarm of alarms$ | async; trackByField: 'id'" class="flex items-center py-4">
         <p class="flex-[0_0_20%] font-semibold text-sm">{{ alarm.type }}</p>
         <ng-container>

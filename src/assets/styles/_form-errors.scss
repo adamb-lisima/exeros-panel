@@ -1,0 +1,23 @@
+// Inline form field error styling
+// Usage: <span class="field-error">Error message</span>
+
+.field-error {
+  display: block;
+  font: var(--text-body-sm);
+  color: var(--error-500);
+  margin-top: var(--space-1);
+}
+
+// Error state for form inputs
+.field--error,
+input.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched,
+select.ng-invalid.ng-touched {
+  border-color: var(--error-500);
+
+  &:focus,
+  &:focus-visible {
+    outline-color: var(--error-500);
+    border-color: var(--error-500);
+  }
+}

@@ -3,11 +3,13 @@
 @import 'assets/style/material';
 @import 'assets/style/tailwind';
 @import 'assets/style/google-map';
-@import 'assets/style/loader';
 @import 'assets/style/h265';
 @import 'assets/styles/tokens';
 @import 'assets/styles/typography';
 @import 'assets/styles/animations';
+@import 'assets/styles/interactions';
+@import 'assets/styles/form-errors';
+@import 'assets/styles/success-flash';
 
 router-outlet {
   display: none;
@@ -41,7 +43,7 @@ body {
 }
 
 .custom-select {
-  border: 1px solid #9295a2 !important;
+  border: 1px solid var(--neutral-400) !important;
   background-color: transparent;
   transition: all 0.3s ease-in-out;
   outline: none;

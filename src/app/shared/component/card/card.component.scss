@@ -1,0 +1,46 @@
+.card {
+  background-color: var(--surface-raised);
+  box-shadow: var(--elevation-sm);
+  border-radius: 12px;
+  padding: var(--space-4);
+  transition: box-shadow var(--duration-normal) var(--ease-default),
+              transform var(--duration-normal) var(--ease-default);
+
+  &:hover {
+    box-shadow: var(--elevation-md);
+    transform: translateY(-1px);
+  }
+
+  &--loading {
+    pointer-events: none;
+
+    &:hover {
+      box-shadow: var(--elevation-sm);
+      transform: none;
+    }
+  }
+}
+
+.card__header {
+  &:empty {
+    display: none;
+  }
+}
+
+.card__body {
+  &:empty {
+    display: none;
+  }
+}
+
+.card__footer {
+  &:empty {
+    display: none;
+  }
+}
+
+.card--chart {
+  .card__body {
+    aspect-ratio: 16 / 9;
+  }
+}

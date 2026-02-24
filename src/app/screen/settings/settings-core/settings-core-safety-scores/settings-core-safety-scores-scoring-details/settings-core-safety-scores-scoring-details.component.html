@@ -12,7 +12,7 @@
           <thead>
             <th></th>
             <tr>
-              <td colspan="3" class="py-1 text-xs text-manatee text-gray-500">{{ profile?.name }}</td>
+              <td colspan="3" class="py-1 text-xs text-neutral-500">{{ profile?.name }}</td>
             </tr>
           </thead>
           <tbody>
@@ -29,7 +29,7 @@
           <thead>
             <th></th>
             <tr>
-              <td colspan="3" class="py-1 text-xs text-manatee text-gray-500">{{ profile?.name }}</td>
+              <td colspan="3" class="py-1 text-xs text-neutral-500">{{ profile?.name }}</td>
             </tr>
           </thead>
           <tbody>
@@ -42,12 +42,12 @@
     </div>
   </div>
   <div (click)="!hasBranches && handleDeleteClick()" (keydown.enter)="!hasBranches && handleDeleteClick()">
-    <span class="text-sm text-main-primary font-semibold cursor-pointer select-none" [ngClass]="hasBranches ? 'opacity-50' : ''">DELETE</span>
+    <span class="text-sm text-brand-500 font-semibold cursor-pointer select-none" [ngClass]="hasBranches ? 'opacity-50' : ''">DELETE</span>
   </div>
 </div>
 
 <ng-template #scoreWeight let-score="score">
-  <td [ngClass]="score.value !== 0 ? 'text-extra-three' : ''" class="pl-5 text-sm font-medium w-16">{{ score.value | number : '1.0-2' }}%</td>
+  <td [ngClass]="score.value !== 0 ? 'text-info-500' : ''" class="pl-5 text-sm font-medium w-16">{{ score.value | number : '1.0-2' }}%</td>
   <td class="py-1.5 w-8">
     <app-event-icon [eventIcon]="score.event_icon"></app-event-icon>
   </td>

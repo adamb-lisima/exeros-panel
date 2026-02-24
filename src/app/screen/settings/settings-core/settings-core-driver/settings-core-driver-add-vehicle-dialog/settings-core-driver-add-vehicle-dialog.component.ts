@@ -82,7 +82,7 @@ export class SettingsCoreDriverAddVehicleDialogComponent implements OnInit, OnDe
     return {
       value: vehicle.id,
       label: vehicle.registration_plate + (vehicle.driver ? ' (Assigned to ' + vehicle.driver.name + ')' : ''),
-      colorClass: vehicle.status === 'Active' ? 'text-extra-one' : undefined
+      colorClass: vehicle.status === 'Active' ? 'text-success-500' : undefined
     };
   }
 

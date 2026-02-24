@@ -1,22 +1,22 @@
 <div class="w-[650px] flex flex-col gap-6 rounded-md bg-white overflow-y-auto">
   <div class="flex justify-between items-center px-5 pt-5">
     <p class="font-medium">Change clip into event</p>
-    <div class="rounded-md cursor-pointer bg-anti-flash-white" (click)="handleCloseClick()" (keydown.enter)="handleCloseClick()">
+    <div class="rounded-md cursor-pointer bg-neutral-100" (click)="handleCloseClick()" (keydown.enter)="handleCloseClick()">
       <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M12.7279 21.2129L21.2132 12.7276" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
         <path d="M21.2132 21.2138L12.7279 12.7285" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
       </svg>
     </div>
   </div>
-  <span class="w-full flex-[0_0_1px] bg-platinum"></span>
+  <span class="w-full flex-[0_0_1px] bg-neutral-200"></span>
   <div class="flex flex-col gap-3 px-5">
     <app-text-control label="Event name*" [formControl]="bodyGroup.controls.name"></app-text-control>
     <app-select-control label="Stream" [options]="streamOptions" [formControl]="bodyGroup.controls.stream"></app-select-control>
     <app-time-control label="Clip beginning*" [formControl]="bodyGroup.controls.from"></app-time-control>
     <div class="flex flex-col gap-1">
-      <span class="text-sm font-medium text-gray-700 mb-2">Clip duration*</span>
+      <span class="text-sm font-medium text-neutral-700 mb-2">Clip duration*</span>
       <div class="flex flex-wrap gap-2">
-        <button *ngFor="let duration of clipDurations" class="py-2 px-4 rounded-xl cursor-pointer font-medium text-xs border border-platinum bg-white select-none" [ngClass]="{ 'border-extra-three text-extra-three': selectedDuration === duration.value }" (click)="updateDuration(duration.value)">
+        <button *ngFor="let duration of clipDurations" class="py-2 px-4 rounded-xl cursor-pointer font-medium text-xs border border-neutral-200 bg-white select-none" [ngClass]="{ 'border-info-500 text-info-500': selectedDuration === duration.value }" (click)="updateDuration(duration.value)">
           {{ duration.label }}
         </button>
       </div>
@@ -25,7 +25,7 @@
 
   <div class="flex px-5 flex-wrap gap-4">
     <ng-container *ngIf="cameras$ | async as cameras">
-      <div *ngFor="let camera of cameras; trackBy: trackByCamera" class="flex gap-2 py-2 px-4 rounded-xl cursor-pointer font-medium text-xs border border-platinum bg-white select-none" [ngClass]="{ 'text-extra-three border-extra-three': isSelected(camera) }" (click)="toggleSelection(camera)" (keydown.enter)="toggleSelection(camera)">
+      <div *ngFor="let camera of cameras; trackBy: trackByCamera" class="flex gap-2 py-2 px-4 rounded-xl cursor-pointer font-medium text-xs border border-neutral-200 bg-white select-none" [ngClass]="{ 'text-info-500 border-info-500': isSelected(camera) }" (click)="toggleSelection(camera)" (keydown.enter)="toggleSelection(camera)">
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M4.5067 14.6673H11.4934C13.3334 14.6673 14.0667 13.5407 14.1534 12.1673L14.5 6.66065C14.5934 5.22065 13.4467 4.00065 12 4.00065C11.5934 4.00065 11.22 3.76732 11.0334 3.40732L10.5534 2.44065C10.2467 1.83398 9.4467 1.33398 8.7667 1.33398H7.24003C6.55337 1.33398 5.75337 1.83398 5.4467 2.44065L4.9667 3.40732C4.78003 3.76732 4.4067 4.00065 4.00003 4.00065C2.55337 4.00065 1.4067 5.22065 1.50003 6.66065L1.8467 12.1673C1.9267 13.5407 2.6667 14.6673 4.5067 14.6673Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
           <path d="M7 5.33398H9" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />

@@ -1,0 +1,64 @@
+.skeleton-loader {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  width: 100%;
+}
+
+// Card variant
+.skeleton--header {
+  height: 20px;
+  width: 60%;
+}
+
+.skeleton--body {
+  height: 80px;
+  width: 100%;
+}
+
+.skeleton--footer {
+  height: 16px;
+  width: 40%;
+}
+
+// Table-row variant
+.skeleton-row {
+  display: flex;
+  gap: var(--space-3);
+  align-items: center;
+}
+
+.skeleton--col {
+  height: 16px;
+}
+
+.skeleton--col-sm {
+  width: 60px;
+}
+
+.skeleton--col-md {
+  width: 120px;
+}
+
+.skeleton--col-lg {
+  flex: 1;
+}
+
+// Chart variant
+.skeleton--chart {
+  height: 200px;
+  width: 100%;
+}
+
+// Text-block variant
+.skeleton--line {
+  height: 14px;
+}
+
+.skeleton--line-full {
+  width: 100%;
+}
+
+.skeleton--line-short {
+  width: 70%;
+}

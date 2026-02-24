@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, HostBinding, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { first, Subject, Subscription, switchMap, tap } from 'rxjs';
+import { first, map, Subject, Subscription, switchMap, tap } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import RouteConst from '../../../const/route';
 import { AppState } from '../../../store/app-store.model';
@@ -15,6 +15,24 @@ export class VehiclesCoreComponent implements OnInit, OnDestroy {
   @HostBinding('class') hostClass = 'h-full';
 
   vehicle$ = this.store.select(VehiclesSelectors.vehicle);
+  vehicleLoading$ = this.vehicle$.pipe(map(v => !v));
+  liveFeed$ = this.store.select(VehiclesSelectors.updatedLiveFeed);
+  liveFeedLoading$ = this.store.select(VehiclesSelectors.liveFeedLoading);
+
+  vehicleStatus$ = this.liveFeed$.pipe(
+    map(feed => {
+      if (!feed) return { status: 'offline' as const, label: 'Offline' };
+      switch (feed.status) {
+        case 'Active':
+          return { status: 'online' as const, label: 'Active' };
+        case 'Available':
+          return { status: 'warning' as const, label: 'Available' };
+        default:
+          return { status: 'offline' as const, label: 'Inactive' };
+      }
+    })
+  );
+
   private readonly sub = new Subscription();
   private readonly destroy$ = new Subject<void>();
 

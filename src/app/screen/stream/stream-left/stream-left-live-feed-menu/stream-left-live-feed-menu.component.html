@@ -1,6 +1,6 @@
 <div class="flex justify-between items-center mb-5 gap-2">
   <div class="text-2xl flex flex-row items-center gap-1">
-    <p appTooltip="Go back to vehicles list" class="text-new-gray-700 cursor-pointer" (keydown.enter)="handleViewStreamClick()" (click)="handleViewStreamClick()">Play</p>
+    <p appTooltip="Go back to vehicles list" class="text-neutral-700 cursor-pointer" (keydown.enter)="handleViewStreamClick()" (click)="handleViewStreamClick()">Live Stream</p>
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <mask id="mask0_2440_3306" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
         <rect width="24" height="24" fill="#D9D9D9" />
@@ -12,7 +12,7 @@
     <p>Live video</p>
   </div>
   <div class="flex items-center gap-1">
-    <div class="h-[35px] flex items-center gap-0.5 px-1.5 rounded-md cursor-pointer border border-main-primary bg-white" (keydown.enter)="handleBackClick()" (click)="handleBackClick()">
+    <div class="h-[35px] flex items-center gap-0.5 px-1.5 rounded-md cursor-pointer border border-brand-500 bg-white" (keydown.enter)="handleBackClick()" (click)="handleBackClick()">
       <div class="rotate-90">
         <svg width="16" height="16" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
           <mask id="mask0_3914_19612" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="21" height="21">
@@ -23,7 +23,7 @@
           </g>
         </svg>
       </div>
-      <p class="font-medium text-xs text-main-primary whitespace-nowrap">Back</p>
+      <p class="font-medium text-xs text-brand-500 whitespace-nowrap">Back</p>
     </div>
     <div appTooltip="Report issue" class="h-[35px] w-[35px] flex items-center justify-center rounded-md cursor-pointer border border-red-500 bg-white hover:bg-red-50" (keydown.enter)="openReportIssueModal()" (click)="openReportIssueModal()">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

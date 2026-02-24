@@ -81,7 +81,7 @@ export class EventsMapComponent implements OnChanges {
   };
 
   polylineOptions: google.maps.PolylineOptions = {
-    strokeColor: ColorUtil.get('--extra-three')
+    strokeColor: ColorUtil.get('--info-500')
   };
 
   markerClustererOptions: MarkerClustererOptions = {
@@ -148,8 +148,8 @@ export class EventsMapComponent implements OnChanges {
           fillOpacity: 1,
           scale: 1.3,
           rotation: (marker.direction ?? 0) - 45,
-          fillColor: ColorUtil.get(marker.fillColorVariable ?? '--main-primary'),
-          strokeColor: ColorUtil.get(marker.strokeColorVariable ?? '--main-primary')
+          fillColor: ColorUtil.get(marker.fillColorVariable ?? '--brand-500'),
+          strokeColor: ColorUtil.get(marker.strokeColorVariable ?? '--brand-500')
         };
       case 'start':
         return { url: 'assets/svg/map-start-icon.svg', anchor: new google.maps.Point(46.5, 47) };
@@ -198,21 +198,21 @@ export class EventsMapComponent implements OnChanges {
     if (startEventIndex > 0) {
       this._polylineSegments.push({
         path: path.slice(0, startEventIndex),
-        strokeColor: ColorUtil.get('--extra-three')
+        strokeColor: ColorUtil.get('--info-500')
       });
     }
 
     if (startEventIndex >= 0) {
       this._polylineSegments.push({
         path: path.slice(startEventIndex - 1, endEventIndex >= 0 ? endEventIndex + 1 : path.length),
-        strokeColor: ColorUtil.get('--main-primary')
+        strokeColor: ColorUtil.get('--brand-500')
       });
     }
 
     if (endEventIndex >= 0 && endEventIndex < path.length) {
       this._polylineSegments.push({
         path: path.slice(endEventIndex),
-        strokeColor: ColorUtil.get('--extra-three')
+        strokeColor: ColorUtil.get('--info-500')
       });
     }
 
@@ -277,8 +277,8 @@ export class EventsMapComponent implements OnChanges {
         coordinates: [String(lat), String(lng)],
         direction,
         type: 'navigation',
-        fillColorVariable: '--main-primary',
-        strokeColorVariable: '--main-primary'
+        fillColorVariable: '--brand-500',
+        strokeColorVariable: '--brand-500'
       });
     }
 
@@ -299,8 +299,8 @@ export class EventsMapComponent implements OnChanges {
         coordinates: [String(lat), String(lng)],
         direction,
         type: 'navigation',
-        fillColorVariable: '--main-primary',
-        strokeColorVariable: '--main-primary'
+        fillColorVariable: '--brand-500',
+        strokeColorVariable: '--brand-500'
       }
     ];
   }

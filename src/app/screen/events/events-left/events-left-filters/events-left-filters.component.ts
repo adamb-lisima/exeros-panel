@@ -62,13 +62,13 @@ export class EventsLeftFiltersComponent implements OnInit, OnDestroy, OnChanges 
       vehicles?.map(vehicle => ({
         value: vehicle.id,
         label: vehicle.registration_plate,
-        colorClass: vehicle.status === 'Active' ? 'text-extra-one' : undefined
+        colorClass: vehicle.status === 'Active' ? 'text-success-500' : undefined
       }))
     )
   );
   providerOptions$ = [
-    { value: 'STREAMAX', label: `video`, colorClass: 'bg-extra-one--30' },
-    { value: 'FLESPI', label: `telematics`, colorClass: 'bg-extra-three--30' }
+    { value: 'STREAMAX', label: `video`, colorClass: 'bg-success-500--30' },
+    { value: 'FLESPI', label: `telematics`, colorClass: 'bg-info-500--30' }
   ];
 
   driverOptions$ = this.store.select(CommonObjectsSelectors.driversTree).pipe(map((drivers): SelectControl[] => drivers.map(driver => ({ value: driver.id, label: `${driver.name} ` }))));

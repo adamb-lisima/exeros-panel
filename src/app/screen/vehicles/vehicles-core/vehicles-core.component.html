@@ -1,20 +1,102 @@
-<div *ngIf="vehicle$ | async" class="grid grid-cols-3 auto-rows-max gap-4">
-  <div class="exeros-fragment row-start-1 h-[130px]">
-    <app-vehicles-core-driving-time></app-vehicles-core-driving-time>
+<ng-container *ngIf="vehicle$ | async as vehicle; else loadingSkeleton">
+  <!-- Hero Section -->
+  <div class="w-full rounded-xl bg-surface-raised p-6 mb-6 shadow-sm">
+    <div class="flex flex-wrap items-center gap-4">
+      <h1 class="text-heading-lg text-neutral-900">{{ vehicle.registration_plate }}</h1>
+      <app-badge
+        *ngIf="vehicleStatus$ | async as vs"
+        [status]="vs.status"
+        [label]="vs.label">
+      </app-badge>
+    </div>
+    <div class="flex flex-wrap gap-6 mt-4">
+      <div class="flex flex-col gap-1">
+        <span class="text-caption text-neutral-400">Fleet</span>
+        <span class="text-body font-medium text-neutral-700">{{ vehicle.fleet_name }}</span>
+      </div>
+      <div class="flex flex-col gap-1">
+        <span class="text-caption text-neutral-400">Type</span>
+        <span class="text-body font-medium text-neutral-700">{{ vehicle.type }}</span>
+      </div>
+      <div class="flex flex-col gap-1">
+        <span class="text-caption text-neutral-400">Make</span>
+        <span class="text-body font-medium text-neutral-700">{{ vehicle.brand_name }}</span>
+      </div>
+      <div class="flex flex-col gap-1">
+        <span class="text-caption text-neutral-400">Model</span>
+        <span class="text-body font-medium text-neutral-700">{{ vehicle.model_name }}</span>
+      </div>
+    </div>
   </div>
-  <div class="exeros-fragment row-start-1 h-[130px]">
-    <app-vehicles-core-distance-driven></app-vehicles-core-distance-driven>
+
+  <!-- Metrics Row -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+    <app-card variant="metric">
+      <div card-body>
+        <app-vehicles-core-driving-time></app-vehicles-core-driving-time>
+      </div>
+    </app-card>
+    <app-card variant="metric">
+      <div card-body>
+        <app-vehicles-core-distance-driven></app-vehicles-core-distance-driven>
+      </div>
+    </app-card>
   </div>
-  <div class="exeros-fragment row-start-1 row-end-3 h-[696px]">
-    <app-vehicles-core-tabs></app-vehicles-core-tabs>
+
+  <!-- Live Feed + Tabs Row -->
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-6">
+    <div class="lg:col-span-2">
+      <app-card variant="media" [loading]="(liveFeedLoading$ | async) ?? false">
+        <div card-body>
+          <app-vehicles-core-live-feed></app-vehicles-core-live-feed>
+        </div>
+      </app-card>
+    </div>
+    <div class="lg:col-span-1">
+      <app-card>
+        <div card-body>
+          <app-vehicles-core-tabs></app-vehicles-core-tabs>
+        </div>
+      </app-card>
+    </div>
   </div>
-  <div class="exeros-fragment row-start-2 col-start-1 col-end-3 h-[550px]">
-    <app-vehicles-core-live-feed></app-vehicles-core-live-feed>
+
+  <!-- Details Section -->
+  <div class="mb-6">
+    <app-card>
+      <div card-body>
+        <app-vehicles-core-details></app-vehicles-core-details>
+      </div>
+    </app-card>
   </div>
-  <div class="exeros-fragment col-start-1 col-end-4">
-    <app-vehicles-core-details></app-vehicles-core-details>
+
+  <!-- Trips Section -->
+  <div class="mb-6">
+    <app-card>
+      <div card-body>
+        <app-vehicles-core-trips></app-vehicles-core-trips>
+      </div>
+    </app-card>
   </div>
-  <div class="exeros-fragment row-start-7 h-[550px] col-start-1 col-end-4">
-    <app-vehicles-core-trips></app-vehicles-core-trips>
+</ng-container>
+
+<ng-template #loadingSkeleton>
+  <div class="w-full mb-6">
+    <app-skeleton-loader variant="card"></app-skeleton-loader>
   </div>
-</div>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+    <app-skeleton-loader variant="card"></app-skeleton-loader>
+    <app-skeleton-loader variant="card"></app-skeleton-loader>
+  </div>
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-6">
+    <div class="lg:col-span-2">
+      <app-skeleton-loader variant="chart"></app-skeleton-loader>
+    </div>
+    <div class="lg:col-span-1">
+      <app-skeleton-loader variant="card"></app-skeleton-loader>
+    </div>
+  </div>
+  <div class="mb-6">
+    <app-skeleton-loader variant="table-row"></app-skeleton-loader>
+  </div>
+</ng-template>

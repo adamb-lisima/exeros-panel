@@ -1,5 +1,5 @@
 <div class="flex items-center gap-4">
-  <div [ngClass]="isFirstPage ? 'text-anti-flash-white' : 'text-dark-electric-blue cursor-pointer'" (click)="!isFirstPage && previousPage()" (keydown.enter)="!isFirstPage && previousPage()">
+  <div [ngClass]="isFirstPage ? 'text-neutral-100' : 'text-neutral-700 cursor-pointer'" (click)="!isFirstPage && previousPage()" (keydown.enter)="!isFirstPage && previousPage()">
     <svg width="7" height="12" viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M5.66946 11.4828L0.536058 6.35299C0.481568 6.29851 0.443303 6.24283 0.421261 6.18593C0.39923 6.12904 0.388214 6.06695 0.388214 5.99963C0.388214 5.93232 0.39923 5.87022 0.421261 5.81334C0.443303 5.75644 0.481568 5.70075 0.536058 5.64627L5.68148 0.500836C5.77123 0.411086 5.8774 0.366211 6 0.366211C6.12259 0.366211 6.23397 0.416295 6.33414 0.516461C6.42628 0.608607 6.47236 0.718784 6.47236 0.846992C6.47236 0.975201 6.42628 1.08538 6.33414 1.17752L1.51201 5.99963L6.34615 10.8338C6.43589 10.9235 6.48076 11.0291 6.48076 11.1505C6.48076 11.2719 6.43068 11.3826 6.33053 11.4828C6.23838 11.575 6.1282 11.621 6 11.621C5.87179 11.621 5.76161 11.575 5.66946 11.4828Z" fill="currentColor" />
     </svg>
@@ -7,17 +7,17 @@
   <div class="flex items-center gap-3">
     <ng-container *ngFor="let pageToShow of pagesToShow">
       <ng-container *ngIf="pageToShow === DOTS; else currentPage">
-        <div class="text-xs text-dark-electric-blue select-none">{{ DOTS }}</div>
+        <div class="text-xs text-neutral-700 select-none">{{ DOTS }}</div>
       </ng-container>
       <ng-template #currentPage>
-        <div *ngIf="pageToShow === pageAsText; else otherPage" class="py-2 px-3 text-xs text-white bg-main-primary rounded-lg select-none">{{ pageToShow }}</div>
+        <div *ngIf="pageToShow === pageAsText; else otherPage" class="py-2 px-3 text-xs text-white bg-brand-500 rounded-lg select-none">{{ pageToShow }}</div>
       </ng-template>
       <ng-template #otherPage>
-        <div class="text-xs text-dark-electric-blue select-none cursor-pointer" (click)="handlePageChangeClick(pageToShow)" (keydown.enter)="handlePageChangeClick(pageToShow)">{{ pageToShow }}</div>
+        <div class="text-xs text-neutral-700 select-none cursor-pointer" (click)="handlePageChangeClick(pageToShow)" (keydown.enter)="handlePageChangeClick(pageToShow)">{{ pageToShow }}</div>
       </ng-template>
     </ng-container>
   </div>
-  <div [ngClass]="isLastPage ? 'text-anti-flash-white' : 'text-dark-electric-blue cursor-pointer'" (click)="!isLastPage && nextPage()" (keydown.enter)="!isLastPage && nextPage()">
+  <div [ngClass]="isLastPage ? 'text-neutral-100' : 'text-neutral-700 cursor-pointer'" (click)="!isLastPage && nextPage()" (keydown.enter)="!isLastPage && nextPage()">
     <svg width="7" height="12" viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M0.673077 11.4832C0.580931 11.391 0.534858 11.2803 0.534858 11.1508C0.534858 11.0214 0.580931 10.9107 0.673077 10.8185L5.49158 6L0.657452 1.16586C0.567702 1.07612 0.522827 0.969953 0.522827 0.84736C0.522827 0.724755 0.57291 0.613375 0.673077 0.513219C0.765223 0.421073 0.875999 0.375 1.00541 0.375C1.13481 0.375 1.24559 0.421073 1.33773 0.513219L6.46755 5.64664C6.52204 5.70112 6.5603 5.75681 6.58233 5.8137C6.60437 5.87059 6.61539 5.93269 6.61539 6C6.61539 6.06731 6.60437 6.12941 6.58233 6.1863C6.5603 6.24319 6.52204 6.29888 6.46755 6.35336L1.32211 11.4988C1.23237 11.5885 1.1268 11.6334 1.00541 11.6334C0.88401 11.6334 0.773233 11.5833 0.673077 11.4832Z" fill="currentColor" />
     </svg>

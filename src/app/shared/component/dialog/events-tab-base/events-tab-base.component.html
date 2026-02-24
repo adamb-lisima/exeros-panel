@@ -1,12 +1,12 @@
 <ng-container *ngIf="events">
   <app-infinity-scroll *ngIf="eventsMeta" [transparent]="true" [listGap]="true" [pageMeta]="eventsMeta" [loading]="eventsLoading ?? false">
     <ng-container list>
-      <div *ngFor="let event of events; trackBy: trackByField('id')" class="flex justify-between items-center px-3 py-2.5 rounded-lg cursor-pointer border border-bright-gray hover:border-main-primary hover:shadow-sm transition-all duration-200 bg-white" (click)="handleEventClick(event)" (keydown.enter)="handleEventClick(event)">
+      <div *ngFor="let event of events; trackBy: trackByField('id')" class="flex justify-between items-center px-3 py-2.5 rounded-lg cursor-pointer border border-neutral-400 hover:border-brand-500 hover:shadow-sm transition-all duration-200 bg-white" (click)="handleEventClick(event)" (keydown.enter)="handleEventClick(event)">
         <div class="flex items-center gap-3 flex-1 min-w-0">
           <app-event-icon [eventIcon]="event.event_icon" class="flex-shrink-0"></app-event-icon>
           <div class="flex flex-col min-w-0 flex-1">
-            <p class="text-sm font-semibold text-gray-900">{{ event.display_name }}</p>
-            <p class="text-xs text-gray-500">{{ event.occurence_time | dateFormat : 'serverDateTimeFormat' : 'clientDateTimeFormat' }}</p>
+            <p class="text-sm font-semibold text-neutral-900">{{ event.display_name }}</p>
+            <p class="text-xs text-neutral-500">{{ event.occurence_time | dateFormat : 'serverDateTimeFormat' : 'clientDateTimeFormat' }}</p>
           </div>
         </div>
         <div *ngIf="event.star_rating" class="flex items-center gap-3 flex-shrink-0">
@@ -22,9 +22,9 @@
             <span
               class="text-xs"
               [ngClass]="{
-                'text-red-600': event.star_rating < 2,
-                'text-orange-500': event.star_rating >= 2 && event.star_rating < 3,
-                'text-green-600': event.star_rating >= 3
+                'text-error-600': event.star_rating < 2,
+                'text-warning-500': event.star_rating >= 2 && event.star_rating < 3,
+                'text-success-500': event.star_rating >= 3
               }">
               {{ event.star_rating | number : '1.2-2' }}
             </span>
@@ -37,6 +37,6 @@
 
 <ng-container *ngIf="!events || events.length === 0">
   <div class="text-center py-8">
-    <p class="text-sm text-gray-500">There are no events</p>
+    <p class="text-sm text-neutral-500">There are no events</p>
   </div>
 </ng-container>

@@ -1,0 +1,40 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
+.settings-sidebar {
+  &__group-label {
+    font: var(--text-overline);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--neutral-400);
+    padding: var(--space-2) var(--space-3);
+  }
+
+  &__item {
+    display: block;
+    padding: var(--space-2) var(--space-3);
+    border-radius: 8px;
+    font: var(--text-body);
+    color: var(--neutral-600);
+    cursor: pointer;
+    transition: background-color 150ms ease-in-out, color 150ms ease-in-out;
+
+    &:hover {
+      background-color: var(--neutral-100);
+      color: var(--neutral-800);
+    }
+
+    &--active {
+      background-color: var(--brand-50);
+      color: var(--brand-600);
+      font-weight: 500;
+
+      &:hover {
+        background-color: var(--brand-50);
+        color: var(--brand-600);
+      }
+    }
+  }
+}

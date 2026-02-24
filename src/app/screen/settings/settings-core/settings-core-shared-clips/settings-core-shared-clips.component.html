@@ -1,11 +1,11 @@
 <div class="flex flex-col gap-5 p-5">
   <div class="flex gap-5">
     <ng-container *appHasPermission="[[accessGroup.SETTINGS_SHARED_CLIPS_EMAILS]]">
-      <div class="w-72 flex flex-col gap-6 p-5 border-r border-bright-gray">
+      <div class="w-72 flex flex-col gap-6 p-5 border-r border-neutral-400">
         <div class="h-[500px] flex flex-col gap-2 overflow-y-auto">
           <ng-container *ngFor="let company of companyElements$ | async">
             <div class="flex items-center ml-4 gap-1 cursor-pointer" (click)="handleCompanyClick(company.id)" (keydown.enter)="handleCompanyClick(company.id)">
-              <span class="ml-5 text-sm font-medium" [ngClass]="selectedCompanyId === company.id ? 'text-main-primary' : 'text-dark-electric-blue'"> {{ company.name }}</span>
+              <span class="ml-5 text-sm font-medium" [ngClass]="selectedCompanyId === company.id ? 'text-brand-500' : 'text-neutral-700'"> {{ company.name }}</span>
             </div>
           </ng-container>
         </div>
@@ -20,7 +20,7 @@
           </div>
           <div class="flex items-center mt-5 gap-2">
             <p class="flex gap-5 items-center">
-              <span class="text-sm text-manatee">Access type:</span>
+              <span class="text-sm text-neutral-400">Access type:</span>
               <span class="text-sm">{{ settings.access_type === 'LIMITED' ? 'Limited' : 'Unlimited' }}</span>
             </p>
             <div [appTooltip]="'Unlimited – Team members can share clips with any e-mail address, including people outside your organization.<br /> Limited – Clips can only be shared with the specific e-mail addresses listed below.'">
@@ -35,15 +35,15 @@
             <table class="table-auto">
               <thead>
                 <th></th>
-                <tr class="border-b border-bright-gray">
+                <tr class="border-b border-neutral-400">
                   <td class="px-2"></td>
-                  <td class="px-2 py-2 text-xs text-manatee">Name</td>
-                  <td class="px-2 text-xs text-manatee">E-mail</td>
+                  <td class="px-2 py-2 text-xs text-neutral-400">Name</td>
+                  <td class="px-2 text-xs text-neutral-400">E-mail</td>
                   <td class="px-2"></td>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let allowedEmail of settings.contacts" class="border-b border-bright-gray">
+                <tr *ngFor="let allowedEmail of settings.contacts" class="border-b border-neutral-400">
                   <td class="px-2 text-sm"></td>
                   <td class="px-2 py-4 text-sm">{{ allowedEmail.name }}</td>
                   <td class="px-2 text-sm">{{ allowedEmail.email }}</td>

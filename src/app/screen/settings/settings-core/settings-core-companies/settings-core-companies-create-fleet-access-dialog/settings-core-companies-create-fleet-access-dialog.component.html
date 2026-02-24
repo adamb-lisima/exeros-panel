@@ -8,14 +8,14 @@
     <div class="flex flex-col gap-2">
       <app-text-control label="Search branches and vehicles" [prefixIcon]="'search'" [formControl]="searchControl"></app-text-control>
       <div class="flex flex-col mt-2 gap-2">
-        <div class="flex items-center border-b border-bright-gray">
+        <div class="flex items-center border-b border-neutral-400">
           <app-checkbox-control [ngModel]="allFleets" (ngModelChange)="handleAllFleetsClick($event)" />
-          <span class="text-xs text-manatee p-2">Branches and vehicles</span>
+          <span class="text-xs text-neutral-400 p-2">Branches and vehicles</span>
         </div>
         <ng-container *ngTemplateOutlet="branchTemplate; context: { fleets: tempFleets, index: 1 }" />
       </div>
     </div>
-    <span class="text-xs text-dim-gray">* - mandatory fields</span>
+    <span class="text-xs text-neutral-500">* - mandatory fields</span>
   </div>
   <div class="flex flex-1 justify-end" footer>
     <app-button [disabled]="false" (buttonClick)="data.type === 'edit' ? handleUpdateFleetAccessClick(data.fleet.id) : handleAddFleetAccessClick()">

@@ -52,7 +52,7 @@ export class SettingsCoreReportsNewReportComponent implements OnInit, OnDestroy 
       vehicles.map(vehicle => ({
         value: vehicle.id,
         label: vehicle.registration_plate,
-        colorClass: vehicle.status === 'Active' ? 'text-extra-one' : undefined
+        colorClass: vehicle.status === 'Active' ? 'text-success-500' : undefined
       }))
     )
   );

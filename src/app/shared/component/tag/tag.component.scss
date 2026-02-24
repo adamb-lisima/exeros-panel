@@ -1,0 +1,10 @@
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-1) var(--space-2);
+  border-radius: 9999px;
+  font: var(--text-caption);
+  color: var(--tag-color);
+  background-color: color-mix(in srgb, var(--tag-color) 10%, transparent);
+  white-space: nowrap;
+}

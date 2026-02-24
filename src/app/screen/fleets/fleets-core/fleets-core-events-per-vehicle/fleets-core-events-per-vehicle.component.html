@@ -2,21 +2,21 @@
   <div class="flex flex-row font-medium text-lg gap-2 pb-2">
     <p class="w-48 px-2">Events per vehicle</p>
   </div>
-  <div *ngIf="!(eventsPerVehicle$ | async)?.event_per_vehicles?.length" class="flex flex-row font-medium gap-2 pl-2 text-sm text-gray-500">
+  <div *ngIf="!(eventsPerVehicle$ | async)?.event_per_vehicles?.length" class="flex flex-row font-medium gap-2 pl-2 text-sm text-neutral-500">
     <p class="w-full text-center justify-center items-center py-4">No events per vehicle</p>
   </div>
   <div class="flex flex-col overflow-y-auto max-h-[230px]">
-    <div class="flex flex-row font-medium border-b border-b-bright-gray gap-2 pl-2 text-sm sticky top-0 bg-white">
-      <button (click)="sort('registration_plate')" class="text-start w-40 py-2 flex items-center hover:bg-gray-100">
+    <div class="flex flex-row font-medium border-b border-b-neutral-400 gap-2 pl-2 text-sm sticky top-0 bg-white">
+      <button (click)="sort('registration_plate')" class="text-start w-40 py-2 flex items-center hover:bg-neutral-100">
         Registration Plate
         <span class="ml-1">{{ getSortIcon('registration_plate') }}</span>
       </button>
-      <button (click)="sort('event_count')" class="text-end w-40 py-2 flex items-center justify-end hover:bg-gray-100">
+      <button (click)="sort('event_count')" class="text-end w-40 py-2 flex items-center justify-end hover:bg-neutral-100">
         Events
         <span class="ml-1">{{ getSortIcon('event_count') }}</span>
       </button>
     </div>
-    <div *ngFor="let event of (eventsPerVehicle$ | async)?.event_per_vehicles" class="flex flex-row font-medium border-b border-b-bright-gray gap-2 pl-2 text-sm">
+    <div *ngFor="let event of (eventsPerVehicle$ | async)?.event_per_vehicles" class="flex flex-row font-medium border-b border-b-neutral-400 gap-2 pl-2 text-sm">
       <p class="text-start w-40 py-2">{{ event.registration_plate }}</p>
       <p class="text-end w-40 py-2">{{ event.event_count }}</p>
     </div>

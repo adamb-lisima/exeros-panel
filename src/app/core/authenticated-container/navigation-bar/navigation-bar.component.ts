@@ -15,6 +15,7 @@ import { NavigationBarVersionDialogComponent } from './navigation-bar-version-di
 @Component({
   selector: 'app-navigation-bar',
   templateUrl: './navigation-bar.component.html',
+  styleUrls: ['./navigation-bar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NavigationBarComponent {
@@ -22,7 +23,19 @@ export class NavigationBarComponent {
   configData$ = this.store.select(ConfigSelectors.data);
   loggedInUser$ = this.store.select(AuthSelectors.loggedInUser);
   accessGroup = AccessGroup;
-  settingsAccess = [AccessGroup.SETTINGS_FLEET_MANAGEMENT, AccessGroup.SETTINGS_NOTIFICATION_SETTINGS, AccessGroup.SETTINGS_ROLE_MANAGEMENT, AccessGroup.SETTINGS_PROFILE, AccessGroup.SETTINGS_COMPANY_MANAGEMENTS, AccessGroup.SETTINGS_DRIVER_SCORE_WEIGHTS, AccessGroup.SETTINGS_DRIVER_MANAGEMENTS, AccessGroup.SETTINGS_AUTOMATED_REPORTS, AccessGroup.SETTINGS_INFOTAINMENT, AccessGroup.SETTINGS_VEHICLE_EVENT_STRATEGIES, AccessGroup.SETTINGS_SHARED_CLIPS_EMAILS];
+  settingsAccess = [
+    AccessGroup.SETTINGS_FLEET_MANAGEMENT,
+    AccessGroup.SETTINGS_NOTIFICATION_SETTINGS,
+    AccessGroup.SETTINGS_ROLE_MANAGEMENT,
+    AccessGroup.SETTINGS_PROFILE,
+    AccessGroup.SETTINGS_COMPANY_MANAGEMENTS,
+    AccessGroup.SETTINGS_DRIVER_SCORE_WEIGHTS,
+    AccessGroup.SETTINGS_DRIVER_MANAGEMENTS,
+    AccessGroup.SETTINGS_AUTOMATED_REPORTS,
+    AccessGroup.SETTINGS_INFOTAINMENT,
+    AccessGroup.SETTINGS_VEHICLE_EVENT_STRATEGIES,
+    AccessGroup.SETTINGS_SHARED_CLIPS_EMAILS
+  ];
   isMenuCollapsed = false;
 
   isStreamActive$ = this.router.events.pipe(
@@ -54,5 +67,9 @@ export class NavigationBarComponent {
     });
   }
 
-  constructor(private readonly store: Store, private readonly dialog: Dialog, private readonly router: Router) {}
+  constructor(
+    private readonly store: Store,
+    private readonly dialog: Dialog,
+    private readonly router: Router
+  ) {}
 }

@@ -1,24 +1,24 @@
 <div #pointsScrollContainer class="relative pt-4 overflow-auto" (scroll)="pointsScrollContainerScroll()" (mousewheel)="pointsScrollContainerWheel($event)" (mouseleave)="pointsScrollContainerMouseLeave()" (mousemove)="pointsScrollContainerMouseOver($event)" (keydown.enter)="pointsScrollContainerKeyDown()" (click)="pointsScrollContainerClick($event)">
-  <div *ngIf="clipToEventActive || playbackDownloadActive || playbackShareActive" class="bg-anti-flash-white fixed top-4 left-1/2 transform -translate-x-1/2 px-4 py-2 text-black text-sm font-normal rounded-md shadow-md z-50 animate-in fade-in">Choose the beginning of your clip on timeline</div>
+  <div *ngIf="clipToEventActive || playbackDownloadActive || playbackShareActive" class="bg-neutral-100 fixed top-4 left-1/2 transform -translate-x-1/2 px-4 py-2 text-black text-sm font-normal rounded-md shadow-md z-50 animate-in fade-in">Choose the beginning of your clip on timeline</div>
 
   <ng-container *ngIf="speedGraphData$ | async as fuelGraphData; else noDataTemplate">
-    <p *ngIf="speedGraphData$ | async" class="absolute top-0 translate-x-[-100%] text-xs text-dim-gray" [style.left]="'calc(100% - ' + padding + 'px + ' + (scrollX$ | async) + 'px)'">
+    <p *ngIf="speedGraphData$ | async" class="absolute top-0 translate-x-[-100%] text-xs text-neutral-500" [style.left]="'calc(100% - ' + padding + 'px + ' + (scrollX$ | async) + 'px)'">
       {{ visibleEndDate$ | async | dateFormat : 'jsDate' : 'shortTimeFormat' }}
     </p>
 
-    <div *ngIf="markerRectangle$ | async as markerRectangle" class="absolute top-8 bottom-0 opacity-10 outline-2 bg-main-primary transition-[left] duration-300" [style.left]="markerRectangle.x + 'px'" [style.width]="markerRectangle.width + 'px'"></div>
+    <div *ngIf="markerRectangle$ | async as markerRectangle" class="absolute top-8 bottom-0 opacity-10 outline-2 bg-brand-500 transition-[left] duration-300" [style.left]="markerRectangle.x + 'px'" [style.width]="markerRectangle.width + 'px'"></div>
 
-    <div class="h-[1px] min-w-full mt-4 bg-platinum" [style.width]="(timelinePixelWidth$ | async) + 'px'"></div>
+    <div class="h-[1px] min-w-full mt-4 bg-neutral-200" [style.width]="(timelinePixelWidth$ | async) + 'px'"></div>
 
     <div class="relative h-28">
-      <div class="absolute bottom-[88px] h-[1px] min-w-full bg-platinum" [style.width]="(timelinePixelWidth$ | async) + 'px'"></div>
-      <div class="absolute bottom-16 h-[1px] min-w-full bg-platinum" [style.width]="(timelinePixelWidth$ | async) + 'px'"></div>
-      <div class="absolute bottom-10 h-[1px] min-w-full bg-platinum" [style.width]="(timelinePixelWidth$ | async) + 'px'"></div>
-      <div class="absolute bottom-4 h-[1px] min-w-full bg-platinum" [style.width]="(timelinePixelWidth$ | async) + 'px'"></div>
+      <div class="absolute bottom-[88px] h-[1px] min-w-full bg-neutral-200" [style.width]="(timelinePixelWidth$ | async) + 'px'"></div>
+      <div class="absolute bottom-16 h-[1px] min-w-full bg-neutral-200" [style.width]="(timelinePixelWidth$ | async) + 'px'"></div>
+      <div class="absolute bottom-10 h-[1px] min-w-full bg-neutral-200" [style.width]="(timelinePixelWidth$ | async) + 'px'"></div>
+      <div class="absolute bottom-4 h-[1px] min-w-full bg-neutral-200" [style.width]="(timelinePixelWidth$ | async) + 'px'"></div>
 
       <div *ngFor="let point of (speedGraphData$ | async)?.data" class="absolute" [style.left]="point.position.x + 64 + 'px'" [style.bottom]="point.position.y + 'px'">
-        <div class="absolute translate-x-[-50%] translate-y-[-50%] w-[1px] h-[1px] rounded-full bg-main-primary"></div>
-        <div *ngIf="point.line" class="absolute origin-[0%_50%] h-[1px] bg-main-primary" [style.width]="point.line.length + 'px'" [style.transform]="'translateY(-50%) rotate(' + point.line.angle + 'rad)'"></div>
+        <div class="absolute translate-x-[-50%] translate-y-[-50%] w-[1px] h-[1px] rounded-full bg-brand-500"></div>
+        <div *ngIf="point.line" class="absolute origin-[0%_50%] h-[1px] bg-brand-500" [style.width]="point.line.length + 'px'" [style.transform]="'translateY(-50%) rotate(' + point.line.angle + 'rad)'"></div>
       </div>
     </div>
 
@@ -26,16 +26,16 @@
       <p class="translate-x-[-50%] translate-y-[-200%] text-xs bg-white">
         {{ positionDate$ | async | dateFormat : 'jsDate' : 'shortTimeFormat' }}
       </p>
-      <div class="absolute top-0 bottom-0 translate-x-[-50%] w-[1px] z-20 bg-extra-one"></div>
-      <div class="absolute top-0 translate-y-[-50%] translate-x-[-50%] w-2 h-2 rounded-full bg-extra-one"></div>
+      <div class="absolute top-0 bottom-0 translate-x-[-50%] w-[1px] z-20 bg-success-500"></div>
+      <div class="absolute top-0 translate-y-[-50%] translate-x-[-50%] w-2 h-2 rounded-full bg-success-500"></div>
     </div>
 
     <div *ngIf="markerPositionX$ | async as markerX" class="absolute top-8 bottom-0 transition-[left] duration-300" [style.left]="markerX + 'px'">
       <p *ngIf="markerPositionDate$ | async as markerDate" class="translate-x-[-50%] translate-y-[-200%] text-xs bg-white">
         {{ markerDate | dateFormat : 'jsDate' : 'shortTimeFormat' }}
       </p>
-      <div class="absolute top-0 bottom-0 translate-x-[-50%] w-[1px] z-20 bg-extra-one"></div>
-      <div class="absolute top-0 translate-y-[-50%] translate-x-[-50%] w-2 h-2 rounded-full bg-extra-one"></div>
+      <div class="absolute top-0 bottom-0 translate-x-[-50%] w-[1px] z-20 bg-success-500"></div>
+      <div class="absolute top-0 translate-y-[-50%] translate-x-[-50%] w-2 h-2 rounded-full bg-success-500"></div>
     </div>
 
     <div *ngIf="scrubberX$ | async as scrubberX" class="absolute top-8 bottom-0 transition-[left] duration-300 pointer-events-none" [style.left]="scrubberX + 'px'">
@@ -43,26 +43,26 @@
         {{ scrubberDate$ | async | dateFormat : 'jsDate' : 'shortTimeFormat' }}
         <ng-container *ngIf="scrubberSpeed$ | async as speed"> - {{ speed }} </ng-container>
       </p>
-      <div class="absolute top-0 bottom-0 translate-x-[-50%] w-[1px] z-20 bg-main-primary"></div>
-      <div class="absolute top-0 translate-y-[-50%] translate-x-[-50%] w-2 h-2 rounded-full bg-main-primary"></div>
+      <div class="absolute top-0 bottom-0 translate-x-[-50%] w-[1px] z-20 bg-brand-500"></div>
+      <div class="absolute top-0 translate-y-[-50%] translate-x-[-50%] w-2 h-2 rounded-full bg-brand-500"></div>
     </div>
 
     <div *ngIf="speedGraphData$ | async as data; else noDataTemplate" class="absolute left-0 top-0 bottom-0 w-14 z-30 bg-white" [style.left]="'calc(' + (scrollX$ | async) + 'px)'">
-      <p class="absolute top-0 right-2 text-dim-gray text-xs">
+      <p class="absolute top-0 right-2 text-neutral-500 text-xs">
         {{ visibleStartDate$ | async | dateFormat : 'jsDate' : 'shortTimeFormat' }}
       </p>
-      <p *ngFor="let item of data.yAxis; let i = index" class="absolute right-2 translate-y-1/2 text-dim-gray text-sm" [style.bottom]="40 + 24 * i + 'px'">
+      <p *ngFor="let item of data.yAxis; let i = index" class="absolute right-2 translate-y-1/2 text-neutral-500 text-sm" [style.bottom]="40 + 24 * i + 'px'">
         {{ item.y }}
       </p>
-      <p class="absolute bottom-4 right-2 translate-y-1/2 text-dim-gray text-sm">0</p>
+      <p class="absolute bottom-4 right-2 translate-y-1/2 text-neutral-500 text-sm">0</p>
     </div>
   </ng-container>
 
   <ng-template #noDataTemplate>
     <div class="relative h-28">
-      <div class="absolute top-1/2 translate-y-[-50%] h-[1px] min-w-full bg-platinum" [style.width]="(timelinePixelWidth$ | async) + 'px'"></div>
+      <div class="absolute top-1/2 translate-y-[-50%] h-[1px] min-w-full bg-neutral-200" [style.width]="(timelinePixelWidth$ | async) + 'px'"></div>
       <div class="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center">
-        <div class="text-dim-gray text-sm bg-white px-4 py-2 rounded-md border border-platinum z-10">No data available</div>
+        <div class="text-neutral-500 text-sm bg-white px-4 py-2 rounded-md border border-neutral-200 z-10">No data available</div>
       </div>
     </div>
   </ng-template>

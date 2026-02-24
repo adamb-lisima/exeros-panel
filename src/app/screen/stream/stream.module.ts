@@ -30,6 +30,7 @@ import { StarRatingModule } from '../../shared/component/star-rating/star-rating
 import { TimelineEventVideoModule } from '../../shared/component/timeline/timeline-event-video/timeline-event-video.module';
 import { VehicleStatusIconsModule } from '../../shared/component/vehicle-status-icons/vehicle-status-icons.module';
 import { VideoModule } from '../../shared/component/video/video.module';
+import { SkeletonLoaderModule } from '../../shared/component/skeleton-loader/skeleton-loader.module';
 import { StreamCorePlaybackChartsClipToEventComponent } from './stream-core/stream-core-playback-charts-clip-to-event/stream-core-playback-charts-clip-to-event.component';
 import { StreamCorePlaybackChartsShareClipDialogComponent } from './stream-core/stream-core-playback-charts-share-clip-dialog/stream-core-playback-charts-share-clip-dialog.component';
 import { StreamCoreTelemetryComponent } from './stream-core/stream-core-telemetry/stream-core-telemetry.component';
@@ -41,7 +42,7 @@ import { StreamTopMainComponent } from './stream-top/stream-top-main/stream-top-
 
 @NgModule({
   declarations: [StreamCoreComponent, StreamLeftComponent, StreamTopComponent, StreamLeftVehiclesSearchComponent, StreamLeftVehiclesListComponent, StreamLeftLiveFeedMenuComponent, StreamLeftLiveFeedMapComponent, StreamLeftLiveFeedDriverComponent, StreamLeftLiveFeedDriverMessageDialogComponent, StreamLeftLiveFeedUpdatesComponent, StreamCoreLiveFeedVideosComponent, StreamPlaybackCalendarComponent, StreamLeftRecentEventComponent, StreamCoreTelemetryComponent, StreamMainComponent, StreamTopMainComponent, StreamCorePlaybackChartsShareClipDialogComponent, StreamCorePlaybackChartsClipToEventComponent],
-  imports: [StoreModule.forFeature(STREAM_FEATURE_KEY, streamReducer), EffectsModule.forFeature([StreamEffects]), SharedModule, CdkMenuModule, CdkAccordionModule, FormsModule, NgOptimizedImage, MatFormFieldModule, MatInputModule, MatIconModule, MatOptionModule, MatSelectModule, MatButtonModule, MatMenuModule, StarRatingModule, VehicleStatusIconsModule, SelectControlCounterModule, TimelineEventVideoModule, VideoModule],
+  imports: [StoreModule.forFeature(STREAM_FEATURE_KEY, streamReducer), EffectsModule.forFeature([StreamEffects]), SharedModule, CdkMenuModule, CdkAccordionModule, FormsModule, NgOptimizedImage, MatFormFieldModule, MatInputModule, MatIconModule, MatOptionModule, MatSelectModule, MatButtonModule, MatMenuModule, StarRatingModule, VehicleStatusIconsModule, SelectControlCounterModule, TimelineEventVideoModule, VideoModule, SkeletonLoaderModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class StreamModule {}

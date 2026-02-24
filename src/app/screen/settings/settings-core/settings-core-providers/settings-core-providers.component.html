@@ -6,17 +6,17 @@
   <table class="table-auto">
     <thead>
       <th></th>
-      <tr class="border-b border-bright-gray">
+      <tr class="border-b border-neutral-400">
         <td class="px-2"></td>
-        <td class="px-2 py-2 text-xs text-manatee">Id</td>
-        <td class="px-2 text-xs text-manatee">Name</td>
-        <td class="px-2 text-xs text-manatee">Type</td>
+        <td class="px-2 py-2 text-xs text-neutral-400">Id</td>
+        <td class="px-2 text-xs text-neutral-400">Name</td>
+        <td class="px-2 text-xs text-neutral-400">Type</td>
         <td class="px-2"></td>
       </tr>
     </thead>
 
     <tbody *ngIf="providers$ | async as response">
-      <tr *ngFor="let provider of response.data" class="border-b border-bright-gray">
+      <tr *ngFor="let provider of response.data" class="border-b border-neutral-400">
         <td class="px-2 text-sm"></td>
         <td class="px-2 py-4 text-sm">{{ provider.id }}</td>
         <td class="px-2 text-sm">{{ provider.name }}</td>
@@ -24,7 +24,7 @@
 
         <td>
           <div class="flex">
-            <span class="px-2 text-main-primary text-sm font-semibold underline cursor-pointer" (keydown.enter)="handleUpdateProvider(provider.id)" (click)="handleUpdateProvider(provider.id)">Edit</span>
+            <span class="px-2 text-brand-500 text-sm font-semibold underline cursor-pointer" (keydown.enter)="handleUpdateProvider(provider.id)" (click)="handleUpdateProvider(provider.id)">Edit</span>
           </div>
         </td>
       </tr>

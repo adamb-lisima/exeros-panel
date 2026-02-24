@@ -1,17 +1,65 @@
 <div *ngIf="(accessToken$ | async) === null || ((accessToken$ | async) === undefined && !this.iframeService.isIframe)">
-  <header class="flex pb-3 border-b border-solid items-center justify-center">
-    <img ngSrc="assets/svg/logo-icon.svg" width="122" height="31" alt="logo-icon" />
+  <header class="flex pb-4 mb-6 border-b border-neutral-200 items-center justify-center">
+    <img src="assets/svg/logo-icon.svg" width="140" height="36" alt="Exeros Panel" />
   </header>
-  <form class="flex flex-col gap-3" [formGroup]="form" (ngSubmit)="handleFormSubmit()">
-    <span></span>
-    <app-text-control *ngIf="showLogin" label="Email" formControlName="email"></app-text-control>
-    <app-text-control *ngIf="showLogin" label="Password" type="password" formControlName="password"></app-text-control>
-    <app-checkbox-control *ngIf="showLogin" label="Remember me:" [labelPosition]="'before'" formControlName="remember_me"></app-checkbox-control>
-    <app-text-control *ngIf="showCode" label="MFA code" formControlName="code"></app-text-control>
-    <div class="flex justify-between pt-3 border-t border-solid border-dust-storm">
-      <a *ngIf="showLogin" class="text-sm" [routerLink]="['/', ROUTE_CONST.resetPassword]">Forgot password?</a>
-      <button *ngIf="showCode" type="button" class="py-1 px-3 rounded-xl border border-solid" (click)="handleBack()">Back</button>
-      <button class="py-1 px-3 rounded-xl border border-solid" type="submit">Login</button>
+
+  <h2 class="text-heading-md text-neutral-800 mb-1">Welcome back</h2>
+  <p class="text-body-sm text-neutral-400 mb-6">Sign in to your account</p>
+
+  <form class="flex flex-col gap-4" [formGroup]="form" (ngSubmit)="handleFormSubmit()">
+    <app-text-control
+      *ngIf="showLogin"
+      label="Email"
+      formControlName="email"
+      [error]="loginError !== null"
+    ></app-text-control>
+
+    <app-text-control
+      *ngIf="showLogin"
+      label="Password"
+      type="password"
+      formControlName="password"
+      [error]="loginError !== null"
+    ></app-text-control>
+
+    <!-- Inline error message -->
+    <p *ngIf="loginError" class="login-error">
+      {{ loginError }}
+    </p>
+
+    <app-checkbox-control
+      *ngIf="showLogin"
+      label="Remember me:"
+      [labelPosition]="'before'"
+      formControlName="remember_me"
+    ></app-checkbox-control>
+
+    <app-text-control
+      *ngIf="showCode"
+      label="MFA code"
+      formControlName="code"
+    ></app-text-control>
+
+    <div class="flex items-center justify-between pt-4 border-t border-neutral-200">
+      <a
+        *ngIf="showLogin"
+        class="text-body-sm text-brand-500 hover:text-brand-600 transition-colors"
+        [routerLink]="['/', ROUTE_CONST.resetPassword]"
+      >Forgot password?</a>
+
+      <app-button
+        *ngIf="showCode"
+        variant="secondary"
+        size="md"
+        (buttonClick)="handleBack()"
+      >Back</app-button>
+
+      <app-button
+        variant="primary"
+        size="md"
+        [loading]="isLoading"
+        (buttonClick)="handleFormSubmit()"
+      >Login</app-button>
     </div>
   </form>
 </div>

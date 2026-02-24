@@ -12,6 +12,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { RouterModule } from '@angular/router';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { CalendarControlModule } from '../../shared/component/control/calendar/calendar-control.module';
+import { CardModule } from '../../shared/component/card/card.module';
+import { DateFormatModule } from '../../shared/pipe/date-format/date-format.module';
 import { SelectControlCounterModule } from '../../shared/component/control/select-control-counter/select-control-counter.module';
 import { SelectControlModule } from '../../shared/component/control/select-control/select-control.module';
 import { TimeSelectControlModule } from '../../shared/component/control/time-select-control/time-select-control.module';
@@ -27,7 +29,7 @@ import { MapViewTopComponent } from './map-view-top/map-view-top.component';
 
 @NgModule({
   declarations: [MapViewCoreComponent, MapViewLeftComponent, MapViewTopComponent, MapViewLeftListComponent, MapViewLeftSearchComponent],
-  imports: [SharedModule, FormsModule, AsyncPipe, CdkMenuModule, SelectControlCounterModule, HasPermissionModule, NgOptimizedImage, SelectControlModule, NgIf, TreeControlModule, ReactiveFormsModule, CalendarControlModule, CdkMenuTrigger, NgApexchartsModule, MatIconModule, UnitAdderModule, CommonModule, RouterModule, CdkAccordionModule, TimeSelectControlModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatOptionModule, MatSelectModule],
+  imports: [SharedModule, FormsModule, AsyncPipe, CdkMenuModule, SelectControlCounterModule, HasPermissionModule, NgOptimizedImage, SelectControlModule, NgIf, TreeControlModule, ReactiveFormsModule, CalendarControlModule, CdkMenuTrigger, NgApexchartsModule, MatIconModule, UnitAdderModule, CommonModule, RouterModule, CdkAccordionModule, TimeSelectControlModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatOptionModule, MatSelectModule, CardModule, DateFormatModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class MapViewModule {}

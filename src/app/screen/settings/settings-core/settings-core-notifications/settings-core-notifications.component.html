@@ -2,19 +2,19 @@
   <app-text-control class="w-[534px]" label="Search escalation or user" [prefixIcon]="'search'" [formControl]="searchControl"></app-text-control>
   <div class="flex gap-5">
     <ng-container *appHasPermission="[[accessGroup.SETTINGS_NOTIFICATION_SETTINGS]]">
-      <div class="w-72 flex flex-col gap-6 p-5 border-r border-bright-gray">
+      <div class="w-72 flex flex-col gap-6 p-5 border-r border-neutral-400">
         <div class="h-[500px] flex flex-col gap-2 overflow-y-auto">
           <div class="flex items-center gap-1">
-            <div class="w-5 text-main-primary">
+            <div class="w-5 text-brand-500">
               <svg width="6" height="4" viewBox="0 0 6 4" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M2.56327 3.10069L0.927679 1.46511C0.706698 1.24412 0.655941 0.988631 0.775408 0.698656C0.894874 0.408667 1.11222 0.263672 1.42746 0.263672H4.68852C5.00374 0.263672 5.22109 0.408667 5.34057 0.698656C5.46003 0.988631 5.40927 1.24412 5.18827 1.46511L3.5527 3.10069C3.47642 3.17697 3.39845 3.23138 3.31879 3.26392C3.23915 3.29645 3.15221 3.31272 3.05798 3.31272C2.96375 3.31272 2.87682 3.29645 2.79716 3.26392C2.71752 3.23138 2.63956 3.17697 2.56327 3.10069Z" fill="currentColor" />
               </svg>
             </div>
-            <span class="text-main-primary text-sm font-medium cursor-pointer" (click)="handleCompanyClick(undefined)" (keydown.enter)="handleCompanyClick(undefined)">All companies</span>
+            <span class="text-brand-500 text-sm font-medium cursor-pointer" (click)="handleCompanyClick(undefined)" (keydown.enter)="handleCompanyClick(undefined)">All companies</span>
           </div>
           <ng-container *ngFor="let company of companyElements$ | async">
             <div class="flex items-center ml-4 gap-1 cursor-pointer" (click)="handleCompanyClick(company.id)" (keydown.enter)="handleCompanyClick(company.id)">
-              <span class="ml-5 text-sm font-medium" [ngClass]="selectedCompanyId === company.id ? 'text-main-primary' : 'text-dark-electric-blue'"> {{ company.name }}</span>
+              <span class="ml-5 text-sm font-medium" [ngClass]="selectedCompanyId === company.id ? 'text-brand-500' : 'text-neutral-700'"> {{ company.name }}</span>
             </div>
           </ng-container>
         </div>
@@ -26,15 +26,15 @@
         <thead>
           <th></th>
         </thead>
-        <tr class="text-left border-b border-bright-gray">
-          <td class="pl-2 py-2 w-full text-xs text-manatee">Event name</td>
-          <td class="text-sm text-manatee">Escalated&nbsp;with</td>
+        <tr class="text-left border-b border-neutral-400">
+          <td class="pl-2 py-2 w-full text-xs text-neutral-400">Event name</td>
+          <td class="text-sm text-neutral-400">Escalated&nbsp;with</td>
           <td></td>
           <td></td>
         </tr>
         <tbody *ngIf="tempEscalations$ | async as escalations">
           <ng-container *ngFor="let main of escalations.main">
-            <tr [ngClass]="openedEvent === main.id || openedTempEvent.includes(main.id) ? '' : 'border-b border-bright-gray'">
+            <tr [ngClass]="openedEvent === main.id || openedTempEvent.includes(main.id) ? '' : 'border-b border-neutral-400'">
               <td class="pl-2 py-4 w-full">
                 <div class="flex gap-2">
                   <img [ngSrc]="main.icon" width="24" height="24" [alt]="main.name" />
@@ -57,12 +57,12 @@
                 </div>
               </td>
               <td>
-                <span *ngIf="selectedSettingsId" class="text-sm text-main-primary font-semibold underline cursor-pointer" (click)="handleEditClick(main, main.users)" (keydown.enter)="handleEditClick(main, main.users)"> Edit </span>
+                <span *ngIf="selectedSettingsId" class="text-sm text-brand-500 font-semibold underline cursor-pointer" (click)="handleEditClick(main, main.users)" (keydown.enter)="handleEditClick(main, main.users)"> Edit </span>
               </td>
             </tr>
-            <tr *ngIf="openedEvent === main.id || openedTempEvent.includes(main.id)" class="border-b border-bright-gray" colspan="4">
+            <tr *ngIf="openedEvent === main.id || openedTempEvent.includes(main.id)" class="border-b border-neutral-400" colspan="4">
               <div class="flex flex-col gap-4 px-8 pb-4">
-                <span class="text-sm text-dark-electric-blue font-medium">Assigned users</span>
+                <span class="text-sm text-neutral-700 font-medium">Assigned users</span>
                 <div class="flex flex-wrap gap-y-4">
                   <div *ngFor="let user of main.usersData" class="flex basis-1/2 gap-2">
                     <div class="flex justify-center items-center">
@@ -71,7 +71,7 @@
                       </svg>
                     </div>
                     <p class="flex items-center text-sm">
-                      {{ user.name }}<span class="text-dark-electric-blue"> ({{ user.email }}) </span>
+                      {{ user.name }}<span class="text-neutral-700"> ({{ user.email }}) </span>
                     </p>
                   </div>
                 </div>
@@ -80,12 +80,12 @@
           </ng-container>
           <ng-container *ngFor="let eventGroup of escalations.groups">
             <tr class>
-              <td class="pt-4 pl-2 border-b border-manatee" colspan="4">
-                <span class="text-xs text-dark-electric-blue"> {{ eventGroup.name }} </span>
+              <td class="pt-4 pl-2 border-b border-neutral-400" colspan="4">
+                <span class="text-xs text-neutral-700"> {{ eventGroup.name }} </span>
               </td>
             </tr>
             <ng-container *ngFor="let event of eventGroup.events">
-              <tr [ngClass]="openedEvent === event.id || openedTempEvent.includes(event.id) ? '' : 'border-b border-bright-gray'">
+              <tr [ngClass]="openedEvent === event.id || openedTempEvent.includes(event.id) ? '' : 'border-b border-neutral-400'">
                 <td class="w-full pl-2 py-4">
                   <div class="flex gap-2">
                     <img [ngSrc]="event.icon" width="24" height="24" [alt]="event.name" />
@@ -108,12 +108,12 @@
                   </div>
                 </td>
                 <td>
-                  <span *ngIf="selectedSettingsId" class="text-sm text-main-primary font-semibold underline cursor-pointer" (click)="handleEditClick(event, event.users)" (keydown.enter)="handleEditClick(event, event.users)"> Edit </span>
+                  <span *ngIf="selectedSettingsId" class="text-sm text-brand-500 font-semibold underline cursor-pointer" (click)="handleEditClick(event, event.users)" (keydown.enter)="handleEditClick(event, event.users)"> Edit </span>
                 </td>
               </tr>
-              <tr *ngIf="openedEvent === event.id || openedTempEvent.includes(event.id)" class="border-b border-bright-gray" colspan="4">
+              <tr *ngIf="openedEvent === event.id || openedTempEvent.includes(event.id)" class="border-b border-neutral-400" colspan="4">
                 <div class="flex flex-col gap-4 px-8 pb-4">
-                  <span class="text-sm text-dark-electric-blue font-medium">Assigned users</span>
+                  <span class="text-sm text-neutral-700 font-medium">Assigned users</span>
                   <div class="flex flex-wrap gap-y-4">
                     <div *ngFor="let user of event.usersData" class="flex basis-1/2 gap-2">
                       <div class="flex justify-center items-center">
@@ -122,7 +122,7 @@
                         </svg>
                       </div>
                       <p class="flex items-center text-sm">
-                        {{ user.name }}<span class="text-dark-electric-blue"> ({{ user.email }}) </span>
+                        {{ user.name }}<span class="text-neutral-700"> ({{ user.email }}) </span>
                       </p>
                     </div>
                   </div>

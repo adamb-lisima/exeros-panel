@@ -4,7 +4,7 @@
     <div class="grid grid-cols-2 gap-1.5">
       <div class="col-span-2">
         <div class="flex flex-wrap gap-1">
-          <button *ngFor="let provider of providerOptions$" (click)="filterProvider(provider.value)" [ngClass]="isProviderActive(provider.value) ? provider.colorClass + ' text-black border-none' : 'bg-gray-100 text-new-gray-800'" class="text-xs h-[28px] min-w-[80px] px-2 flex items-center justify-center rounded cursor-pointer border border-manatee hover:bg-gray-50 shrink-0">
+          <button *ngFor="let provider of providerOptions$" (click)="filterProvider(provider.value)" [ngClass]="isProviderActive(provider.value) ? provider.colorClass + ' text-black border-none' : 'bg-neutral-100 text-neutral-800'" class="text-xs h-[28px] min-w-[80px] px-2 flex items-center justify-center rounded cursor-pointer border border-neutral-400 hover:bg-neutral-50 shrink-0">
             {{ provider.label }}
           </button>
         </div>
@@ -13,7 +13,7 @@
   </div>
   <div class="grid grid-cols-2 gap-1.5 py-0.5 bg-white rounded-xl">
     <app-tree-control *ngIf="fleetOptions$ | async as options" label="Fleet" [showHintSpace]="false" [options]="options" [formControl]="bodyGroup.controls.fleet_id"></app-tree-control>
-    <div class="h-[48px] w-full flex items-center justify-between gap-2 px-2 rounded cursor-pointer bg-white rounded-[4px] custom-select" [cdkMenuTriggerFor]="menu">
+    <div class="h-[48px] w-full flex items-center justify-between gap-2 px-2 rounded cursor-pointer bg-white custom-select" [cdkMenuTriggerFor]="menu">
       <svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M6.66699 1.66602V4.16602" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
         <path d="M13.333 1.66602V4.16602" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
@@ -22,7 +22,7 @@
       </svg>
       <p class="font-medium text-sm">{{ selectedRangeMessage$ | async }}</p>
       <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <g><path class="fill-black dark:fill-cultured" d="M7 10l5 5 5-5" fill="currentColor" opacity="0.5" /></g>
+        <g><path class="fill-black dark:fill-neutral-50" d="M7 10l5 5 5-5" fill="currentColor" opacity="0.5" /></g>
       </svg>
     </div>
 
@@ -31,7 +31,7 @@
         <a *ngFor="let range of RANGES; trackByField: 'id'" class="p-2 font-medium text-sm cursor-pointer" cdkMenuItem (click)="handleDaysClick(range.id)">
           {{ range.text }}
         </a>
-        <span class="flex-[0_0_1px] w-full bg-platinum"></span>
+        <span class="flex-[0_0_1px] w-full bg-neutral-200"></span>
         <app-calendar-control class="flex-[0_0_40px]" [formControl]="rangeFilterControl"></app-calendar-control>
       </div>
     </ng-template>
@@ -42,34 +42,34 @@
       <app-select-control-counter class="col-span-2" *ngIf="eventTypes$ | async as types" label="Event type" [showHintSpace]="false" [clearable]="true" [multiple]="true" [selectAll]="true" [mode]="''" [options]="types" [formControl]="bodyGroup.controls.event_type"></app-select-control-counter>
     </div>
     <div class="col-span-1 mb-[2px]">
-      <button (click)="filterClipEvents()" [ngClass]="{ 'bg-main-primary text-white border-none': activeQuickFilter === 'Clip Event' }" class="px-3 py-1 flex items-center justify-center rounded cursor-pointer border border-manatee hover:bg-gray-50 shrink-0">
+      <button (click)="filterClipEvents()" [ngClass]="{ 'bg-brand-500 text-white border-none': activeQuickFilter === 'Clip Event' }" class="px-3 py-1 flex items-center justify-center rounded cursor-pointer border border-neutral-400 hover:bg-neutral-50 shrink-0">
         <span class="font-normal text-xs">View manual downloads</span>
       </button>
     </div>
   </div>
 
   <div *ngIf="hasFatigueEvents || hasBsdEvents || hasBridgeEvents || hasDscEvents" class="col-span-2 flex items-center gap-2 text-xs z-50">
-    <span class="text-gray-500 shrink-0">Quick Filters:</span>
+    <span class="text-neutral-500 shrink-0">Quick Filters:</span>
     <div class="flex gap-1 overflow-x-auto">
-      <button *ngIf="hasFatigueEvents" (click)="filterFatigue()" [ngClass]="{ 'bg-main-primary text-white border-none': activeQuickFilter === 'Fatigue' }" class="h-[24px] min-w-[70px] px-2 flex items-center justify-center rounded cursor-pointer border border-manatee hover:bg-gray-50 shrink-0">Fatigue</button>
-      <button *ngIf="hasBsdEvents" (click)="filterBSD()" [ngClass]="{ 'bg-main-primary text-white border-none': activeQuickFilter === 'BSD' }" class="h-[24px] min-w-[70px] px-2 flex items-center justify-center rounded cursor-pointer border border-manatee hover:bg-gray-50 shrink-0">BSD</button>
-      <button *ngIf="hasBridgeEvents" (click)="filterBridge()" [ngClass]="{ 'bg-main-primary text-white border-none': activeQuickFilter === 'Bridge' }" class="h-[24px] min-w-[70px] px-2 flex items-center justify-center rounded cursor-pointer border border-manatee hover:bg-gray-50 shrink-0">Bridge</button>
-      <button *ngIf="hasDscEvents" (click)="filterDSC()" [ngClass]="{ 'bg-main-primary text-white border-none': activeQuickFilter === 'DSC' }" class="h-[24px] min-w-[70px] px-2 flex items-center justify-center rounded cursor-pointer border border-manatee hover:bg-gray-50 shrink-0">DSC</button>
+      <button *ngIf="hasFatigueEvents" (click)="filterFatigue()" [ngClass]="{ 'bg-brand-500 text-white border-none': activeQuickFilter === 'Fatigue' }" class="h-[24px] min-w-[70px] px-2 flex items-center justify-center rounded cursor-pointer border border-neutral-400 hover:bg-neutral-50 shrink-0">Fatigue</button>
+      <button *ngIf="hasBsdEvents" (click)="filterBSD()" [ngClass]="{ 'bg-brand-500 text-white border-none': activeQuickFilter === 'BSD' }" class="h-[24px] min-w-[70px] px-2 flex items-center justify-center rounded cursor-pointer border border-neutral-400 hover:bg-neutral-50 shrink-0">BSD</button>
+      <button *ngIf="hasBridgeEvents" (click)="filterBridge()" [ngClass]="{ 'bg-brand-500 text-white border-none': activeQuickFilter === 'Bridge' }" class="h-[24px] min-w-[70px] px-2 flex items-center justify-center rounded cursor-pointer border border-neutral-400 hover:bg-neutral-50 shrink-0">Bridge</button>
+      <button *ngIf="hasDscEvents" (click)="filterDSC()" [ngClass]="{ 'bg-brand-500 text-white border-none': activeQuickFilter === 'DSC' }" class="h-[24px] min-w-[70px] px-2 flex items-center justify-center rounded cursor-pointer border border-neutral-400 hover:bg-neutral-50 shrink-0">DSC</button>
     </div>
   </div>
 
   <div *ngIf="hasBrakingEvents || hasAcceleratingEvents || hasTurningEvents || hasShockEvents" class="col-span-2 flex items-center gap-2 text-xs z-10">
-    <span class="text-gray-500 shrink-0">Harsh Driving:</span>
+    <span class="text-neutral-500 shrink-0">Harsh Driving:</span>
     <div class="flex gap-1 overflow-x-auto">
-      <button *ngIf="hasBrakingEvents" (click)="filterBraking()" [ngClass]="{ 'bg-main-primary text-white border-none': activeQuickFilter === 'Acceleration alarm::rapid deceleration' }" class="h-[24px] min-w-[70px] px-2 flex items-center justify-center rounded cursor-pointer border border-manatee hover:bg-gray-50 shrink-0">Braking</button>
-      <button *ngIf="hasAcceleratingEvents" (click)="filterAccelerating()" [ngClass]="{ 'bg-main-primary text-white border-none': activeQuickFilter === 'Acceleration alarm::rapid acceleration' }" class="h-[24px] min-w-[70px] px-2 flex items-center justify-center rounded cursor-pointer border border-manatee hover:bg-gray-50 shrink-0">Accelerating</button>
-      <button *ngIf="hasTurningEvents" (click)="filterTurning()" [ngClass]="{ 'bg-main-primary text-white border-none': activeQuickFilter === 'Turning' }" class="h-[24px] min-w-[70px] px-2 flex items-center justify-center rounded cursor-pointer border border-manatee hover:bg-gray-50 shrink-0">Turning</button>
-      <button *ngIf="hasShockEvents" (click)="filterShock()" [ngClass]="{ 'bg-main-primary text-white border-none': activeQuickFilter === 'Acceleration alarm::Shock alarm' }" class="h-[24px] min-w-[70px] px-2 flex items-center justify-center rounded cursor-pointer border border-manatee hover:bg-gray-50 shrink-0">Shock</button>
+      <button *ngIf="hasBrakingEvents" (click)="filterBraking()" [ngClass]="{ 'bg-brand-500 text-white border-none': activeQuickFilter === 'Acceleration alarm::rapid deceleration' }" class="h-[24px] min-w-[70px] px-2 flex items-center justify-center rounded cursor-pointer border border-neutral-400 hover:bg-neutral-50 shrink-0">Braking</button>
+      <button *ngIf="hasAcceleratingEvents" (click)="filterAccelerating()" [ngClass]="{ 'bg-brand-500 text-white border-none': activeQuickFilter === 'Acceleration alarm::rapid acceleration' }" class="h-[24px] min-w-[70px] px-2 flex items-center justify-center rounded cursor-pointer border border-neutral-400 hover:bg-neutral-50 shrink-0">Accelerating</button>
+      <button *ngIf="hasTurningEvents" (click)="filterTurning()" [ngClass]="{ 'bg-brand-500 text-white border-none': activeQuickFilter === 'Turning' }" class="h-[24px] min-w-[70px] px-2 flex items-center justify-center rounded cursor-pointer border border-neutral-400 hover:bg-neutral-50 shrink-0">Turning</button>
+      <button *ngIf="hasShockEvents" (click)="filterShock()" [ngClass]="{ 'bg-brand-500 text-white border-none': activeQuickFilter === 'Acceleration alarm::Shock alarm' }" class="h-[24px] min-w-[70px] px-2 flex items-center justify-center rounded cursor-pointer border border-neutral-400 hover:bg-neutral-50 shrink-0">Shock</button>
     </div>
   </div>
 
   <div class="col-span-2 flex flex-col">
-    <button class="group flex items-center gap-1 text-main-primary hover:bg-gray-50 px-2 py-1 rounded w-fit" (click)="isOpen = !isOpen">
+    <button class="group flex items-center gap-1 text-brand-500 hover:bg-neutral-50 px-2 py-1 rounded w-fit" (click)="isOpen = !isOpen">
       <span class="text-sm font-medium">Advanced filters</span>
       <svg class="w-3 h-3 transform transition-transform" [ngClass]="isOpen ? 'rotate-180' : ''" viewBox="0 0 24 24" fill="none">
         <path d="M7 10l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />

@@ -3,7 +3,7 @@
     <div class="flex flex-col gap-1">
       <p class="font-medium text-sm">{{ event.occurence_time | dateFormat : 'serverDateTimeFormat' : 'clientDateTimeFormat' }}</p>
       <div class="flex flex-row items-center justify-center">
-        <app-event-icon class="text-extra-two" [eventIcon]="event.event_icon"></app-event-icon>
+        <app-event-icon class="text-error-500" [eventIcon]="event.event_icon"></app-event-icon>
         <p class="font-['Poppins'] font-medium text-sm leading-[16px] pl-1.5">{{ event.display_name }}</p>
       </div>
     </div>

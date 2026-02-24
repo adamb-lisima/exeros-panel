@@ -1,12 +1,12 @@
 <div class="h-full flex flex-col">
   <div class="flex justify-between items-center gap-8">
-    <p class="font-semibold text-xl">Events & Alarms</p>
+    <p class="text-heading-sm">Events & Alarms</p>
     <app-select-control *ngIf="alarmTypesOptions$ | async as alarmTypesOptions" class="w-[250px]" label="Type" [multiple]="true" [clearable]="true" [options]="alarmTypesOptions" [formControl]="alarmTypeControl"></app-select-control>
   </div>
   <ng-container *ngIf="chartOptions$ | async as chartOptions; else noChartTemplate">
     <app-stacked-bar-chart [options]="chartOptions"></app-stacked-bar-chart>
   </ng-container>
   <ng-template #noChartTemplate>
-    <p class="text-sm">There are no events available for selection</p>
+    <p class="text-body-sm text-neutral-500">There are no events available for selection</p>
   </ng-template>
 </div>

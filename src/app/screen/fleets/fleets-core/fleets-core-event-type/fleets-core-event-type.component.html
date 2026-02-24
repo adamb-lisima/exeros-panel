@@ -6,11 +6,11 @@
     <p class="text-end w-1/5 justify-end">Average speed</p>
   </div>
   <div class="flex flex-col overflow-y-auto md:max-h-[200px] 2xl:max-h-[230px]">
-    <div *ngIf="!(eventsStats$ | async)?.event_stats?.length" class="flex flex-row font-medium gap-2 pl-2 text-sm text-gray-500">
+    <div *ngIf="!(eventsStats$ | async)?.event_stats?.length" class="flex flex-row font-medium gap-2 pl-2 text-sm text-neutral-500">
       <p class="w-full text-center justify-center items-center py-4">No events types</p>
     </div>
-    <div *ngFor="let event of (eventsStats$ | async)?.event_stats" class="flex flex-row font-medium border-b border-b-bright-gray gap-2 pl-2">
-      <app-event-icon class="text-extra-two w-[14px] h-[14px] my-auto" [eventIcon]="event.event_icon"></app-event-icon>
+    <div *ngFor="let event of (eventsStats$ | async)?.event_stats" class="flex flex-row font-medium border-b border-b-neutral-400 gap-2 pl-2">
+      <app-event-icon class="text-error-500 w-[14px] h-[14px] my-auto" [eventIcon]="event.event_icon"></app-event-icon>
       <p class="w-2/5 py-2">{{ event.display_name }}</p>
       <p class="text-end w-1/5 py-2 pr-4 justify-end">{{ event.total_events }}</p>
       <p class="text-end w-1/5 py-2 pr-2 justify-end">{{ event.total_escalations }}</p>

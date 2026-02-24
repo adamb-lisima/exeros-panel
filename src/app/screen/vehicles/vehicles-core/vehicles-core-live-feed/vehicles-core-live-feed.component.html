@@ -1,30 +1,30 @@
-<div *ngIf="liveFeed$ | async as liveFeed" class="flex flex-col gap-4" [class.loader]="liveFeedLoading$ | async">
-  <p *ngIf="liveFeed.last_updated_at" class="text-sm text-dim-gray">Last updated at {{ liveFeed.last_updated_at | dateFormat : 'serverDateTimeFormat' : 'clientDateTimeFormat' }}</p>
-  <app-map class="h-[350px]" [center]="liveFeed.gps_position" [markers]="markers$ | async" [zoom]="15" [rounded]="true" [isClusterer]="false"></app-map>
+<div *ngIf="liveFeed$ | async as liveFeed" class="flex flex-col gap-4">
+  <p *ngIf="liveFeed.last_updated_at" class="text-sm text-neutral-500">Last updated at {{ liveFeed.last_updated_at | dateFormat : 'serverDateTimeFormat' : 'clientDateTimeFormat' }}</p>
+  <app-map class="w-full" style="min-height: 400px; aspect-ratio: 16 / 9;" [center]="liveFeed.gps_position" [markers]="markers$ | async" [zoom]="15" [rounded]="true" [isClusterer]="false"></app-map>
   <div class="flex flex-col gap-3">
     <div class="flex justify-between items-center">
       <div class="flex items-center gap-3">
         <p class="font-bold text-xl">{{ liveFeed.registration_plate }}</p>
-        <div *ngIf="liveFeed.last_speed" class="flex items-center gap-2 px-2 py-1 rounded-md bg-honeydew">
-          <div class="text-extra-one">
+        <div *ngIf="liveFeed.last_speed" class="flex items-center gap-2 px-2 py-1 rounded-md bg-success-50">
+          <div class="text-success-500">
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M6 0C4.81331 0 3.65328 0.351894 2.66658 1.01118C1.67989 1.67047 0.910851 2.60754 0.456725 3.7039C0.00259973 4.80025 -0.11622 6.00665 0.115291 7.17054C0.346802 8.33443 0.918247 9.40352 1.75736 10.2426C2.59648 11.0818 3.66557 11.6532 4.82946 11.8847C5.99335 12.1162 7.19975 11.9974 8.2961 11.5433C9.39246 11.0891 10.3295 10.3201 10.9888 9.33342C11.6481 8.34673 12 7.18669 12 6C11.9981 4.40928 11.3654 2.88424 10.2406 1.75943C9.11576 0.63462 7.59072 0.00187662 6 0ZM6 10.9091C5.08688 10.9078 4.1922 10.6519 3.41653 10.1702C2.64085 9.68838 2.01492 8.9998 1.60909 8.18182H10.3909C9.98508 8.9998 9.35915 9.68838 8.58347 10.1702C7.8078 10.6519 6.91312 10.9078 6 10.9091ZM10.7825 7.09091H6.31636L4.29164 3.54545C4.25582 3.48328 4.20811 3.42877 4.15123 3.38503C4.09435 3.34129 4.02941 3.30919 3.96012 3.29055C3.82018 3.25291 3.67102 3.27239 3.54546 3.34473C3.48328 3.38054 3.42877 3.42825 3.38503 3.48513C3.3413 3.54202 3.30919 3.60696 3.29055 3.67625C3.25291 3.81618 3.2724 3.96534 3.34473 4.09091L5.06018 7.09091H1.21746C1.05079 6.37115 1.04873 5.62306 1.21143 4.9024C1.37412 4.18173 1.69738 3.50709 2.15711 2.92874C2.61683 2.3504 3.20116 1.88328 3.86655 1.56221C4.53193 1.24113 5.2612 1.07437 6 1.07437C6.7388 1.07437 7.46807 1.24113 8.13346 1.56221C8.79884 1.88328 9.38317 2.3504 9.8429 2.92874C10.3026 3.50709 10.6259 4.18173 10.7886 4.9024C10.9513 5.62306 10.9492 6.37115 10.7825 7.09091Z" fill="currentColor" />
             </svg>
           </div>
-          <p *ngIf="liveFeed.last_speed | unitConverter | async as lastSpeed" class="font-medium text-xs text-extra-one">{{ lastSpeed.value }} {{ lastSpeed.unit }}</p>
+          <p *ngIf="liveFeed.last_speed | unitConverter | async as lastSpeed" class="font-medium text-xs text-success-500">{{ lastSpeed.value }} {{ lastSpeed.unit }}</p>
         </div>
       </div>
-      <div class="flex gap-3 items-center px-2 py-1 rounded-md cursor-pointer bg-anti-flash-white">
+      <div class="flex gap-3 items-center px-2 py-1 rounded-md cursor-pointer bg-neutral-100">
         <img ngSrc="assets/svg/icons-gray-back/12.svg" width="28" height="28" alt="icon" />
-        <p class="font-medium text-xs text-extra-three">Remote wakeup</p>
+        <p class="font-medium text-xs text-info-500">Remote wakeup</p>
       </div>
     </div>
     <div *ngIf="liveFeed.gps_position.length" class="flex items-center gap-1">
       <p class="font-medium text-sm">{{ liveFeed.gps_position[0] }}, {{ liveFeed.gps_position[1] }}</p>
-      <p class="text-xs text-dark-electric-blue">(Longitude, Latitude)</p>
+      <p class="text-xs text-neutral-700">(Longitude, Latitude)</p>
     </div>
     <div *ngIf="liveFeed.location" class="flex items-center gap-1">
-      <div class="text-extra-three">
+      <div class="text-info-500">
         <svg width="13" height="16" viewBox="0 0 13 16" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M12.7048 5.28814C12.0331 1.24475 8.02547 -0.874789 4.29836 0.341876C1.69704 1.18979 -0.00134277 3.58255 -0.00134277 6.67942C0.0133391 7.85141 0.452224 9.22882 1.41808 10.407C2.8674 12.1747 4.35446 13.9147 5.82265 15.6665C6.19704 16.1128 6.59922 16.1123 6.97623 15.6665C8.38814 13.9851 9.80005 12.3031 11.212 10.6206C12.5118 9.05934 13.0336 7.27363 12.7048 5.28814ZM6.40207 8.61613C5.90513 8.61694 5.41911 8.47335 5.00552 8.20353C4.59193 7.93372 4.26936 7.5498 4.07861 7.10035C3.88787 6.65091 3.83753 6.15615 3.93397 5.67868C4.03041 5.20121 4.26929 4.76249 4.62038 4.41804C4.97147 4.07359 5.419 3.83888 5.90633 3.74363C6.39365 3.64837 6.89888 3.69685 7.35807 3.88292C7.81726 4.06899 8.20977 4.3843 8.48594 4.78894C8.76211 5.19358 8.90952 5.66936 8.90952 6.15609C8.90814 6.8074 8.64366 7.43172 8.17383 7.89265C7.70401 8.35359 7.06704 8.61369 6.40207 8.61613Z" fill="#006BFF" />
         </svg>

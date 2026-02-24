@@ -1,0 +1,12 @@
+// Success flash animation
+// Usage: Add .success-flash class to an element after a successful save.
+// The element briefly tints with success-50 background over 600ms.
+
+@keyframes successFlash {
+  0% { background-color: var(--success-50); }
+  100% { background-color: transparent; }
+}
+
+.success-flash {
+  animation: successFlash 600ms ease-out forwards;
+}

@@ -17,7 +17,8 @@
     "test": "ng test",
     "ci:environemnt": "echo {'\"API_URL\"': '\"'\"$API_URL\"'\"', '\"REPORTS_ALARMS_SHOW_EXPORT_WITHOUT_FILTERS\"': '\"'\"$REPORTS_ALARMS_SHOW_EXPORT_WITHOUT_FILTERS\"'\"', '\"PUSHER_APP_CHANNEL\"': '\"'\"$PUSHER_APP_CHANNEL\"'\"', '\"PUSHER_APP_KEY\"': '\"'\"$PUSHER_APP_KEY\"'\"', '\"GUIDE_API_URL\"': '\"'\"$GUIDE_API_URL\"'\"', '\"GUIDE_API_TOKEN\"': '\"'\"$GUIDE_API_TOKEN\"'\"'} > src/environments/environment.json",
     "ci:style:rac": "cat src/assets/style/color/_colors.rac.scss > src/assets/style/color/_colors.scss",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "test:legacy-colors": "node src/test/legacy-color-check.spec.js"
   },
   "private": true,
   "dependencies": {

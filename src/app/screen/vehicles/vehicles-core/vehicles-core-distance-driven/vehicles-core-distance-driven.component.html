@@ -1,9 +1,9 @@
-<div *ngIf="vehicle$ | async as vehicle" class="h-full flex flex-col justify-between">
+<div *ngIf="vehicle$ | async as vehicle" class="flex flex-col justify-between gap-2">
   <p class="font-semibold text-sm">Distance Driven</p>
   <div class="flex justify-between items-center">
     <div class="flex gap-1">
-      <p class="font-bold text-xl text-main-primary">{{ vehicle.distance_driven | truncate }}</p>
-      <sup class="font-bold text-xs text-main-primary">Miles</sup>
+      <p class="font-bold text-xl text-brand-500">{{ vehicle.distance_driven | truncate }}</p>
+      <sup class="font-bold text-xs text-brand-500">Miles</sup>
     </div>
     <img ngSrc="assets/svg/icons-gray-back/3.svg" width="40" height="40" alt="icon" />
   </div>

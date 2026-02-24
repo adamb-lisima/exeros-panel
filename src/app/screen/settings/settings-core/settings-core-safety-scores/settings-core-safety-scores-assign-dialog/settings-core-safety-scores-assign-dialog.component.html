@@ -1,7 +1,7 @@
 <app-dialog-container title="Assign scoring">
   <div class="grid grid-cols-[1fr_minmax(0,_max-content)] auto-rows-auto gap-y-2 p-5" body>
-    <span class="py-2 text-sm text-manatee border-b border-bright-gray">Branch</span>
-    <span class="py-2 text-sm text-manatee border-b border-bright-gray">Scoring assigned</span>
+    <span class="py-2 text-sm text-neutral-400 border-b border-neutral-400">Branch</span>
+    <span class="py-2 text-sm text-neutral-400 border-b border-neutral-400">Scoring assigned</span>
     <ng-container *ngFor="let item of data.tree">
       <span class="pl-5 self-center text-sm">{{ item.label }}</span>
       <app-select-control [options]="options" [showHintSpace]="false" [formControl]="form.controls[item.value]"></app-select-control>

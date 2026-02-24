@@ -1,7 +1,6 @@
-import { CdkMenuTrigger } from '@angular/cdk/menu';
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Subject, Subscription } from 'rxjs';
+import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { AuthSelectors } from '../../../store/auth/auth.selectors';
 import { AccessGroup, SettingsModuleList } from '../settings.model';
@@ -12,8 +11,14 @@ interface TabConfig {
   permission: AccessGroup;
 }
 
+interface SectionGroup {
+  label: string;
+  tabs: TabConfig[];
+}
+
 @Component({
   templateUrl: './settings-core.component.html',
+  styleUrls: ['./settings-core.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SettingsCoreComponent implements OnInit, OnDestroy {
@@ -23,71 +28,76 @@ export class SettingsCoreComponent implements OnInit, OnDestroy {
   module: SettingsModuleList = 'profile';
   accessGroup = AccessGroup;
 
-  private readonly tabsConfig: TabConfig[] = [
-    { label: 'Profile', module: 'profile', permission: AccessGroup.SETTINGS_PROFILE },
-    { label: 'Notifications', module: 'notifications', permission: AccessGroup.SETTINGS_NOTIFICATION_SETTINGS },
-    { label: 'Manage companies', module: 'companies', permission: AccessGroup.SETTINGS_COMPANY_MANAGEMENTS },
-    { label: 'Manage fleets', module: 'fleets', permission: AccessGroup.SETTINGS_FLEET_MANAGEMENT },
-    { label: 'Manage roles', module: 'roles', permission: AccessGroup.SETTINGS_ROLE_MANAGEMENT },
-    { label: 'Manage drivers', module: 'driver', permission: AccessGroup.SETTINGS_DRIVER_MANAGEMENTS },
-    { label: 'Manage event strategies', module: 'event-strategies', permission: AccessGroup.SETTINGS_VEHICLE_EVENT_STRATEGIES },
-    { label: 'Driver score weighting', module: 'safety-scores', permission: AccessGroup.SETTINGS_DRIVER_SCORE_WEIGHTS },
-    { label: 'Automatic Reports', module: 'automated_reports', permission: AccessGroup.SETTINGS_AUTOMATED_REPORTS },
-    { label: 'Admin Notices', module: 'infotainment', permission: AccessGroup.SETTINGS_INFOTAINMENT },
-    { label: 'Shared Clips E-mails', module: 'shared-clips-emails', permission: AccessGroup.SETTINGS_SHARED_CLIPS_EMAILS },
-    { label: 'Providers', module: 'providers', permission: AccessGroup.SUPER_ADMIN },
-    { label: 'Admins', module: 'admins', permission: AccessGroup.SUPER_ADMIN },
-    { label: 'App Settings', module: 'app-settings', permission: AccessGroup.SUPER_ADMIN }
+  private readonly sectionGroups: SectionGroup[] = [
+    {
+      label: 'Account',
+      tabs: [
+        { label: 'Profile', module: 'profile', permission: AccessGroup.SETTINGS_PROFILE }
+      ]
+    },
+    {
+      label: 'Fleet Management',
+      tabs: [
+        { label: 'Manage companies', module: 'companies', permission: AccessGroup.SETTINGS_COMPANY_MANAGEMENTS },
+        { label: 'Manage fleets', module: 'fleets', permission: AccessGroup.SETTINGS_FLEET_MANAGEMENT },
+        { label: 'Manage roles', module: 'roles', permission: AccessGroup.SETTINGS_ROLE_MANAGEMENT },
+        { label: 'Manage drivers', module: 'driver', permission: AccessGroup.SETTINGS_DRIVER_MANAGEMENTS },
+        { label: 'Manage event strategies', module: 'event-strategies', permission: AccessGroup.SETTINGS_VEHICLE_EVENT_STRATEGIES },
+        { label: 'Driver score weighting', module: 'safety-scores', permission: AccessGroup.SETTINGS_DRIVER_SCORE_WEIGHTS }
+      ]
+    },
+    {
+      label: 'Notifications',
+      tabs: [
+        { label: 'Notifications', module: 'notifications', permission: AccessGroup.SETTINGS_NOTIFICATION_SETTINGS },
+        { label: 'Automatic Reports', module: 'automated_reports', permission: AccessGroup.SETTINGS_AUTOMATED_REPORTS },
+        { label: 'Admin Notices', module: 'infotainment', permission: AccessGroup.SETTINGS_INFOTAINMENT },
+        { label: 'Shared Clips E-mails', module: 'shared-clips-emails', permission: AccessGroup.SETTINGS_SHARED_CLIPS_EMAILS }
+      ]
+    },
+    {
+      label: 'Administration',
+      tabs: [
+        { label: 'Providers', module: 'providers', permission: AccessGroup.SUPER_ADMIN },
+        { label: 'Admins', module: 'admins', permission: AccessGroup.SUPER_ADMIN },
+        { label: 'App Settings', module: 'app-settings', permission: AccessGroup.SUPER_ADMIN }
+      ]
+    }
   ];
 
-  visibleTabs: TabConfig[] = [];
-  mainTabs: TabConfig[] = [];
-  dropdownTabs: TabConfig[] = [];
-  maxMainTabs = 6;
-  private readonly sub?: Subscription;
-  @ViewChild('menuTrigger') menuTrigger!: CdkMenuTrigger;
+  visibleSectionGroups: SectionGroup[] = [];
 
   constructor(private readonly store: Store) {}
 
   ngOnInit(): void {
     this.loggedInUser$.pipe(takeUntil(this.destroy$)).subscribe(loggedInUser => {
-      this.visibleTabs = this.tabsConfig.filter(tab => this.hasPermission(loggedInUser, tab.permission));
-      this.splitTabs();
+      this.visibleSectionGroups = this.sectionGroups
+        .map(group => ({
+          ...group,
+          tabs: group.tabs.filter(tab => this.hasPermission(loggedInUser, tab.permission))
+        }))
+        .filter(group => group.tabs.length > 0);
 
       this.handleSavedTab(loggedInUser);
-
       this.setDefaultTab();
     });
   }
 
   ngOnDestroy(): void {
-    this.sub?.unsubscribe();
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   private hasPermission(loggedInUser: any, permission: AccessGroup): boolean {
     if (!loggedInUser?.access_groups) return false;
-
-    return loggedInUser.access_groups.includes(permission) ? true : loggedInUser.access_groups.includes(AccessGroup.SUPER_ADMIN);
-  }
-
-  private splitTabs(): void {
-    if (this.visibleTabs.length < this.maxMainTabs) {
-      this.mainTabs = [...this.visibleTabs];
-      this.dropdownTabs = [];
-    } else {
-      this.mainTabs = this.visibleTabs.slice(0, this.maxMainTabs);
-      this.dropdownTabs = this.visibleTabs.slice(this.maxMainTabs);
-    }
-  }
-
-  isAnyDropdownTabActive(): boolean {
-    return this.dropdownTabs.some(tab => this.isTabActive(tab.module));
+    return loggedInUser.access_groups.includes(permission) || loggedInUser.access_groups.includes(AccessGroup.SUPER_ADMIN);
   }
 
   private handleSavedTab(loggedInUser: any): void {
     const savedInStore = localStorage.getItem('settingsTab') as SettingsModuleList;
     if (savedInStore) {
-      const savedTab = this.visibleTabs.find(tab => tab.module === savedInStore);
+      const allTabs = this.visibleSectionGroups.flatMap(g => g.tabs);
+      const savedTab = allTabs.find(tab => tab.module === savedInStore);
       if (savedTab && (loggedInUser?.access_groups.includes(savedTab.permission) || loggedInUser?.access_groups.includes(AccessGroup.SUPER_ADMIN))) {
         this.module = savedInStore;
         return;
@@ -96,9 +106,10 @@ export class SettingsCoreComponent implements OnInit, OnDestroy {
   }
 
   private setDefaultTab(): void {
-    if (!this.visibleTabs.find(tab => tab.module === this.module)) {
-      if (this.visibleTabs.length > 0) {
-        this.module = this.visibleTabs[0].module;
+    const allTabs = this.visibleSectionGroups.flatMap(g => g.tabs);
+    if (!allTabs.find(tab => tab.module === this.module)) {
+      if (allTabs.length > 0) {
+        this.module = allTabs[0].module;
       }
     }
   }
@@ -106,14 +117,6 @@ export class SettingsCoreComponent implements OnInit, OnDestroy {
   handleModeClick(module: SettingsModuleList): void {
     localStorage.setItem('settingsTab', module);
     this.module = module;
-
-    if (this.menuTrigger) {
-      this.menuTrigger.close();
-    }
-  }
-
-  get hasDropdownItems(): boolean {
-    return this.dropdownTabs.length > 0;
   }
 
   isTabActive(module: SettingsModuleList): boolean {

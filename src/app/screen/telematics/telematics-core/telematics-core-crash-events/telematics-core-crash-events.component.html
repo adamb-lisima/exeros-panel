@@ -4,14 +4,14 @@
       <ng-container *ngFor="let crash of crashEvents">
         <div class="relative flex pl-1 items-center">
           <div class="h-9 w-9 bg-[#e6e6e6] rounded-full"></div>
-          <div class="absolute translate-x-[6px] text-extra-two">
+          <div class="absolute translate-x-[6px] text-error-500">
             <app-telematics-core-crash-event-type [type]="crash.type"></app-telematics-core-crash-event-type>
           </div>
         </div>
-        <div class="py-4 border-b border-bright-gray text-xs font-medium">
+        <div class="py-4 border-b border-neutral-400 text-xs font-medium">
           {{ crash.name }}
         </div>
-        <div class="py-4 border-b border-bright-gray text-xs font-medium">
+        <div class="py-4 border-b border-neutral-400 text-xs font-medium">
           {{ crash.date | dateFormat : 'serverDateTimeFormat' : 'clientDateTimeFormat' }}
         </div>
       </ng-container>

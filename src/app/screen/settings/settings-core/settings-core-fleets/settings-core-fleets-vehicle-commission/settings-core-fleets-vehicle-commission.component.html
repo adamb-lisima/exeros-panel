@@ -4,19 +4,19 @@
       <ng-container>
         <div class="flex flex-col gap-6 mb-4">
           <p class="text-lg font-medium">Choose event strategy templates</p>
-          <p class="font-normal text-sm text-new-gray-700">You can set up event strategy templates in the fleet settings.</p>
+          <p class="font-normal text-sm text-neutral-700">You can set up event strategy templates in the fleet settings.</p>
           <div>
             <app-tree-control label="Fleet*" *ngIf="fleetOptions$ | async as options" [options]="options" [formControl]="fleetIdControl"> </app-tree-control>
             <app-text-control [showHintSpace]="false" [formControl]="searchControl" label="Search templates"> </app-text-control>
           </div>
         </div>
 
-        <div class="flex items-center pb-2 border-b border-b-bright-gray">
+        <div class="flex items-center pb-2 border-b border-b-neutral-400">
           <div class="w-10">
-            <app-checkbox-control [ngModel]="allTemplatesSelected" (ngModelChange)="handleAllTemplatesClick($event)" class="text-xs text-manatee py-3 cursor-pointer"> </app-checkbox-control>
+            <app-checkbox-control [ngModel]="allTemplatesSelected" (ngModelChange)="handleAllTemplatesClick($event)" class="text-xs text-neutral-400 py-3 cursor-pointer"> </app-checkbox-control>
           </div>
-          <p class="flex-1 text-xs text-manatee py-3 cursor-pointer">Template Name</p>
-          <p class="flex-1 text-xs text-manatee py-3 cursor-pointer">Event Type</p>
+          <p class="flex-1 text-xs text-neutral-400 py-3 cursor-pointer">Template Name</p>
+          <p class="flex-1 text-xs text-neutral-400 py-3 cursor-pointer">Event Type</p>
         </div>
       </ng-container>
 
@@ -35,7 +35,7 @@
     <app-settings-core-fleets-vehicle-commission-verify-template [vehicleId]="vehicleId" [confirmedEventId]="confirmedEventId" (eventSelected)="onEventSelected($event)" (eventConfirmed)="completeVehicleCommission($event)" *ngIf="currentView === ViewMode.COMMISSION_VERIFY"> </app-settings-core-fleets-vehicle-commission-verify-template>
     <div *ngIf="currentView === ViewMode.COMPLETE" class="gap-6 flex flex-col">
       <p class="text-lg font-medium">Vehicle setup finished!</p>
-      <p class="font-normal text-sm text-new-gray-700">All events are properly configured, and the vehicle is now visible to the client.</p>
+      <p class="font-normal text-sm text-neutral-700">All events are properly configured, and the vehicle is now visible to the client.</p>
     </div>
   </div>
 

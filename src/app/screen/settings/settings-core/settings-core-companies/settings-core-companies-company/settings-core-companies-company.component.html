@@ -8,12 +8,12 @@
     <img *ngIf="company?.logo as logo" class="h-fit rounded-lg aspect-square object-contain" [ngSrc]="logo" width="144" height="144" alt="avatar" />
     <div class="flex gap-5">
       <div class="flex flex-col items-end gap-2">
-        <span class="text-sm text-manatee">Roles:</span>
-        <span class="text-sm text-manatee">Users:</span>
-        <span class="text-sm text-manatee">Branches:</span>
-        <span class="text-sm text-manatee">Vehicles:</span>
-        <span class="text-sm text-manatee">Licence end date:</span>
-        <span class="text-sm text-manatee">End date reminder:</span>
+        <span class="text-sm text-neutral-400">Roles:</span>
+        <span class="text-sm text-neutral-400">Users:</span>
+        <span class="text-sm text-neutral-400">Branches:</span>
+        <span class="text-sm text-neutral-400">Vehicles:</span>
+        <span class="text-sm text-neutral-400">Licence end date:</span>
+        <span class="text-sm text-neutral-400">End date reminder:</span>
       </div>
       <div *ngIf="company" class="flex flex-col items-start gap-2">
         <span class="text-sm font-medium">{{ company.roles_count }}</span>
@@ -34,24 +34,24 @@
     <table class="table-auto">
       <thead>
         <th></th>
-        <tr class="border-b border-bright-gray">
+        <tr class="border-b border-neutral-400">
           <td class="px-2"></td>
-          <td class="px-2 py-2 text-xs text-manatee">Name</td>
-          <td class="px-2 text-xs text-manatee">No. users assigned</td>
-          <td class="px-2 text-xs text-manatee">No. vehicles assigned</td>
+          <td class="px-2 py-2 text-xs text-neutral-400">Name</td>
+          <td class="px-2 text-xs text-neutral-400">No. users assigned</td>
+          <td class="px-2 text-xs text-neutral-400">No. vehicles assigned</td>
           <td class="px-2"></td>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let fleetAccess of data" class="border-b border-bright-gray">
+        <tr *ngFor="let fleetAccess of data" class="border-b border-neutral-400">
           <td class="px-2 text-sm"></td>
           <td class="px-2 py-4 text-sm">{{ fleetAccess.name }}</td>
           <td class="px-2 text-sm">{{ fleetAccess.company_fleet_access_users.length }}</td>
           <td class="px-2 text-sm">{{ fleetAccess.vehicles_count }}</td>
           <td class="px-2">
             <div class="flex">
-              <span class="px-2 text-main-primary text-sm font-semibold underline cursor-pointer" (keydown.enter)="handleEditFleetAccessClick(fleetAccess)" (click)="handleEditFleetAccessClick(fleetAccess)">Edit</span>
-              <span class="px-2 text-main-primary text-sm font-semibold underline cursor-pointer" (keydown.enter)="handleDeleteFleetAccessClick(fleetAccess)" (click)="handleDeleteFleetAccessClick(fleetAccess)">Delete</span>
+              <span class="px-2 text-brand-500 text-sm font-semibold underline cursor-pointer" (keydown.enter)="handleEditFleetAccessClick(fleetAccess)" (click)="handleEditFleetAccessClick(fleetAccess)">Edit</span>
+              <span class="px-2 text-brand-500 text-sm font-semibold underline cursor-pointer" (keydown.enter)="handleDeleteFleetAccessClick(fleetAccess)" (click)="handleDeleteFleetAccessClick(fleetAccess)">Delete</span>
             </div>
           </td>
         </tr>
@@ -59,6 +59,6 @@
     </table>
   </div>
   <div class="mt-8" (keydown.enter)="handleDeleteCompanyClick()" (click)="canDelete ? handleDeleteCompanyClick() : null">
-    <span matTooltip="Deleting a company is only possible if there are no assigned fleets, roles, users and vehicles." matTooltipPosition="right" [matTooltipDisabled]="canDelete" class="text-sm text-main-primary font-semibold cursor-pointer select-none" [ngClass]="!canDelete ? 'opacity-50' : ''">Delete company</span>
+    <span matTooltip="Deleting a company is only possible if there are no assigned fleets, roles, users and vehicles." matTooltipPosition="right" [matTooltipDisabled]="canDelete" class="text-sm text-brand-500 font-semibold cursor-pointer select-none" [ngClass]="!canDelete ? 'opacity-50' : ''">Delete company</span>
   </div>
 </div>

@@ -10,7 +10,9 @@
           <app-top-bar *ngIf="!ctx.routeData?.hideTopBar && ctx.routeQueryParams?.mode !== 'screenshot'" class="mb-5">
             <router-outlet name="top-menu"></router-outlet>
           </app-top-bar>
-          <router-outlet></router-outlet>
+          <div [@routeFadeIn]="getRouteAnimationData()">
+            <router-outlet></router-outlet>
+          </div>
         </div>
       </ng-container>
     </div>

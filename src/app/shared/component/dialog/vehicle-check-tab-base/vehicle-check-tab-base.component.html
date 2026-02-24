@@ -17,7 +17,7 @@
       <ng-container *appHasPermission="[[vehicleCheckViewer]]">
         <div class="flex justify-between items-center py-4 cursor-pointer" (keydown.enter)="handleRowClick(vehicleCheck)" (click)="handleRowClick(vehicleCheck)">
           <div class="flex items-center gap-4">
-            <div class="h-[50px] flex-[0_0_50px] flex justify-center items-center rounded-full" [ngClass]="{ 'bg-extra-one--30': vehicleCheck.status === 'Complete' && vehicleCheck.vehicle_check_status === 'PASSED', 'bg-extra-two--30': vehicleCheck.status === 'Complete' && vehicleCheck.vehicle_check_status === 'FAILED' }">
+            <div class="h-[50px] flex-[0_0_50px] flex justify-center items-center rounded-full" [ngClass]="{ 'bg-success-500--30': vehicleCheck.status === 'Complete' && vehicleCheck.vehicle_check_status === 'PASSED', 'bg-error-50': vehicleCheck.status === 'Complete' && vehicleCheck.vehicle_check_status === 'FAILED' }">
               <img [src]="vehicleCheck.status === 'Incomplete' ? 'assets/svg/icons-gray-back/56.svg' : vehicleCheck.vehicle_check_status === 'PASSED' ? 'assets/svg/icons-gray-back/55.svg' : 'assets/svg/icons-gray-back/58.svg'" width="40" height="40" alt="icon" />
             </div>
             <div class="flex flex-col gap-2">
@@ -26,21 +26,21 @@
                 <svg width="2" height="2" viewBox="0 0 2 2" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <circle cx="1" cy="1" r="1" fill="currentColor" />
                 </svg>
-                <p class="text-xs" [ngClass]="vehicleCheck.status === 'Complete' && vehicleCheck.vehicle_check_status === 'PASSED' ? 'text-extra-one' : 'text-extra-two'">
+                <p class="text-xs" [ngClass]="vehicleCheck.status === 'Complete' && vehicleCheck.vehicle_check_status === 'PASSED' ? 'text-success-500' : 'text-error-500'">
                   {{ vehicleCheck.vehicle_check_status ?? vehicleCheck.status }}
                 </p>
               </div>
               <div class="flex items-center gap-2">
-                <p class="font-semibold text-xs text-arsenic">{{ vehicleCheck.driver_name }}</p>
-                <svg class="text-arsenic" width="2" height="2" viewBox="0 0 2 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <p class="font-semibold text-xs text-neutral-700">{{ vehicleCheck.driver_name }}</p>
+                <svg class="text-neutral-700" width="2" height="2" viewBox="0 0 2 2" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <circle cx="1" cy="1" r="1" fill="currentColor" />
                 </svg>
-                <p class="text-xs text-arsenic">{{ vehicleCheck.date | dateFormat : 'serverDateFormat' : 'clientDateFormat' }}</p>
+                <p class="text-xs text-neutral-700">{{ vehicleCheck.date | dateFormat : 'serverDateFormat' : 'clientDateFormat' }}</p>
               </div>
             </div>
           </div>
           <div *appHasPermission="[[vehicleCheckDownloader]]">
-            <div *ngIf="vehicleCheck.vehicle_check_status" class="rounded cursor-pointer text-extra-two" (click)="handleExportItemClick($event, vehicleCheck.id)" (keydown.enter)="handleExportItemKeyDown(vehicleCheck.id)">
+            <div *ngIf="vehicleCheck.vehicle_check_status" class="rounded cursor-pointer text-error-500" (click)="handleExportItemClick($event, vehicleCheck.id)" (keydown.enter)="handleExportItemKeyDown(vehicleCheck.id)">
               <img src="assets/svg/pdf-file-icon.svg" width="30" height="30" alt="pdf" />
             </div>
           </div>

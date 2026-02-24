@@ -1,9 +1,9 @@
 <div class="h-full flex flex-col gap-4">
   <div class="flex items-center gap-2 overflow-hidden">
-    <button class="mb-1 pb-1 font-semibold text-xs text-center text-manatee border-b-2 cursor-pointer bg-transparent border-0 whitespace-nowrap flex-shrink-0" [ngClass]="mode === 'events' ? 'border-main-primary' : 'border-transparent'" (click)="handleModeClick('events')">Events</button>
-    <button class="mb-1 pb-1 font-semibold text-xs text-center text-manatee border-b-2 cursor-pointer bg-transparent border-0 whitespace-nowrap flex-shrink-0" [ngClass]="mode === 'alarms' ? 'border-main-primary' : 'border-transparent'" (click)="handleModeClick('alarms')">Alarms</button>
-    <button class="mb-1 pb-1 font-semibold text-xs text-center text-manatee border-b-2 cursor-pointer bg-transparent border-0 whitespace-nowrap flex-shrink-0" [ngClass]="mode === 'checks' ? 'border-main-primary' : 'border-transparent'" (click)="handleModeClick('checks')">Checks</button>
-    <button class="mb-1 pb-1 font-semibold text-xs text-center text-manatee border-b-2 cursor-pointer bg-transparent border-0 whitespace-nowrap flex-shrink-0" [ngClass]="mode === 'accidents' ? 'border-main-primary' : 'border-transparent'" (click)="handleModeClick('accidents')">Accidents</button>
+    <button class="mb-1 pb-1 font-semibold text-xs text-center text-neutral-400 border-b-2 cursor-pointer bg-transparent border-0 whitespace-nowrap flex-shrink-0" [ngClass]="mode === 'events' ? 'border-brand-500' : 'border-transparent'" (click)="handleModeClick('events')">Events</button>
+    <button class="mb-1 pb-1 font-semibold text-xs text-center text-neutral-400 border-b-2 cursor-pointer bg-transparent border-0 whitespace-nowrap flex-shrink-0" [ngClass]="mode === 'alarms' ? 'border-brand-500' : 'border-transparent'" (click)="handleModeClick('alarms')">Alarms</button>
+    <button class="mb-1 pb-1 font-semibold text-xs text-center text-neutral-400 border-b-2 cursor-pointer bg-transparent border-0 whitespace-nowrap flex-shrink-0" [ngClass]="mode === 'checks' ? 'border-brand-500' : 'border-transparent'" (click)="handleModeClick('checks')">Checks</button>
+    <button class="mb-1 pb-1 font-semibold text-xs text-center text-neutral-400 border-b-2 cursor-pointer bg-transparent border-0 whitespace-nowrap flex-shrink-0" [ngClass]="mode === 'accidents' ? 'border-brand-500' : 'border-transparent'" (click)="handleModeClick('accidents')">Accidents</button>
   </div>
   <div class="h-full overflow-auto" [ngSwitch]="mode">
     <app-drivers-core-tabs-events *ngSwitchCase="'events'"></app-drivers-core-tabs-events>

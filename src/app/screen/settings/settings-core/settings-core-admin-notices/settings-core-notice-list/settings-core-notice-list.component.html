@@ -5,17 +5,17 @@
   <table class="table-auto">
     <thead>
       <th></th>
-      <tr class="border-b border-bright-gray">
+      <tr class="border-b border-neutral-400">
         <td class="px-2"></td>
-        <td class="px-2 py-2 text-xs text-manatee">Title</td>
-        <td class="px-2 text-xs text-manatee">Start Date</td>
-        <td class="px-2 text-xs text-manatee">End Date</td>
-        <td class="px-2 text-xs text-manatee">Status</td>
+        <td class="px-2 py-2 text-xs text-neutral-400">Title</td>
+        <td class="px-2 text-xs text-neutral-400">Start Date</td>
+        <td class="px-2 text-xs text-neutral-400">End Date</td>
+        <td class="px-2 text-xs text-neutral-400">Status</td>
         <td class="px-2"></td>
       </tr>
     </thead>
     <tbody *ngIf="data | async as response">
-      <tr *ngFor="let infotiment of response.data" class="border-b border-bright-gray">
+      <tr *ngFor="let infotiment of response.data" class="border-b border-neutral-400">
         <td class="px-2 text-sm"></td>
         <td class="px-2 py-4 text-sm">{{ infotiment.title }}</td>
         <td class="px-2 text-sm">{{ infotiment.start_hour | date : 'dd/MM/yy HH:mm' }}</td>
@@ -23,11 +23,11 @@
         <td class="px-2 text-sm">{{ infotiment.status }}</td>
         <td class="px-2">
           <div class="flex">
-            <span class="px-2 text-main-primary text-sm font-normal underline cursor-pointer" *ngIf="infotiment.status === 'draft' || infotiment.status === 'pending'" (click)="editInfotainment(infotiment.id)" (keydown.enter)="editInfotainment(infotiment.id)">Edit</span>
-            <span class="px-2 text-main-primary text-sm font-normal underline cursor-pointer" *ngIf="infotiment.status === 'completed'" (click)="viewInfotainment(infotiment.id)" (keydown.enter)="viewInfotainment(infotiment.id)">View</span>
+            <span class="px-2 text-brand-500 text-sm font-normal underline cursor-pointer" *ngIf="infotiment.status === 'draft' || infotiment.status === 'pending'" (click)="editInfotainment(infotiment.id)" (keydown.enter)="editInfotainment(infotiment.id)">Edit</span>
+            <span class="px-2 text-brand-500 text-sm font-normal underline cursor-pointer" *ngIf="infotiment.status === 'completed'" (click)="viewInfotainment(infotiment.id)" (keydown.enter)="viewInfotainment(infotiment.id)">View</span>
 
-            <span class="px-2 text-main-primary text-sm font-normal underline cursor-pointer" (click)="duplicateInfotainment(infotiment)" (keydown.enter)="duplicateInfotainment(infotiment)">Duplicate</span>
-            <span class="px-2 text-main-primary text-sm font-normal underline cursor-pointer" *ngIf="infotiment.status === 'draft' || infotiment.status === 'pending'" (click)="onDelete(infotiment.id, infotiment.title)" (keydown.enter)="onDelete(infotiment.id, infotiment.title)">Delete</span>
+            <span class="px-2 text-brand-500 text-sm font-normal underline cursor-pointer" (click)="duplicateInfotainment(infotiment)" (keydown.enter)="duplicateInfotainment(infotiment)">Duplicate</span>
+            <span class="px-2 text-brand-500 text-sm font-normal underline cursor-pointer" *ngIf="infotiment.status === 'draft' || infotiment.status === 'pending'" (click)="onDelete(infotiment.id, infotiment.title)" (keydown.enter)="onDelete(infotiment.id, infotiment.title)">Delete</span>
           </div>
         </td>
       </tr>

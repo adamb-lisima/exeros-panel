@@ -1,5 +1,5 @@
-<div *ngIf="event$ | async as event" class="h-[48px] flex items-center px-2 rounded border border-manatee bg-white">
-  <p class="font-medium text-xs" [ngClass]="{ 'text-extra-three': (event.last_status || event.status) === 'ESCALATED', 'text-extra-one': (event.last_status || event.status) === 'DO_NOT_ESCALATE', 'text-extra-two': (event.last_status || event.status) === 'FALSE_EVENT' }">
+<div *ngIf="event$ | async as event" class="h-[48px] flex items-center px-2 rounded border border-neutral-400 bg-white">
+  <p class="font-medium text-xs" [ngClass]="{ 'text-info-500': (event.last_status || event.status) === 'ESCALATED', 'text-success-500': (event.last_status || event.status) === 'DO_NOT_ESCALATE', 'text-error-500': (event.last_status || event.status) === 'FALSE_EVENT' }">
     {{ event.last_status || event.status | humanize }}
   </p>
 </div>

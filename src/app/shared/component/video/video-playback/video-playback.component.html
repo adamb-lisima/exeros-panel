@@ -2,7 +2,7 @@
   <ft-cloud-playback *ngIf="isFtCloud && cameras.length > 0" [attr.cameras]="ftCloudCamerasJson" [attr.config]="ftCloudConfigJson" [attr.headers]="ftCloudHeadersJson" [attr.begin-time]="playbackVideoStartTime?.toFormat('yyyy-MM-dd HH:mm:ss') || beginTime" [attr.end-time]="endTime" [attr.timeline-start-time]="timelineStartTime" [attr.timeline-end-time]="timelineEndTime" [attr.stream-type]="ftCloudStreamType" [attr.play-type]="playType" [attr.store-type]="storeType" [attr.show-controls]="showControls" #ftCloudPlaybackElement> </ft-cloud-playback>
 
   <ng-container *ngIf="isStreamax">
-    <div class="border border-new-gray-300 rounded-lg overflow-y-auto h-[calc(65vh-200px)]">
+    <div class="border border-neutral-500-300 rounded-lg overflow-y-auto h-[calc(65vh-200px)]">
       <ng-container *ngIf="cameras.length === 1; else multipleCamerasTemplate">
         <div class="flex-1 grid items-center overflow-auto grid-cols-2 auto-rows-fr gap-2 p-2 h-full">
           <app-smax-video-h265 *ngFor="let camera of cameras; let i = index" class="max-h-full grid col-span-2 h-full" [source]="camera" [showControls]="showControls" (stateChange)="handleSmaxStateChange(i, $event)" (loadError)="handleSmaxLoadError(i, camera, $event)" (loadStart)="handleSmaxLoadStart(camera)"> </app-smax-video-h265>

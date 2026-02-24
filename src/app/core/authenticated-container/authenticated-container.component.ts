@@ -1,5 +1,6 @@
+import { animate, style, transition, trigger } from '@angular/animations';
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ChildrenOutletContexts, Router } from '@angular/router';
 import { Actions } from '@ngrx/effects';
 import { select, Store } from '@ngrx/store';
 import { Observable, of, Subject, switchMap } from 'rxjs';
@@ -19,7 +20,15 @@ import { IframeSelectors } from '../../store/iframe/iframe.selectors';
 @Component({
   selector: 'app-authenticated-container',
   templateUrl: './authenticated-container.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    trigger('routeFadeIn', [
+      transition('* <=> *', [
+        style({ opacity: 0 }),
+        animate('200ms ease-in-out', style({ opacity: 1 }))
+      ])
+    ])
+  ]
 })
 export class AuthenticatedContainerComponent implements OnInit, OnDestroy {
   isReady$?: Observable<boolean>;
@@ -29,7 +38,13 @@ export class AuthenticatedContainerComponent implements OnInit, OnDestroy {
 
   private readonly destroy$ = new Subject<void>();
 
-  constructor(public iframeService: IframeService, private readonly store: Store<AppState>, private readonly actions$: Actions, private readonly router: Router) {
+  constructor(
+    public iframeService: IframeService,
+    private readonly store: Store<AppState>,
+    private readonly actions$: Actions,
+    private readonly router: Router,
+    private readonly contexts: ChildrenOutletContexts
+  ) {
     this.routeData$ = RoutingUtil.getData<RouteData>(this.router);
     this.routeQueryParams$ = RoutingUtil.mergeQueryParams<RouteQueryParams>(this.router);
   }
@@ -61,6 +76,10 @@ export class AuthenticatedContainerComponent implements OnInit, OnDestroy {
         return of(true);
       })
     );
+  }
+
+  getRouteAnimationData() {
+    return this.contexts.getContext('primary')?.route?.snapshot?.url;
   }
 
   ngOnDestroy(): void {

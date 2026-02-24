@@ -1,4 +1,4 @@
 <div class="h-full flex flex-col gap-2">
   <app-text-control class="max-w-[50%]" label="Search" [prefixIcon]="'search'" [formControl]="searchControl"></app-text-control>
-  <app-map class="h-full" [markers]="markers$ | async" [zoom]="5" (mapReady)="onMapReady($event)"></app-map>
+  <app-map class="flex-1 min-h-0" [markers]="markers$ | async" [zoom]="5" (mapReady)="onMapReady($event)"></app-map>
 </div>

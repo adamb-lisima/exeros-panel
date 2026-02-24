@@ -1,5 +1,5 @@
 <app-vehicle-check-tab-base [showTitle]="true" [vehicleChecks]="vehicleChecks$ | async" [vehicleChecksLoading]="vehicleChecksLoading$ | async" [statusOptions]="statusOptions" [formParams]="formParams" (rowClick)="handleRowClick($event)" (exportItem)="handleExportItemClick($event.event, $event.id)" (exportItemKeyDown)="handleExportItemKeyDown($event)">
   <ng-container title>
-    <p class="font-semibold text-sm">Vehicle Checks</p>
+    <p class="text-heading-sm">Vehicle Checks</p>
   </ng-container>
 </app-vehicle-check-tab-base>

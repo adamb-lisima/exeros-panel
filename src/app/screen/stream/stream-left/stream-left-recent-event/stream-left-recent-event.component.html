@@ -1,11 +1,11 @@
 <div>
   <p class="py-4">Updates history</p>
 
-  <div class="border border-new-gray-300 rounded-lg">
+  <div class="border border-neutral-500-300 rounded-lg">
     <table class="w-full table-fixed border-collapse">
       <thead>
-        <tr class="bg-new-gray-100">
-          <th class="py-3 px-2 pl-3 border-r border-r-new-gray-300 text-left w-[70%]">Event name</th>
+        <tr class="bg-neutral-100">
+          <th class="py-3 px-2 pl-3 border-r border-r-neutral-300 text-left w-[70%]">Event name</th>
           <th class="py-3 px-2 pl-3 text-left w-[30%]">Time</th>
         </tr>
       </thead>
@@ -19,12 +19,12 @@
         <tbody *ngIf="events$ | async as events">
           <ng-container *ngIf="events.length; else noEvents">
             <tr *ngFor="let event of events">
-              <td class="py-3 px-2 pl-3 border-r border-r-new-gray-300 w-[70%]">
+              <td class="py-3 px-2 pl-3 border-r border-r-neutral-300 w-[70%]">
                 <div class="flex flex-row gap-2">
                   <div>
-                    <app-event-icon class="text-extra-two w-[14px] h-[14px]" [eventIcon]="event.event_icon"></app-event-icon>
+                    <app-event-icon class="text-error-500 w-[14px] h-[14px]" [eventIcon]="event.event_icon"></app-event-icon>
                   </div>
-                  <span class="cursor-pointer underline text-main-primary" (keydown.enter)="handleEventClick(event)" (click)="handleEventClick(event)">{{ event.name }}</span>
+                  <span class="cursor-pointer underline text-brand-500" (keydown.enter)="handleEventClick(event)" (click)="handleEventClick(event)">{{ event.name }}</span>
                 </div>
               </td>
               <td class="py-3 px-2 pl-3 w-[27%]">{{ event.time | date : 'dd/MM/yy HH:mm' }}</td>

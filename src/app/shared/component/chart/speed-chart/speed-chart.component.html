@@ -1,9 +1,9 @@
 <div class="flex flex-row gap-1 items-start">
   <ng-container *ngIf="_position$ | async as position">
     <div class="bg-[rgba(0,107,255,.07)] p-2 rounded-md flex flex-row gap-1">
-      <span class="text-xs text-dim-gray mt-0.5">Speed : </span>
+      <span class="text-xs text-neutral-500 mt-0.5">Speed : </span>
       <ng-container *ngIf="event?.speed !== undefined">
-        <span *ngIf="event!.speed | unitConverter | async as speed" [ngClass]="[event?.is_overlimit ? 'text-extra-two' : 'text-black']" class="font-semibold text-sm flex items-center">{{ speed.value }} {{ speed.unit }}</span>
+        <span *ngIf="event!.speed | unitConverter | async as speed" [ngClass]="[event?.is_overlimit ? 'text-error-500' : 'text-black']" class="font-semibold text-sm flex items-center">{{ speed.value }} {{ speed.unit }}</span>
       </ng-container>
       <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
         <mask id="mask0_2064_16979" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="20" height="21">
@@ -39,42 +39,42 @@
         </g>
         <g>
           <g>
-            <path class="pointer-events-none" [attr.d]="chart.lineData" fill="none" style="stroke: var(--extra-three)"></path>
+            <path class="pointer-events-none" [attr.d]="chart.lineData" fill="none" style="stroke: var(--info-500)"></path>
           </g>
           <g *ngFor="let point of chart.points">
             <rect [attr.x]="point.rect.x" [attr.y]="point.rect.y" [attr.width]="point.rect.width" [attr.height]="point.rect.height" class="cursor-pointer" fill="transparent" stroke="transparent" (mouseover)="_showPointHover(point)" (mouseleave)="_hidePointHover()" (click)="_selectPoint(point.data)" (keydown.enter)="_selectPoint(point.data)" (focus)="_showPointHover(point)"></rect>
           </g>
           <g *ngFor="let label of _xAxis$ | async as xAxis; let i = index">
             <line [attr.x1]="label.x" [attr.x2]="label.x" [attr.stroke]="_yAxisColor" class="pointer-events-none" y1="0%" [attr.y2]="chart.height" stroke-width="1"></line>
-            <text class="text-xs w-12" style="fill: var(--dim-gray)" [attr.x]="label.x - 24" [attr.y]="chart.height + 20" text-anchor="start" alignment-baseline="middle">{{ label.date | dateFormat : 'jsDate' : 'timeFormat' }}</text>
+            <text class="text-xs w-12" style="fill: var(--neutral-500)" [attr.x]="label.x - 24" [attr.y]="chart.height + 20" text-anchor="start" alignment-baseline="middle">{{ label.date | dateFormat : 'jsDate' : 'timeFormat' }}</text>
           </g>
           <g *ngIf="_eventStart$ | async as eventStart">
-            <line [attr.x1]="eventStart.pos" [attr.x2]="eventStart.pos" style="stroke: var(--main-primary)" class="pointer-events-none" y1="0%" [attr.y2]="chart.height" stroke-width="2"></line>
+            <line [attr.x1]="eventStart.pos" [attr.x2]="eventStart.pos" style="stroke: var(--brand-500)" class="pointer-events-none" y1="0%" [attr.y2]="chart.height" stroke-width="2"></line>
             <image [attr.xlink:href]="eventStart.type" height="36" width="36" y="50%" [attr.x]="eventStart.pos - 18"></image>
           </g>
           <g *ngIf="_smoothPosition$ | async as point">
-            <line [attr.x1]="point.x" [attr.x2]="point.x" style="stroke: var(--outer-space)" class="pointer-events-none" y1="0%" y2="100%" stroke-width="1"></line>
-            <circle #circle class="pointer-events-none" r="4" [attr.cx]="point.x" [attr.cy]="point.y" style="stroke: var(--main-primary)" fill="white" stroke-width="4"></circle>
+            <line [attr.x1]="point.x" [attr.x2]="point.x" style="stroke: var(--neutral-800)" class="pointer-events-none" y1="0%" y2="100%" stroke-width="1"></line>
+            <circle #circle class="pointer-events-none" r="4" [attr.cx]="point.x" [attr.cy]="point.y" style="stroke: var(--brand-500)" fill="white" stroke-width="4"></circle>
             <rect [attr.x]="point.x - 30" [attr.y]="10" [attr.width]="60" [attr.height]="20" class="" fill="white" stroke="black"></rect>
-            <text class="text-xs w-12 border border-black" style="fill: var(--dim-gray)" [attr.x]="point.x - 24" [attr.y]="20" text-anchor="start" alignment-baseline="middle">{{ point.time | dateFormat : 'jsDate' : 'timeFormat' }}</text>
+            <text class="text-xs w-12 border border-black" style="fill: var(--neutral-500)" [attr.x]="point.x - 24" [attr.y]="20" text-anchor="start" alignment-baseline="middle">{{ point.time | dateFormat : 'jsDate' : 'timeFormat' }}</text>
           </g>
           <g *ngIf="_selectedPoint$ | async as point">
-            <line [attr.x1]="point.x" [attr.x2]="point.x" style="stroke: var(--outer-space)" class="opacity-50 pointer-events-none" y1="0%" y2="100%" stroke-width="1"></line>
-            <circle #circle class="pointer-events-none opacity-50" r="4" [attr.cx]="point.x" [attr.cy]="point.y" style="stroke: var(--main-primary)" fill="white" stroke-width="4"></circle>
+            <line [attr.x1]="point.x" [attr.x2]="point.x" style="stroke: var(--neutral-800)" class="opacity-50 pointer-events-none" y1="0%" y2="100%" stroke-width="1"></line>
+            <circle #circle class="pointer-events-none opacity-50" r="4" [attr.cx]="point.x" [attr.cy]="point.y" style="stroke: var(--brand-500)" fill="white" stroke-width="4"></circle>
             <ng-container [ngSwitch]="point.position">
               <rect *ngSwitchCase="'first'" [attr.x]="point.x" [attr.y]="10" [attr.width]="60" [attr.height]="35" class="" fill="white" stroke="black"></rect>
-              <text *ngSwitchCase="'first'" class="text-xs w-12 border border-black" style="fill: var(--dim-gray)" [attr.x]="point.x + 6" [attr.y]="20" text-anchor="start" alignment-baseline="middle">{{ point.date | dateFormat : 'jsDate' : 'timeFormat' }}</text>
-              <text *ngSwitchCase="'first'" class="text-xs w-12 border border-black" style="fill: var(--dim-gray)" [attr.x]="point.x + 6" [attr.y]="35" text-anchor="start" alignment-baseline="middle">
+              <text *ngSwitchCase="'first'" class="text-xs w-12 border border-black" style="fill: var(--neutral-500)" [attr.x]="point.x + 6" [attr.y]="20" text-anchor="start" alignment-baseline="middle">{{ point.date | dateFormat : 'jsDate' : 'timeFormat' }}</text>
+              <text *ngSwitchCase="'first'" class="text-xs w-12 border border-black" style="fill: var(--neutral-500)" [attr.x]="point.x + 6" [attr.y]="35" text-anchor="start" alignment-baseline="middle">
                 <ng-container [ngTemplateOutlet]="speedValue"></ng-container>
               </text>
               <rect *ngSwitchCase="'last'" [attr.x]="point.x - 60" [attr.y]="10" [attr.width]="60" [attr.height]="35" class="" fill="white" stroke="black"></rect>
-              <text *ngSwitchCase="'last'" class="text-xs w-12 border border-black" style="fill: var(--dim-gray)" [attr.x]="point.x - 54" [attr.y]="20" text-anchor="start" alignment-baseline="middle">{{ point.date | dateFormat : 'jsDate' : 'timeFormat' }}</text>
-              <text *ngSwitchCase="'last'" class="text-xs w-12 border border-black" style="fill: var(--dim-gray)" [attr.x]="point.x - 54" [attr.y]="35" text-anchor="start" alignment-baseline="middle">
+              <text *ngSwitchCase="'last'" class="text-xs w-12 border border-black" style="fill: var(--neutral-500)" [attr.x]="point.x - 54" [attr.y]="20" text-anchor="start" alignment-baseline="middle">{{ point.date | dateFormat : 'jsDate' : 'timeFormat' }}</text>
+              <text *ngSwitchCase="'last'" class="text-xs w-12 border border-black" style="fill: var(--neutral-500)" [attr.x]="point.x - 54" [attr.y]="35" text-anchor="start" alignment-baseline="middle">
                 <ng-container [ngTemplateOutlet]="speedValue"></ng-container>
               </text>
               <rect *ngSwitchDefault [attr.x]="point.x - 30" [attr.y]="10" [attr.width]="60" [attr.height]="35" class="" fill="white" stroke="black"></rect>
-              <text *ngSwitchDefault class="text-xs w-12 border border-black" style="fill: var(--dim-gray)" [attr.x]="point.x - 24" [attr.y]="20" text-anchor="start" alignment-baseline="middle">{{ point.date | dateFormat : 'jsDate' : 'timeFormat' }}</text>
-              <text *ngSwitchDefault class="text-xs w-12 border border-black" style="fill: var(--dim-gray)" [attr.x]="point.x - 24" [attr.y]="35" text-anchor="start" alignment-baseline="middle">
+              <text *ngSwitchDefault class="text-xs w-12 border border-black" style="fill: var(--neutral-500)" [attr.x]="point.x - 24" [attr.y]="20" text-anchor="start" alignment-baseline="middle">{{ point.date | dateFormat : 'jsDate' : 'timeFormat' }}</text>
+              <text *ngSwitchDefault class="text-xs w-12 border border-black" style="fill: var(--neutral-500)" [attr.x]="point.x - 24" [attr.y]="35" text-anchor="start" alignment-baseline="middle">
                 <ng-container [ngTemplateOutlet]="speedValue"></ng-container>
               </text>
               <ng-template #speedValue>
@@ -86,7 +86,7 @@
       </svg>
       <svg class="overflow-visible sticky h-full" style="background-color: var(--white)" [style.left]="0" [style.top]="0" [attr.width]="yAxis.width">
         <ng-container *ngFor="let tick of yAxis.ticks">
-          <text *ngIf="tick.text | unitAdder : true | async as yValue" class="text-xs" style="fill: var(--dim-gray)" [attr.y]="tick.y" x="0%" text-anchor="start" alignment-baseline="middle">{{ yValue.value | number : '.0-1' }} {{ yValue.unit }}</text>
+          <text *ngIf="tick.text | unitAdder : true | async as yValue" class="text-xs" style="fill: var(--neutral-500)" [attr.y]="tick.y" x="0%" text-anchor="start" alignment-baseline="middle">{{ yValue.value | number : '.0-1' }} {{ yValue.unit }}</text>
         </ng-container>
       </svg>
     </ng-container>

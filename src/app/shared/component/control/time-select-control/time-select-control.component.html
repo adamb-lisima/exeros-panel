@@ -1,9 +1,9 @@
-<div class="self-stretch h-16 px-5 py-1.5 border-t border-b border-new-gray-300 flex justify-between items-center overflow-hidden">
+<div class="self-stretch h-16 px-5 py-1.5 border-t border-b border-neutral-500-300 flex justify-between items-center overflow-hidden">
   <div class="text-center justify-start text-stone-900 text-base font-medium">{{ label }}</div>
   <div class="flex justify-start items-center gap-2.5">
     <div class="flex justify-start items-center gap-1">
       <div class="w-7 h-10 relative overflow-hidden">
-        <div class="w-7 h-6 left-0 top-[7px] absolute rounded-sm outline outline-1 outline-offset-[-1px] outline-new-gray-300 overflow-hidden">
+        <div class="w-7 h-6 left-0 top-[7px] absolute rounded-sm outline outline-1 outline-offset-[-1px] outline-neutral-300 overflow-hidden">
           <input type="text" [(ngModel)]="hours" (input)="onHoursInput($event)" class="w-7 h-6 text-center text-stone-900 text-sm font-medium bg-transparent border-none outline-none" maxlength="2" />
         </div>
         <div class="w-6 h-6 origin-top-left" (click)="incrementHours()" (keydown.enter)="incrementHours()">
@@ -31,7 +31,7 @@
       <div class="text-center justify-center text-stone-900 text-sm font-medium">:</div>
 
       <div class="w-7 h-10 relative overflow-hidden">
-        <div class="w-7 h-6 left-0 top-[7px] absolute rounded-sm outline outline-1 outline-offset-[-1px] outline-new-gray-300 overflow-hidden">
+        <div class="w-7 h-6 left-0 top-[7px] absolute rounded-sm outline outline-1 outline-offset-[-1px] outline-neutral-300 overflow-hidden">
           <input type="text" [(ngModel)]="minutes" (input)="onMinutesInput($event)" class="w-7 h-6 text-center text-stone-900 text-sm font-medium bg-transparent border-none outline-none" maxlength="2" />
         </div>
         <div class="w-6 h-6 origin-top-left" (click)="incrementMinutes()" (keydown.enter)="incrementMinutes()">

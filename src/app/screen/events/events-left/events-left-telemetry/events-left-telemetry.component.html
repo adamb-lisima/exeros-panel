@@ -29,7 +29,7 @@
               </ng-container>
 
               <ng-container *ngIf="telemetric.speed_limit !== null && telemetric.speed_limit !== undefined">
-                <div *ngIf="telemetric.speed_limit | unitConverter | async as speed_limit" class="flex w-5 h-5 p-1.5 justify-center items-center gap-1 rounded-[40px] border-2 border-[#FE3C3C] bg-white text-[11px]">{{ speed_limit.value | number : '1.0-0' }}</div>
+                <div *ngIf="telemetric.speed_limit | unitConverter | async as speed_limit" class="flex w-5 h-5 p-1.5 justify-center items-center gap-1 rounded-full border-2 border-error-500 bg-white text-[11px]">{{ speed_limit.value | number : '1.0-0' }}</div>
               </ng-container>
             </div>
           </td>

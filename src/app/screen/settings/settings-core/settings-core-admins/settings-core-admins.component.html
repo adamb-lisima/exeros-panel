@@ -6,18 +6,18 @@
   <table class="table-auto">
     <thead>
       <th></th>
-      <tr class="border-b border-bright-gray">
+      <tr class="border-b border-neutral-400">
         <td class="px-2"></td>
-        <td class="px-2 py-2 text-xs text-manatee">Id</td>
-        <td class="px-2 text-xs text-manatee">Name</td>
-        <td class="px-2 text-xs text-manatee">Email</td>
-        <td class="px-2 text-xs text-manatee">Companies</td>
+        <td class="px-2 py-2 text-xs text-neutral-400">Id</td>
+        <td class="px-2 text-xs text-neutral-400">Name</td>
+        <td class="px-2 text-xs text-neutral-400">Email</td>
+        <td class="px-2 text-xs text-neutral-400">Companies</td>
         <td class="px-2"></td>
       </tr>
     </thead>
 
     <tbody *ngIf="admins$ | async as response">
-      <tr *ngFor="let admin of response.data" class="border-b border-bright-gray">
+      <tr *ngFor="let admin of response.data" class="border-b border-neutral-400">
         <td class="px-2 text-sm"></td>
         <td class="px-2 py-4 text-sm">{{ admin.id }}</td>
         <td class="px-2 text-sm">{{ admin.name }}</td>
@@ -26,7 +26,7 @@
 
         <td>
           <div class="flex">
-            <span class="px-2 text-main-primary text-sm font-semibold underline cursor-pointer" (keydown.enter)="handleUpdateAdmin(admin.id)" (click)="handleUpdateAdmin(admin.id)">Edit</span>
+            <span class="px-2 text-brand-500 text-sm font-semibold underline cursor-pointer" (keydown.enter)="handleUpdateAdmin(admin.id)" (click)="handleUpdateAdmin(admin.id)">Edit</span>
           </div>
         </td>
       </tr>

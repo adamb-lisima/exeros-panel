@@ -1,7 +1,6 @@
-<div *ngIf="options$ | async as options" class="flex flex-col h-full" [class.loader]="mileageLoading$ | async">
-  <div class="flex flex-col gap-8 -mb-6">
-    <div class="min-h-[40px] flex flex-wrap justify-between items-center gap-2">
-      <p class="font-semibold text-xl whitespace-nowrap">Mileage</p>
+<div *ngIf="options$ | async as options" class="flex flex-col h-full">
+  <div class="flex flex-col gap-4 mb-4">
+    <div class="flex flex-wrap justify-between items-center gap-2">
       <app-export-buttons *appHasPermission="[[mileageDownloaderAccess]]" (export)="handleExportClick($event)"> </app-export-buttons>
     </div>
     <div class="flex flex-wrap items-center gap-x-2">
@@ -9,10 +8,15 @@
       <app-select-control *ngIf="driverOptions$ | async as driverOptions" class="w-[230px]" label="Driver" [options]="driverOptions" [formControl]="driverControl"></app-select-control>
     </div>
   </div>
-  <app-bar-chart [data]="options.series" [options]="{ overlayTemplate: overlay }" class="flex-1"></app-bar-chart>
+  <ng-container *ngIf="options.series[0]?.data?.length; else emptyMileage">
+    <app-bar-chart [data]="options.series" [options]="{ overlayTemplate: overlay }" class="flex-1"></app-bar-chart>
+  </ng-container>
+  <ng-template #emptyMileage>
+    <app-empty-state heading="No mileage data" description="No mileage data available for the selected date range."></app-empty-state>
+  </ng-template>
 </div>
 <ng-template #overlay let-point>
-  <div class="flex flex-col gap-1 py-1 px-2 bg-outer-space rounded-md translate-x-[-50%] w-max bottom-2 absolute pointer-events-none">
+  <div class="flex flex-col gap-1 py-1 px-2 bg-neutral-800 rounded-md translate-x-[-50%] w-max bottom-2 absolute pointer-events-none">
     <p class="text-white text-xs opacity-80">{{ point.data.x | dateFormat : 'serverDateFormat' : 'clientDateFormat' }}</p>
     <p class="text-white text-xs">{{ point.data.y | number : '1.0-0' }} Miles</p>
   </div>

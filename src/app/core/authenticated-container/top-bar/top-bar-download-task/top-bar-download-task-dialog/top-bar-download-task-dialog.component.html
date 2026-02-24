@@ -1,33 +1,37 @@
-<div class="w-[800px] min-h-[200px] p-5 z-30 bg-white rounded-md overflow-auto" [class.loader]="downloadTaskFilesLoading$ | async">
-  <ng-container *ngIf="(downloadTaskFilesLoading$ | async) === false">
+<div class="w-[800px] min-h-[200px] p-5 z-30 bg-white rounded-md overflow-auto">
+  <ng-container *ngIf="(downloadTaskFilesLoading$ | async); else downloadContent">
+    <app-skeleton-loader variant="table-row"></app-skeleton-loader>
+    <app-skeleton-loader variant="table-row"></app-skeleton-loader>
+  </ng-container>
+  <ng-template #downloadContent>
     <ng-container *ngIf="downloadTaskFilesData$ | async as files">
       <app-infinity-scroll [listDivider]="false">
         <ng-container header>
-          <button type="submit" class="bg-extra-two py-0.5 px-3 text-sm text-white rounded" (click)="handleDeleteDownloadTaskClick()">Remove task</button>
+          <button type="submit" class="bg-error-500 py-0.5 px-3 text-sm text-white rounded" (click)="handleDeleteDownloadTaskClick()">Remove task</button>
         </ng-container>
         <ng-container list>
           <ng-container *ngIf="files.length; else noDetailsTemplate">
             <div class="overflow-x-auto mt-4">
               <table class="w-full border-collapse">
                 <thead>
-                  <tr class="border-b-2 border-gray-200">
-                    <th *ngIf="hasCameraData$ | async" class="text-left py-2 px-3 text-sm font-semibold text-gray-700">Camera Channel</th>
-                    <th *ngIf="hasCameraData$ | async" class="text-left py-2 px-3 text-sm font-semibold text-gray-700">Camera Name</th>
-                    <th class="text-left py-2 px-3 text-sm font-semibold text-gray-700">File Name</th>
-                    <th class="text-center py-2 px-3 text-sm font-semibold text-gray-700">Action</th>
+                  <tr class="border-b-2 border-neutral-200">
+                    <th *ngIf="hasCameraData$ | async" class="text-left py-2 px-3 text-sm font-semibold text-neutral-700">Camera Channel</th>
+                    <th *ngIf="hasCameraData$ | async" class="text-left py-2 px-3 text-sm font-semibold text-neutral-700">Camera Name</th>
+                    <th class="text-left py-2 px-3 text-sm font-semibold text-neutral-700">File Name</th>
+                    <th class="text-center py-2 px-3 text-sm font-semibold text-neutral-700">Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let file of files; trackByField: 'name'" class="border-b border-gray-100 hover:bg-gray-50">
+                  <tr *ngFor="let file of files; trackByField: 'name'" class="border-b border-neutral-100 hover:bg-neutral-50">
                     <td *ngIf="hasCameraData$ | async" class="py-3 px-3 text-sm">{{ file.channel || '-' }}</td>
                     <td *ngIf="hasCameraData$ | async" class="py-3 px-3 text-sm">{{ file.metadata?.channel_name || '-' }}</td>
                     <td class="py-3 px-3 text-sm">{{ file.name }}</td>
                     <td class="py-3 px-3 text-sm text-center">
                       <ng-container *ngIf="file.metadata?.status !== 'failed'; else errorTemplate">
-                        <button type="button" class="bg-extra-three py-1 px-4 text-sm text-white rounded hover:opacity-90" (click)="handleFileClick(file)">Download</button>
+                        <button type="button" class="bg-info-500 py-1 px-4 text-sm text-white rounded hover:opacity-90" (click)="handleFileClick(file)">Download</button>
                       </ng-container>
                       <ng-template #errorTemplate>
-                        <div class="text-red-600 text-xs">
+                        <div class="text-error-600 text-xs">
                           {{ file.metadata?.error_message || 'Download failed' }}
                         </div>
                       </ng-template>
@@ -43,5 +47,5 @@
         </ng-container>
       </app-infinity-scroll>
     </ng-container>
-  </ng-container>
+  </ng-template>
 </div>

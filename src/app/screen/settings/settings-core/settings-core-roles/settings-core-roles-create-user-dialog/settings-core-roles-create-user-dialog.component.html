@@ -1,10 +1,10 @@
 <app-dialog-container [title]="title">
   <div class="flex flex-col py-4" body>
     <div class="flex-[0_0_45px] flex items-center gap-10 px-6 overflow-x-auto">
-      <a class="pb-4 whitespace-nowrap font-medium border-b-[3px] cursor-pointer" [ngClass]="module === 'details' ? 'border-main-primary' : 'border-transparent text-manatee'" (click)="handleModeClick('details')"> Profile </a>
-      <a class="pb-4 whitespace-nowrap font-medium border-b-[3px] cursor-pointer" [ngClass]="module === 'notifications' ? 'border-main-primary' : 'border-transparent text-manatee'" (click)="handleModeClick('notifications')"> Notifications </a>
+      <a class="pb-4 whitespace-nowrap font-medium border-b-[3px] cursor-pointer" [ngClass]="module === 'details' ? 'border-brand-500' : 'border-transparent text-neutral-400'" (click)="handleModeClick('details')"> Profile </a>
+      <a class="pb-4 whitespace-nowrap font-medium border-b-[3px] cursor-pointer" [ngClass]="module === 'notifications' ? 'border-brand-500' : 'border-transparent text-neutral-400'" (click)="handleModeClick('notifications')"> Notifications </a>
     </div>
-    <span class="w-full flex-[0_0_1px] bg-platinum"></span>
+    <span class="w-full flex-[0_0_1px] bg-neutral-200"></span>
     <div class="pt-6">
       <ng-container [ngSwitch]="module">
         <div *ngSwitchCase="'details'" class="flex flex-col gap-8 p-5">
@@ -17,16 +17,16 @@
             <app-text-control [formControl]="bodyGroup.controls.name" [error]="bodyGroup.controls.name.invalid && bodyGroup.controls.name.touched" errorText="The name field is required" label="Name*"></app-text-control>
             <app-text-control [formControl]="bodyGroup.controls.email" [error]="bodyGroup.controls.email.invalid && bodyGroup.controls.email.touched" errorText="The email field is required" label="E-mail*"></app-text-control>
           </div>
-          <span class="text-xs text-dim-gray">* - mandatory fields</span>
+          <span class="text-xs text-neutral-500">* - mandatory fields</span>
         </div>
 
         <div *ngSwitchCase="'notifications'" class="flex flex-col gap-2 p-5">
           <app-text-control [formControl]="searchControl" label="Search notifications" [prefixIcon]="'search'"> </app-text-control>
           <div class="flex flex-col gap-2" *ngIf="notifications$ | async as notifications">
             <div class="flex items-center gap-4 py-2">
-              <div class="flex flex-row items-center border-platinum w-full border-b-[1px]">
+              <div class="flex flex-row items-center border-neutral-200 w-full border-b-[1px]">
                 <app-checkbox-control [ngModel]="allSelected" (ngModelChange)="handleSelectAllClick($event)"> </app-checkbox-control>
-                <span class="text-dark-electric-blue text-xs">Notification type</span>
+                <span class="text-neutral-700 text-xs">Notification type</span>
                 <span class="text-xs ml-auto"> Selected: {{ selectedCount }} </span>
               </div>
             </div>
@@ -52,12 +52,12 @@
             </div>
             <ng-container *ngFor="let category of categories">
               <div class="flex flex-col gap-4 mt-4" *ngIf="hasCategoryEvents(notifications, category)">
-                <span class="text-sm font-medium text-dark-electric-blue">{{ getCategoryLabel(category) }}</span>
+                <span class="text-sm font-medium text-neutral-700">{{ getCategoryLabel(category) }}</span>
 
-                <div class="flex items-center border-b border-bright-gray pb-2">
-                  <div class="flex-1 text-xs text-manatee">Notification type</div>
-                  <div class="flex-[0_0_150px] text-xs text-manatee text-center">Event Occurred</div>
-                  <div class="flex-[0_0_150px] text-xs text-manatee text-center">Event Escalated</div>
+                <div class="flex items-center border-b border-neutral-400 pb-2">
+                  <div class="flex-1 text-xs text-neutral-400">Notification type</div>
+                  <div class="flex-[0_0_150px] text-xs text-neutral-400 text-center">Event Occurred</div>
+                  <div class="flex-[0_0_150px] text-xs text-neutral-400 text-center">Event Escalated</div>
                 </div>
 
                 <div class="flex flex-col gap-3">

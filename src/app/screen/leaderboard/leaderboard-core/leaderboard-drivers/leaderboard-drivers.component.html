@@ -5,30 +5,30 @@
 
   <div class="overflow-y-auto h-full pb-14">
     <div class="space-y-2" [class.opacity-50]="loading">
-      <div *ngFor="let driver of displayedDrivers; trackByField: 'id'; let i = index" class="flex items-start gap-2.5 py-2.5 px-4 border-b-new-gray-300 border-b">
+      <div *ngFor="let driver of displayedDrivers; trackByField: 'id'; let i = index" class="flex items-start gap-2.5 py-2.5 px-4 border-b-neutral-300 border-b">
         <div *ngIf="driver.rank !== null" class="flex justify-center items-center w-8 pt-1.5">
           <ng-container [ngSwitch]="driver.rank">
             <img *ngSwitchCase="1" src="assets/svg/icons-gray-back/53-1.svg" width="40" height="40" alt="cup" />
             <img *ngSwitchCase="2" src="assets/svg/icons-gray-back/53-2.svg" width="40" height="40" alt="cup" />
             <img *ngSwitchCase="3" src="assets/svg/icons-gray-back/53-3.svg" width="40" height="40" alt="cup" />
-            <p *ngSwitchDefault class="font-semibold text-xs text-gray-600">{{ driver.rank }}.</p>
+            <p *ngSwitchDefault class="font-semibold text-xs text-neutral-600">{{ driver.rank }}.</p>
           </ng-container>
         </div>
 
-        <div class="flex-[0_0_40px] h-[40px] flex justify-center items-center rounded-full mt-1" [ngClass]="{ 'bg-main-primary': driver.id % 3 === 0, 'bg-extra-three': driver.id % 3 === 1, 'bg-extra-four': driver.id % 3 === 2 }">
+        <div class="flex-[0_0_40px] h-[40px] flex justify-center items-center rounded-full mt-1" [ngClass]="{ 'bg-brand-500': driver.id % 3 === 0, 'bg-info-500': driver.id % 3 === 1, 'bg-warning-500': driver.id % 3 === 2 }">
           <p class="font-medium text-white text-sm">{{ driver.name | firstCharacter }}</p>
         </div>
 
         <div class="flex flex-col gap-1 flex-1 min-w-0">
           <p class="font-semibold text-sm leading-tight">{{ driver.name }}</p>
-          <div class="flex items-center gap-1 text-sm text-gray-600">
+          <div class="flex items-center gap-1 text-sm text-neutral-600">
             <span>{{ driver.star_rating | number : '1.2-2' }}</span>
             <app-star-rating [score]="driver.star_rating ?? 0" [maxScore]="5"></app-star-rating>
           </div>
         </div>
 
         <div class="flex flex-col items-center gap-2" *ngIf="driver.rank_change !== null && driver.rank_change !== 0 && title !== 'All Time'">
-          <div class="text-sm text-gray-600 font-normal">{{ driver.rank! + driver.rank_change! | ordinal }} → {{ driver.rank! | ordinal }}</div>
+          <div class="text-sm text-neutral-600 font-normal">{{ driver.rank! + driver.rank_change! | ordinal }} → {{ driver.rank! | ordinal }}</div>
           <div class="flex flex-row ml-auto items-center">
             <svg *ngIf="driver.rank_change! > 0" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd" clip-rule="evenodd" d="M8 14C7.58579 14 7.25 13.6642 7.25 13.25L7.25 4.56066L4.03033 7.78033C3.73744 8.07322 3.26256 8.07322 2.96967 7.78033C2.67678 7.48744 2.67678 7.01256 2.96967 6.71967L7.46967 2.21967C7.76256 1.92678 8.23744 1.92678 8.53033 2.21967L13.0303 6.71967C13.3232 7.01256 13.3232 7.48744 13.0303 7.78033C12.7374 8.07322 12.2626 8.07322 11.9697 7.78033L8.75 4.56066L8.75 13.25C8.75 13.6642 8.41421 14 8 14Z" fill="#14A54D" />
@@ -39,8 +39,8 @@
             <span
               class="mt-0.5"
               [ngClass]="{
-                'text-extra-one': driver.rank_change! > 0,
-                'text-extra-two': driver.rank_change! < 0
+                'text-success-500': driver.rank_change! > 0,
+                'text-error-500': driver.rank_change! < 0
               }"
               >{{ abs(driver.rank_change!) }}</span
             >
@@ -49,15 +49,15 @@
       </div>
 
       <div *ngIf="loading" class="flex justify-center py-4">
-        <div class="animate-spin rounded-full h-5 w-5 border-2 border-main-primary border-t-transparent"></div>
+        <div class="animate-spin rounded-full h-5 w-5 border-2 border-brand-500 border-t-transparent"></div>
       </div>
 
-      <div *ngIf="!loading && topDrivers.length === 0" class="text-center py-6 text-gray-500 text-sm">No drivers found</div>
+      <div *ngIf="!loading && topDrivers.length === 0" class="text-center py-6 text-neutral-500 text-sm">No drivers found</div>
     </div>
   </div>
 
-  <div *ngIf="canShowMore || showAll" class="absolute bottom-0 left-0 right-0 flex justify-center bg-white py-3 border-t border-new-gray-100">
-    <button (click)="toggleShowAll()" class="text-xs text-main-primary underline font-medium px-3 py-1 rounded hover:bg-blue-50 transition-colors">
+  <div *ngIf="canShowMore || showAll" class="absolute bottom-0 left-0 right-0 flex justify-center bg-white py-3 border-t border-neutral-500-100">
+    <button (click)="toggleShowAll()" class="text-xs text-brand-500 underline font-medium px-3 py-1 rounded hover:bg-blue-50 transition-colors">
       {{ showAll ? 'Show less' : 'Show all (' + topDrivers.length + ')' }}
     </button>
   </div>

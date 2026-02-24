@@ -23,7 +23,7 @@
               <td class="text-sm leading-[16px] font-medium">-</td>
             </ng-container>
             <ng-container *ngIf="telemetric.speed_limit !== null && telemetric.speed_limit !== undefined">
-              <div *ngIf="telemetric.speed_limit | unitConverter | async as speed_limit" class="flex w-5 h-5 p-1.5 justify-center items-center gap-1 rounded-[40px] border-2 border-[#FE3C3C] bg-white text-[11px]">{{ speed_limit.value | number : '1.0-0' }}</div>
+              <div *ngIf="telemetric.speed_limit | unitConverter | async as speed_limit" class="flex w-5 h-5 p-1.5 justify-center items-center gap-1 rounded-full border-2 border-error-500 bg-white text-[11px]">{{ speed_limit.value | number : '1.0-0' }}</div>
             </ng-container>
           </ng-container>
           <ng-template #noSpeedData>
@@ -175,7 +175,7 @@
 </table>
 
 <ng-container *ngIf="telemetryData$ | async as telemetric">
-  <div *ngFor="let alert of telemetric.vehicle_alerts; let i = index" class="flex border-t border-new-gray-300 flex-row text-sm py-2 gap-1 my-2">
+  <div *ngFor="let alert of telemetric.vehicle_alerts; let i = index" class="flex border-t border-neutral-500-300 flex-row text-sm py-2 gap-1 my-2">
     <svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M9.05 18.05C8.874 18.05 8.70388 18.0156 8.53963 17.9469C8.37538 17.8781 8.22531 17.7808 8.08944 17.6548L2.39525 11.9606C2.26925 11.8247 2.17188 11.6746 2.10313 11.5104C2.03438 11.3461 2 11.176 2 11C2 10.824 2.03387 10.6519 2.10162 10.4836C2.1695 10.3154 2.26738 10.1673 2.39525 10.0395L8.08944 4.34526C8.22531 4.20776 8.37538 4.10751 8.53963 4.04451C8.70388 3.98151 8.874 3.95001 9.05 3.95001C9.226 3.95001 9.39813 3.98201 9.56638 4.04601C9.73463 4.10989 9.88269 4.20964 10.0106 4.34526L15.7048 10.0395C15.8404 10.1673 15.9401 10.3148 16.004 10.4819C16.068 10.6491 16.1 10.8218 16.1 11C16.1 11.176 16.0685 11.3461 16.0055 11.5104C15.9425 11.6746 15.8423 11.8247 15.7048 11.9606L10.0106 17.6548C9.88269 17.7826 9.73519 17.8805 9.56806 17.9484C9.40094 18.0161 9.22825 18.05 9.05 18.05ZM9.21594 16.8528L14.9028 11.166C14.9413 11.1275 14.9606 11.0721 14.9606 11C14.9606 10.9279 14.9413 10.8726 14.9028 10.8341L9.21594 5.1472C9.17744 5.1087 9.12213 5.08945 9.05 5.08945C8.97788 5.08945 8.92256 5.1087 8.88406 5.1472L3.19719 10.8341C3.15869 10.8726 3.13944 10.9279 3.13944 11C3.13944 11.0721 3.15869 11.1275 3.19719 11.166L8.88406 16.8528C8.92256 16.8913 8.97788 16.9106 9.05 16.9106C9.12213 16.9106 9.17744 16.8913 9.21594 16.8528ZM9.05019 11.8149C9.20969 11.8149 9.34325 11.761 9.45088 11.6533C9.55863 11.5454 9.6125 11.4118 9.6125 11.2524V8.16595C9.6125 8.00657 9.55856 7.87295 9.45069 7.76507C9.34281 7.65732 9.20919 7.60345 9.04981 7.60345C8.89031 7.60345 8.75675 7.65732 8.64913 7.76507C8.54138 7.87295 8.4875 8.00657 8.4875 8.16595V11.2524C8.4875 11.4118 8.54144 11.5454 8.64931 11.6533C8.75719 11.761 8.89081 11.8149 9.05019 11.8149ZM9.05 13.7765C9.22163 13.7765 9.3655 13.7185 9.48163 13.6023C9.59775 13.4862 9.65581 13.3423 9.65581 13.1707C9.65581 12.9991 9.59775 12.8552 9.48163 12.7391C9.3655 12.623 9.22163 12.5649 9.05 12.5649C8.87838 12.5649 8.7345 12.623 8.61838 12.7391C8.50225 12.8552 8.44419 12.9991 8.44419 13.1707C8.44419 13.3423 8.50225 13.4862 8.61838 13.6023C8.7345 13.7185 8.87838 13.7765 9.05 13.7765Z" fill="#1C1B1F" />
     </svg>
@@ -186,26 +186,26 @@
 </ng-container>
 
 <div *ngIf="isDetailsExpanded">
-  <div class="border-b border-new-gray-300 w-[100%] py-1"></div>
+  <div class="border-b border-neutral-500-300 w-[100%] py-1"></div>
 
   <div class="py-3">
-    <p class="text-xs text-new-gray-600 font-normal">Location - Latitude - Longitude</p>
+    <p class="text-xs text-neutral-600 font-normal">Location - Latitude - Longitude</p>
     <ng-container *ngIf="telemetryData$ | async as telemetric; else noLocationData">
       <div class="font-medium text-sm">{{ telemetric.location ? telemetric.location : '-' }} | {{ telemetric.lat ? telemetric.lat : '-' }} | {{ telemetric.lng ? telemetric.lng : '-' }}</div>
     </ng-container>
     <ng-template #noLocationData>
       <div class="font-medium text-sm">- | - | -</div>
     </ng-template>
-    <div class="border-b border-new-gray-300 w-[100%] py-1"></div>
+    <div class="border-b border-neutral-500-300 w-[100%] py-1"></div>
   </div>
 
   <table class="w-full text-sm mt-4">
     <thead>
       <tr class="align-middle pb-2">
-        <th class="w-1/4 text-left text-xs text-new-gray-600 font-normal">VIN</th>
-        <th class="w-1/4 text-left text-xs text-new-gray-600 font-normal">Millage</th>
-        <th class="w-1/4 text-left text-xs text-new-gray-600 font-normal">Battery</th>
-        <th class="w-1/4 text-left text-xs text-new-gray-600 font-normal">Air</th>
+        <th class="w-1/4 text-left text-xs text-neutral-600 font-normal">VIN</th>
+        <th class="w-1/4 text-left text-xs text-neutral-600 font-normal">Millage</th>
+        <th class="w-1/4 text-left text-xs text-neutral-600 font-normal">Battery</th>
+        <th class="w-1/4 text-left text-xs text-neutral-600 font-normal">Air</th>
       </tr>
     </thead>
     <tbody>
@@ -247,7 +247,7 @@
         <td class="w-1/4"></td>
         <td class="w-1/4">
           <div class="flex flex-col">
-            <span class="text-new-gray-600 text-xs font-normal">Ignition</span>
+            <span class="text-neutral-600 text-xs font-normal">Ignition</span>
             <ng-container *ngIf="telemetryData$ | async as telemetric; else noIgnitionData">
               <span class="font-medium">{{ telemetric.ignition !== null && telemetric.ignition !== undefined ? (telemetric.ignition ? 'ON' : 'OFF') : '-' }}</span>
             </ng-container>
@@ -258,7 +258,7 @@
         </td>
         <td class="w-1/4">
           <div class="flex flex-col">
-            <span class="text-new-gray-600 text-xs font-normal">Turbocharger</span>
+            <span class="text-neutral-600 text-xs font-normal">Turbocharger</span>
             <ng-container *ngIf="telemetryData$ | async as telemetric; else noTurboData">
               <span class="font-medium">{{ telemetric.turbocharger_temperature ? telemetric.turbocharger_temperature : '-' }}</span>
             </ng-container>
@@ -269,7 +269,7 @@
         </td>
         <td class="w-1/4">
           <div class="flex flex-col">
-            <span class="text-new-gray-600 text-xs font-normal">Engine</span>
+            <span class="text-neutral-600 text-xs font-normal">Engine</span>
             <ng-container *ngIf="telemetryData$ | async as telemetric; else noEngineData">
               <span class="font-medium">{{ telemetric.engine_temperature ? telemetric.engine_temperature : '-' }}</span>
             </ng-container>
@@ -283,9 +283,9 @@
   </table>
 </div>
 
-<div class="border-b border-new-gray-300 w-[100%] py-1"></div>
+<div class="border-b border-neutral-500-300 w-[100%] py-1"></div>
 <div class="py-2 items-center justify-center flex cursor-pointer" (click)="toggleDetails()" (keydown.enter)="toggleDetails()">
-  <p class="underline text-main-primary font-medium text-sm">{{ isDetailsExpanded ? 'Show less' : 'Show more' }}</p>
+  <p class="underline text-brand-500 font-medium text-sm">{{ isDetailsExpanded ? 'Show less' : 'Show more' }}</p>
   <svg [class.rotate-180]="!isDetailsExpanded" width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
     <mask id="mask0_3814_21259" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="21" height="21">
       <rect x="0.929688" y="0.251465" width="20" height="20" fill="#D9D9D9" />

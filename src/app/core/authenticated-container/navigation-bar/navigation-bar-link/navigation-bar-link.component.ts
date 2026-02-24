@@ -14,6 +14,7 @@ export class NavigationBarLinkComponent {
   @Input() badge?: string | number | null;
   @Input() isCollapsed = false;
   @Input() isActive: boolean = false;
+  @Input() tooltipLabel = '';
 
   shouldBeActive(mainActive: boolean, subActive: boolean): boolean {
     const currentUrl = this.router.url;

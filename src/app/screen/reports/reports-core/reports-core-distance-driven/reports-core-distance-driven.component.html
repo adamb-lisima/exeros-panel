@@ -1,39 +1,41 @@
 <ng-container *ngIf="vehicleByDeviceId$ | async as vehicleByDeviceId">
   <app-infinity-scroll>
     <ng-container header>
-      <div class="flex flex-col gap-8">
-        <div class="flex flex-col gap-8">
-          <div class="min-h-[40px] flex flex-wrap justify-between items-center gap-2">
-            <p class="font-semibold text-xl whitespace-nowrap">Distance Driven</p>
-            <ng-container *ngIf="SHOW_EXPORT_WITHOUT_FILTERS || bodyGroup.controls.vehicle_id.value">
-              <div *appHasPermission="[[accessGroup.DISTANCE_DRIVEN_REPORTS_DOWNLOADER]]" class="flex gap-2">
-                <div class="h-[40px] w-[40px] flex justify-center items-center rounded cursor-pointer border border-platinum text-extra-one" (click)="handleExportDistanceClick()" (keydown.enter)="handleExportDistanceClick()">
-                  <img src="assets/svg/xls-file-icon.svg" alt="Export as PDF" width="24" height="24" />
-                </div>
+      <div class="flex flex-col gap-4">
+        <div class="flex flex-wrap justify-between items-center gap-2">
+          <ng-container *ngIf="SHOW_EXPORT_WITHOUT_FILTERS || bodyGroup.controls.vehicle_id.value">
+            <div *appHasPermission="[[accessGroup.DISTANCE_DRIVEN_REPORTS_DOWNLOADER]]" class="flex gap-2">
+              <div class="h-[40px] w-[40px] flex justify-center items-center rounded cursor-pointer border border-neutral-200 text-success-500" (click)="handleExportDistanceClick()" (keydown.enter)="handleExportDistanceClick()">
+                <img src="assets/svg/xls-file-icon.svg" alt="Export as XLSX" width="24" height="24" />
               </div>
-            </ng-container>
-          </div>
-          <div class="flex flex-wrap items-center gap-x-2">
-            <app-select-control *ngIf="vehicleOptions$ | async as options" class="w-[24%]" label="Vehicle" [multiple]="true" [clearable]="true" [disabled]="!!(vehiclesLoading$ | async)" [options]="options" [formControl]="bodyGroup.controls.vehicle_id"></app-select-control>
-          </div>
+            </div>
+          </ng-container>
         </div>
-        <div class="flex items-center pb-2 border-b border-b-bright-gray">
-          <p class="flex-[0_0_35%] text-sm text-sonic-silver">Registration Plate</p>
-          <p class="flex-[0_0_15%] text-sm text-sonic-silver">Type</p>
-          <p class="flex-[0_0_15%] text-sm text-sonic-silver">Route</p>
-          <p class="flex-[0_0_35%] text-sm text-sonic-silver">Mileage</p>
+        <div class="flex flex-wrap items-center gap-x-2">
+          <app-select-control *ngIf="vehicleOptions$ | async as options" class="w-[24%]" label="Vehicle" [multiple]="true" [clearable]="true" [disabled]="!!(vehiclesLoading$ | async)" [options]="options" [formControl]="bodyGroup.controls.vehicle_id"></app-select-control>
+        </div>
+        <div class="flex items-center pb-2 border-b border-b-neutral-400">
+          <p class="flex-[0_0_35%] text-sm text-neutral-500">Registration Plate</p>
+          <p class="flex-[0_0_15%] text-sm text-neutral-500">Type</p>
+          <p class="flex-[0_0_15%] text-sm text-neutral-500">Route</p>
+          <p class="flex-[0_0_35%] text-sm text-neutral-500">Mileage</p>
         </div>
       </div>
     </ng-container>
     <ng-container list>
-      <div *ngFor="let vehicle of vehicles$ | async; trackByField: 'vehicle_id'" class="flex items-center py-4">
-        <a class="flex-[0_0_35%] font-medium text-sm" (click)="vehicle.vehicle_id !== null ? handleVehicleClick(vehicle.vehicle_id) : null" [ngClass]="{ 'cursor-pointer': vehicle.vehicle_id !== null, 'cursor-default': vehicle.vehicle_id === null }">
-          {{ vehicle.registration_plate }}
-        </a>
-        <p class="flex-[0_0_15%] font-semibold text-sm">{{ vehicle.type }}</p>
-        <p class="flex-[0_0_15%] font-semibold text-sm">{{ vehicle.route }}</p>
-        <p class="flex-[0_0_35%] font-semibold text-sm">{{ vehicle.mileage | number : '1.2-2' }}</p>
-      </div>
+      <ng-container *ngIf="(vehicles$ | async)?.length; else emptyDistanceDriven">
+        <div *ngFor="let vehicle of vehicles$ | async; trackByField: 'vehicle_id'" class="flex items-center py-4">
+          <a class="flex-[0_0_35%] font-medium text-sm" (click)="vehicle.vehicle_id !== null ? handleVehicleClick(vehicle.vehicle_id) : null" [ngClass]="{ 'cursor-pointer': vehicle.vehicle_id !== null, 'cursor-default': vehicle.vehicle_id === null }">
+            {{ vehicle.registration_plate }}
+          </a>
+          <p class="flex-[0_0_15%] font-semibold text-sm">{{ vehicle.type }}</p>
+          <p class="flex-[0_0_15%] font-semibold text-sm">{{ vehicle.route }}</p>
+          <p class="flex-[0_0_35%] font-semibold text-sm">{{ vehicle.mileage | number : '1.2-2' }}</p>
+        </div>
+      </ng-container>
+      <ng-template #emptyDistanceDriven>
+        <app-empty-state heading="No distance data" description="No distance driven data available for the selected date range."></app-empty-state>
+      </ng-template>
     </ng-container>
   </app-infinity-scroll>
 </ng-container>

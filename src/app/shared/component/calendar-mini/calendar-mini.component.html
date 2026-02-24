@@ -16,10 +16,10 @@
             *ngFor="let cell of row"
             class="h-[32px] w-[24px] relative rounded"
             [ngClass]="{
-              'cursor-not-allowed text-new-gray-400 opacity-50': !cell.isAvailable || (!cell.has_video && !cell.has_telematics),
+              'cursor-not-allowed text-neutral-400 opacity-50': !cell.isAvailable || (!cell.has_video && !cell.has_telematics),
               'cursor-pointer ': cell.isAvailable && (cell.has_video || cell.has_telematics),
               'text-black': cell.isAvailable && cell.dayNumber !== selectedDay?.day,
-              'text-black bg-main-primary': cell.isAvailable && cell.dayNumber === selectedDay?.day
+              'text-black bg-brand-500': cell.isAvailable && cell.dayNumber === selectedDay?.day
             }"
             (click)="handleDayClick(cell)"
             (keydown.enter)="handleDayClick(cell)">

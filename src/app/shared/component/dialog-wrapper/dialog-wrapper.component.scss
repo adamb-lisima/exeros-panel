@@ -1,0 +1,75 @@
+:host {
+  display: block;
+}
+
+.dialog-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+}
+
+.dialog-panel {
+  position: relative;
+  background-color: var(--surface-raised);
+  border-radius: 12px;
+  box-shadow: var(--elevation-lg);
+  width: 100%;
+  max-width: 480px;
+  max-height: 90vh;
+  overflow-y: auto;
+  outline: none;
+
+  &:focus-visible {
+    outline: 2px solid var(--brand-500);
+    outline-offset: 2px;
+  }
+
+  &__header {
+    padding: var(--space-6) var(--space-6) var(--space-2);
+    font: var(--text-heading-md);
+    color: var(--neutral-900);
+  }
+
+  &__body {
+    padding: var(--space-2) var(--space-6);
+    font: var(--text-body);
+    color: var(--neutral-600);
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--space-3);
+    padding: var(--space-4) var(--space-6) var(--space-6);
+  }
+}
+
+// Variant-specific action button styling via ::ng-deep
+// Informational: primary action uses brand-500
+.dialog-panel:not(.dialog-panel--destructive) {
+  ::ng-deep .dialog-action-primary {
+    background-color: var(--brand-500);
+    color: var(--neutral-0);
+
+    &:hover {
+      background-color: var(--brand-600);
+    }
+  }
+}
+
+// Destructive: primary action uses error-500
+.dialog-panel--destructive {
+  ::ng-deep .dialog-action-primary {
+    background-color: var(--error-500);
+    color: var(--neutral-0);
+
+    &:hover {
+      background-color: var(--error-600, #dc2626);
+    }
+  }
+}

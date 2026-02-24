@@ -1,23 +1,23 @@
 <app-telematics-core-card title="Event Informations">
   <div class="grid grid-cols-[40px_1fr_1fr] auto-rows-auto overflow-auto">
-    <div class="pb-4 border-b border-bright-gray"></div>
-    <div class="pb-4 border-b border-bright-gray text-xs text-dark-electric-blue">Date/Time</div>
-    <div class="pb-4 border-b border-bright-gray text-xs text-dark-electric-blue">Event</div>
+    <div class="pb-4 border-b border-neutral-400"></div>
+    <div class="pb-4 border-b border-neutral-400 text-xs text-neutral-700">Date/Time</div>
+    <div class="pb-4 border-b border-neutral-400 text-xs text-neutral-700">Event</div>
     <ng-container *ngIf="eventInfos && eventInfos.length > 0; else noData">
       <ng-container *ngFor="let event of eventInfos">
         <div class="flex pl-1 items-center">
           <div
             class="h-2 w-2 rounded-full"
             [ngClass]="{
-              'bg-extra-two': event.status === 'red',
-              'bg-extra-one': event.status === 'green',
-              'bg-extra-three': event.status === 'blue'
+              'bg-error-500': event.status === 'red',
+              'bg-success-500': event.status === 'green',
+              'bg-info-500': event.status === 'blue'
             }"></div>
         </div>
-        <div class="py-4 border-b border-bright-gray text-xs font-medium">
+        <div class="py-4 border-b border-neutral-400 text-xs font-medium">
           {{ event.date | dateFormat : 'serverDateTimeFormat' : 'clientDateTimeFormat' }}
         </div>
-        <div class="py-4 border-b border-bright-gray text-xs font-medium">
+        <div class="py-4 border-b border-neutral-400 text-xs font-medium">
           {{ event.event }}
         </div>
       </ng-container>

@@ -1,39 +1,25 @@
 <ng-container *ngIf="loggedInUser$ | async as loggedInUser">
-  <div class="h-full flex flex-col gap-4 rounded-md bg-white">
-    <span class="w-full flex-[0_0_1px] bg-platinum"></span>
-    <div class="flex-[0_0_45px] flex items-center gap-10 px-6 overflow-x-auto">
-      <a *ngFor="let tab of mainTabs" class="pb-4 whitespace-nowrap font-medium border-b-[3px] cursor-pointer" [ngClass]="isTabActive(tab.module) ? 'border-main-primary' : 'border-transparent text-manatee'" (click)="handleModeClick(tab.module)">
-        {{ tab.label }}
-      </a>
-
-      <div *ngIf="hasDropdownItems" class="relative group pb-5" #timelineTabMenuItem="cdkMenuTriggerFor" [cdkMenuTriggerFor]="menu">
-        <div class="flex items-center gap-1 py-3 px-1.5 rounded-md cursor-pointer hover:bg-anti-flash-white">
-          <svg width="14" height="4" viewBox="0 0 14 4" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path fill="currentColor" d="M1.99992 3.66536C1.54159 3.66536 1.14922 3.50217 0.822835 3.17578C0.496446 2.84939 0.333252 2.45703 0.333252 1.9987C0.333252 1.54036 0.496446 1.148 0.822835 0.821615C1.14922 0.495226 1.54159 0.332031 1.99992 0.332031C2.45825 0.332031 2.85061 0.495226 3.177 0.821615C3.50339 1.148 3.66659 1.54036 3.66659 1.9987C3.66659 2.45703 3.50339 2.84939 3.177 3.17578C2.85061 3.50217 2.45825 3.66536 1.99992 3.66536ZM6.99992 3.66536C6.54159 3.66536 6.14922 3.50217 5.82284 3.17578C5.49645 2.84939 5.33325 2.45703 5.33325 1.9987C5.33325 1.54036 5.49645 1.148 5.82284 0.821615C6.14922 0.495226 6.54159 0.332031 6.99992 0.332031C7.45825 0.332031 7.85061 0.495226 8.177 0.821615C8.50339 1.148 8.66659 1.54036 8.66659 1.9987C8.66659 2.45703 8.50339 2.84939 8.177 3.17578C7.85061 3.50217 7.45825 3.66536 6.99992 3.66536ZM11.9999 3.66536C11.5416 3.66536 11.1492 3.50217 10.8228 3.17578C10.4964 2.84939 10.3333 2.45703 10.3333 1.9987C10.3333 1.54036 10.4964 1.148 10.8228 0.821615C11.1492 0.495226 11.5416 0.332031 11.9999 0.332031C12.4583 0.332031 12.8506 0.495226 13.177 0.821615C13.5034 1.148 13.6666 1.54036 13.6666 1.9987C13.6666 2.45703 13.5034 2.84939 13.177 3.17578C12.8506 3.50217 12.4583 3.66536 11.9999 3.66536Z" [ngClass]="{ 'fill-[#EE8444]': isAnyDropdownTabActive(), 'fill-black dark:fill-cultured': !isAnyDropdownTabActive() }"></path>
-          </svg>
-        </div>
-      </div>
-
-      <ng-template #menu>
-        <div cdkMenu class="flex flex-col bg-white p-6 border-anti-flash-white border">
+  <div class="flex h-full bg-surface-base rounded-md overflow-hidden">
+    <!-- Left Sidebar -->
+    <nav class="flex-[0_0_240px] flex flex-col gap-1 p-4 border-r border-neutral-200 overflow-y-auto settings-sidebar" aria-label="Settings navigation">
+      <ng-container *ngFor="let group of visibleSectionGroups; let isLast = last">
+        <div class="flex flex-col gap-1">
+          <span class="settings-sidebar__group-label">{{ group.label }}</span>
           <a
-            *ngFor="let tab of dropdownTabs; let isFirst = first"
-            cdkMenuItem
-            class="font-medium border-b-[3px] cursor-pointer"
-            [ngClass]="{
-              'border-main-primary': isTabActive(tab.module),
-              'border-transparent text-manatee': !isTabActive(tab.module),
-              'pt-4': !isFirst
-            }"
-            (click)="handleModeClick(tab.module)">
+            *ngFor="let tab of group.tabs"
+            class="settings-sidebar__item"
+            [class.settings-sidebar__item--active]="isTabActive(tab.module)"
+            (click)="handleModeClick(tab.module)"
+          >
             {{ tab.label }}
           </a>
         </div>
-      </ng-template>
-    </div>
+        <span *ngIf="!isLast" class="block h-px bg-neutral-200 mx-3 my-2"></span>
+      </ng-container>
+    </nav>
 
-    <span class="w-full flex-[0_0_1px] -mt-[18px] bg-platinum"></span>
-    <div class="pt-6 px-6">
+    <!-- Right Content Area -->
+    <div class="flex-1 p-6 overflow-y-auto">
       <ng-container [ngSwitch]="module">
         <app-settings-core-profile *ngSwitchCase="'profile'"></app-settings-core-profile>
         <app-settings-core-notifications *ngSwitchCase="'notifications'"></app-settings-core-notifications>

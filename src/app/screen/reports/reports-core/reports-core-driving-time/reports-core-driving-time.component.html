@@ -1,13 +1,12 @@
-<div *ngIf="options$ | async as options" class="flex flex-col h-full" [class.loader]="drivingTimeLoading$ | async">
-  <div class="flex flex-col gap-8 -mb-6">
-    <div class="min-h-[40px] flex flex-wrap justify-between items-center gap-2">
-      <p class="font-semibold text-xl whitespace-nowrap">Driving Time</p>
+<div *ngIf="options$ | async as options" class="flex flex-col h-full">
+  <div class="flex flex-col gap-4 mb-4">
+    <div class="flex flex-wrap justify-between items-center gap-2">
       <div *appHasPermission="[[accessGroup.DRIVING_TIME_REPORTS_DOWNLOADER]]" class="flex gap-2">
-        <div class="h-[40px] w-[40px] flex justify-center items-center rounded cursor-pointer border border-platinum text-extra-two" (click)="handleExportClick('pdf')" (keydown.enter)="handleExportClick('pdf')">
+        <div class="h-[40px] w-[40px] flex justify-center items-center rounded cursor-pointer border border-neutral-200 text-error-500" (click)="handleExportClick('pdf')" (keydown.enter)="handleExportClick('pdf')">
           <img src="assets/svg/pdf-file-icon.svg" alt="Export as PDF" width="24" height="24" />
         </div>
-        <div class="h-[40px] w-[40px] flex justify-center items-center rounded cursor-pointer border border-platinum text-extra-one" (click)="handleExportClick('xlsx')" (keydown.enter)="handleExportClick('xlsx')">
-          <img src="assets/svg/xls-file-icon.svg" alt="Export as PDF" width="24" height="24" />
+        <div class="h-[40px] w-[40px] flex justify-center items-center rounded cursor-pointer border border-neutral-200 text-success-500" (click)="handleExportClick('xlsx')" (keydown.enter)="handleExportClick('xlsx')">
+          <img src="assets/svg/xls-file-icon.svg" alt="Export as XLSX" width="24" height="24" />
         </div>
       </div>
     </div>
@@ -16,10 +15,15 @@
       <app-select-control *ngIf="driverOptions$ | async as driverOptions" class="w-[230px]" label="Driver" [options]="driverOptions" [formControl]="driverControl"></app-select-control>
     </div>
   </div>
-  <app-line-chart [height]="240" [data]="options.series" [options]="{ overlayTemplate: overlay }" class="flex-1"></app-line-chart>
+  <ng-container *ngIf="options.series[0]?.data?.length; else emptyDrivingTime">
+    <app-line-chart [height]="240" [data]="options.series" [options]="{ overlayTemplate: overlay }" class="flex-1"></app-line-chart>
+  </ng-container>
+  <ng-template #emptyDrivingTime>
+    <app-empty-state heading="No driving time data" description="No driving time data available for the selected date range."></app-empty-state>
+  </ng-template>
 </div>
 <ng-template #overlay let-data>
-  <div class="flex flex-col gap-1 py-1 px-2 bg-outer-space rounded-md translate-x-[-50%] w-max bottom-2 absolute pointer-events-none">
+  <div class="flex flex-col gap-1 py-1 px-2 bg-neutral-800 rounded-md translate-x-[-50%] w-max bottom-2 absolute pointer-events-none">
     <p class="text-white text-xs opacity-80">{{ data.x | dateFormat : 'jsDate' : 'clientDateFormat' }}</p>
     <p class="text-white text-xs">{{ data.y }} {{ data.unit }}</p>
   </div>

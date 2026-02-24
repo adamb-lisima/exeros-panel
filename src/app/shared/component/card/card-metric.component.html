@@ -1,0 +1,16 @@
+<div class="card-metric">
+  <div class="card-metric__label">{{ label }}</div>
+  <div class="card-metric__value">{{ value }}</div>
+  <div class="card-metric__bottom">
+    <span *ngIf="trend" class="card-metric__trend" [ngClass]="trendClass">
+      <span class="card-metric__trend-icon">{{ trendIcon }}</span>
+      <span>{{ trend.percentage }}%</span>
+    </span>
+    <svg *ngIf="sparklineData && sparklineData.length >= 2"
+         class="card-metric__sparkline"
+         viewBox="0 0 100 32"
+         preserveAspectRatio="none">
+      <path [attr.d]="sparklinePath" fill="none" stroke="var(--brand-500)" stroke-width="2" />
+    </svg>
+  </div>
+</div>

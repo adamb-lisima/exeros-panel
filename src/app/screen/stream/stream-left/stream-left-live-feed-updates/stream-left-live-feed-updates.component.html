@@ -2,7 +2,7 @@
   <div *ngIf="alarms$ | async as alarms" class="h-[600px] p-5 rounded-xl bg-white">
     <app-infinity-scroll *ngIf="alarmsMeta$ | async as meta" [transparent]="true" [listGap]="true" [pageMeta]="meta" [loading]="alarmsLoading$ | async" (nextPageRequest)="handleNextPageRequest($event)">
       <ng-container filters>
-        <p class="font-medium text-sm text-dim-gray">Vehicle's recent updates</p>
+        <p class="font-medium text-sm text-neutral-500">Vehicle's recent updates</p>
       </ng-container>
       <ng-container list>
         <ng-container *ngIf="alarms.length; else noAlarmsTemplate">

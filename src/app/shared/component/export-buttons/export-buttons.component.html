@@ -1,8 +1,8 @@
 <div [ngClass]="containerClass">
-  <div class="h-[40px] w-[40px] flex justify-center items-center rounded cursor-pointer border border-platinum text-extra-two" (click)="handleExportClick('pdf')" (keydown.enter)="handleExportClick('pdf')">
+  <div class="h-[40px] w-[40px] flex justify-center items-center rounded cursor-pointer border border-neutral-200 text-error-500" (click)="handleExportClick('pdf')" (keydown.enter)="handleExportClick('pdf')">
     <img src="assets/svg/pdf-file-icon.svg" alt="Export as PDF" width="24" height="24" />
   </div>
-  <div class="h-[40px] w-[40px] flex justify-center items-center rounded cursor-pointer border border-platinum text-extra-one" (click)="handleExportClick('xlsx')" (keydown.enter)="handleExportClick('xlsx')">
+  <div class="h-[40px] w-[40px] flex justify-center items-center rounded cursor-pointer border border-neutral-200 text-success-500" (click)="handleExportClick('xlsx')" (keydown.enter)="handleExportClick('xlsx')">
     <img src="assets/svg/xls-file-icon.svg" alt="Export as PDF" width="24" height="24" />
   </div>
 </div>

@@ -1,12 +1,16 @@
 <button
-  class="w-full h-full flex justify-center items-center gap-2 py-2.5 px-4 rounded text-sm disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
-  [ngClass]="{
-    'bg-main-primary text-white': type === 'primary',
-    'text-extra-three bg-extra-three--10': type === 'secondary',
-    'bg-white text-[#EE8444]  border-2 border-main-primary hover:bg-main-primary hover:text-white': type === 'ternary',
-    'text-main-primary bg-white underline': type === 'quaternary'
-  }"
+  class="btn"
+  [class]="'btn btn--' + variant + ' btn--' + size"
+  [class.btn--loading]="loading"
   [disabled]="disabled"
+  [attr.aria-label]="ariaLabel || null"
+  [attr.aria-busy]="loading || null"
   (click)="handleButtonClick()">
-  <ng-content></ng-content>
+  <ng-container *ngIf="!loading; else spinnerTpl">
+    <ng-content></ng-content>
+  </ng-container>
+  <ng-template #spinnerTpl>
+    <span class="btn-spinner" aria-hidden="true"></span>
+    <span class="sr-only">Loading</span>
+  </ng-template>
 </button>

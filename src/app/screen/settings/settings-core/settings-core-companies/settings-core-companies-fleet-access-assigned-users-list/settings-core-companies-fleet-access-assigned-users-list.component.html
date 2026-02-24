@@ -11,24 +11,24 @@
     <table class="table-auto">
       <thead>
         <th></th>
-        <tr class="border-b border-bright-gray">
+        <tr class="border-b border-neutral-400">
           <td class="px-2"></td>
-          <td class="px-2 py-2 text-xs text-manatee">Name</td>
-          <td class="px-2 text-xs text-manatee">E-mail</td>
+          <td class="px-2 py-2 text-xs text-neutral-400">Name</td>
+          <td class="px-2 text-xs text-neutral-400">E-mail</td>
           <td class="px-2"></td>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let user of data?.data" class="border-b border-bright-gray">
+        <tr *ngFor="let user of data?.data" class="border-b border-neutral-400">
           <td class="px-2 text-sm"></td>
           <td class="px-2 py-4 text-sm">{{ user.name }}</td>
           <td class="px-2 text-sm">{{ user.email }}</td>
           <td class="px-2">
             <div class="flex">
-              <span class="px-2 text-main-primary text-sm font-semibold underline cursor-pointer" (keydown.enter)="handleEditUserClick(user)" (click)="handleEditUserClick(user)">Edit</span>
-              <span class="px-2 text-main-primary text-sm font-semibold underline cursor-pointer" (click)="handleResetPasswordClick(user)" (keydown.enter)="handleResetPasswordClick(user)">Reset Password</span>
-              <span *ngIf="user.is_mfa_enabled" class="px-2 text-main-primary text-sm font-semibold underline cursor-pointer" (click)="handleResetMFAClick(user)" (keydown.enter)="handleResetMFAClick(user)">Reset MFA</span>
-              <span class="px-2 text-main-primary text-sm font-semibold underline cursor-pointer" (click)="handleDeleteUserClick(user)" (keydown.enter)="handleDeleteUserClick(user)">Delete</span>
+              <span class="px-2 text-brand-500 text-sm font-semibold underline cursor-pointer" (keydown.enter)="handleEditUserClick(user)" (click)="handleEditUserClick(user)">Edit</span>
+              <span class="px-2 text-brand-500 text-sm font-semibold underline cursor-pointer" (click)="handleResetPasswordClick(user)" (keydown.enter)="handleResetPasswordClick(user)">Reset Password</span>
+              <span *ngIf="user.is_mfa_enabled" class="px-2 text-brand-500 text-sm font-semibold underline cursor-pointer" (click)="handleResetMFAClick(user)" (keydown.enter)="handleResetMFAClick(user)">Reset MFA</span>
+              <span class="px-2 text-brand-500 text-sm font-semibold underline cursor-pointer" (click)="handleDeleteUserClick(user)" (keydown.enter)="handleDeleteUserClick(user)">Delete</span>
             </div>
           </td>
         </tr>

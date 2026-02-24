@@ -15,13 +15,21 @@ import { DriversElement } from '../../../drivers/drivers.model';
 import { EventsMeta } from '../../../fleets/fleets.model';
 import { AccessGroup } from '../../../settings/settings.model';
 import { EventsActions } from '../../events.actions';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 type EventsType = 'NEW' | 'ESCALATED' | 'REVIEWED' | 'ARCHIVED' | 'INVALID_VIDEO';
 
 @Component({
   selector: 'app-events-left-list',
   templateUrl: './events-left-list.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    trigger('expandDetail', [
+      state('collapsed', style({ height: '0', opacity: '0', overflow: 'hidden' })),
+      state('expanded', style({ height: '*', opacity: '1', overflow: 'hidden' })),
+      transition('collapsed <=> expanded', [animate('200ms ease-in-out')])
+    ])
+  ]
 })
 export class EventsLeftListComponent implements OnInit, OnDestroy, AfterViewInit {
   @Output() vehicleFilter = new EventEmitter<number>();
@@ -53,6 +61,8 @@ export class EventsLeftListComponent implements OnInit, OnDestroy, AfterViewInit
   isHovered = false;
   hoveredEventId: string | null = null;
   private hideTimeout: any = null;
+
+  expandedEventIds = new Set<string>();
 
   allLoadedEvents: EventsElement[] = [];
   private readonly loadedPages = new Set<number>();
@@ -353,6 +363,39 @@ export class EventsLeftListComponent implements OnInit, OnDestroy, AfterViewInit
     if (dataChanged) {
       this.forceRefreshView();
     }
+  }
+
+  toggleEventExpand(eventId: string, clickEvent: MouseEvent): void {
+    clickEvent.stopPropagation();
+    if (this.expandedEventIds.has(eventId)) {
+      this.expandedEventIds.delete(eventId);
+    } else {
+      this.expandedEventIds.add(eventId);
+    }
+    this.cdr.markForCheck();
+  }
+
+  isEventExpanded(eventId: string): boolean {
+    return this.expandedEventIds.has(eventId);
+  }
+
+  getEventBadgeStatus(event: EventsElement): 'online' | 'offline' | 'warning' {
+    const status = event.last_status || event.status;
+    switch (status) {
+      case 'REVIEWED':
+      case 'DO_NOT_ESCALATE':
+        return 'online';
+      case 'ESCALATED':
+      case 'FALSE_EVENT':
+        return 'warning';
+      default:
+        return 'offline';
+    }
+  }
+
+  getEventBadgeLabel(event: EventsElement): string {
+    const status = event.last_status || event.status;
+    return status.replace(/_/g, ' ').toLowerCase().replace(/\b\w/g, c => c.toUpperCase());
   }
 
   ngOnDestroy(): void {

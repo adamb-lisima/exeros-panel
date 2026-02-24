@@ -6,6 +6,7 @@ const getState = createFeatureSelector<DashboardState>(DASHBOARD_FEATURE_KEY);
 export const DashboardSelectors = {
   rangeFilter: createSelector(getState, state => state.rangeFilter),
 
+  dashboardLoading: createSelector(getState, state => state.dashboardLoading),
   dashboardParams: createSelector(getState, state => state.dashboardParams),
   dashboard: createSelector(getState, state => state.dashboard),
 

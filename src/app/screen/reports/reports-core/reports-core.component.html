@@ -1,68 +1,155 @@
-<div class="flex flex-col gap-4">
-  <div class="grid grid-cols-4 auto-rows-max gap-4">
+<div class="flex flex-col gap-6">
+  <div class="reports-grid">
     <ng-template #mileageTpl *appHasPermission="[[accessGroup.MILEAGE_REPORTS_VIEWER]]">
-      <div [ngClass]="{ 'col-span-2': hasVehicleIssues, 'col-span-4': !hasVehicleIssues, 'h-[390px]': hasDrivingTime, 'h-[796px]': !hasDrivingTime }" class="exeros-fragment row-start-1 h-[390px]">
-        <app-reports-core-mileage></app-reports-core-mileage>
+      <div [ngClass]="{ 'col-span-1': hasVehicleIssues, 'col-span-2': !hasVehicleIssues }">
+        <app-card variant="chart" [loading]="!!(mileageLoading$ | async)">
+          <div card-header class="flex items-center justify-between">
+            <p class="text-heading-sm font-semibold">Mileage</p>
+            <span class="text-body-sm text-neutral-400">{{ selectedRangeMessage$ | async }}</span>
+          </div>
+          <div card-body>
+            <app-reports-core-mileage></app-reports-core-mileage>
+          </div>
+        </app-card>
       </div>
     </ng-template>
 
     <ng-template #drivingTimeTpl *appHasPermission="[[accessGroup.DRIVING_TIME_REPORTS_VIEWER]]">
-      <div [ngClass]="{ 'col-span-2': hasVehicleIssues, 'col-span-4': !hasVehicleIssues, 'h-[390px]': hasMileage, 'h-[796px]': !hasMileage }" class="exeros-fragment row-start-2">
-        <app-reports-core-driving-time></app-reports-core-driving-time>
+      <div [ngClass]="{ 'col-span-1': hasVehicleIssues, 'col-span-2': !hasVehicleIssues }">
+        <app-card variant="chart" [loading]="!!(drivingTimeLoading$ | async)">
+          <div card-header class="flex items-center justify-between">
+            <p class="text-heading-sm font-semibold">Driving Time</p>
+            <span class="text-body-sm text-neutral-400">{{ selectedRangeMessage$ | async }}</span>
+          </div>
+          <div card-body>
+            <app-reports-core-driving-time></app-reports-core-driving-time>
+          </div>
+        </app-card>
       </div>
     </ng-template>
 
     <ng-template #vehicleIssuesTpl *appHasPermission="[[accessGroup.VEHICLE_ISSUES_REPORTS_VIEWER]]">
-      <div class="exeros-fragment row-start-1 row-end-3 h-[796px] col-span-2">
-        <app-reports-core-vehicle-issues></app-reports-core-vehicle-issues>
+      <div class="col-span-1 row-span-2">
+        <app-card variant="chart" [loading]="!!(vehicleIssuesLoading$ | async)">
+          <div card-header>
+            <p class="text-heading-sm font-semibold">Vehicle Issues</p>
+          </div>
+          <div card-body class="h-full">
+            <app-reports-core-vehicle-issues></app-reports-core-vehicle-issues>
+          </div>
+        </app-card>
       </div>
     </ng-template>
 
     <ng-template #distanceDrivenTpl *appHasPermission="[[accessGroup.DISTANCE_DRIVEN_REPORTS_VIEWER]]">
-      <div [ngClass]="{ 'col-span-2': hasEvents, 'col-span-4': !hasEvents }" class="exeros-fragment row-start-3 h-[627px]">
-        <app-reports-core-distance-driven></app-reports-core-distance-driven>
+      <div [ngClass]="{ 'col-span-1': hasEvents, 'col-span-2': !hasEvents }">
+        <app-card variant="chart" [loading]="!!(distanceDrivenLoading$ | async)">
+          <div card-header class="flex items-center justify-between">
+            <p class="text-heading-sm font-semibold">Distance Driven</p>
+            <span class="text-body-sm text-neutral-400">{{ selectedRangeMessage$ | async }}</span>
+          </div>
+          <div card-body>
+            <app-reports-core-distance-driven></app-reports-core-distance-driven>
+          </div>
+        </app-card>
       </div>
     </ng-template>
 
     <ng-template #eventsTpl *appHasPermission="[[accessGroup.EVENTS_REPORTS_VIEWER]]">
-      <div [ngClass]="{ 'col-span-2': hasDistanceDriven, 'col-span-4': !hasDistanceDriven }" class="exeros-fragment row-start-3 h-[627px]">
-        <app-reports-core-vehicles-events></app-reports-core-vehicles-events>
+      <div [ngClass]="{ 'col-span-1': hasDistanceDriven, 'col-span-2': !hasDistanceDriven }">
+        <app-card variant="chart" [loading]="!!(eventsLoading$ | async)">
+          <div card-header class="flex items-center justify-between">
+            <p class="text-heading-sm font-semibold">Events</p>
+            <span class="text-body-sm text-neutral-400">{{ selectedRangeMessage$ | async }}</span>
+          </div>
+          <div card-body>
+            <app-reports-core-vehicles-events></app-reports-core-vehicles-events>
+          </div>
+        </app-card>
       </div>
     </ng-template>
 
     <ng-template #alarmsTpl *appHasPermission="[[accessGroup.ALARMS_REPORTS_VIEWER]]">
-      <div class="exeros-fragment row-start-4 col-span-4 h-[627px]">
-        <app-reports-core-vehicles-alarms></app-reports-core-vehicles-alarms>
+      <div class="col-span-2">
+        <app-card variant="chart" [loading]="!!(alarmsLoading$ | async)">
+          <div card-header class="flex items-center justify-between">
+            <p class="text-heading-sm font-semibold">Alarms</p>
+            <span class="text-body-sm text-neutral-400">{{ selectedRangeMessage$ | async }}</span>
+          </div>
+          <div card-body>
+            <app-reports-core-vehicles-alarms></app-reports-core-vehicles-alarms>
+          </div>
+        </app-card>
       </div>
     </ng-template>
 
     <ng-template #accidentsTpl *appHasPermission="[[accessGroup.ACCIDENTS_REPORTS_VIEWER]]">
-      <div [ngClass]="{ 'col-span-1': hasTrips, 'col-span-4': !hasTrips }" class="exeros-fragment row-start-5 h-[676px]">
-        <app-reports-core-accidents></app-reports-core-accidents>
+      <div [ngClass]="{ 'col-span-1': hasTrips, 'col-span-2': !hasTrips }">
+        <app-card variant="chart" [loading]="!!(accidentsLoading$ | async)">
+          <div card-header class="flex items-center justify-between">
+            <p class="text-heading-sm font-semibold">Accidents</p>
+            <span class="text-body-sm text-neutral-400">{{ selectedRangeMessage$ | async }}</span>
+          </div>
+          <div card-body>
+            <app-reports-core-accidents></app-reports-core-accidents>
+          </div>
+        </app-card>
       </div>
     </ng-template>
 
     <ng-template #tripsTpl *appHasPermission="[[accessGroup.TRIPS_REPORTS_VIEWER]]">
-      <div [ngClass]="{ 'col-span-3': hasAccidents, 'col-span-4': !hasAccidents }" class="exeros-fragment row-start-5 h-[676px]">
-        <app-reports-core-trips></app-reports-core-trips>
+      <div [ngClass]="{ 'col-span-1': hasAccidents, 'col-span-2': !hasAccidents }">
+        <app-card variant="chart" [loading]="!!(tripsLoading$ | async)">
+          <div card-header class="flex items-center justify-between">
+            <p class="text-heading-sm font-semibold">Trip Reports</p>
+            <span class="text-body-sm text-neutral-400">{{ selectedRangeMessage$ | async }}</span>
+          </div>
+          <div card-body>
+            <app-reports-core-trips></app-reports-core-trips>
+          </div>
+        </app-card>
       </div>
     </ng-template>
 
     <ng-template #vehicleChecksTpl *appHasPermission="[[accessGroup.VEHICLES_CHECKS_REPORTS_VIEWER]]">
-      <div [ngClass]="{ 'col-span-2': hasOnlineStatus, 'col-span-4': !hasOnlineStatus }" class="exeros-fragment row-start-6 h-[627px]">
-        <app-reports-core-vehicles-checks></app-reports-core-vehicles-checks>
+      <div [ngClass]="{ 'col-span-1': hasOnlineStatus, 'col-span-2': !hasOnlineStatus }">
+        <app-card variant="chart" [loading]="!!(vehicleChecksLoading$ | async)">
+          <div card-header class="flex items-center justify-between">
+            <p class="text-heading-sm font-semibold">Vehicle Checks</p>
+            <span class="text-body-sm text-neutral-400">{{ selectedRangeMessage$ | async }}</span>
+          </div>
+          <div card-body>
+            <app-reports-core-vehicles-checks></app-reports-core-vehicles-checks>
+          </div>
+        </app-card>
       </div>
     </ng-template>
 
     <ng-template #onlineStatusTpl *appHasPermission="[[accessGroup.VEHICLE_ONLINE_STATUS_REPORTS_VIEWER]]">
-      <div [ngClass]="{ 'col-span-2': hasVehicleChecks, 'col-span-4': !hasVehicleChecks }" class="exeros-fragment row-start-6 h-[627px]">
-        <app-reports-core-vehicle-online-status></app-reports-core-vehicle-online-status>
+      <div [ngClass]="{ 'col-span-1': hasVehicleChecks, 'col-span-2': !hasVehicleChecks }">
+        <app-card variant="chart" [loading]="!!(vehicleOnlineStatusLoading$ | async)">
+          <div card-header class="flex items-center justify-between">
+            <p class="text-heading-sm font-semibold">Vehicle Online Status</p>
+            <span class="text-body-sm text-neutral-400">{{ selectedRangeMessage$ | async }}</span>
+          </div>
+          <div card-body>
+            <app-reports-core-vehicle-online-status></app-reports-core-vehicle-online-status>
+          </div>
+        </app-card>
       </div>
     </ng-template>
 
     <ng-template #userLogsTpl *appHasPermission="[[accessGroup.USER_LOGS_REPORTS_VIEWER]]">
-      <div class="exeros-fragment row-start-7 col-span-4 h-[627px]">
-        <app-reports-core-user-logs></app-reports-core-user-logs>
+      <div class="col-span-2">
+        <app-card variant="chart" [loading]="!!(userLogsLoading$ | async)">
+          <div card-header class="flex items-center justify-between">
+            <p class="text-heading-sm font-semibold">User Logs</p>
+            <span class="text-body-sm text-neutral-400">{{ selectedRangeMessage$ | async }}</span>
+          </div>
+          <div card-body>
+            <app-reports-core-user-logs></app-reports-core-user-logs>
+          </div>
+        </app-card>
       </div>
     </ng-template>
 

@@ -2,14 +2,14 @@
   <ng-container *ngIf="accident">
     <div class="flex justify-between items-center px-5 pt-5">
       <p class="font-medium">Accident</p>
-      <div class="rounded-md cursor-pointer bg-anti-flash-white" (click)="handleCloseClick()" (keydown.enter)="handleCloseClick()">
+      <div class="rounded-md cursor-pointer bg-neutral-100" (click)="handleCloseClick()" (keydown.enter)="handleCloseClick()">
         <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M12.7279 21.2129L21.2132 12.7276" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
           <path d="M21.2132 21.2138L12.7279 12.7285" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
       </div>
     </div>
-    <span class="w-full flex-[0_0_1px] bg-platinum"></span>
+    <span class="w-full flex-[0_0_1px] bg-neutral-200"></span>
     <div class="flex flex-col gap-8 pb-8 mx-14 overflow-auto">
       <div class="flex items-center gap-2">
         <p class="font-medium text-xl">{{ accident.vehicle.registration_plate }}</p>
@@ -19,7 +19,7 @@
         <p class="font-medium text-xl">{{ accident.date | dateFormat : 'serverDateTimeFormat' : 'clientDateTimeFormat' }}</p>
       </div>
       <div class="flex flex-col gap-8">
-        <div class="flex-[0_0_65px] flex items-center pl-4 rounded-md bg-light-steel-blue">
+        <div class="flex-[0_0_65px] flex items-center pl-4 rounded-md bg-neutral-300">
           <p class="">Safety Prompts</p>
         </div>
         <div class="flex ml-4 gap-6">
@@ -53,10 +53,10 @@
         </div>
       </div>
       <div class="flex flex-col gap-8">
-        <div class="flex-[0_0_65px] flex items-center pl-4 rounded-md bg-light-steel-blue">
+        <div class="flex-[0_0_65px] flex items-center pl-4 rounded-md bg-neutral-300">
           <p class="">Accident Details</p>
         </div>
-        <div class="flex flex-col ml-4 divide-y divide-bright-gray">
+        <div class="flex flex-col ml-4 divide-y divide-neutral-200">
           <div class="flex pb-4">
             <p class="flex-1">Date & Time</p>
             <p class="flex-1">{{ accident.date | dateFormat : 'serverDateTimeFormat' : 'clientDateTimeFormat' }}</p>
@@ -80,16 +80,16 @@
         </div>
       </div>
       <div *ngIf="markers && markers.length > 0" class="flex flex-col justify-center gap-8">
-        <div class="flex-[0_0_65px] flex items-center pl-4 rounded-md bg-light-steel-blue">
+        <div class="flex-[0_0_65px] flex items-center pl-4 rounded-md bg-neutral-300">
           <p class="">Map</p>
         </div>
         <app-map class="h-[350px] mx-4" [markers]="markers" [center]="markers[0].coordinates" [zoom]="15"></app-map>
       </div>
       <div *ngFor="let thirdPartyDetail of accident.third_party_vehicle_details; trackByField: 'id'; let i = index" class="flex flex-col gap-8">
-        <div class="flex-[0_0_65px] flex items-center pl-4 rounded-md bg-light-steel-blue">
+        <div class="flex-[0_0_65px] flex items-center pl-4 rounded-md bg-neutral-300">
           <p class="">3rd Party Vehicle Registration Details #{{ i + 1 }}</p>
         </div>
-        <div class="flex flex-col ml-4 divide-y divide-bright-gray">
+        <div class="flex flex-col ml-4 divide-y divide-neutral-200">
           <div class="flex pb-4">
             <p class="flex-1">Registration Plate</p>
             <p class="flex-1">{{ thirdPartyDetail.registration_plate }}</p>
@@ -137,10 +137,10 @@
         </div>
       </div>
       <div *ngFor="let otherDetail of accident.other_details; trackByField: 'id'; let i = index" class="flex flex-col gap-8">
-        <div class="flex-[0_0_65px] flex items-center pl-4 rounded-md bg-light-steel-blue">
+        <div class="flex-[0_0_65px] flex items-center pl-4 rounded-md bg-neutral-300">
           <p class="">Other Details #{{ i + 1 }}</p>
         </div>
-        <div class="flex flex-col divide-y divide-bright-gray">
+        <div class="flex flex-col divide-y divide-neutral-200">
           <div class="flex pb-4">
             <p class="flex-1">Driver Name</p>
             <p class="flex-1">{{ otherDetail.driver_name }}</p>
@@ -164,10 +164,10 @@
         </div>
       </div>
       <div *ngFor="let witness of accident.witnesses; trackByField: 'id'; let i = index" class="flex flex-col gap-8">
-        <div class="flex-[0_0_65px] flex items-center pl-4 rounded-md bg-light-steel-blue">
+        <div class="flex-[0_0_65px] flex items-center pl-4 rounded-md bg-neutral-300">
           <p class="">Witness #{{ i + 1 }}</p>
         </div>
-        <div class="flex flex-col ml-4 divide-y divide-bright-gray">
+        <div class="flex flex-col ml-4 divide-y divide-neutral-200">
           <div class="flex pb-4">
             <p class="flex-1">Name</p>
             <p class="flex-1">{{ witness.full_name }}</p>
@@ -183,10 +183,10 @@
         </div>
       </div>
       <div class="flex flex-col gap-8">
-        <div class="flex-[0_0_65px] flex items-center pl-4 rounded-md bg-light-steel-blue">
+        <div class="flex-[0_0_65px] flex items-center pl-4 rounded-md bg-neutral-300">
           <p class="">Driver</p>
         </div>
-        <div class="flex flex-col ml-4 divide-y divide-bright-gray">
+        <div class="flex flex-col ml-4 divide-y divide-neutral-200">
           <div class="flex pb-4">
             <p class="flex-1">Name</p>
             <p class="flex-1">{{ accident.driver.name }}</p>
@@ -205,7 +205,7 @@
           </div>
         </div>
       </div>
-      <div class="flex-[0_0_65px] flex items-center pl-4 rounded-md bg-light-steel-blue">
+      <div class="flex-[0_0_65px] flex items-center pl-4 rounded-md bg-neutral-300">
         <p class="">Images</p>
       </div>
       <div class="flex flex-col gap-4">

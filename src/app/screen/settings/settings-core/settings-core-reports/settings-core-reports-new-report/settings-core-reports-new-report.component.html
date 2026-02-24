@@ -21,7 +21,7 @@
       <app-tree-control label="Frequency" [formControl]="bodyGroup.controls.type" [options]="typeOptions"></app-tree-control>
     </div>
     <td><app-checkbox-control label="ACTIVE" [formControl]="bodyGroup.controls.status"></app-checkbox-control></td>
-    <span class="text-xs text-dim-gray">* - mandatory fields</span>
+    <span class="text-xs text-neutral-500">* - mandatory fields</span>
   </div>
   <div class="flex flex-1 justify-end" footer>
     <app-button (buttonClick)="data?.id ? handleUpdateReportClick() : handleAddReportClick()">

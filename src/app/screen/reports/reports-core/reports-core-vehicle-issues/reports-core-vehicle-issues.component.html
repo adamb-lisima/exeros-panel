@@ -1,25 +1,22 @@
 <ng-container *ngIf="vehicleIssues$ | async as vehicleIssues">
   <app-infinity-scroll *ngIf="vehicleIssuesMeta$ | async as vehicleIssuesMeta" [pageMeta]="vehicleIssuesMeta" [loading]="vehicleIssuesLoading$ | async" (nextPageRequest)="handleNextPageRequest($event)">
-    <ng-container header>
-      <p class="font-semibold text-xl">Vehicle Issues</p>
-    </ng-container>
     <ng-container list>
       <ng-container *ngIf="vehicleIssues.length; else noVehicleIssuesTemplate">
         <div *ngFor="let vehicleIssue of vehicleIssues; trackByField: 'registration_plate'" class="flex items-center gap-4 py-4 cursor-pointer" (click)="handleRowClick(vehicleIssue)" (keydown.enter)="handleRowClick(vehicleIssue)">
-          <div class="h-[55px] flex-[0_0_55px] flex justify-center items-center rounded-full" [ngClass]="{ 'bg-extra-one--30': vehicleIssue.status === 'PASSED', 'bg-extra-two--30': vehicleIssue.status === 'FAILED', 'bg-extra-three--30': vehicleIssue.status === 'INCOMPLETE' }">
+          <div class="h-[55px] flex-[0_0_55px] flex justify-center items-center rounded-full" [ngClass]="{ 'bg-success-500--30': vehicleIssue.status === 'PASSED', 'bg-error-50': vehicleIssue.status === 'FAILED', 'bg-info-500--30': vehicleIssue.status === 'INCOMPLETE' }">
             <img ngSrc="assets/svg/icons-gray-back/56.svg" width="40" height="40" alt="icon" />
           </div>
           <div class="w-full flex flex-col gap-2">
             <p class="font-semibold">{{ vehicleIssue.registration_plate }}</p>
             <div class="flex items-center gap-4">
-              <div class="h-[4px] flex-[0_0_4px] rounded-full bg-extra-two"></div>
-              <p class="text-xs text-manatee">{{ vehicleIssue.issues | join : ', ' }}</p>
+              <div class="h-[4px] flex-[0_0_4px] rounded-full bg-error-500"></div>
+              <p class="text-xs text-neutral-400">{{ vehicleIssue.issues | join : ', ' }}</p>
             </div>
           </div>
         </div>
       </ng-container>
       <ng-template #noVehicleIssuesTemplate>
-        <p class="text-sm">No vehicle issues</p>
+        <app-empty-state heading="No vehicle issues" description="No vehicle issues found for the selected date range."></app-empty-state>
       </ng-template>
     </ng-container>
   </app-infinity-scroll>

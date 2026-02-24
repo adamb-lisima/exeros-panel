@@ -1,45 +1,42 @@
 <app-infinity-scroll *ngIf="tripsMeta$ | async as tripsMeta" [pageMeta]="tripsMeta" [listDivider]="true" [loading]="tripsLoading$ | async" (nextPageRequest)="handleNextPageRequest($event)">
   <ng-container header>
-    <div class="flex flex-col gap-8 -mb-6">
-      <div class="flex flex-col gap-8 -mb-6">
-        <div class="min-h-[40px] flex flex-wrap justify-between items-center gap-2">
-          <p class="font-semibold text-xl whitespace-nowrap">Trip Reports</p>
-          <div *appHasPermission="[[accessGroup.TRIPS_REPORTS_DOWNLOADER]]" class="flex items-center gap-2">
-            <app-export-buttons (export)="handleExportClick($event)"> </app-export-buttons>
-          </div>
-        </div>
-        <div class="flex flex-wrap items-center gap-x-2">
-          <app-select-control *ngIf="vehicleOptions$ | async as vehicleOptions" class="w-[230px]" label="Vehicle" [clearable]="true" [multiple]="true" [options]="vehicleOptions" [formControl]="vehicleControl"></app-select-control>
-          <app-select-control *ngIf="driverOptions$ | async as driverOptions" class="w-[230px]" label="Driver" [options]="driverOptions" [formControl]="driverControl"></app-select-control>
+    <div class="flex flex-col gap-4">
+      <div class="flex flex-wrap justify-between items-center gap-2">
+        <div *appHasPermission="[[accessGroup.TRIPS_REPORTS_DOWNLOADER]]" class="flex items-center gap-2">
+          <app-export-buttons (export)="handleExportClick($event)"> </app-export-buttons>
         </div>
       </div>
-      <div class="flex items-center pb-2 border-b border-b-bright-gray">
-        <p class="flex-[0_0_25%] text-sm text-sonic-silver">Checks</p>
-        <p class="flex-[0_0_20%] text-sm text-sonic-silver">From</p>
-        <p class="flex-[0_0_20%] text-sm text-sonic-silver">To</p>
-        <p class="flex-[0_0_20%] text-sm text-sonic-silver">Driver</p>
-        <p class="flex-[0_0_15%] text-sm text-sonic-silver">Action</p>
+      <div class="flex flex-wrap items-center gap-x-2">
+        <app-select-control *ngIf="vehicleOptions$ | async as vehicleOptions" class="w-[230px]" label="Vehicle" [clearable]="true" [multiple]="true" [options]="vehicleOptions" [formControl]="vehicleControl"></app-select-control>
+        <app-select-control *ngIf="driverOptions$ | async as driverOptions" class="w-[230px]" label="Driver" [options]="driverOptions" [formControl]="driverControl"></app-select-control>
+      </div>
+      <div class="flex items-center pb-2 border-b border-b-neutral-400">
+        <p class="flex-[0_0_25%] text-sm text-neutral-500">Checks</p>
+        <p class="flex-[0_0_20%] text-sm text-neutral-500">From</p>
+        <p class="flex-[0_0_20%] text-sm text-neutral-500">To</p>
+        <p class="flex-[0_0_20%] text-sm text-neutral-500">Driver</p>
+        <p class="flex-[0_0_15%] text-sm text-neutral-500">Action</p>
       </div>
     </div>
   </ng-container>
   <ng-container list>
     <div *ngFor="let trip of trips$ | async; trackByField: 'id'" class="flex items-center py-4">
       <div class="flex-[0_0_25%] flex items-center gap-4">
-        <svg class="text-main-primary" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg class="text-brand-500" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M11.981 15.2891L15.9656 1.33057C16.1648 0.532938 15.4675 -0.164989 14.6706 0.0344188L0.724291 4.02257C-0.172257 4.32169 -0.271874 5.51813 0.624675 5.91695L7.19936 8.70866L9.98862 15.2891C10.4867 16.2862 11.6821 16.1865 11.981 15.2891Z" fill="currentColor" />
         </svg>
         <p class="font-semibold text-sm">{{ trip.vehicle_registration_plate }}</p>
         <ng-container *ngIf="trip.status === 'DURING'; else notActiveTemplate">
-          <div class="flex items-center gap-2 px-2 py-1 rounded-md bg-honeydew">
-            <svg class="text-extra-one" width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <div class="flex items-center gap-2 px-2 py-1 rounded-md bg-success-50">
+            <svg class="text-success-500" width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
               <circle cx="4" cy="4" r="4" fill="currentColor" />
             </svg>
-            <p class="font-medium text-sm text-extra-one">LIVE</p>
+            <p class="font-medium text-sm text-success-500">LIVE</p>
           </div>
         </ng-container>
         <ng-template #notActiveTemplate>
-          <div class="flex items-center gap-2 px-2 py-1 rounded-md bg-cultured">
-            <p class="font-medium text-sm text-manatee">OFF</p>
+          <div class="flex items-center gap-2 px-2 py-1 rounded-md bg-neutral-50">
+            <p class="font-medium text-sm text-neutral-400">OFF</p>
           </div>
         </ng-template>
       </div>
@@ -48,10 +45,10 @@
       <p class="flex-[0_0_20%] font-normal text-sm">{{ trip.driver_name }}</p>
       <ng-container *appHasPermission="[[accessGroup.STREAM_VIEWER]]">
         <ng-container *ngIf="trip.status === 'DURING'; else completeTemplate">
-          <a class="flex-[0_0_15%] cursor-pointer font-medium text-sm text-main-primary underline hover:underline" (click)="handleViewLiveClick(trip.vehicle_id)">View Live</a>
+          <a class="flex-[0_0_15%] cursor-pointer font-medium text-sm text-brand-500 underline hover:underline" (click)="handleViewLiveClick(trip.vehicle_id)">View Live</a>
         </ng-container>
         <ng-template #completeTemplate>
-          <a class="flex-[0_0_15%] cursor-pointer font-medium text-sm text-main-primary underline hover:underline" (click)="handleViewPlaybackClick(trip.vehicle_id)">View Playback</a>
+          <a class="flex-[0_0_15%] cursor-pointer font-medium text-sm text-brand-500 underline hover:underline" (click)="handleViewPlaybackClick(trip.vehicle_id)">View Playback</a>
         </ng-template>
       </ng-container>
     </div>

@@ -11,7 +11,7 @@
       <app-text-control [formControl]="bodyGroup.controls.licence_number" label="Licence number"></app-text-control>
       <app-checkbox-control label="Allow automated vehicle assignment*" [formControl]="bodyGroup.controls.allow_automated_assignment"></app-checkbox-control>
     </div>
-    <span class="text-xs text-dim-gray">* - mandatory fields</span>
+    <span class="text-xs text-neutral-500">* - mandatory fields</span>
   </div>
   <div class="flex flex-1 justify-end" footer>
     <app-button [disabled]="false" (buttonClick)="data?.id ? handleUpdateDriverClick() : handleAddDriverClick()">

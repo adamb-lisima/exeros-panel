@@ -14,7 +14,7 @@
               <p *ngIf="isPerDayChart" class="text-lg font-medium">Events per day</p>
               <p *ngIf="!isPerDayChart" class="text-lg font-medium">Events per day of the week</p>
 
-              <div class="flex items-center p-1.5 rounded-lg bg-bright-gray justify-end">
+              <div class="flex items-center p-1.5 rounded-lg bg-neutral-400 justify-end">
                 <p class="px-4 py-2 rounded-md cursor-pointer font-bold" (keydown.enter)="toggleChart('perDay')" (click)="toggleChart('perDay')" [class.bg-white]="isPerDayChart" [class.opacity-50]="!isPerDayChart">Per day</p>
                 <a class="px-4 py-2 rounded-md font-bold cursor-pointer" (keydown.enter)="toggleChart('perWeek')" (click)="toggleChart('perWeek')" [class.bg-white]="!isPerDayChart" [class.opacity-50]="isPerDayChart">Per day of the week</a>
               </div>
@@ -31,18 +31,23 @@
               <p *ngIf="isPerHourChart" class="text-lg font-medium">Hour of the day</p>
               <p *ngIf="!isPerHourChart" class="text-lg font-medium">Hour of the day per vehicle</p>
 
-              <div class="flex items-center p-1.5 rounded-lg bg-bright-gray justify-end">
+              <div class="flex items-center p-1.5 rounded-lg bg-neutral-400 justify-end">
                 <p class="px-4 py-2 rounded-md cursor-pointer font-bold" (keydown.enter)="toggleHourChart('perHour')" (click)="toggleHourChart('perHour')" [class.bg-white]="isPerHourChart" [class.opacity-50]="!isPerHourChart">All</p>
                 <a class="px-4 py-2 rounded-md font-bold cursor-pointer" (keydown.enter)="toggleHourChart('perHourBus')" (click)="toggleHourChart('perHourBus')" [class.bg-white]="!isPerHourChart" [class.opacity-50]="isPerHourChart">Per vehicle</a>
               </div>
             </div>
           </div>
-          <div class="bg-white rounded-md" id="chart1" *ngIf="isPerHourChart" [class.loader]="eventsTrendsLoading$ | async">
+          <ng-container *ngIf="(eventsTrendsLoading$ | async); else hourChart">
+            <app-skeleton-loader variant="chart"></app-skeleton-loader>
+          </ng-container>
+          <ng-template #hourChart>
+          <div class="bg-white rounded-md" id="chart1" *ngIf="isPerHourChart">
             <apx-chart [series]="hourOfTheDay.series" [chart]="hourOfTheDay.chart" [xaxis]="hourOfTheDay.xaxis" [grid]="hourOfTheDay.grid" [tooltip]="hourOfTheDay.tooltip" [yaxis]="hourOfTheDay.yaxis" [legend]="hourOfTheDay.legend" [markers]="hourOfTheDay.markers" [colors]="hourOfTheDay.colors"></apx-chart>
           </div>
-          <div class="bg-white rounded-md" id="chart3" *ngIf="!isPerHourChart" [class.loader]="eventsTrendsLoading$ | async">
+          <div class="bg-white rounded-md" id="chart3" *ngIf="!isPerHourChart">
             <apx-chart [series]="hourOfTheDayBus.series" [chart]="hourOfTheDayBus.chart" [xaxis]="hourOfTheDayBus.xaxis" [fill]="hourOfTheDayBus.fill" [tooltip]="hourOfTheDayBus.tooltip" [grid]="hourOfTheDayBus.grid" [yaxis]="hourOfTheDayBus.yaxis" [legend]="hourOfTheDayBus.legend" [markers]="hourOfTheDayBus.markers"></apx-chart>
           </div>
+          </ng-template>
         </div>
       </div>
     </div>

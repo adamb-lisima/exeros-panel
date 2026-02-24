@@ -15,7 +15,7 @@
   </mat-form-field>
 
   <div *ngIf="isMenuOpen" class="date-time-menu-container fixed z-[9999]" [ngStyle]="{ 'top.px': dropdownPosition.top, 'left.px': dropdownPosition.left }">
-    <div class="w-[280px] flex flex-col gap-2 bg-white shadow-lg rounded-md p-2 text-new-gray-800" (keydown.enter)="$event.stopPropagation()" (click)="$event.stopPropagation()" (mousedown)="$event.stopPropagation()">
+    <div class="w-[280px] flex flex-col gap-2 bg-white shadow-lg rounded-md p-2 text-neutral-800" (keydown.enter)="$event.stopPropagation()" (click)="$event.stopPropagation()" (mousedown)="$event.stopPropagation()">
       <div class="calendar-container">
         <div class="flex justify-center items-center gap-2 mb-2">
           <select class="w-[120px] h-[30px] rounded border px-2" [(ngModel)]="selectedMonth" (change)="updateCalendar()">
@@ -38,9 +38,9 @@
                 *ngFor="let cell of row"
                 class="h-[32px] w-[24px] relative rounded cursor-pointer"
                 [ngClass]="{
-                  'text-gray-400': !cell.active,
-                  'bg-main-primary text-white': cell.active && cell.day === selectedDay,
-                  'hover:bg-main-primary-10': cell.active && cell.day !== selectedDay
+                  'text-neutral-400': !cell.active,
+                  'bg-brand-500 text-white': cell.active && cell.day === selectedDay,
+                  'hover:bg-brand-500-10': cell.active && cell.day !== selectedDay
                 }"
                 (click)="handleDayClick(cell)"
                 (keydown.enter)="handleDayClick(cell)">

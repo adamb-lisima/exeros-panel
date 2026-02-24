@@ -7,11 +7,12 @@ import { IncludesModule } from '../../../pipe/includes/includes.module';
 import { SelectControlModule } from '../../control/select-control/select-control.module';
 import { InfinityScrollModule } from '../../infinity-scroll/infinity-scroll.module';
 import { MapModule } from '../../map/map.module';
+import { SkeletonLoaderModule } from '../../skeleton-loader/skeleton-loader.module';
 import { TripsBaseComponent } from './trips-base.component';
 
 @NgModule({
   exports: [TripsBaseComponent],
-  imports: [AsyncPipe, DateFormatModule, IncludesModule, MapModule, NgForOf, NgForTrackByFieldModule, NgIf, CommonModule, MapModule, ReactiveFormsModule, SelectControlModule, InfinityScrollModule],
+  imports: [AsyncPipe, DateFormatModule, IncludesModule, MapModule, NgForOf, NgForTrackByFieldModule, NgIf, CommonModule, MapModule, ReactiveFormsModule, SelectControlModule, InfinityScrollModule, SkeletonLoaderModule],
   declarations: [TripsBaseComponent]
 })
 export class TripsBaseModule {}

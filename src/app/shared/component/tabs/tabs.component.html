@@ -1,0 +1,39 @@
+<div
+  class="tabs"
+  [class.tabs--underline]="variant === 'underline'"
+  [class.tabs--pill]="variant === 'pill'"
+  role="tablist"
+>
+  <button
+    *ngFor="let tab of tabs; let i = index"
+    class="tabs__tab"
+    [class.tabs__tab--active]="i === activeIndex"
+    [class.tabs__tab--disabled]="tab.disabled"
+    [attr.id]="'tab-' + i"
+    [attr.role]="'tab'"
+    [attr.aria-selected]="i === activeIndex"
+    [attr.aria-controls]="'tabpanel-' + i"
+    [attr.tabindex]="i === activeIndex ? 0 : -1"
+    [disabled]="tab.disabled"
+    (click)="selectTab(i)"
+    (keydown)="onKeydown($event, i)"
+  >
+    <span class="tabs__label">{{ tab.label }}</span>
+    <app-count-badge
+      *ngIf="tab.count != null"
+      [count]="tab.count"
+      class="tabs__count"
+    ></app-count-badge>
+  </button>
+</div>
+
+<div
+  class="tabs__panel"
+  role="tabpanel"
+  [attr.id]="'tabpanel-' + activeIndex"
+  [attr.aria-labelledby]="'tab-' + activeIndex"
+>
+  <div class="tabs__panel-content" [@crossfade]="activeIndex">
+    <ng-content></ng-content>
+  </div>
+</div>

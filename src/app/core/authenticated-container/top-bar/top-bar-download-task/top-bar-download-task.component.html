@@ -1,29 +1,29 @@
 <ng-container *ngIf="{ downloadTasks: downloadTaskListData$ | async } as context">
-  <div [ngClass]="{ 'bg-main-primary--30': isFlashing, 'bg-white': !isFlashing }" class="relative h-[48px] w-[48px] flex justify-center items-center px-3 rounded cursor-pointer border border-manatee" [cdkMenuTriggerFor]="menu">
+  <div [ngClass]="{ 'bg-brand-100': isFlashing, 'bg-white': !isFlashing }" class="relative h-[48px] w-[48px] flex justify-center items-center px-3 rounded cursor-pointer border border-neutral-400" [cdkMenuTriggerFor]="menu">
     <svg width="17" height="22" viewBox="0 0 16 16">
       <path fill="currentColor" d="M14.7848 5.37896C14.8347 5.11172 14.8599 4.84046 14.8602 4.56859C14.8572 2.04366 12.8079 -0.00072439 10.283 0.00232274C8.36086 0.0046332 6.64549 1.20892 5.99039 3.01593C4.81745 2.54902 3.48807 3.12134 3.02112 4.29429C2.9807 4.39581 2.94762 4.50008 2.92214 4.60633C1.04926 4.88643 -0.241921 6.63177 0.0381808 8.50465C0.289385 10.1844 1.73238 11.427 3.43074 11.4263H6.28811C6.60374 11.4263 6.8596 11.1705 6.8596 10.8549C6.8596 10.5392 6.60374 10.2834 6.28811 10.2834H3.43074C2.16826 10.2834 1.14482 9.25993 1.14482 7.99745C1.14482 6.73497 2.16826 5.71154 3.43074 5.71154C3.74637 5.71154 4.00223 5.45568 4.00223 5.14005C4.00326 4.50882 4.51582 3.99794 5.14704 3.99898C5.44556 3.99949 5.73206 4.11675 5.94522 4.3257C6.17001 4.54723 6.53185 4.54459 6.75338 4.3198C6.83656 4.23539 6.89144 4.12723 6.91043 4.01023C7.22063 2.14402 8.98495 0.882641 10.8512 1.19285C12.7174 1.50305 13.9788 3.26737 13.6686 5.13359C13.6501 5.24486 13.6261 5.35516 13.5967 5.46405C13.531 5.7026 13.6263 5.95631 13.8327 6.09266C14.8847 6.79065 15.1716 8.20931 14.4736 9.26127C14.0511 9.89799 13.3385 10.2815 12.5743 10.2833H10.8599C10.5443 10.2833 10.2884 10.5392 10.2884 10.8548C10.2884 11.1704 10.5443 11.4263 10.8599 11.4263H12.5743C14.468 11.4245 16.0017 9.88788 15.9999 7.99417C15.999 6.98624 15.5546 6.02974 14.7848 5.37896Z" />
       <path fill="currentColor" d="M11.8222 12.1648C11.6008 11.9509 11.2497 11.9509 11.0282 12.1648L9.1452 14.0467V5.71114C9.1452 5.39551 8.88934 5.13965 8.57371 5.13965C8.25808 5.13965 8.00223 5.39551 8.00223 5.71114V14.0467L6.12034 12.1648C5.89331 11.9455 5.53154 11.9518 5.31228 12.1788C5.09838 12.4003 5.09838 12.7514 5.31228 12.9728L8.16965 15.8302C8.39253 16.0537 8.7544 16.0541 8.97784 15.8312C8.97818 15.8309 8.97851 15.8305 8.97888 15.8302L11.8363 12.9728C12.0555 12.7458 12.0492 12.3841 11.8222 12.1648Z" />
     </svg>
-    <div *ngIf="context.downloadTasks?.length as length" class="absolute top-0 right-0 w-[18px] h-[18px] flex items-center justify-center rounded-full bg-main-primary">
+    <div *ngIf="context.downloadTasks?.length as length" class="absolute top-0 right-0 w-[18px] h-[18px] flex items-center justify-center rounded-full bg-brand-500">
       <p class="text-[8px] text-white">{{ length > 99 ? '99+' : length }}</p>
     </div>
   </div>
 
   <ng-template #menu>
-    <div class="flex flex-col w-max max-h-[400px] z-20 bg-white rounded-md ring-1 shadow-lg ring-dust-storm" cdkMenu>
-      <div class="flex gap-1 w-[90vw] max-w-[1200px] px-2 py-3 border-b border-dust-storm bg-gray-50">
-        <p class="flex-[15%] text-sm font-semibold text-gray-700">Task name</p>
-        <p class="flex-[12%] text-sm font-semibold text-gray-700">Request by</p>
-        <p class="flex-[10%] text-sm font-semibold text-gray-700">Vehicle</p>
-        <p class="flex-[13%] text-sm font-semibold text-gray-700">Date requested</p>
-        <p class="flex-[13%] text-sm font-semibold text-gray-700">Date of event</p>
-        <p class="flex-[10%] text-sm font-semibold text-gray-700">Duration</p>
-        <p class="flex-[27%] text-sm font-semibold text-gray-700">Status</p>
+    <div class="flex flex-col w-max max-h-[400px] z-20 bg-white rounded-md ring-1 shadow-lg ring-neutral-200" cdkMenu>
+      <div class="flex gap-1 w-[90vw] max-w-[1200px] px-2 py-3 border-b border-neutral-200 bg-neutral-50">
+        <p class="flex-[15%] text-sm font-semibold text-neutral-700">Task name</p>
+        <p class="flex-[12%] text-sm font-semibold text-neutral-700">Request by</p>
+        <p class="flex-[10%] text-sm font-semibold text-neutral-700">Vehicle</p>
+        <p class="flex-[13%] text-sm font-semibold text-neutral-700">Date requested</p>
+        <p class="flex-[13%] text-sm font-semibold text-neutral-700">Date of event</p>
+        <p class="flex-[10%] text-sm font-semibold text-neutral-700">Duration</p>
+        <p class="flex-[27%] text-sm font-semibold text-neutral-700">Status</p>
       </div>
 
       <app-infinity-scroll [loading]="downloadTaskListLoading$ | async" [listDivider]="true" cdkMenuItem class="overflow-y-auto">
         <ng-container list>
-          <a *ngFor="let downloadTask of context.downloadTasks; trackByField: 'id'" class="flex gap-1 w-[90vw] max-w-[1200px] pt-2 px-2 last:mb-2 text-sm cursor-pointer hover:bg-gray-50" (click)="handleDownloadTaskClick(downloadTask)">
+          <a *ngFor="let downloadTask of context.downloadTasks; trackByField: 'id'" class="flex gap-1 w-[90vw] max-w-[1200px] pt-2 px-2 last:mb-2 text-sm cursor-pointer hover:bg-neutral-50" (click)="handleDownloadTaskClick(downloadTask)">
             <p class="flex-[15%] text-sm whitespace-nowrap overflow-hidden text-ellipsis">{{ downloadTask.name }}</p>
             <p class="flex-[12%] text-sm whitespace-nowrap overflow-hidden text-ellipsis">{{ downloadTask.user_name }}</p>
             <p class="flex-[10%] text-sm">{{ downloadTask.vehicle.registration_plate }}</p>
@@ -31,9 +31,9 @@
             <p class="flex-[13%] text-sm">{{ downloadTask.date ? (downloadTask.date | dateFormat : 'serverDateFormat' : 'clientDateFormat') : '' }} {{ downloadTask.time ? (downloadTask.time | dateFormat : 'timeFormat' : 'shortTimeFormat') : '' }}</p>
             <p class="flex-[10%] text-sm">{{ formatDuration(downloadTask.duration) }}</p>
             <div class="flex-[27%] flex flex-col gap-1">
-              <div class="relative flex items-center rounded-2xl bg-light-steel-blue">
+              <div class="relative flex items-center rounded-2xl bg-neutral-300">
                 <p class="absolute w-full text-center text-white text-xs">{{ downloadTask.percent }}%</p>
-                <span class="block h-5 rounded-2xl bg-extra-one" [style]="'transition: width 0.5s linear; width: ' + downloadTask.percent + '%'"></span>
+                <span class="block h-5 rounded-2xl bg-success-500" [style]="'transition: width 0.5s linear; width: ' + downloadTask.percent + '%'"></span>
               </div>
               <p class="text-xs text-center">{{ getDisplayState(downloadTask.state) }}</p>
             </div>

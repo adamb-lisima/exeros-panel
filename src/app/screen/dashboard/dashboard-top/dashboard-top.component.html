@@ -2,7 +2,7 @@
   <div class="w-full flex justify-between mt-2">
     <h1 class="font-bold text-3xl">Dashboard</h1>
     <app-tree-control *ngIf="fleetOptions$ | async as options" class="col-span-2 w-[18%] ml-auto mr-2" label="Fleet" [options]="options" [formControl]="bodyGroup.controls.fleet_id"></app-tree-control>
-    <div class="h-[48px] w-[165px] flex items-center justify-between gap-2 p-3 py-[11px] rounded cursor-pointer bg-white rounded-[4px] custom-select" [cdkMenuTriggerFor]="menu">
+    <div class="h-[48px] w-[165px] flex items-center justify-between gap-2 p-3 py-[11px] rounded cursor-pointer bg-white custom-select" [cdkMenuTriggerFor]="menu">
       <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M6.66699 1.66602V4.16602" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
         <path d="M13.333 1.66602V4.16602" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
@@ -28,7 +28,7 @@
       <a *ngFor="let range of RANGES; trackByField: 'id'" class="p-2 font-medium text-sm cursor-pointer" cdkMenuItem (click)="handleDaysClick(range.id)">
         {{ range.text }}
       </a>
-      <span class="flex-[0_0_1px] w-full bg-platinum"></span>
+      <span class="flex-[0_0_1px] w-full bg-neutral-200"></span>
       <app-calendar-control class="flex-[0_0_40px]" [formControl]="rangeFilterControl"></app-calendar-control>
     </div>
   </ng-template>

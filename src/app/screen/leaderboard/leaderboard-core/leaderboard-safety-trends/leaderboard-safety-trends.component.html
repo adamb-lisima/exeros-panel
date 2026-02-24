@@ -1,19 +1,19 @@
 <div class="h-full flex flex-col">
-  <div class="h-min flex items-center justify-between mb-4 pb-4 border-b-new-gray-300 border-b">
+  <div class="h-min flex items-center justify-between mb-4 pb-4 border-b-neutral-300 border-b">
     <p class="font-semibold text-xl">Events Impact Analysis</p>
     <div class="flex justify-between items-center">
-      <div class="flex items-center p-1.5 rounded-lg bg-bright-gray">
-        <button (click)="selectPeriod('monthly')" [ngClass]="selectedPeriod === 'monthly' ? 'bg-white text-black' : 'bg-bright-gray text-gray-700'" class="px-3 py-2 text-xs rounded hover:bg-new-gray-200 transition-colors">Monthly</button>
-        <button (click)="selectPeriod('weekly')" [ngClass]="selectedPeriod === 'weekly' ? 'bg-white text-black' : 'bg-bright-gray text-gray-700'" class="px-3 py-2 text-xs rounded hover:bg-new-gray-200 transition-colors">Weekly</button>
-        <button (click)="selectPeriod('yesterday')" [ngClass]="selectedPeriod === 'yesterday' ? 'bg-white text-black' : 'bg-bright-gray text-gray-700'" class="px-3 py-2 text-xs rounded hover:bg-new-gray-200 transition-colors">Yesterday</button>
-        <button (click)="selectPeriod('alltime')" [ngClass]="selectedPeriod === 'alltime' ? 'bg-white text-black' : 'bg-bright-gray text-gray-700'" class="px-3 py-2 text-xs rounded hover:bg-new-gray-200 transition-colors">All Time</button>
+      <div class="flex items-center p-1.5 rounded-lg bg-neutral-400">
+        <button (click)="selectPeriod('monthly')" [ngClass]="selectedPeriod === 'monthly' ? 'bg-white text-black' : 'bg-neutral-400 text-neutral-700'" class="px-3 py-2 text-xs rounded hover:bg-neutral-200 transition-colors">Monthly</button>
+        <button (click)="selectPeriod('weekly')" [ngClass]="selectedPeriod === 'weekly' ? 'bg-white text-black' : 'bg-neutral-400 text-neutral-700'" class="px-3 py-2 text-xs rounded hover:bg-neutral-200 transition-colors">Weekly</button>
+        <button (click)="selectPeriod('yesterday')" [ngClass]="selectedPeriod === 'yesterday' ? 'bg-white text-black' : 'bg-neutral-400 text-neutral-700'" class="px-3 py-2 text-xs rounded hover:bg-neutral-200 transition-colors">Yesterday</button>
+        <button (click)="selectPeriod('alltime')" [ngClass]="selectedPeriod === 'alltime' ? 'bg-white text-black' : 'bg-neutral-400 text-neutral-700'" class="px-3 py-2 text-xs rounded hover:bg-neutral-200 transition-colors">All Time</button>
       </div>
     </div>
   </div>
   <div class="flex-grow overflow-hidden">
     <div class="space-y-3" [class.opacity-50]="loading">
-      <div class="border-b-new-gray-300 border-b pb-12 pt-10">
-        <h4 class="text-base text-center font-medium mb-5 text-gray-600">Event Types Impact</h4>
+      <div class="border-b-neutral-300 border-b pb-12 pt-10">
+        <h4 class="text-base text-center font-medium mb-5 text-neutral-600">Event Types Impact</h4>
         <ng-container *ngIf="eventsChartData$ | async as chartData">
           <ng-container *ngIf="chartData.length; else noData">
             <app-pie-chart class="py-8" [data]="chartData" [height]="250" [colors]="CHART_COLORS"></app-pie-chart>
@@ -21,8 +21,8 @@
         </ng-container>
       </div>
 
-      <div class="border-b-new-gray-300 border-b pb-12 pt-10">
-        <h4 class="text-base text-center font-medium mb-5 text-gray-600">Safety Score Distribution</h4>
+      <div class="border-b-neutral-300 border-b pb-12 pt-10">
+        <h4 class="text-base text-center font-medium mb-5 text-neutral-600">Safety Score Distribution</h4>
         <ng-container *ngIf="ratingsChartData$ | async as chartData">
           <ng-container *ngIf="chartData.length; else noData">
             <app-pie-chart class="py-8" [data]="chartData" [height]="250" [colors]="CHART_COLORS"></app-pie-chart>
@@ -31,7 +31,7 @@
       </div>
 
       <div class="pt-10">
-        <h4 class="text-base text-center font-medium mb-5 text-gray-600">Monthly Position Trends</h4>
+        <h4 class="text-base text-center font-medium mb-5 text-neutral-600">Monthly Position Trends</h4>
         <ng-container *ngIf="positionTrendsData$ | async as chartData">
           <ng-container *ngIf="chartData.length; else noData">
             <app-line-chart class="pt-8" [data]="chartData" [height]="400" [colors]="CHART_COLORS" [options]="{ invertedYAxis: true, yAxisMin: 1 }"> </app-line-chart>
@@ -41,12 +41,12 @@
     </div>
 
     <div *ngIf="loading" class="flex justify-center py-4">
-      <div class="animate-spin rounded-full h-5 w-5 border-2 border-main-primary border-t-transparent"></div>
+      <div class="animate-spin rounded-full h-5 w-5 border-2 border-brand-500 border-t-transparent"></div>
     </div>
 
     <ng-template #noData>
       <div class="h-full flex items-start justify-center pt-8">
-        <p class="text-sm text-gray-500">No data available for this period</p>
+        <p class="text-sm text-neutral-500">No data available for this period</p>
       </div>
     </ng-template>
   </div>
