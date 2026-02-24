@@ -1,7 +1,7 @@
 <ng-container *ngIf="{ selectedId: selectedId$ | async } as ctx">
   <app-infinity-scroll *ngIf="driversMeta$ | async as meta" [transparent]="true" [listGap]="true" [pageMeta]="meta" [loading]="driversLoading$ | async">
     <ng-container list>
-      <div *rxFor="let driver of drivers$; trackByField: 'id'" class="flex justify-between gap-1 p-4 rounded-xl cursor-pointer border bg-white" [ngClass]="ctx.selectedId === driver.id ? 'border-brand-500' : 'border-transparent'" (click)="handleDriverClick(driver)" (keydown.enter)="handleDriverClick(driver)">
+      <div *rxFor="let driver of drivers$; trackByField: 'id'" class="flex justify-between gap-1 p-4 rounded-xl cursor-pointer border bg-white transition-all duration-200 hover:shadow-sm hover:-translate-y-px" [ngClass]="ctx.selectedId === driver.id ? 'border-brand-500 shadow-sm' : 'border-neutral-200'" (click)="handleDriverClick(driver)" (keydown.enter)="handleDriverClick(driver)">
         <div class="flex items-center gap-2">
           <div class="w-[42px] h-[42px] flex justify-center items-center rounded-full" [ngClass]="{ 'bg-brand-500': driver.id % 3 === 0, 'bg-info-500': driver.id % 3 === 1, 'bg-warning-500': driver.id % 3 === 2 }">
             <p class="font-medium text-white" [appTooltip]="driver.name">{{ driver.name | firstCharacter }}</p>

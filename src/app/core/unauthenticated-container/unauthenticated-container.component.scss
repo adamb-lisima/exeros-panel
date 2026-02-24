@@ -10,8 +10,8 @@
 
   &__brand {
     display: none;
-    width: 50%;
-    background: linear-gradient(135deg, var(--brand-700), var(--brand-500));
+    width: 55%;
+    background: linear-gradient(135deg, #1a1d2e 0%, #2d1f3d 40%, #ee8444 100%);
     position: relative;
     overflow: hidden;
 
@@ -20,31 +20,63 @@
       align-items: center;
       justify-content: center;
     }
+
+    // Animated gradient orbs
+    &::before {
+      content: '';
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(238, 132, 68, 0.3) 0%, transparent 70%);
+      top: -100px;
+      right: -100px;
+      animation: float-orb 8s ease-in-out infinite;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(238, 132, 68, 0.15) 0%, transparent 70%);
+      bottom: -80px;
+      left: -80px;
+      animation: float-orb 10s ease-in-out infinite reverse;
+    }
   }
 
   &__brand-content {
     position: relative;
     z-index: 1;
     text-align: center;
-    padding: var(--space-8);
+    padding: 48px;
   }
 
   &__logo {
-    width: 180px;
+    width: 200px;
     height: auto;
-    margin-bottom: var(--space-8);
+    margin-bottom: 40px;
     filter: brightness(0) invert(1);
   }
 
   &__tagline {
-    font: var(--text-heading-lg);
-    color: var(--neutral-0);
-    margin-bottom: var(--space-3);
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1.2;
+    color: #ffffff;
+    margin-bottom: 16px;
+    letter-spacing: -0.02em;
   }
 
   &__subtitle {
-    font: var(--text-body);
-    color: rgba(255, 255, 255, 0.8);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.7);
+    max-width: 380px;
+    margin: 0 auto;
   }
 
   &__form {
@@ -52,17 +84,22 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--surface-base);
-    padding: var(--space-6);
+    background: #ffffff;
+    padding: 40px;
 
     @media (min-width: 1024px) {
-      width: 50%;
+      width: 45%;
       flex: none;
     }
   }
 
   &__form-inner {
     width: 100%;
-    max-width: 420px;
+    max-width: 400px;
   }
+}
+
+@keyframes float-orb {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(30px, -30px) scale(1.1); }
 }

@@ -6,7 +6,7 @@
           <app-navigation-bar></app-navigation-bar>
           <router-outlet name="left-menu"></router-outlet>
         </ng-container>
-        <div class="w-full flex flex-col" [ngClass]="{ 'm-3': !ctx.routeData?.removeContainerMargin, 'overflow-auto': ctx.routeQueryParams?.mode !== 'screenshot' }">
+        <div class="w-full flex flex-col" style="background: #f8f9fb" [ngClass]="{ 'p-5': !ctx.routeData?.removeContainerMargin, 'overflow-auto': ctx.routeQueryParams?.mode !== 'screenshot' }">
           <app-top-bar *ngIf="!ctx.routeData?.hideTopBar && ctx.routeQueryParams?.mode !== 'screenshot'" class="mb-5">
             <router-outlet name="top-menu"></router-outlet>
           </app-top-bar>

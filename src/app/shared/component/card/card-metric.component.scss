@@ -1,39 +1,51 @@
 .card-metric {
   display: flex;
   flex-direction: column;
-  gap: var(--space-1);
+  gap: 4px;
+  padding: 4px 0;
 }
 
 .card-metric__label {
-  font: var(--text-caption);
-  color: var(--neutral-500);
+  font-size: 12px;
+  font-weight: 500;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .card-metric__value {
-  font: var(--text-heading-lg);
-  color: var(--neutral-900);
+  font-size: 28px;
+  font-weight: 700;
+  color: #111827;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
 }
 
 .card-metric__bottom {
   display: flex;
   align-items: center;
-  gap: var(--space-3);
-  margin-top: var(--space-1);
+  gap: 12px;
+  margin-top: 4px;
 }
 
 .card-metric__trend {
-  font: var(--text-body-sm);
+  font-size: 13px;
+  font-weight: 500;
   display: inline-flex;
   align-items: center;
-  gap: var(--space-1);
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 20px;
 }
 
 .trend--up {
-  color: var(--success-500);
+  color: #16a34a;
+  background: rgba(22, 163, 74, 0.1);
 }
 
 .trend--down {
-  color: var(--error-500);
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.1);
 }
 
 .card-metric__trend-icon {

@@ -86,7 +86,7 @@ const MapUtil = {
         <div class='flex flex-col gap-1 m-1'>
           <p class=" font-semibold text-xs">${location.registration_plate}</p>
           <p class='font-medium text-xs text-neutral-700'>${location.event_type}</p>
-          <p class='text-xs text-gray-500'>${location.occurence_time}</p>
+          <p class='text-xs text-neutral-500'>${location.occurence_time}</p>
         </div>
       `
     };

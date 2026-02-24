@@ -1,75 +1,65 @@
-:host {
-  display: block;
+.dialog-wrapper {
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15), 0 10px 20px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  animation: dialog-enter 250ms cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.dialog-backdrop {
-  position: fixed;
-  inset: 0;
-  z-index: 1000;
+.dialog-wrapper__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.dialog-wrapper__title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #111827;
+  letter-spacing: -0.01em;
+}
+
+.dialog-wrapper__close {
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(4px);
-}
+  border-radius: 10px;
+  border: none;
+  background: transparent;
+  color: #9ca3af;
+  cursor: pointer;
+  transition: all 150ms ease;
 
-.dialog-panel {
-  position: relative;
-  background-color: var(--surface-raised);
-  border-radius: 12px;
-  box-shadow: var(--elevation-lg);
-  width: 100%;
-  max-width: 480px;
-  max-height: 90vh;
-  overflow-y: auto;
-  outline: none;
-
-  &:focus-visible {
-    outline: 2px solid var(--brand-500);
-    outline-offset: 2px;
-  }
-
-  &__header {
-    padding: var(--space-6) var(--space-6) var(--space-2);
-    font: var(--text-heading-md);
-    color: var(--neutral-900);
-  }
-
-  &__body {
-    padding: var(--space-2) var(--space-6);
-    font: var(--text-body);
-    color: var(--neutral-600);
-  }
-
-  &__footer {
-    display: flex;
-    justify-content: flex-end;
-    gap: var(--space-3);
-    padding: var(--space-4) var(--space-6) var(--space-6);
+  &:hover {
+    background: #f3f4f6;
+    color: #374151;
   }
 }
 
-// Variant-specific action button styling via ::ng-deep
-// Informational: primary action uses brand-500
-.dialog-panel:not(.dialog-panel--destructive) {
-  ::ng-deep .dialog-action-primary {
-    background-color: var(--brand-500);
-    color: var(--neutral-0);
-
-    &:hover {
-      background-color: var(--brand-600);
-    }
-  }
+.dialog-wrapper__body {
+  padding: 24px;
 }
 
-// Destructive: primary action uses error-500
-.dialog-panel--destructive {
-  ::ng-deep .dialog-action-primary {
-    background-color: var(--error-500);
-    color: var(--neutral-0);
+.dialog-wrapper__footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 16px 24px;
+  border-top: 1px solid #f3f4f6;
+}
 
-    &:hover {
-      background-color: var(--error-600, #dc2626);
-    }
+@keyframes dialog-enter {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
   }
 }

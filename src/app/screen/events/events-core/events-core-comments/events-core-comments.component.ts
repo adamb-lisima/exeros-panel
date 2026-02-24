@@ -217,7 +217,7 @@ export class EventsCoreCommentsComponent implements OnInit, OnDestroy {
 
   private scrollActiveIntoView() {
     requestAnimationFrame(() => {
-      const activeElement = document.querySelector('.users-list .bg-gray-50');
+      const activeElement = document.querySelector('.users-list .bg-neutral-50');
       if (activeElement) {
         activeElement.scrollIntoView({ block: 'nearest' });
       }

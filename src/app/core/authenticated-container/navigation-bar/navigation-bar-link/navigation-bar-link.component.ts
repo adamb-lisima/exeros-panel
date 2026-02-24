@@ -5,6 +5,7 @@ import RouteConst from '../../../../const/route';
 @Component({
   selector: 'app-navigation-bar-link',
   templateUrl: './navigation-bar-link.component.html',
+  styleUrls: ['./navigation-bar-link.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NavigationBarLinkComponent {

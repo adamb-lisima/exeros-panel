@@ -1,6 +1,6 @@
-<div *ngIf="loggedInUser$ | async as loggedInUser" class="flex py-2 px-1 gap-2 mx-auto" [ngClass]="{ 'justify-center': isCollapsed }">
+<div *ngIf="loggedInUser$ | async as loggedInUser" class="flex py-2 px-3 gap-3 mx-auto items-center" [ngClass]="{ 'justify-center px-0': isCollapsed }">
   <div class="flex-shrink-0">
-    <img class="rounded-lg object-cover w-5 h-5 mt-1" [ngSrc]="loggedInUser.avatar" width="20" height="20" alt="avatar" />
+    <img class="rounded-full object-cover" style="width: 28px; height: 28px; border: 2px solid rgba(255,255,255,0.15)" [ngSrc]="loggedInUser.avatar" width="28" height="28" alt="avatar" />
   </div>
 
   <div
@@ -9,7 +9,7 @@
       width: isCollapsed ? '0' : '140px',
       opacity: isCollapsed ? '0' : '1'
     }">
-    <p class="font-normal text-neutral-500 text-sm leading-[20px]">{{ loggedInUser.name }}</p>
-    <p class="font-normal text-neutral-400 text-[10px]">{{ loggedInUser.email }}</p>
+    <p class="font-medium text-sm leading-[18px]" style="color: rgba(255,255,255,0.85)">{{ loggedInUser.name }}</p>
+    <p class="font-normal text-[10px]" style="color: rgba(255,255,255,0.4)">{{ loggedInUser.email }}</p>
   </div>
 </div>

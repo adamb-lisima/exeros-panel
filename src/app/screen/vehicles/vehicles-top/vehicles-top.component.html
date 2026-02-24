@@ -22,11 +22,11 @@
 </div>
 
 <ng-template #menu>
-  <div class="w-[250px] flex flex-col gap-2 bg-white shadow-lg" cdkMenu>
-    <a *ngFor="let range of RANGES; trackByField: 'id'" class="p-2 font-medium text-sm cursor-pointer" cdkMenuItem (click)="handleDaysClick(range.id)">
+  <div class="w-[250px] flex flex-col gap-1 bg-white shadow-lg rounded-xl p-2 border border-neutral-100" cdkMenu>
+    <a *ngFor="let range of RANGES; trackByField: 'id'" class="p-2.5 font-medium text-sm cursor-pointer rounded-lg hover:bg-neutral-50 transition-colors" cdkMenuItem (click)="handleDaysClick(range.id)">
       {{ range.text }}
     </a>
-    <span class="flex-[0_0_1px] w-full bg-neutral-200"></span>
+    <span class="flex-[0_0_1px] w-full bg-neutral-200 my-1"></span>
     <app-calendar-control class="flex-[0_0_40px]" [formControl]="rangeFilterControl"></app-calendar-control>
   </div>
 </ng-template>

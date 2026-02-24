@@ -1,29 +1,39 @@
 .badge {
   display: inline-flex;
   align-items: center;
-  gap: var(--space-1);
-  font: var(--text-body-sm);
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 20px;
+  line-height: 1.4;
 }
 
 .badge__dot {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   flex-shrink: 0;
 }
 
 .badge__label {
-  color: var(--neutral-700);
+  white-space: nowrap;
 }
 
-.badge--online .badge__dot {
-  background-color: var(--success-500);
+.badge--online {
+  background: rgba(22, 163, 74, 0.08);
+  .badge__dot { background-color: #16a34a; }
+  .badge__label { color: #16a34a; }
 }
 
-.badge--offline .badge__dot {
-  background-color: var(--neutral-400);
+.badge--offline {
+  background: rgba(156, 163, 175, 0.1);
+  .badge__dot { background-color: #9ca3af; }
+  .badge__label { color: #6b7280; }
 }
 
-.badge--warning .badge__dot {
-  background-color: var(--warning-500);
+.badge--warning {
+  background: rgba(245, 158, 11, 0.08);
+  .badge__dot { background-color: #f59e0b; }
+  .badge__label { color: #d97706; }
 }

@@ -57,7 +57,7 @@
   </div>
 
   <div *ngIf="canShowMore || showAll" class="absolute bottom-0 left-0 right-0 flex justify-center bg-white py-3 border-t border-neutral-500-100">
-    <button (click)="toggleShowAll()" class="text-xs text-brand-500 underline font-medium px-3 py-1 rounded hover:bg-blue-50 transition-colors">
+    <button (click)="toggleShowAll()" class="text-xs text-brand-500 underline font-medium px-3 py-1 rounded hover:bg-brand-50 transition-colors">
       {{ showAll ? 'Show less' : 'Show all (' + topDrivers.length + ')' }}
     </button>
   </div>

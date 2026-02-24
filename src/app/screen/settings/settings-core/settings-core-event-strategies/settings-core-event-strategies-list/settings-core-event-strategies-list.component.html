@@ -21,7 +21,7 @@
           <td class="px-2 text-sm">
             <div class="flex gap-2">
               <span *ngIf="strategy.main_stream" class="px-2 py-1 bg-success-50 text-success-500 rounded text-xs">Main</span>
-              <span *ngIf="strategy.sub_stream" class="px-2 py-1 bg-blue-100 text-blue-800 rounded text-xs">Sub</span>
+              <span *ngIf="strategy.sub_stream" class="px-2 py-1 bg-info-50 text-info-500 rounded text-xs">Sub</span>
             </div>
           </td>
           <td class="px-2 text-sm">{{ strategy.created_at | dateFormat : 'serverDateTimeFormat' : 'clientDateTimeFormat' }}</td>

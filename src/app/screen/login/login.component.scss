@@ -1,5 +1,13 @@
+:host {
+  display: block;
+}
+
 .login-error {
-  font: var(--text-body-sm);
-  color: var(--error-500);
+  font-size: 13px;
+  color: #ef4444;
   margin: 0;
+  padding: 10px 14px;
+  background: #fef2f2;
+  border-radius: 10px;
+  border: 1px solid rgba(239, 68, 68, 0.15);
 }

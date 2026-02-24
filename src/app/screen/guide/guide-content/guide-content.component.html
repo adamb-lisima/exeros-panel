@@ -29,13 +29,13 @@
         </div>
 
         <div class="mt-10 pt-6 border-t border-neutral-300 flex justify-between">
-          <button *ngIf="prevSlug" (click)="navigateToPage(prevSlug)" class="px-4 py-3 cursor-pointer hover:bg-indigo-100 hover:text-indigo-700 hover:font-medium transition-colors duration-150 flex items-center">
+          <button *ngIf="prevSlug" (click)="navigateToPage(prevSlug)" class="px-4 py-3 cursor-pointer hover:bg-brand-50 hover:text-brand-700 hover:font-medium transition-colors duration-150 rounded-lg flex items-center">
             <i class="fas fa-chevron-left mr-2"></i>
             Previous
           </button>
           <div *ngIf="!prevSlug"></div>
 
-          <button *ngIf="nextSlug" (click)="navigateToPage(nextSlug)" class="px-4 py-3 cursor-pointer hover:bg-indigo-100 hover:text-indigo-700 hover:font-medium transition-colors duration-150 flex items-center">
+          <button *ngIf="nextSlug" (click)="navigateToPage(nextSlug)" class="px-4 py-3 cursor-pointer hover:bg-brand-50 hover:text-brand-700 hover:font-medium transition-colors duration-150 rounded-lg flex items-center">
             Next
             <i class="fas fa-chevron-right ml-2"></i>
           </button>

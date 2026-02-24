@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 @import '@angular/cdk/overlay-prebuilt.css';
 @import 'assets/style/material';
 @import 'assets/style/tailwind';
@@ -15,18 +15,65 @@ router-outlet {
   display: none;
 }
 
-.exeros-fragment {
-  @apply p-6 bg-white rounded-xl;
+// ── Global Reset & Base ──
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 body {
   font-family: 'Poppins', sans-serif;
+  background: #f0f2f5;
+  color: #111827;
+  margin: 0;
+  line-height: 1.5;
 }
 
+// ── Premium Fragment Style ──
+.exeros-fragment {
+  padding: 24px;
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+// ── Scrollbar Styling ──
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.25);
+  }
+}
+
+// ── CDK Overlay Backdrop ──
 .custom-backdrop {
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(12px);
+  background: rgba(0, 0, 0, 0.3);
 }
 
+.cdk-overlay-dark-backdrop {
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+}
+
+// ── Animations ──
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -39,16 +86,136 @@ body {
 }
 
 .animate-fadeIn {
-  animation: fadeIn 0.2s ease-out;
+  animation: fadeIn 0.25s ease-out;
 }
 
+// ── Stagger fade-in for dashboard grid ──
+.stagger-fade-in > * {
+  animation: fadeInUp 0.4s ease-out both;
+}
+
+@for $i from 1 through 12 {
+  .stagger-fade-in > *:nth-child(#{$i}) {
+    animation-delay: #{$i * 60}ms;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ── Form Controls ──
 .custom-select {
-  border: 1px solid var(--neutral-400) !important;
+  border: 1px solid #d1d5db !important;
   background-color: transparent;
-  transition: all 0.3s ease-in-out;
+  border-radius: 10px;
+  transition: all 0.2s ease;
   outline: none;
+  font-family: inherit;
+
+  &:hover {
+    border-color: #9ca3af !important;
+  }
+
+  &:focus {
+    border-color: #ee8444 !important;
+    box-shadow: 0 0 0 3px rgba(238, 132, 68, 0.1);
+  }
 }
 
-.custom-select:hover {
-  border-color: black !important;
+// ── Selection Color ──
+::selection {
+  background: rgba(238, 132, 68, 0.2);
+  color: #111827;
+}
+
+// ── Premium Table Styling ──
+table.table-auto {
+  border-collapse: separate;
+  border-spacing: 0;
+
+  thead {
+    tr {
+      border-bottom: 2px solid #e5e7eb;
+    }
+
+    th {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #9ca3af;
+      padding: 10px 12px;
+      white-space: nowrap;
+    }
+  }
+
+  tbody {
+    tr {
+      border-bottom: 1px solid #f3f4f6;
+      transition: background-color 150ms ease;
+
+      &:hover {
+        background-color: #fafbfc;
+      }
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+
+    td {
+      padding: 14px 12px;
+      font-size: 13.5px;
+      color: #374151;
+    }
+  }
+}
+
+// ── Premium Page Headings ──
+h1.font-bold,
+h1.font-semibold {
+  letter-spacing: -0.02em;
+}
+
+// ── Premium Input Focus ──
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid rgba(238, 132, 68, 0.4);
+  outline-offset: 1px;
+}
+
+// ── Smooth Page Transitions ──
+router-outlet + * {
+  animation: pageEnter 0.3s ease-out;
+}
+
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ── Premium Checkbox ──
+input[type='checkbox'] {
+  accent-color: #ee8444;
+  border-radius: 4px;
+}
+
+// ── Left Panel Styling ──
+.border-r.border-r-neutral-200 {
+  border-right-color: #eef0f3;
 }

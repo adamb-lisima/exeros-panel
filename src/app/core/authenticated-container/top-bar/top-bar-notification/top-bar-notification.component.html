@@ -1,23 +1,23 @@
 <ng-container *ngIf="{ notifications: notificationListData$ | async, meta: notificationListMeta$ | async } as context">
-  <div class="relative h-[48px] w-[48px] flex justify-center items-center px-3 rounded cursor-pointer border border-neutral-400 bg-white" [cdkMenuTriggerFor]="menu">
+  <div class="relative h-[44px] w-[44px] flex justify-center items-center rounded-xl cursor-pointer border border-neutral-200 bg-white transition-all duration-200 hover:shadow-sm hover:border-neutral-300" [cdkMenuTriggerFor]="menu">
     <svg width="17" height="22" viewBox="0 0 19 23" fill="none">
       <path d="M1 19H17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
       <path d="M9 5V3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
       <path d="M2 12C2 8.13401 5.13401 5 9 5V5C12.866 5 16 8.13401 16 12V19H2V12Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
       <path fill="currentColor" d="M7.26756 19V18.25C6.99984 18.25 6.75242 18.3927 6.61836 18.6245L7.26756 19ZM10.7324 19L11.3816 18.6245C11.2476 18.3927 11.0002 18.25 10.7324 18.25V19ZM7.75 20C7.75 19.7711 7.81085 19.5586 7.91677 19.3755L6.61836 18.6245C6.38393 19.0297 6.25 19.5004 6.25 20H7.75ZM9 21.25C8.30964 21.25 7.75 20.6904 7.75 20H6.25C6.25 21.5188 7.48122 22.75 9 22.75V21.25ZM10.25 20C10.25 20.6904 9.69036 21.25 9 21.25V22.75C10.5188 22.75 11.75 21.5188 11.75 20H10.25ZM10.0832 19.3755C10.1891 19.5586 10.25 19.7711 10.25 20H11.75C11.75 19.5004 11.6161 19.0297 11.3816 18.6245L10.0832 19.3755ZM10.7324 18.25H7.26756V19.75H10.7324V18.25Z" />
     </svg>
-    <div *ngIf="context.meta?.total_items as length" class="absolute top-0 right-0 w-[18px] h-[18px] flex items-center justify-center rounded-full bg-brand-500">
-      <p class="text-[8px] text-white">{{ length > 99 ? '99+' : length }}</p>
+    <div *ngIf="context.meta?.total_items as length" class="absolute -top-1 -right-1 min-w-[20px] h-[20px] flex items-center justify-center rounded-full bg-brand-500 shadow-sm">
+      <p class="text-[9px] font-semibold text-white px-1">{{ length > 99 ? '99+' : length }}</p>
     </div>
   </div>
 
   <ng-template #menu>
-    <div class="flex w-max max-h-[300px] z-20 bg-white rounded-md ring-1 shadow-lg ring-neutral-200" cdkMenu>
+    <div class="flex w-max max-h-[300px] z-20 bg-white rounded-xl ring-1 shadow-lg ring-neutral-200 overflow-hidden" cdkMenu>
       <app-infinity-scroll *ngIf="context.meta" [pageMeta]="context.meta" [loading]="notificationListLoading$ | async" [listDivider]="true" cdkMenuItem (nextPageRequest)="handleNextPageRequest($event)">
         <ng-container list>
-          <div *ngFor="let notification of notificationListData$ | async; trackByField: '_id'" class="flex flex-col pt-2 px-2 last:mb-2 text-sm cursor-pointer" (keydown.enter)="handleNotificationClick(notification)" (click)="handleNotificationClick(notification)">
-            <a class="text-sm">{{ notification.message }}</a>
-            <p class="self-end text-xs opacity-50">{{ notification.created_at | dateFormat : 'serverDateTimeFormat' : 'clientDateTimeFormat' }}</p>
+          <div *ngFor="let notification of notificationListData$ | async; trackByField: '_id'" class="flex flex-col pt-2.5 px-3 last:mb-2 text-sm cursor-pointer hover:bg-neutral-50 transition-colors" (keydown.enter)="handleNotificationClick(notification)" (click)="handleNotificationClick(notification)">
+            <a class="text-sm leading-snug">{{ notification.message }}</a>
+            <p class="self-end text-xs text-neutral-400 mt-1 mb-1.5">{{ notification.created_at | dateFormat : 'serverDateTimeFormat' : 'clientDateTimeFormat' }}</p>
           </div>
         </ng-container>
       </app-infinity-scroll>

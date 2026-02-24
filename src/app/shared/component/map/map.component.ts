@@ -235,7 +235,7 @@ export class MapComponent implements AfterViewInit, OnDestroy {
 
     const content = `
       <div class="px-3 py-2 bg-white rounded shadow-md">
-        <span class="text-sm text-gray-600">${startTime.toFormat('HH:mm:ss')}</span>
+        <span class="text-sm text-neutral-600">${startTime.toFormat('HH:mm:ss')}</span>
       </div>
     `;
 

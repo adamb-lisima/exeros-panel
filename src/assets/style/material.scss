@@ -106,3 +106,131 @@ $exeros-panel-theme-dark: mat.define-dark-theme(
   color: var(--mdc-theme-error, #ef4444) !important;
   display: block !important;
 }
+
+// ── Premium Form Field Overrides ──
+.mat-mdc-form-field {
+  .mdc-notched-outline__leading,
+  .mdc-notched-outline__notch,
+  .mdc-notched-outline__trailing {
+    border-color: #e5e7eb !important;
+    transition: border-color 200ms ease;
+  }
+
+  &:hover .mdc-notched-outline__leading,
+  &:hover .mdc-notched-outline__notch,
+  &:hover .mdc-notched-outline__trailing {
+    border-color: #9ca3af !important;
+  }
+
+  &.mat-focused .mdc-notched-outline__leading,
+  &.mat-focused .mdc-notched-outline__notch,
+  &.mat-focused .mdc-notched-outline__trailing {
+    border-color: #ee8444 !important;
+    border-width: 2px !important;
+  }
+
+  .mdc-notched-outline__leading {
+    border-radius: 10px 0 0 10px !important;
+  }
+
+  .mdc-notched-outline__trailing {
+    border-radius: 0 10px 10px 0 !important;
+  }
+
+  .mat-mdc-form-field-focus-overlay {
+    background: transparent !important;
+  }
+
+  .mdc-text-field--outlined {
+    --mdc-outlined-text-field-container-shape: 10px;
+  }
+}
+
+// ── Premium Dialog Overlay ──
+.cdk-overlay-pane {
+  .mat-mdc-dialog-surface {
+    border-radius: 20px !important;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15), 0 10px 20px rgba(0, 0, 0, 0.08) !important;
+  }
+}
+
+// ── Premium Tooltip ──
+.mat-mdc-tooltip .mdc-tooltip__surface {
+  background: #1f2937 !important;
+  border-radius: 8px !important;
+  font-size: 12px !important;
+  padding: 6px 12px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+// ── Premium Menu ──
+.mat-mdc-menu-panel {
+  border-radius: 12px !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12), 0 4px 10px rgba(0, 0, 0, 0.06) !important;
+  border: 1px solid rgba(0, 0, 0, 0.06) !important;
+}
+
+// ── Premium CDK Menu ──
+.cdk-menu {
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12), 0 4px 10px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+}
+
+// ── Premium Mat Menu Items ──
+.mat-mdc-menu-item {
+  border-radius: 8px !important;
+  margin: 2px 4px !important;
+  transition: background-color 150ms ease !important;
+
+  &:hover {
+    background-color: #f9fafb !important;
+  }
+}
+
+// ── Premium Snackbar ──
+.mat-mdc-snack-bar-container {
+  border-radius: 12px !important;
+
+  .mdc-snackbar__surface {
+    border-radius: 12px !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) !important;
+  }
+}
+
+// ── Premium Slide Toggle ──
+.mat-mdc-slide-toggle {
+  .mdc-switch__track {
+    border-radius: 12px !important;
+  }
+}
+
+// ── Premium Chips ──
+.mat-mdc-chip {
+  border-radius: 20px !important;
+}
+
+// ── Premium Tabs ──
+.mat-mdc-tab-group {
+  .mat-mdc-tab-header {
+    border-bottom: 1px solid #f3f4f6;
+  }
+
+  .mdc-tab-indicator__content--underline {
+    border-color: #ee8444 !important;
+    border-width: 3px !important;
+    border-radius: 3px 3px 0 0 !important;
+  }
+
+  .mdc-tab--active .mdc-tab__text-label {
+    color: #ee8444 !important;
+    font-weight: 600 !important;
+  }
+}
+
+// ── Premium Paginator ──
+.mat-mdc-paginator {
+  border-radius: 12px;
+  background: transparent !important;
+}

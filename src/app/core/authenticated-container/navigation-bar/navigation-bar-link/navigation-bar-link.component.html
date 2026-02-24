@@ -1,28 +1,23 @@
 <div [routerLink]="link ? ['/', link] : null" [routerLinkActive]="''" #mainRouteActive="routerLinkActive">
   <ng-container *ngIf="{ isActive: shouldBeActive(mainRouteActive.isActive, subRouteActive.isActive) } as ctx">
     <a
-      class="group flex items-center justify-between py-2 px-3 rounded-lg cursor-pointer hover:bg-neutral-50"
+      class="nav-link group"
       [ngClass]="{
-        'text-black bg-neutral-50': ctx.isActive,
-        'justify-center': isCollapsed
+        'nav-link--active': ctx.isActive,
+        'nav-link--collapsed': isCollapsed
       }"
       [attr.aria-label]="isCollapsed ? tooltipLabel : null"
+      [attr.aria-current]="ctx.isActive ? 'page' : null"
       [matTooltip]="isCollapsed ? tooltipLabel : ''"
       matTooltipPosition="right">
-      <div class="flex items-center gap-2 flex-grow" [ngClass]="{ 'justify-center w-full': isCollapsed }">
-        <div class="text-neutral-500 group-hover:text-black w-5 h-5 flex-shrink-0" [ngClass]="{ '!text-black': ctx.isActive }" aria-hidden="true">
-          <ng-content></ng-content>
-        </div>
-        <div *ngIf="!isCollapsed" class="transition-all duration-200 overflow-hidden">
-          <p
-            class="font-normal text-sm text-neutral-500 group-hover:text-black whitespace-nowrap"
-            [ngClass]="{ '!text-black': ctx.isActive }">
-            {{ text }}
-          </p>
-        </div>
+      <div class="nav-link__icon" [ngClass]="{ 'nav-link__icon--active': ctx.isActive }" aria-hidden="true">
+        <ng-content></ng-content>
       </div>
-      <div *ngIf="badge && !isCollapsed" class="py-1 px-2 rounded-lg bg-neutral-400 ml-auto">
-        <p class="opacity-80 font-medium text-xs">{{ badge }}</p>
+      <div *ngIf="!isCollapsed" class="nav-link__label" [ngClass]="{ 'nav-link__label--active': ctx.isActive }">
+        {{ text }}
+      </div>
+      <div *ngIf="badge && !isCollapsed" class="nav-link__badge">
+        {{ badge }}
       </div>
     </a>
   </ng-container>
