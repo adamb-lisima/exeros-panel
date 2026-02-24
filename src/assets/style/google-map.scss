@@ -25,14 +25,14 @@
   .gm-style {
     .gm-style-iw-t::after {
       box-shadow: none !important;
-      background: var(--chinese-white) !important;
+      background: var(--neutral-100) !important;
     }
 
     .gm-style-iw {
-      @apply bg-chinese-white #{!important};
+      @apply bg-neutral-100 #{!important};
 
       .gm-style-iw-d {
-        @apply bg-chinese-white #{!important};
+        @apply bg-neutral-100 #{!important};
       }
     }
   }

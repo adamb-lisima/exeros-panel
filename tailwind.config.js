@@ -1,77 +1,111 @@
-const generateColorClass = variable => () => `var(--${variable})`;
-
-const colors = {
-  white: generateColorClass('white'),
-  cultured: generateColorClass('cultured'),
-  black: generateColorClass('black'),
-  'chinese-white': generateColorClass('chinese-white'),
-  'dust-storm': generateColorClass('dust-storm'),
-  platinum: generateColorClass('platinum'),
-  'light-steel-blue': generateColorClass('light-steel-blue'),
-  'anti-flash-white': generateColorClass('anti-flash-white'),
-  'chinese-silver': generateColorClass('chinese-silver'),
-  manatee: generateColorClass('manatee'),
-  'bright-gray': generateColorClass('bright-gray'),
-  arsenic: generateColorClass('arsenic'),
-  'dark-electric-blue': generateColorClass('dark-electric-blue'),
-  'sonic-silver': generateColorClass('sonic-silver'),
-  honeydew: generateColorClass('honeydew'),
-  'outer-space': generateColorClass('outer-space'),
-  'old-lace': generateColorClass('old-lace'),
-  'dim-gray': generateColorClass('dim-gray'),
-  quartz: generateColorClass('quartz'),
-  carmel: generateColorClass('carmel'),
-  transparent: generateColorClass('transparent'),
-  'new-gray': generateColorClass('new-gray'),
-  'new-gray-50': generateColorClass('new-gray-50'),
-  'new-gray-100': generateColorClass('new-gray-100'),
-  'new-gray-200': generateColorClass('new-gray-200'),
-  'new-gray-300': generateColorClass('new-gray-300'),
-  'new-gray-400': generateColorClass('new-gray-400'),
-  'new-gray-500': generateColorClass('new-gray-500'),
-  'new-gray-600': generateColorClass('new-gray-600'),
-  'new-gray-700': generateColorClass('new-gray-700'),
-  'new-gray-800': generateColorClass('new-gray-800'),
-  'new-gray-900': generateColorClass('new-gray-900'),
-
-  'main-primary': generateColorClass('main-primary'),
-  'main-primary--10': generateColorClass('main-primary--10'),
-  'main-primary--30': generateColorClass('main-primary--30'),
-  'extra-one': generateColorClass('extra-one'),
-  'extra-one--10': generateColorClass('extra-one--10'),
-  'extra-one--30': generateColorClass('extra-one--30'),
-  'extra-two': generateColorClass('extra-two'),
-  'extra-two--10': generateColorClass('extra-two--10'),
-  'extra-two--30': generateColorClass('extra-two--30'),
-  'extra-three': generateColorClass('extra-three'),
-  'extra-three--10': generateColorClass('extra-three--10'),
-  'extra-three--30': generateColorClass('extra-three--30'),
-  'extra-four': generateColorClass('extra-four'),
-  'extra-four--10': generateColorClass('extra-four--10'),
-  'extra-four--30': generateColorClass('extra-four--30')
-};
+const tokenColor = name => `var(--${name})`;
 
 module.exports = {
   darkMode: 'class',
   content: ['./src/**/*.{html,ts,tsx}'],
   theme: {
-    colors,
+    colors: {
+      transparent: 'transparent',
+      current: 'currentColor',
+      white: tokenColor('neutral-0'),
+      black: tokenColor('neutral-950'),
+      brand: {
+        50: tokenColor('brand-50'),
+        100: tokenColor('brand-100'),
+        200: tokenColor('brand-200'),
+        300: tokenColor('brand-300'),
+        400: tokenColor('brand-400'),
+        500: tokenColor('brand-500'),
+        600: tokenColor('brand-600'),
+        700: tokenColor('brand-700'),
+        800: tokenColor('brand-800'),
+        900: tokenColor('brand-900'),
+      },
+      neutral: {
+        0: tokenColor('neutral-0'),
+        50: tokenColor('neutral-50'),
+        100: tokenColor('neutral-100'),
+        200: tokenColor('neutral-200'),
+        300: tokenColor('neutral-300'),
+        400: tokenColor('neutral-400'),
+        500: tokenColor('neutral-500'),
+        600: tokenColor('neutral-600'),
+        700: tokenColor('neutral-700'),
+        800: tokenColor('neutral-800'),
+        900: tokenColor('neutral-900'),
+        950: tokenColor('neutral-950'),
+      },
+      success: {
+        50: tokenColor('success-50'),
+        500: tokenColor('success-500'),
+      },
+      error: {
+        50: tokenColor('error-50'),
+        500: tokenColor('error-500'),
+      },
+      warning: {
+        50: tokenColor('warning-50'),
+        500: tokenColor('warning-500'),
+      },
+      info: {
+        50: tokenColor('info-50'),
+        500: tokenColor('info-500'),
+      },
+      surface: {
+        base: tokenColor('surface-base'),
+        raised: tokenColor('surface-raised'),
+        overlay: tokenColor('surface-overlay'),
+        sunken: tokenColor('surface-sunken'),
+      },
+    },
+    spacing: {
+      0: '0px',
+      px: '1px',
+      0.5: '2px',
+      1: 'var(--space-1)',
+      2: 'var(--space-2)',
+      3: 'var(--space-3)',
+      4: 'var(--space-4)',
+      5: 'var(--space-5)',
+      6: 'var(--space-6)',
+      7: 'var(--space-7)',
+      8: 'var(--space-8)',
+      9: 'var(--space-9)',
+      10: 'var(--space-10)',
+      11: 'var(--space-11)',
+      12: 'var(--space-12)',
+    },
+    boxShadow: {
+      none: 'var(--elevation-none)',
+      sm: 'var(--elevation-sm)',
+      md: 'var(--elevation-md)',
+      lg: 'var(--elevation-lg)',
+    },
     flex: {
       auto: '1 1 auto',
       1: '1 1 0',
-      2: '2 2 0'
+      2: '2 2 0',
     },
     fill: {
-      current: 'currentColor'
+      current: 'currentColor',
     },
     stroke: {
-      current: 'currentColor'
+      current: 'currentColor',
     },
     extend: {
       fontSize: {
-        '2xs': ['0.625rem', '0.75rem']
-      }
-    }
+        '2xs': ['0.625rem', '0.75rem'],
+        display: ['28px', { lineHeight: '1.3', fontWeight: '600' }],
+        'heading-lg': ['22px', { lineHeight: '1.3', fontWeight: '600' }],
+        'heading-md': ['18px', { lineHeight: '1.4', fontWeight: '600' }],
+        'heading-sm': ['15px', { lineHeight: '1.4', fontWeight: '600' }],
+        'body-lg': ['15px', { lineHeight: '1.5', fontWeight: '400' }],
+        body: ['14px', { lineHeight: '1.5', fontWeight: '400' }],
+        'body-sm': ['13px', { lineHeight: '1.5', fontWeight: '400' }],
+        caption: ['12px', { lineHeight: '1.4', fontWeight: '500' }],
+        overline: ['11px', { lineHeight: '1.4', fontWeight: '600' }],
+      },
+    },
   },
-  plugins: []
+  plugins: [],
 };

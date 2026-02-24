@@ -1,0 +1,101 @@
+// src/assets/styles/_animations.scss
+// Global animation keyframes and utility classes
+
+// Shimmer animation for skeleton loaders
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+// Spinner rotation for button loading states
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// Fade in animation
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Scale in animation for dialogs
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+// Scale out animation for dialogs
+@keyframes scaleOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+// Skeleton loader base class
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--neutral-100);
+  border-radius: 4px;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--neutral-200),
+      transparent
+    );
+    animation: shimmer 1.5s infinite;
+  }
+}
+
+// Button spinner utility class
+.btn-spinner {
+  display: inline-block;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.75s linear infinite;
+
+  .btn--sm & {
+    width: 16px;
+    height: 16px;
+  }
+
+  .btn--md & {
+    width: 20px;
+    height: 20px;
+  }
+
+  .btn--lg & {
+    width: 24px;
+    height: 24px;
+  }
+}

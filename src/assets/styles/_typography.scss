@@ -1,0 +1,16 @@
+// src/assets/styles/_typography.scss
+// Typography utility classes mapped to design system tokens
+
+.text-display { font: var(--text-display); }
+.text-heading-lg { font: var(--text-heading-lg); }
+.text-heading-md { font: var(--text-heading-md); }
+.text-heading-sm { font: var(--text-heading-sm); }
+.text-body-lg { font: var(--text-body-lg); }
+.text-body { font: var(--text-body); }
+.text-body-sm { font: var(--text-body-sm); }
+.text-caption { font: var(--text-caption); }
+.text-overline {
+  font: var(--text-overline);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
