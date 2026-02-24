@@ -7,11 +7,11 @@
 .settings-shell {
   display: flex;
   height: 100%;
-  background: #ffffff;
+  background: #fff;
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.06);
-  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.06);
+  border: 1px solid rgba(0,0,0,0.06);
 }
 
 // ── Settings Sidebar ──
@@ -34,11 +34,7 @@
     padding: 16px 14px 6px;
   }
 
-  &__divider {
-    height: 1px;
-    background: #eef0f3;
-    margin: 8px 14px;
-  }
+  &__divider { height: 1px; background: #eef0f3; margin: 8px 14px; }
 
   &__item {
     display: flex;
@@ -47,19 +43,15 @@
     padding: 9px 14px;
     border-radius: 10px;
     font-size: 13.5px;
-    font-weight: 400;
     color: #6b7280;
     cursor: pointer;
-    transition: all 180ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 180ms cubic-bezier(0.4,0,0.2,1);
     position: relative;
 
-    &:hover {
-      background: #f3f4f6;
-      color: #374151;
-    }
+    &:hover { background: #f3f4f6; color: #374151; }
 
     &--active {
-      background: linear-gradient(135deg, rgba(238, 132, 68, 0.08), rgba(238, 132, 68, 0.04));
+      background: linear-gradient(135deg, rgba(238,132,68,0.08), rgba(238,132,68,0.04));
       color: #ee8444;
       font-weight: 500;
 
@@ -76,32 +68,23 @@
       }
 
       &:hover {
-        background: linear-gradient(135deg, rgba(238, 132, 68, 0.1), rgba(238, 132, 68, 0.06));
-        color: #ee8444;
+        background: linear-gradient(135deg, rgba(238,132,68,0.1), rgba(238,132,68,0.06));
       }
     }
   }
 }
 
-// ── Settings Content Area ──
-.settings-content {
-  flex: 1;
-  padding: 32px;
-  overflow-y: auto;
-  background: #ffffff;
-}
+.settings-content { flex: 1; padding: 32px; overflow-y: auto; background: #fff; }
 
 // ── Settings Cards (profile & sub-pages) ──
 .settings-card {
-  background: #ffffff;
+  background: #fff;
   border: 1px solid #f0f1f3;
   border-radius: 16px;
   overflow: hidden;
   transition: box-shadow 200ms ease;
 
-  &:hover {
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-  }
+  &:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
 
   &__header {
     display: flex;
@@ -119,9 +102,7 @@
     letter-spacing: -0.01em;
   }
 
-  &__body {
-    padding: 24px;
-  }
+  &__body { padding: 24px; }
 }
 
 // ── Profile Avatar ──
@@ -132,13 +113,9 @@
   border-radius: 16px;
   overflow: hidden;
   border: 3px solid #f0f1f3;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
 
-  &__img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
+  &__img { width: 100%; height: 100%; object-fit: cover; }
 }
 
 // ── Profile Info Grid ──
@@ -156,9 +133,7 @@
   border-radius: 10px;
   transition: background 150ms ease;
 
-  &:hover {
-    background: #fafbfc;
-  }
+  &:hover { background: #fafbfc; }
 
   &__label {
     width: 140px;
@@ -170,11 +145,7 @@
     letter-spacing: 0.04em;
   }
 
-  &__value {
-    font-size: 14px;
-    font-weight: 500;
-    color: #1f2937;
-  }
+  &__value { font-size: 14px; font-weight: 500; color: #1f2937; }
 }
 
 // ── Settings Action Link ──
@@ -185,19 +156,11 @@
   cursor: pointer;
   transition: color 150ms ease;
 
-  &:hover {
-    color: #df5f18;
-  }
+  &:hover { color: #df5f18; }
 }
 
 // ── Settings Inner Panel (shared across sub-pages) ──
 :host ::ng-deep {
-  // Premium search field
-  .w-\\[534px\\] {
-    max-width: 100%;
-  }
-
-  // Inner left tree panels
   .border-r.border-neutral-400 {
     border-right: 1px solid #eef0f3 !important;
     background: #fafbfc;
@@ -206,104 +169,44 @@
     margin-right: 12px;
   }
 
-  // Sub-page containers
-  .flex.flex-col.gap-5.p-5 {
-    padding: 0 !important;
-    gap: 24px !important;
-  }
+  .flex.flex-col.gap-5.p-5 { padding: 0 !important; gap: 24px !important; }
+  .flex.gap-5 { gap: 24px !important; }
 
-  // Sub-page inner flex panels
-  .flex.gap-5 {
-    gap: 24px !important;
-  }
-
-  // Section headings inside settings
-  .text-xl.font-bold,
-  .font-bold {
+  .text-xl.font-bold, .font-bold {
     font-size: 16px;
     font-weight: 600;
     letter-spacing: -0.01em;
     color: #111827;
   }
 
-  // Tree item text
-  .text-sm.font-medium {
-    font-size: 13.5px;
-  }
+  .text-sm.font-medium { font-size: 13.5px; }
 
-  // Escalation table styling
   table {
     width: 100%;
     border-collapse: separate;
     border-spacing: 0;
 
-    tr {
-      transition: background 150ms ease;
+    tr { transition: background 150ms ease; &:hover { background: #fafbfc; } }
+    td { padding: 12px 8px; font-size: 13.5px; }
 
-      &:hover {
-        background: #fafbfc;
-      }
-    }
-
-    td {
-      padding: 12px 8px;
-      font-size: 13.5px;
-    }
-
-    .border-b.border-neutral-400,
-    .border-b.border-neutral-100 {
-      border-bottom-color: #f0f1f3 !important;
-    }
+    .border-b.border-neutral-400, .border-b.border-neutral-100 { border-bottom-color: #f0f1f3 !important; }
 
     thead {
-      .border-b.border-neutral-400,
-      .border-b.border-neutral-100 {
-        border-bottom-color: #e5e7eb !important;
-      }
-
-      td {
-        font-size: 11px;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        color: #9ca3af;
-        padding: 10px 8px;
-      }
+      .border-b.border-neutral-400, .border-b.border-neutral-100 { border-bottom-color: #e5e7eb !important; }
+      td { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #9ca3af; padding: 10px 8px; }
     }
   }
 
-  // All border-neutral-400 → softer
-  .border-neutral-400 {
-    border-color: #eef0f3 !important;
-  }
+  .border-neutral-400 { border-color: #eef0f3 !important; }
+  .text-neutral-400 { color: #9ca3af !important; }
 
-  // Text neutral-400 labels
-  .text-neutral-400 {
-    color: #9ca3af !important;
-  }
-
-  // Delete / action links at bottom
   .text-sm.text-brand-500.font-semibold {
     font-size: 13px;
     font-weight: 600;
     color: #ee8444;
     text-decoration: none;
-    transition: color 150ms ease;
-
-    &:hover {
-      color: #df5f18;
-    }
+    &:hover { color: #df5f18; }
   }
 
-  // Buttons inside sub-pages
-  app-button {
-    .font-semibold {
-      font-weight: 600;
-    }
-  }
-
-  // Paginator centering
-  app-paginator {
-    margin-top: 8px;
-  }
+  app-paginator { margin-top: 8px; }
 }

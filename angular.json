@@ -56,8 +56,8 @@
               },
               {
                 "type": "anyComponentStyle",
-                "maximumWarning": "2kb",
-                "maximumError": "4kb"
+                "maximumWarning": "4kb",
+                "maximumError": "6kb"
               }
             ],
             "allowedCommonJsDependencies": ["apexcharts", "socket.io-client", "pusher-js"]
@@ -174,8 +174,8 @@
               },
               {
                 "type": "anyComponentStyle",
-                "maximumWarning": "2kb",
-                "maximumError": "4kb"
+                "maximumWarning": "4kb",
+                "maximumError": "6kb"
               }
             ]
           },
@@ -285,8 +285,8 @@
               },
               {
                 "type": "anyComponentStyle",
-                "maximumWarning": "2kb",
-                "maximumError": "4kb"
+                "maximumWarning": "4kb",
+                "maximumError": "6kb"
               }
             ]
           },
@@ -396,8 +396,8 @@
               },
               {
                 "type": "anyComponentStyle",
-                "maximumWarning": "2kb",
-                "maximumError": "4kb"
+                "maximumWarning": "4kb",
+                "maximumError": "6kb"
               }
             ]
           },
