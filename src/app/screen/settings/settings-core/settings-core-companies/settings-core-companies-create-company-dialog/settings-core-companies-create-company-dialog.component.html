@@ -1,0 +1,46 @@
+<app-dialog-container title="{{ title }}">
+  <div class="flex flex-col gap-8 p-4" body>
+    <app-text-control label="Company name*" [formControl]="bodyGroup.controls.name" [error]="bodyGroup.controls.name.invalid && bodyGroup.controls.name.touched" errorText="The name field is required"></app-text-control>
+    <ng-container *appIsSuperAdmin="true">
+      <app-tree-control label="Assign vehicle branches" [options]="(fleetOptions$ | async) ?? []" [multiple]="true" [formControl]="bodyGroup.controls.fleet_ids"></app-tree-control>
+      <app-tree-control label="Assign user roles" [options]="(rolesOptions$ | async) ?? []" [multiple]="true" [formControl]="bodyGroup.controls.role_ids"></app-tree-control>
+    </ng-container>
+    <div class="flex flex-col gap-2">
+      <span class="text-xs text-dim-gray">Add your company photo</span>
+      <div *ngIf="file" class="flex gap-2">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <mask id="mask0_140_9623" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
+            <rect width="24" height="24" fill="#D9D9D9" />
+          </mask>
+          <g mask="url(#mask0_140_9623)">
+            <path d="M9 17.5H15C15.1417 17.5 15.2604 17.452 15.3562 17.3561C15.4521 17.2601 15.5 17.1412 15.5 16.9993C15.5 16.8575 15.4521 16.7388 15.3562 16.6433C15.2604 16.5478 15.1417 16.5 15 16.5H9C8.85833 16.5 8.73958 16.548 8.64375 16.644C8.54792 16.7399 8.5 16.8588 8.5 17.0007C8.5 17.1425 8.54792 17.2612 8.64375 17.3567C8.73958 17.4522 8.85833 17.5 9 17.5ZM9 13.5H15C15.1417 13.5 15.2604 13.452 15.3562 13.3561C15.4521 13.2601 15.5 13.1412 15.5 12.9993C15.5 12.8575 15.4521 12.7388 15.3562 12.6433C15.2604 12.5478 15.1417 12.5 15 12.5H9C8.85833 12.5 8.73958 12.548 8.64375 12.644C8.54792 12.7399 8.5 12.8588 8.5 13.0007C8.5 13.1425 8.54792 13.2612 8.64375 13.3567C8.73958 13.4522 8.85833 13.5 9 13.5ZM6.61537 21C6.15512 21 5.77083 20.8458 5.4625 20.5375C5.15417 20.2292 5 19.8449 5 19.3846V4.61537C5 4.15512 5.15417 3.77083 5.4625 3.4625C5.77083 3.15417 6.15512 3 6.61537 3H13.8288C14.0499 3 14.2607 3.04359 14.461 3.13078C14.6614 3.21794 14.834 3.33397 14.9789 3.47885L18.5212 7.02115C18.666 7.16603 18.7821 7.33865 18.8692 7.539C18.9564 7.73935 19 7.95007 19 8.17115V19.3846C19 19.8449 18.8458 20.2292 18.5375 20.5375C18.2292 20.8458 17.8449 21 17.3846 21H6.61537ZM14 7.2V4H6.61537C6.46154 4 6.32052 4.0641 6.1923 4.1923C6.0641 4.32052 6 4.46154 6 4.61537V19.3846C6 19.5385 6.0641 19.6795 6.1923 19.8077C6.32052 19.9359 6.46154 20 6.61537 20H17.3846C17.5385 20 17.6795 19.9359 17.8077 19.8077C17.9359 19.6795 18 19.5385 18 19.3846V8H14.7997C14.573 8 14.383 7.92333 14.2298 7.77C14.0766 7.61667 14 7.42667 14 7.2Z" fill="currentColor" />
+          </g>
+        </svg>
+        <div class="flex flex-col">
+          <span class="text-xs font-medium">{{ file.name }}</span>
+          <span class="text-xs text-dim-gray">{{ file.size | humanizeFileSize }}</span>
+        </div>
+      </div>
+      <label class="flex cursor-pointer">
+        <span class="py-2 px-4 border-2 border-main-primary rounded-lg text-sm text-main-primary font-semibold select-none">Change file</span>
+        <input type="file" accept="image/png,image/jpeg" hidden (change)="handleAvatarChange($any($event.target).files[0])" />
+      </label>
+    </div>
+    <div class="flex justify-between">
+      <ng-container *appIsSuperAdmin="true">
+        <app-date-control class="col-span-2" label="Licence end date" [formControl]="bodyGroup.controls.licence_end_date"></app-date-control>
+      </ng-container>
+      <app-select-control class="col-span-2" [multiple]="true" label="End date reminder" [formControl]="bodyGroup.controls.license_renewal_remind_me_before" [options]="remindOptions"></app-select-control>
+    </div>
+    <app-checkbox-control label="Require MFA for all users" [formControl]="bodyGroup.controls.mfa_status"></app-checkbox-control>
+    <app-tree-control label="Review required event types" [options]="eventTypes" [multiple]="true" [formControl]="bodyGroup.controls.review_required_event_types"> </app-tree-control>
+    <app-text-control type="number" class="col-span-2" label="Video timeout seconds" [formControl]="bodyGroup.controls.video_timeout"></app-text-control>
+    <app-text-control *appIsSuperAdmin="true" type="number" [min]="0" [step]="1" class="col-span-2" label="Users Limit" [formControl]="bodyGroup.controls.users_limit"></app-text-control>
+    <span class="text-xs text-dim-gray">* - mandatory fields</span>
+  </div>
+  <div class="flex flex-1 justify-end" footer>
+    <app-button [disabled]="false" (buttonClick)="data.id ? handleUpdateCompanyClick() : handleAddCompanyClick()">
+      <span class="text-sm text-white font-semibold">{{ button }}</span>
+    </app-button>
+  </div>
+</app-dialog-container>

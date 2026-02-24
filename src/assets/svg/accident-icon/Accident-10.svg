@@ -1,0 +1,60 @@
+<svg id="e011c298-3378-4f43-b9d3-b658db0064d3" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80">
+  <defs>
+    <style>
+      .bca5ad17-8900-4b42-b8c2-6c07c52fe6e7 {
+        fill: #fff;
+      }
+
+      .b07fcb4e-099f-452c-b2ad-7fbb9ea4bfde {
+        fill: #fadc0f;
+      }
+
+      .e47dd968-c40d-442b-b675-e806cc4505ac {
+        fill: none;
+        stroke: #414042;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .f3ca68a1-a43f-4717-bcb0-bc61b74c58aa {
+        font-size: 15.09px;
+        fill: #414042;
+        font-family: AvertaCY-Light;
+        font-weight: 300;
+      }
+
+      .eac68171-0600-4c62-b418-8428a055613f {
+        letter-spacing: -0.01em;
+      }
+    </style>
+  </defs>
+  <title>Accident-10</title>
+  <g>
+    <g>
+      <g>
+        <rect class="bca5ad17-8900-4b42-b8c2-6c07c52fe6e7" x="0.63" y="30.42" width="78.74" height="20.17"/>
+        <path class="b07fcb4e-099f-452c-b2ad-7fbb9ea4bfde" d="M79.37,24.19v6.23H.63V24.19A4.89,4.89,0,0,1,5.52,19.3h69A4.89,4.89,0,0,1,79.37,24.19Z"/>
+        <path class="b07fcb4e-099f-452c-b2ad-7fbb9ea4bfde" d="M79.37,50.59v5.22a4.89,4.89,0,0,1-4.89,4.89h-69A4.89,4.89,0,0,1,.63,55.81V50.59Z"/>
+        <circle class="bca5ad17-8900-4b42-b8c2-6c07c52fe6e7" cx="5.28" cy="24.03" r="1.51"/>
+        <circle class="bca5ad17-8900-4b42-b8c2-6c07c52fe6e7" cx="74.88" cy="24.51" r="1.51"/>
+        <circle class="bca5ad17-8900-4b42-b8c2-6c07c52fe6e7" cx="5.59" cy="56.1" r="1.51"/>
+        <circle class="bca5ad17-8900-4b42-b8c2-6c07c52fe6e7" cx="74.88" cy="56.59" r="1.51"/>
+      </g>
+      <g>
+        <rect class="e47dd968-c40d-442b-b675-e806cc4505ac" x="0.63" y="19.3" width="78.73" height="41.4" rx="4.89"/>
+        <line class="e47dd968-c40d-442b-b675-e806cc4505ac" x1="15.88" y1="24.51" x2="21.66" y2="24.51"/>
+        <line class="e47dd968-c40d-442b-b675-e806cc4505ac" x1="58.91" y1="24.51" x2="64.7" y2="24.51"/>
+        <line class="e47dd968-c40d-442b-b675-e806cc4505ac" x1="15.59" y1="55.65" x2="21.38" y2="55.65"/>
+        <line class="e47dd968-c40d-442b-b675-e806cc4505ac" x1="58.62" y1="55.65" x2="64.41" y2="55.65"/>
+        <line class="e47dd968-c40d-442b-b675-e806cc4505ac" x1="0.63" y1="30.42" x2="79.37" y2="30.42"/>
+        <line class="e47dd968-c40d-442b-b675-e806cc4505ac" x1="0.63" y1="50.6" x2="79.37" y2="50.6"/>
+        <circle class="e47dd968-c40d-442b-b675-e806cc4505ac" cx="5.28" cy="24.03" r="1.51"/>
+        <circle class="e47dd968-c40d-442b-b675-e806cc4505ac" cx="74.88" cy="24.51" r="1.51"/>
+        <circle class="e47dd968-c40d-442b-b675-e806cc4505ac" cx="5.59" cy="56.1" r="1.51"/>
+        <circle class="e47dd968-c40d-442b-b675-e806cc4505ac" cx="74.88" cy="56.59" r="1.51"/>
+        <text class="f3ca68a1-a43f-4717-bcb0-bc61b74c58aa" transform="translate(10.67 45.25)">AB21 A<tspan class="eac68171-0600-4c62-b418-8428a055613f" x="46.26" y="0">B</tspan><tspan x="55.57" y="0">C</tspan></text>
+      </g>
+    </g>
+    <line class="e47dd968-c40d-442b-b675-e806cc4505ac" x1="8.56" y1="30.42" x2="8.56" y2="50.6"/>
+  </g>
+</svg>

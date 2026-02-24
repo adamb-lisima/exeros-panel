@@ -1,0 +1,19 @@
+<div class="h-full flex flex-col gap-1 py-1 rounded" [ngClass]="{ 'loader loader--infinite-scroll': loading }">
+  <ng-content select="[header]"></ng-content>
+  <ng-content select="[filters]"></ng-content>
+  <ng-container *ngIf="items && items.length; else emptyTemplate">
+    <cdk-virtual-scroll-viewport *ngIf="infiniteMaxBuffer" #listElement class="h-full" [itemSize]="itemSize" (scroll)="handleListScroll(listElement)" [maxBufferPx]="9999999">
+      <div *cdkVirtualFor="let item of items; trackBy: trackBy; let first = first; let last = last" [ngClass]="{ 'mb-2 last:mb-0': listGap, 'border-b border-b-bright-gray last:border-b-none': listDivider }">
+        <ng-container *ngTemplateOutlet="listItemRef; context: { $implicit: item }"></ng-container>
+      </div>
+    </cdk-virtual-scroll-viewport>
+    <cdk-virtual-scroll-viewport *ngIf="!infiniteMaxBuffer" #listElement class="h-full" [itemSize]="itemSize" (scroll)="handleListScroll(listElement)">
+      <div *cdkVirtualFor="let item of items; trackBy: trackBy; let first = first; let last = last" [ngClass]="{ 'mb-1 last:mb-0 h-[155px]': listGap, 'border-b border-b-bright-gray last:border-b-none': listDivider }">
+        <ng-container *ngTemplateOutlet="listItemRef; context: { $implicit: item }"></ng-container>
+      </div>
+    </cdk-virtual-scroll-viewport>
+  </ng-container>
+  <ng-template #emptyTemplate>
+    <ng-content select="[empty]"></ng-content>
+  </ng-template>
+</div>

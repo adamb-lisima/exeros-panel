@@ -1,0 +1,14 @@
+<div class="h-full w-[500px] flex flex-col gap-5 p-5 border-r border-r-platinum overflow-auto">
+  <div class="flex justify-between items-center">
+    <h1 class="font-bold text-3xl">Telematics</h1>
+  </div>
+  <div class="flex gap-2">
+    <app-select-control *ngIf="vehicleOptions$ | async as vehicleOptions" label="Vehicle" [clearable]="true" [options]="vehicleOptions" [formControl]="bodyGroup.controls.vehicle_id"></app-select-control>
+    <app-select-control *ngIf="driversOptions$ | async as driversOptions" label="Driver" [clearable]="true" [options]="driversOptions" [formControl]="bodyGroup.controls.driver_id"></app-select-control>
+  </div>
+  <div class="flex flex-col gap-3 p-5 rounded-xl bg-white">
+    <app-map class="h-[350px]" [center]="center" [markers]="markers$ | async" [zoom]="15" [rounded]="true"></app-map>
+    <app-telematics-left-from-to [from]="from" [to]="to"></app-telematics-left-from-to>
+  </div>
+  <app-telematics-left-fleet-info [vehicleLocation]="vehicleLocation" [numberOfTrips]="numberOfTrips" [averageTripLength]="averageTripLength"></app-telematics-left-fleet-info>
+</div>

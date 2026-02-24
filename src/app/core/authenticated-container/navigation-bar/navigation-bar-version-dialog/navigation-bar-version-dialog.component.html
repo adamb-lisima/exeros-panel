@@ -1,0 +1,12 @@
+<app-dialog-container title="Release Notes">
+  <div *ngIf="configData$ | async as configData" class="flex flex-col gap-8 p-4" body>
+    <div *ngFor="let note of configData.release_notes" class="border-b border-gray-200 pb-4">
+      <h3 class="text-lg font-semibold text-gray-800">{{ note.version }}</h3>
+      <ul class="mt-2 list-disc list-inside space-y-1 text-gray-700">
+        <li *ngFor="let change of note.changes" class="ml-4">
+          {{ change }}
+        </li>
+      </ul>
+    </div>
+  </div>
+</app-dialog-container>

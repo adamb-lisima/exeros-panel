@@ -1,0 +1,59 @@
+<svg id="a0a7e033-d023-4ab0-a58e-0a761e4ea3ee" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80">
+  <defs>
+    <style>
+      .b0eb900c-fd5a-4cf9-b611-e6443540d93d {
+        fill: #fadc0f;
+      }
+
+      .ec495cae-9f96-488c-a55d-aa772c0a5a35 {
+        fill: #fff;
+      }
+
+      .b1fbc963-28ec-42ae-86b1-9d4629709f4e {
+        fill: none;
+        stroke: #414042;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+    </style>
+  </defs>
+  <title>Accident-20</title>
+  <g>
+    <g>
+      <path class="b0eb900c-fd5a-4cf9-b611-e6443540d93d" d="M79.35,10.21v9.72H.64V10.21A4.83,4.83,0,0,1,5.47,5.38H74.52A4.83,4.83,0,0,1,79.35,10.21Z"/>
+      <path class="ec495cae-9f96-488c-a55d-aa772c0a5a35" d="M79.35,19.93V74a4.83,4.83,0,0,1-4.83,4.83h-69A4.83,4.83,0,0,1,.64,74v-54Z"/>
+      <rect class="b0eb900c-fd5a-4cf9-b611-e6443540d93d" x="12.09" y="36.05" width="4.92" height="4.92"/>
+      <rect class="b0eb900c-fd5a-4cf9-b611-e6443540d93d" x="25.05" y="36.05" width="4.92" height="4.92"/>
+      <rect class="b0eb900c-fd5a-4cf9-b611-e6443540d93d" x="38.01" y="36.05" width="4.92" height="4.92"/>
+      <rect class="b0eb900c-fd5a-4cf9-b611-e6443540d93d" x="50.97" y="36.05" width="4.92" height="4.92"/>
+      <rect class="b0eb900c-fd5a-4cf9-b611-e6443540d93d" x="63.93" y="36.05" width="4.92" height="4.92"/>
+      <rect class="b0eb900c-fd5a-4cf9-b611-e6443540d93d" x="11.62" y="47.5" width="4.92" height="4.92"/>
+      <rect class="b0eb900c-fd5a-4cf9-b611-e6443540d93d" x="24.58" y="47.5" width="4.92" height="4.92"/>
+      <rect class="b0eb900c-fd5a-4cf9-b611-e6443540d93d" x="37.54" y="47.5" width="4.92" height="4.92"/>
+      <rect class="b0eb900c-fd5a-4cf9-b611-e6443540d93d" x="11.62" y="58.95" width="4.92" height="4.92"/>
+      <rect class="b0eb900c-fd5a-4cf9-b611-e6443540d93d" x="24.58" y="58.95" width="4.92" height="4.92"/>
+      <rect class="b0eb900c-fd5a-4cf9-b611-e6443540d93d" x="37.54" y="58.95" width="4.92" height="4.92"/>
+      <rect class="b0eb900c-fd5a-4cf9-b611-e6443540d93d" x="50.5" y="47.5" width="4.92" height="4.92"/>
+      <rect class="b0eb900c-fd5a-4cf9-b611-e6443540d93d" x="63.46" y="47.5" width="4.92" height="4.92"/>
+    </g>
+    <g>
+      <rect class="b1fbc963-28ec-42ae-86b1-9d4629709f4e" x="0.65" y="5.38" width="78.7" height="73.41" rx="4.82"/>
+      <line class="b1fbc963-28ec-42ae-86b1-9d4629709f4e" x1="0.65" y1="19.93" x2="79.35" y2="19.93"/>
+      <line class="b1fbc963-28ec-42ae-86b1-9d4629709f4e" x1="14.08" y1="1.22" x2="14.08" y2="13.51"/>
+      <line class="b1fbc963-28ec-42ae-86b1-9d4629709f4e" x1="64.41" y1="1.22" x2="64.41" y2="13.51"/>
+      <rect class="b1fbc963-28ec-42ae-86b1-9d4629709f4e" x="12.09" y="36.05" width="4.92" height="4.92"/>
+      <rect class="b1fbc963-28ec-42ae-86b1-9d4629709f4e" x="25.05" y="36.05" width="4.92" height="4.92"/>
+      <rect class="b1fbc963-28ec-42ae-86b1-9d4629709f4e" x="38.01" y="36.05" width="4.92" height="4.92"/>
+      <rect class="b1fbc963-28ec-42ae-86b1-9d4629709f4e" x="50.97" y="36.05" width="4.92" height="4.92"/>
+      <rect class="b1fbc963-28ec-42ae-86b1-9d4629709f4e" x="63.93" y="36.05" width="4.92" height="4.92"/>
+      <rect class="b1fbc963-28ec-42ae-86b1-9d4629709f4e" x="11.62" y="47.5" width="4.92" height="4.92"/>
+      <rect class="b1fbc963-28ec-42ae-86b1-9d4629709f4e" x="24.58" y="47.5" width="4.92" height="4.92"/>
+      <rect class="b1fbc963-28ec-42ae-86b1-9d4629709f4e" x="37.54" y="47.5" width="4.92" height="4.92"/>
+      <rect class="b1fbc963-28ec-42ae-86b1-9d4629709f4e" x="11.62" y="58.95" width="4.92" height="4.92"/>
+      <rect class="b1fbc963-28ec-42ae-86b1-9d4629709f4e" x="24.58" y="58.95" width="4.92" height="4.92"/>
+      <rect class="b1fbc963-28ec-42ae-86b1-9d4629709f4e" x="37.54" y="58.95" width="4.92" height="4.92"/>
+      <rect class="b1fbc963-28ec-42ae-86b1-9d4629709f4e" x="50.5" y="47.5" width="4.92" height="4.92"/>
+      <rect class="b1fbc963-28ec-42ae-86b1-9d4629709f4e" x="63.46" y="47.5" width="4.92" height="4.92"/>
+    </g>
+  </g>
+</svg>

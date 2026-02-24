@@ -1,0 +1,43 @@
+<div class="grid grid-cols-[3fr_2fr] gap-6 p-6" *appHasPermission="[[accessGroup.LEADERBOARD_VIEWER]]">
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div class="bg-white rounded-lg shadow-sm border border-platinum">
+      <div class="flex justify-between items-center p-4 h-[72px] border-b-new-gray-300 border-b">
+        <h4 class="font-semibold text-xl">Monthly Score</h4>
+        <div class="w-48">
+          <app-select-control [options]="monthOptions" [formControl]="monthControl" [showSearchInput]="false" [showHintSpace]="false"> </app-select-control>
+        </div>
+      </div>
+      <app-leaderboard-drivers title="" [rangeFilter]="monthlyRange" [fleetId]="(fleetId$ | async) || null"> </app-leaderboard-drivers>
+    </div>
+
+    <div class="bg-white rounded-lg shadow-sm border border-platinum">
+      <div class="flex justify-between items-center p-4 h-[72px] border-b-new-gray-300 border-b">
+        <h4 class="font-semibold text-xl">Weekly Score</h4>
+        <div class="w-48">
+          <app-select-control [options]="weekOptions" [formControl]="weekControl" [showSearchInput]="false" [showHintSpace]="false"> </app-select-control>
+        </div>
+      </div>
+      <app-leaderboard-drivers title="" [rangeFilter]="weeklyRange" [fleetId]="(fleetId$ | async) || null"> </app-leaderboard-drivers>
+    </div>
+
+    <div class="bg-white rounded-lg shadow-sm border border-platinum">
+      <div class="flex justify-between items-center p-4 h-[72px] border-b-new-gray-300 border-b">
+        <h4 class="font-semibold text-xl">Yesterday Score</h4>
+      </div>
+      <app-leaderboard-drivers title="" [rangeFilter]="yesterdayRange" [fleetId]="(fleetId$ | async) || null"> </app-leaderboard-drivers>
+    </div>
+
+    <div class="bg-white rounded-lg shadow-sm border border-platinum">
+      <div class="flex justify-between items-center p-4 h-[72px] border-b-new-gray-300 border-b">
+        <h4 class="font-semibold text-xl">All Time</h4>
+      </div>
+      <app-leaderboard-drivers title="" [rangeFilter]="allTimeRange" [fleetId]="(fleetId$ | async) || null"> </app-leaderboard-drivers>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-1 gap-4">
+    <div class="bg-white rounded-lg shadow-sm border border-platinum p-6">
+      <app-leaderboard-safety-trends [monthlyRange]="monthlyRange" [weeklyRange]="weeklyRange" [yesterdayRange]="yesterdayRange" [allTimeRange]="allTimeRange" [fleetId]="(fleetId$ | async) || null"> </app-leaderboard-safety-trends>
+    </div>
+  </div>
+</div>

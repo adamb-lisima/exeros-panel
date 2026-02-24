@@ -1,0 +1,20 @@
+
+<svg id="a4ab4634-6834-4268-a7be-3db70395be27" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80">
+  <title>1</title>
+  <g>
+    <g>
+      <path style="fill: #fff;" d="M79.13,29.61,60.24,61.67a1.48,1.48,0,0,1-2,.54,38.61,38.61,0,0,0-36.48,0,1.48,1.48,0,0,1-2-.54L.87,29.61a1.5,1.5,0,0,1,.55-2.06,79.77,79.77,0,0,1,77.16,0A1.5,1.5,0,0,1,79.13,29.61Z"/>
+      <path style="fill: #fff;" d="M45.55,29.11H34.39a10.23,10.23,0,0,1-.43-5H46A8.46,8.46,0,0,1,45.55,29.11Z"/>
+      <polygon style="fill: #fadc0f;" points="51.81 42.42 44.83 42.42 51.23 39.03 50.28 31.88 54.94 36.91 60.97 34.58 58.16 39.19 61.5 47.81 55.89 42.68 54.62 47.07 51.81 42.42"/>
+    </g>
+    <g>
+      <path style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" d="M79.13,29.61,60.24,61.67a1.48,1.48,0,0,1-2,.54,38.61,38.61,0,0,0-36.48,0,1.48,1.48,0,0,1-2-.54L.87,29.61a1.5,1.5,0,0,1,.55-2.06,79.77,79.77,0,0,1,77.16,0A1.5,1.5,0,0,1,79.13,29.61Z"/>
+      <g>
+        <path style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" d="M45.55,29.11H34.39a10.23,10.23,0,0,1-.43-5H46A8.46,8.46,0,0,1,45.55,29.11Z"/>
+        <line style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" x1="40" y1="29.11" x2="40" y2="30.48"/>
+        <line style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" x1="40" y1="17.6" x2="40" y2="24.13"/>
+      </g>
+      <polygon style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" points="51.81 42.42 44.83 42.42 51.23 39.03 50.28 31.88 54.94 36.91 60.97 34.58 58.16 39.19 61.5 47.81 55.89 42.68 54.62 47.07 51.81 42.42"/>
+    </g>
+  </g>
+</svg>

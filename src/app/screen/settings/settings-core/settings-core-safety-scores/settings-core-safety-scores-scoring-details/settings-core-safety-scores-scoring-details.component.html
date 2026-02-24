@@ -1,0 +1,55 @@
+<div class="flex flex-col gap-6">
+  <div class="flex justify-between items-center">
+    <p class="font-bold text-base">Scoring details</p>
+    <app-button (buttonClick)="handleEditClick()">
+      <span class="text-sm text-white font-semibold">Edit</span>
+    </app-button>
+  </div>
+  <div class="flex gap-8">
+    <div class="flex flex-col gap-5 flex-1">
+      <div *ngFor="let profile of getLeftColumnProfiles()">
+        <table class="table-auto w-full mb-5">
+          <thead>
+            <th></th>
+            <tr>
+              <td colspan="3" class="py-1 text-xs text-manatee text-gray-500">{{ profile?.name }}</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let score of profile?.weights ?? []">
+              <ng-container *ngTemplateOutlet="scoreWeight; context: { score: score }"></ng-container>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="flex flex-col gap-5 flex-1">
+      <div *ngFor="let profile of getRightColumnProfiles()">
+        <table class="table-auto w-full mb-5">
+          <thead>
+            <th></th>
+            <tr>
+              <td colspan="3" class="py-1 text-xs text-manatee text-gray-500">{{ profile?.name }}</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let score of profile?.weights ?? []">
+              <ng-container *ngTemplateOutlet="scoreWeight; context: { score: score }"></ng-container>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div (click)="!hasBranches && handleDeleteClick()" (keydown.enter)="!hasBranches && handleDeleteClick()">
+    <span class="text-sm text-main-primary font-semibold cursor-pointer select-none" [ngClass]="hasBranches ? 'opacity-50' : ''">DELETE</span>
+  </div>
+</div>
+
+<ng-template #scoreWeight let-score="score">
+  <td [ngClass]="score.value !== 0 ? 'text-extra-three' : ''" class="pl-5 text-sm font-medium w-16">{{ score.value | number : '1.0-2' }}%</td>
+  <td class="py-1.5 w-8">
+    <app-event-icon [eventIcon]="score.event_icon"></app-event-icon>
+  </td>
+  <td class="text-sm">{{ score.name }}</td>
+</ng-template>

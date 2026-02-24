@@ -1,0 +1,36 @@
+<ng-container>
+  <app-infinity-scroll [loading]="userLogsLoading$ | async">
+    <ng-container header>
+      <div class="flex flex-col gap-8">
+        <div class="flex flex-col gap-8">
+          <div class="min-h-[40px] flex flex-wrap justify-between items-center gap-2">
+            <p class="font-semibold text-xl whitespace-nowrap">User logs</p>
+            <div *appHasPermission="[[accessGroup.USER_LOGS_REPORTS_DOWNLOADER]]" class="flex gap-2">
+              <div class="h-[40px] w-[40px] flex justify-center items-center rounded cursor-pointer border border-platinum text-extra-one" (click)="handleUserLogsExport()" (keydown.enter)="handleUserLogsExport()">
+                <img src="assets/svg/xls-file-icon.svg" alt="Export as PDF" width="24" height="24" />
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-wrap items-center gap-x-2">
+            <app-select-control *appIsSuperAdmin="false" label="Company" [clearable]="true" [options]="(companyOptions$ | async) ?? []" [formControl]="companyControl"> </app-select-control>
+            <app-select-control label="Order" [options]="orderOptions" [formControl]="orderControl"> </app-select-control>
+            <app-select-control label="User" [options]="(userOptions$ | async) ?? []" [multiple]="true" [clearable]="true" [formControl]="userControl"> </app-select-control>
+            <app-select-control label="Log Type" [options]="(logTypeOptions$ | async) ?? []" [multiple]="true" [clearable]="true" [formControl]="logTypeControl"> </app-select-control>
+          </div>
+        </div>
+        <div class="flex items-center pb-2 border-b border-b-bright-gray">
+          <p class="flex-[0_0_25%] text-sm text-sonic-silver">Log type</p>
+          <p class="flex-[0_0_50%] text-sm text-sonic-silver">Description</p>
+          <p class="flex-[0_0_25%] text-sm text-sonic-silver">Created at</p>
+        </div>
+      </div>
+    </ng-container>
+    <ng-container list>
+      <div *ngFor="let userLog of userLogs$ | async" class="flex items-center py-4">
+        <p class="flex-[0_0_25%] font-semibold text-sm">{{ userLog.log_type.replace('_', ' ') }}</p>
+        <p class="flex-[0_0_50%] font-semibold text-sm">{{ userLog.desc }}</p>
+        <p class="flex-[0_0_25%] font-semibold text-sm">{{ userLog.created_at | dateFormat : 'serverDateTimeFormat' : 'clientDateTimeFormat' }}</p>
+      </div>
+    </ng-container>
+  </app-infinity-scroll>
+</ng-container>

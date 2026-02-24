@@ -1,0 +1,37 @@
+<ng-container *ngIf="liveFeed$ | async as liveFeed">
+  <ng-container *ngIf="liveFeed.driver as driver; else unassignedTemplate">
+    <div class="flex flex-col gap-4 p-5 rounded-xl bg-white">
+      <p class="font-medium text-sm text-dim-gray">DRIVER</p>
+      <div class="flex justify-between items-center">
+        <div class="flex items-center gap-2">
+          <div class="w-[42px] h-[42px] flex justify-center items-center rounded-full cursor-pointer" [ngClass]="{ 'bg-main-primary': driver.id % 3 === 0, 'bg-extra-three': driver.id % 3 === 1, 'bg-extra-four': driver.id % 3 === 2 }" (click)="handleDriverClick(driver)" (keydown.enter)="handleDriverClick(driver)">
+            <p class="font-medium text-sm text-white" [appTooltip]="driver.name">{{ driver.name | firstCharacter }}</p>
+          </div>
+          <div class="flex flex-col justify-between">
+            <p class="font-semibold text-sm">{{ driver.name }}</p>
+            <p class="text-sm text-arsenic opacity-50">ID {{ driver.licence_number }}</p>
+          </div>
+        </div>
+        <div *appHasPermission="[[AccessGroup.DRIVERS_EDITOR]]" class="flex self-end items-center gap-2 px-2 py-1 rounded-md cursor-pointer bg-anti-flash-white" (click)="handleMessageClick(driver)" (keydown.enter)="handleMessageClick(driver)">
+          <svg class="text-extra-three" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M11 3.61548V6.7463C11 7.02323 10.9706 7.28478 10.9043 7.52325C10.6321 8.65405 9.73437 9.36177 8.49816 9.36177H6.49669L4.27447 10.908C3.94334 11.1464 3.50184 10.8926 3.50184 10.4772V9.36177C2.75128 9.36177 2.12583 9.10023 1.69169 8.64638C1.25019 8.18482 1 7.53093 1 6.7463V3.61548C1 2.1539 1.86829 1.14617 3.20751 1.0154C3.30316 1.00771 3.39882 1 3.50184 1H8.49816C9.99927 1 11 2.0462 11 3.61548Z" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          <p class="font-medium text-xs text-extra-three">Message</p>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <ng-template #unassignedTemplate>
+    <div class="flex flex-col gap-4 p-5 rounded-xl bg-white">
+      <p class="font-medium text-sm text-dim-gray">DRIVER</p>
+      <div class="flex items-center gap-2">
+        <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="15" cy="15" r="15" fill="#C0C3D1" />
+          <path d="M15 14.9993C16.6109 14.9993 17.9167 13.6935 17.9167 12.0827C17.9167 10.4719 16.6109 9.16602 15 9.16602C13.3892 9.16602 12.0834 10.4719 12.0834 12.0827C12.0834 13.6935 13.3892 14.9993 15 14.9993Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M20.0108 20.8333C20.0108 18.5758 17.765 16.75 15 16.75C12.235 16.75 9.98914 18.5758 9.98914 20.8333" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <p class="text-sm">Unassigned</p>
+      </div>
+    </div>
+  </ng-template>
+</ng-container>

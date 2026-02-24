@@ -1,0 +1,33 @@
+<svg id="edd1d898-e789-43bc-93b0-70276dcee024" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80">
+  <defs>
+    <style>
+      .f964c11f-da34-4315-922b-905c1b0a55e6 {
+        fill: #fff;
+      }
+
+      .abbf9e01-4686-4ed6-a2dd-8e4c51488a2e {
+        fill: #fadc0f;
+      }
+
+      .f5efd7c6-fedf-4d74-8ac5-4da89fb0a6f0 {
+        fill: none;
+        stroke: #414042;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+    </style>
+  </defs>
+  <title>Accident-24</title>
+  <g>
+    <g>
+      <path class="f964c11f-da34-4315-922b-905c1b0a55e6" d="M79.3,39.36A38.68,38.68,0,0,1,40.64,78,38.22,38.22,0,0,1,19.9,71.92L.7,79.24l7-19.83a38.62,38.62,0,1,1,71.65-20Z"/>
+      <polygon class="abbf9e01-4686-4ed6-a2dd-8e4c51488a2e" points="48.66 54.65 48.66 61.49 32.41 61.49 32.41 54.65 35.24 54.65 35.24 38.88 32.03 38.88 32.03 32.73 46.09 32.73 46.09 54.65 48.66 54.65"/>
+      <circle class="abbf9e01-4686-4ed6-a2dd-8e4c51488a2e" cx="40.66" cy="21.06" r="5.25"/>
+    </g>
+    <g>
+      <polygon class="f5efd7c6-fedf-4d74-8ac5-4da89fb0a6f0" points="48.66 54.65 48.66 61.49 32.41 61.49 32.41 54.65 35.24 54.65 35.24 38.88 32.03 38.88 32.03 32.73 46.09 32.73 46.09 54.65 48.66 54.65"/>
+      <circle class="f5efd7c6-fedf-4d74-8ac5-4da89fb0a6f0" cx="40.66" cy="21.06" r="5.25"/>
+      <path class="f5efd7c6-fedf-4d74-8ac5-4da89fb0a6f0" d="M79.3,39.36A38.68,38.68,0,0,1,40.64,78,38.22,38.22,0,0,1,19.9,71.92L.7,79.24l7-19.83a38.62,38.62,0,1,1,71.65-20Z"/>
+    </g>
+  </g>
+</svg>

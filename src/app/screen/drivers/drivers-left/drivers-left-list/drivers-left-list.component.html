@@ -1,0 +1,23 @@
+<ng-container *ngIf="{ selectedId: selectedId$ | async } as ctx">
+  <app-infinity-scroll *ngIf="driversMeta$ | async as meta" [transparent]="true" [listGap]="true" [pageMeta]="meta" [loading]="driversLoading$ | async">
+    <ng-container list>
+      <div *rxFor="let driver of drivers$; trackByField: 'id'" class="flex justify-between gap-1 p-4 rounded-xl cursor-pointer border bg-white" [ngClass]="ctx.selectedId === driver.id ? 'border-main-primary' : 'border-transparent'" (click)="handleDriverClick(driver)" (keydown.enter)="handleDriverClick(driver)">
+        <div class="flex items-center gap-2">
+          <div class="w-[42px] h-[42px] flex justify-center items-center rounded-full" [ngClass]="{ 'bg-main-primary': driver.id % 3 === 0, 'bg-extra-three': driver.id % 3 === 1, 'bg-extra-four': driver.id % 3 === 2 }">
+            <p class="font-medium text-white" [appTooltip]="driver.name">{{ driver.name | firstCharacter }}</p>
+          </div>
+          <div class="flex flex-col justify-between">
+            <p class="font-bold">{{ driver.name }}</p>
+            <p class="text-xs text-arsenic opacity-50">ID: {{ driver.licence_number }}</p>
+          </div>
+        </div>
+        <div *appHasPermission="[[AccessGroup.DRIVERS_EDITOR]]" class="flex items-center gap-1 py-1 px-2 rounded-md cursor-pointer bg-anti-flash-white" (keydown.enter)="handleMessageClick(driver)" (click)="handleMessageClick(driver)">
+          <svg class="text-extra-three" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M11 3.61548V6.7463C11 7.02323 10.9706 7.28478 10.9043 7.52325C10.6321 8.65405 9.73437 9.36177 8.49816 9.36177H6.49669L4.27447 10.908C3.94334 11.1464 3.50184 10.8926 3.50184 10.4772V9.36177C2.75128 9.36177 2.12583 9.10023 1.69169 8.64638C1.25019 8.18482 1 7.53093 1 6.7463V3.61548C1 2.1539 1.86829 1.14617 3.20751 1.0154C3.30316 1.00771 3.39882 1 3.50184 1H8.49816C9.99927 1 11 2.0462 11 3.61548Z" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          <p class="font-medium text-xs text-extra-three">Message</p>
+        </div>
+      </div>
+    </ng-container>
+  </app-infinity-scroll>
+</ng-container>

@@ -1,0 +1,39 @@
+<svg id="ffb1f7c4-39b6-4fee-8410-b110953250e5" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80">
+  <defs>
+    <style>
+      .a2ffdc1d-2e5d-49b7-b12d-8b9dd7745671 {
+        fill: #fff;
+      }
+
+      .a55110c1-6430-493d-86a4-ed34269b354f {
+        fill: #fadc0f;
+      }
+
+      .aa4e23fd-cab8-48bb-85e9-f7f7cea862ca {
+        fill: none;
+        stroke: #414042;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+    </style>
+  </defs>
+  <title>Accident-26</title>
+  <g>
+    <g>
+      <path class="a2ffdc1d-2e5d-49b7-b12d-8b9dd7745671" d="M78.19,18.81H1.81a1.1,1.1,0,0,0-1.1,1.1V68.25a1.1,1.1,0,0,0,1.1,1.09H78.19a1.09,1.09,0,0,0,1.1-1.09V19.91A1.1,1.1,0,0,0,78.19,18.81ZM10,29.8a2.72,2.72,0,1,1,2.72-2.72A2.72,2.72,0,0,1,10,29.8ZM40,60.45A16.38,16.38,0,1,1,56.37,44.08,16.37,16.37,0,0,1,40,60.45ZM72,29.8H62.13V24.36H72Z"/>
+      <path class="a55110c1-6430-493d-86a4-ed34269b354f" d="M40,27.7A16.38,16.38,0,1,0,56.37,44.08,16.37,16.37,0,0,0,40,27.7Zm0,26.79A10.41,10.41,0,1,1,50.41,44.08,10.41,10.41,0,0,1,40,54.49Z"/>
+      <path class="a2ffdc1d-2e5d-49b7-b12d-8b9dd7745671" d="M50.41,44.08A10.41,10.41,0,1,1,40,33.67,10.41,10.41,0,0,1,50.41,44.08Z"/>
+      <circle class="a55110c1-6430-493d-86a4-ed34269b354f" cx="10.03" cy="27.08" r="2.72"/>
+      <rect class="a55110c1-6430-493d-86a4-ed34269b354f" x="62.13" y="24.36" width="9.83" height="5.44"/>
+      <path class="a2ffdc1d-2e5d-49b7-b12d-8b9dd7745671" d="M59.93,18.81H20.07L23,12.16a2.5,2.5,0,0,1,2.3-1.51H54.73A2.5,2.5,0,0,1,57,12.16Z"/>
+    </g>
+    <g>
+      <rect class="aa4e23fd-cab8-48bb-85e9-f7f7cea862ca" x="0.71" y="18.81" width="78.57" height="50.53" rx="1.1"/>
+      <circle class="aa4e23fd-cab8-48bb-85e9-f7f7cea862ca" cx="40" cy="44.08" r="10.41"/>
+      <circle class="aa4e23fd-cab8-48bb-85e9-f7f7cea862ca" cx="40" cy="44.08" r="16.37"/>
+      <circle class="aa4e23fd-cab8-48bb-85e9-f7f7cea862ca" cx="10.02" cy="27.08" r="2.72"/>
+      <rect class="aa4e23fd-cab8-48bb-85e9-f7f7cea862ca" x="62.13" y="24.36" width="9.83" height="5.44"/>
+      <path class="aa4e23fd-cab8-48bb-85e9-f7f7cea862ca" d="M59.93,18.81,57,12.16a2.5,2.5,0,0,0-2.3-1.51H25.27A2.5,2.5,0,0,0,23,12.16l-2.9,6.65"/>
+    </g>
+  </g>
+</svg>

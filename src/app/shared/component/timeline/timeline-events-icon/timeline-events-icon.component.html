@@ -1,0 +1,25 @@
+<div class="h-9 w-9 cursor-pointer" cdkOverlayOrigin #trigger="cdkOverlayOrigin" (mouseover)="onMouseOverHandle()" (focus)="onMouseOverHandle()" (mouseleave)="showOverlay = false">
+  <ng-container [ngSwitch]="icon">
+    <ng-container *ngSwitchCase="'event'">
+      <ng-container *ngIf="eventType; else defaultIconTemplate">
+        <img [ngSrc]="eventType" width="36" height="36" alt="icon" />
+      </ng-container>
+      <ng-template #defaultIconTemplate>
+        <div class="w-9 h-9 rounded-full opacity-10 bg-extra-two"></div>
+      </ng-template>
+    </ng-container>
+    <ng-container *ngSwitchCase="'alarm'">
+      <ng-container *ngIf="eventType; else defaultIconTemplate">
+        <img [ngSrc]="eventType" width="36" height="36" alt="icon" />
+      </ng-container>
+      <ng-template #defaultIconTemplate>
+        <div class="w-9 h-9 rounded-full opacity-10 bg-extra-two"></div>
+      </ng-template>
+    </ng-container>
+    <ng-container *ngSwitchCase="'driver'">
+      <div class="h-9 w-9 flex justify-center items-center rounded-full bg-main-primary">
+        <p class="font-medium text-sm text-white">{{ eventName | firstCharacter }}</p>
+      </div>
+    </ng-container>
+  </ng-container>
+</div>

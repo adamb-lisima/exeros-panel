@@ -1,0 +1,21 @@
+<app-dialog-container [title]="title">
+  <div class="flex flex-col gap-8 p-5" body>
+    <div class="flex flex-col gap-4">
+      <app-select-control [error]="bodyGroup.controls.company.invalid && bodyGroup.controls.company.touched" errorText="Company is required" [options]="(companyOptions$ | async) ?? []" [formControl]="bodyGroup.controls.company" [showHintSpace]="false" label="Company*"></app-select-control>
+      <app-select-control *ngIf="fleetsOptions$ | async as options" [options]="options" [formControl]="fleet_access_ids" [multiple]="true" [showHintSpace]="false" [error]="fleet_access_ids.invalid && fleet_access_ids.touched" errorText="Fleet access is required" label="Fleet access*"> </app-select-control>
+    </div>
+    <div class="flex flex-col">
+      <app-text-control [formControl]="bodyGroup.controls.name" label="Name*" [error]="bodyGroup.controls.name.invalid && bodyGroup.controls.name.touched" errorText="The name field is required"> </app-text-control>
+      <app-text-control [formControl]="bodyGroup.controls.username" label="Username*" [error]="bodyGroup.controls.username.invalid && bodyGroup.controls.username.touched" errorText="The username field is required"></app-text-control>
+      <app-text-control [formControl]="bodyGroup.controls.email" label="E-mail*" [error]="bodyGroup.controls.email.invalid && bodyGroup.controls.email.touched" errorText="The email field is required"></app-text-control>
+      <app-text-control [formControl]="bodyGroup.controls.licence_number" label="Licence number"></app-text-control>
+      <app-checkbox-control label="Allow automated vehicle assignment*" [formControl]="bodyGroup.controls.allow_automated_assignment"></app-checkbox-control>
+    </div>
+    <span class="text-xs text-dim-gray">* - mandatory fields</span>
+  </div>
+  <div class="flex flex-1 justify-end" footer>
+    <app-button [disabled]="false" (buttonClick)="data?.id ? handleUpdateDriverClick() : handleAddDriverClick()">
+      <span class="text-sm text-white font-semibold">{{ button }}</span>
+    </app-button>
+  </div>
+</app-dialog-container>

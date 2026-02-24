@@ -1,0 +1,235 @@
+<div>
+  <p>You can add multiple providers and use drag and drop to change their orders.</p>
+  <div class="flex flex-col gap-8 mt-8">
+    <div class="flex flex-col">
+      <div class="flex flex-col mt-2">
+        <div
+          *ngFor="let provider of providersFormArray.controls; let i = index"
+          class="items-center space-x-4 flex-1 mb-2 border rounded-lg"
+          [ngClass]="{
+            'border-main-primary !rounded-lg': activeProviderIndex === i,
+            'border-new-gray-400 !rounded-lg': activeProviderIndex !== i
+          }"
+          (click)="setActiveProvider(i)"
+          (keydown.enter)="setActiveProvider(i)">
+          <div class="flex flex-row items-center p-4 gap-2" [ngClass]="{ 'bg-main-primary--10': activeProviderIndex === i, 'bg-new-gray-50 rounded-t-lg': activeProviderIndex !== i }">
+            <button
+              type="button"
+              class="flex justify-center cursor-pointer"
+              [disabled]="i === 0"
+              (click)="moveProviderUp(i); $event.stopPropagation()"
+              [ngClass]="{
+                'text-new-gray-300': i === 0,
+                'text-main-primary': i !== 0 && activeProviderIndex === i,
+                'text-new-gray-400': i !== 0 && activeProviderIndex !== i
+              }">
+              <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6.00219 2.18632L1.92919 6.25957C1.79069 6.3979 1.61661 6.46873 1.40694 6.47207C1.19744 6.47523 1.02019 6.4044 0.875194 6.25957C0.730361 6.11457 0.657944 5.9389 0.657944 5.73257C0.657944 5.52623 0.730361 5.35057 0.875194 5.20557L5.36944 0.711316C5.46311 0.617816 5.56186 0.551816 5.66569 0.513316C5.76953 0.474816 5.88169 0.455566 6.00219 0.455566C6.12269 0.455566 6.23486 0.474816 6.33869 0.513316C6.44253 0.551816 6.54128 0.617816 6.63494 0.711316L11.1292 5.20557C11.2675 5.34407 11.3384 5.51815 11.3417 5.72782C11.3449 5.93732 11.274 6.11457 11.1292 6.25957C10.9842 6.4044 10.8085 6.47682 10.6022 6.47682C10.3959 6.47682 10.2202 6.4044 10.0752 6.25957L6.00219 2.18632Z" [attr.fill]="i === 0 ? '#cccccc' : activeProviderIndex === i ? '#EE8444' : '#888888'" />
+              </svg>
+            </button>
+
+            <span class="h-8 w-8 rounded-full font-normal text-sm py-1 flex items-center justify-center text-white" [ngClass]="{ 'bg-main-primary': activeProviderIndex === i, 'bg-new-gray-500': activeProviderIndex !== i }">
+              {{ i + 1 }}
+            </span>
+
+            <button
+              type="button"
+              class="flex justify-center cursor-pointer"
+              [disabled]="i === providersFormArray.controls.length - 1"
+              (click)="moveProviderDown(i); $event.stopPropagation()"
+              [ngClass]="{
+                'text-new-gray-300': i === providersFormArray.controls.length - 1,
+                'text-main-primary': i !== providersFormArray.controls.length - 1 && activeProviderIndex === i,
+                'text-new-gray-400': i !== providersFormArray.controls.length - 1 && activeProviderIndex !== i
+              }">
+              <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5.99781 4.7463L10.0708 0.67305C10.2093 0.534717 10.3834 0.463884 10.5931 0.46055C10.8026 0.457384 10.9798 0.528216 11.1248 0.67305C11.2696 0.81805 11.3421 0.993717 11.3421 1.20005C11.3421 1.40638 11.2696 1.58205 11.1248 1.72705L6.63056 6.2213C6.53689 6.3148 6.43814 6.3808 6.33431 6.4193C6.23047 6.4578 6.11831 6.47705 5.99781 6.47705C5.87731 6.47705 5.76514 6.4578 5.66131 6.4193C5.55747 6.3808 5.45872 6.3148 5.36506 6.2213L0.870805 1.72705C0.732471 1.58855 0.661638 1.41447 0.658305 1.2048C0.655138 0.995301 0.725971 0.81805 0.870805 0.67305C1.0158 0.528217 1.19147 0.455801 1.3978 0.455801C1.60414 0.4558 1.77981 0.528217 1.92481 0.67305L5.99781 4.7463Z" [attr.fill]="i === providersFormArray.controls.length - 1 ? '#cccccc' : activeProviderIndex === i ? '#EE8444' : '#888888'" />
+              </svg>
+            </button>
+
+            <div class="ml-2">
+              <span class="text-sm font-medium" [ngClass]="{ 'text-main-primary': activeProviderIndex === i, 'text-new-gray-500': activeProviderIndex !== i }"> Provider Configuration </span>
+              <div class="flex flex-col text-sm" *ngIf="provider.get('provider_id')?.value">
+                <span class="font-normal text-xs">
+                  {{ provider.get('provider_id')?.value ? getProviderLabel(provider.get('provider_id')?.value) || 'Unknown provider' : '' }}
+                  <ng-container *ngIf="provider.get('device_id')?.value"> - {{ getDeviceLabel(i, provider.get('device_id')?.value) || provider.get('device_id')?.value }} </ng-container>
+                </span>
+              </div>
+            </div>
+
+            <button class="text-red-500 hover:text-red-700 ml-auto" (click)="removeProvider(i); $event.stopPropagation()" type="button">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <mask id="mask0_41_503" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
+                  <rect width="24" height="24" fill="#D9D9D9" />
+                </mask>
+                <g mask="url(#mask0_41_503)">
+                  <path d="M7.56887 20.1398C7.06374 20.1398 6.63617 19.9648 6.28617 19.6148C5.93617 19.2648 5.76117 18.8372 5.76117 18.3321V5.63982H5.51117C5.29835 5.63982 5.12015 5.56803 4.97657 5.42445C4.83297 5.28087 4.76117 5.10267 4.76117 4.88985C4.76117 4.67703 4.83297 4.49883 4.97657 4.35525C5.12015 4.21165 5.29835 4.13985 5.51117 4.13985H9.26114C9.26114 3.88858 9.34896 3.67833 9.52459 3.5091C9.70024 3.33987 9.91371 3.25525 10.165 3.25525H14.3573C14.6086 3.25525 14.822 3.33987 14.9977 3.5091C15.1733 3.67833 15.2611 3.88858 15.2611 4.13985H19.0111C19.2239 4.13985 19.4021 4.21165 19.5457 4.35525C19.6893 4.49883 19.7611 4.67703 19.7611 4.88985C19.7611 5.10267 19.6893 5.28087 19.5457 5.42445C19.4021 5.56803 19.2239 5.63982 19.0111 5.63982H18.7611V18.3321C18.7611 18.8372 18.5861 19.2648 18.2361 19.6148C17.8861 19.9648 17.4586 20.1398 16.9534 20.1398H7.56887ZM7.26114 5.63982V18.3321C7.26114 18.4219 7.28999 18.4956 7.34769 18.5533C7.40539 18.611 7.47912 18.6398 7.56887 18.6398H16.9534C17.0432 18.6398 17.1169 18.611 17.1746 18.5533C17.2323 18.4956 17.2611 18.4219 17.2611 18.3321V5.63982H7.26114ZM9.66502 15.8899C9.66502 16.1027 9.73681 16.2809 9.88039 16.4244C10.024 16.568 10.2022 16.6398 10.415 16.6398C10.6278 16.6398 10.806 16.568 10.9496 16.4244C11.0932 16.2809 11.165 16.1027 11.165 15.8899V8.3898C11.165 8.17698 11.0932 7.99878 10.9496 7.8552C10.806 7.71162 10.6278 7.63982 10.415 7.63982C10.2022 7.63982 10.024 7.71162 9.88039 7.8552C9.73681 7.99878 9.66502 8.17698 9.66502 8.3898V15.8899ZM13.3573 15.8899C13.3573 16.1027 13.4291 16.2809 13.5727 16.4244C13.7163 16.568 13.8945 16.6398 14.1073 16.6398C14.3201 16.6398 14.4983 16.568 14.6419 16.4244C14.7855 16.2809 14.8573 16.1027 14.8573 15.8899V8.3898C14.8573 8.17698 14.7855 7.99878 14.6419 7.8552C14.4983 7.71162 14.3201 7.63982 14.1073 7.63982C13.8945 7.63982 13.7163 7.71162 13.5727 7.8552C13.4291 7.99878 13.3573 8.17698 13.3573 8.3898V15.8899ZM7.26114 5.63982V18.3321C7.26114 18.4219 7.28999 18.4956 7.34769 18.5533C7.40539 18.611 7.47912 18.6398 7.56887 18.6398H7.26114V5.63982Z" fill="#1C1B1B" />
+                </g>
+              </svg>
+            </button>
+          </div>
+          <div class="flex flex-col flex-grow gap-2 mb-4 pr-4 pt-4">
+            <form [formGroup]="bodyGroup">
+              <div>
+                <app-select-control label="Provider" *ngIf="providerOptions$ | async as options" [options]="options" [formControl]="provider.controls.provider_id"></app-select-control>
+
+                <div *ngIf="showSmaxOptions[i]" class="flex flex-row gap-4 mt-2 mb-2">
+                  <mat-radio-button [checked]="providerModes[i] === 'assign'" (change)="setProviderMode(i, 'assign')" value="assign" color="primary"> Assign existing object </mat-radio-button>
+                  <mat-radio-button [checked]="providerModes[i] === 'create'" (change)="setProviderMode(i, 'create')" value="create" color="primary"> Create new object </mat-radio-button>
+                </div>
+
+                <div class="relative">
+                  <app-select-control label="Device" [formControl]="provider.controls.device_id" [options]="(getDeviceOptions(i) | async) || []"></app-select-control>
+
+                  <div *ngIf="isDeviceOptionsLoading(i)" class="absolute right-2 top-1/3 transform -translate-y-1/2">
+                    <svg class="animate-spin h-5 w-5 text-main-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                      <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </form>
+
+            <div *ngIf="isExistingSmaxProvider[i] || (showSmaxOptions[i] && providerModes[i] === 'create')">
+              <app-text-control label="Transmit IP or domain name" [formControl]="getTransmitIpControl(provider)"></app-text-control>
+              <app-text-control label="Transmit port" [formControl]="getTransmitPortControl(provider)"></app-text-control>
+              <div class="flex flex-col">
+                <div class="flex items-center gap-3 cursor-pointer" (click)="isChannelSetOpen = !isChannelSetOpen" (keydown.enter)="isChannelSetOpen = !isChannelSetOpen">
+                  <span class="text-sm text-main-primary font-semibold">Channel set</span>
+                  <ng-container *ngIf="isChannelSetOpen; then arrowDown; else arrowUp"> </ng-container>
+                </div>
+                <div *ngIf="isChannelSetOpen" class="flex flex-col mt-2">
+                  <table class="border-separate border-spacing-1">
+                    <thead class="border-b border-bright-gray">
+                      <td class="w-6">
+                        <div>
+                          <app-checkbox-control [ngModel]="allChannels" (ngModelChange)="handleAllChannelsClick($event)"></app-checkbox-control>
+                        </div>
+                      </td>
+                      <td class="text-xs text-manatee py-3 cursor-pointer" (click)="handleChannelAliasClick()" (keydown.enter)="handleChannelAliasClick()">Channel alias</td>
+                      <th></th>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <div>
+                            <app-checkbox-control [ngModel]="channelEnabled[0]" (ngModelChange)="handleChannelCheckboxChange($event, 0)"></app-checkbox-control>
+                          </div>
+                        </td>
+                        <td><app-text-control [showHintSpace]="false" [formControl]="channelSetForm.controls[0]" label="Channel name"></app-text-control></td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div>
+                            <app-checkbox-control [ngModel]="channelEnabled[1]" (ngModelChange)="handleChannelCheckboxChange($event, 1)"></app-checkbox-control>
+                          </div>
+                        </td>
+                        <td><app-text-control [showHintSpace]="false" [formControl]="channelSetForm.controls[1]" label="Channel name"></app-text-control></td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div>
+                            <app-checkbox-control [ngModel]="channelEnabled[2]" (ngModelChange)="handleChannelCheckboxChange($event, 2)"></app-checkbox-control>
+                          </div>
+                        </td>
+                        <td><app-text-control [showHintSpace]="false" [formControl]="channelSetForm.controls[2]" label="Channel name"></app-text-control></td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div>
+                            <app-checkbox-control [ngModel]="channelEnabled[3]" (ngModelChange)="handleChannelCheckboxChange($event, 3)"></app-checkbox-control>
+                          </div>
+                        </td>
+                        <td><app-text-control [showHintSpace]="false" [formControl]="channelSetForm.controls[3]" label="Channel name"></app-text-control></td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div>
+                            <app-checkbox-control [ngModel]="channelEnabled[4]" (ngModelChange)="handleChannelCheckboxChange($event, 4)"></app-checkbox-control>
+                          </div>
+                        </td>
+                        <td><app-text-control [showHintSpace]="false" [formControl]="channelSetForm.controls[4]" label="Channel name"></app-text-control></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div class="flex flex-col">
+                <div class="flex items-center gap-3 cursor-pointer" (click)="isSimCardOpen = !isSimCardOpen" (keydown.enter)="isSimCardOpen = !isSimCardOpen">
+                  <span class="text-sm text-main-primary font-semibold">Sim card</span>
+                  <ng-container *ngIf="isSimCardOpen; then arrowDown; else arrowUp"></ng-container>
+                </div>
+                <div *ngIf="isSimCardOpen" class="flex flex-col mt-2">
+                  <app-text-control [formControl]="simCardForm.controls.sim_no" label="SIM No."></app-text-control>
+                  <app-text-control [formControl]="simCardForm.controls.imei" label="IMEI"></app-text-control>
+                  <app-text-control [formControl]="simCardForm.controls.imsi" label="IMSI"></app-text-control>
+                  <app-select-control [formControl]="simCardForm.controls.network_module_type" [options]="networkModuleTypeOptions" label="Network module type"></app-select-control>
+                </div>
+              </div>
+              <div class="flex flex-col">
+                <div class="flex items-center gap-3 cursor-pointer" (click)="isVehicleFileOpen = !isVehicleFileOpen" (keydown.enter)="isVehicleFileOpen = !isVehicleFileOpen">
+                  <span class="text-sm text-main-primary font-semibold">Vehicle file</span>
+                  <ng-container *ngIf="isVehicleFileOpen; then arrowDown; else arrowUp"></ng-container>
+                </div>
+                <div *ngIf="isVehicleFileOpen" class="flex flex-col mt-2">
+                  <app-select-control [formControl]="vehicleFileForm.controls.vehicle_class" [options]="vehicleClassOptions" label="Vehicle class"></app-select-control>
+                  <app-text-control [formControl]="vehicleFileForm.controls.factory_grade" label="Factory grade"></app-text-control>
+                  <app-text-control [formControl]="vehicleFileForm.controls.loading_capacity" label="Loading capacity"></app-text-control>
+                  <app-text-control [formControl]="vehicleFileForm.controls.engine_number" label="Engine number"></app-text-control>
+                  <app-text-control [formControl]="vehicleFileForm.controls.chassis_number" label="Chassis number"></app-text-control>
+                  <app-select-control [formControl]="vehicleFileForm.controls.fuel_type" [options]="fuelTypeOptions" label="Fuel type"></app-select-control>
+                  <app-text-control [formControl]="vehicleFileForm.controls.road_transport_certificate" label="Road Transport Certificate"></app-text-control>
+                  <app-text-control [formControl]="vehicleFileForm.controls.technical_grade" label="Technical Grade"></app-text-control>
+                  <app-text-control [formControl]="vehicleFileForm.controls.validity_period" label="Validity period"></app-text-control>
+                  <app-text-control [formControl]="vehicleFileForm.controls.fuel_consumption" label="Fuel Consumption"></app-text-control>
+                  <app-text-control [formControl]="vehicleFileForm.controls.province" label="Province"></app-text-control>
+                  <app-text-control [formControl]="vehicleFileForm.controls.city" label="City"></app-text-control>
+                </div>
+              </div>
+              <div class="flex flex-col">
+                <div class="flex items-center gap-3 cursor-pointer" (click)="isEquipmentFileOpen = !isEquipmentFileOpen" (keydown.enter)="isEquipmentFileOpen = !isEquipmentFileOpen">
+                  <span class="text-sm text-main-primary font-semibold">Equipment file</span>
+                  <ng-container *ngIf="isEquipmentFileOpen; then arrowDown; else arrowUp"></ng-container>
+                </div>
+              </div>
+              <div *ngIf="isEquipmentFileOpen" class="flex flex-col mt-2">
+                <app-text-control [formControl]="equipmentFileForm.controls.device_username" label="Device username"></app-text-control>
+                <app-text-control [formControl]="equipmentFileForm.controls.device_password" label="Device password"></app-text-control>
+                <app-text-control [formControl]="equipmentFileForm.controls.factory_lot_number" label="Factory lot number"></app-text-control>
+                <app-text-control [formControl]="equipmentFileForm.controls.factory_lot_time" label="Factory lot time"></app-text-control>
+                <app-text-control [formControl]="equipmentFileForm.controls.installer" label="Installer"></app-text-control>
+                <app-text-control [formControl]="equipmentFileForm.controls.peripheral_description" label="Peripheral description"></app-text-control>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <app-button [type]="'ternary'" class="mr-auto mt-4" (buttonClick)="addProvider()">
+        <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <mask id="mask0_4372_14243" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="21" height="21">
+            <rect x="0.5" y="0.5" width="20" height="20" fill="#D9D9D9" />
+          </mask>
+          <g mask="url(#mask0_4372_14243)">
+            <path d="M10.5 8.41667V12.5833M12.5833 10.5H8.41667M16.75 10.5C16.75 13.9518 13.9518 16.75 10.5 16.75C7.04822 16.75 4.25 13.9518 4.25 10.5C4.25 7.04822 7.04822 4.25 10.5 4.25C13.9518 4.25 16.75 7.04822 16.75 10.5Z" stroke="#EE8444" stroke-linecap="round" stroke-linejoin="round" />
+          </g>
+        </svg>
+        Add provider relation
+      </app-button>
+    </div>
+  </div>
+</div>
+
+<ng-template #arrowDown>
+  <svg width="6" height="4" viewBox="0 0 6 4" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M1.55771 3.57041C1.24247 3.57041 1.02512 3.42541 0.905657 3.13542C0.78619 2.84545 0.836947 2.58997 1.05793 2.36897L2.69352 0.733397C2.76981 0.657112 2.84777 0.602701 2.92741 0.570166C3.00706 0.53763 3.094 0.521362 3.18823 0.521362C3.28246 0.521362 3.3694 0.53763 3.44904 0.570166C3.52869 0.602701 3.60667 0.657112 3.68295 0.733397L5.31852 2.36897C5.53952 2.58997 5.59028 2.84545 5.47082 3.13542C5.35134 3.42541 5.13398 3.57041 4.81877 3.57041H1.55771Z" fill="#EE8444" />
+  </svg>
+</ng-template>
+
+<ng-template #arrowUp>
+  <svg width="6" height="4" viewBox="0 0 6 4" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M2.56315 3.10069L0.927557 1.46511C0.706576 1.24412 0.655819 0.988631 0.775285 0.698656C0.894752 0.408667 1.1121 0.263672 1.42734 0.263672H4.68839C5.00361 0.263672 5.22096 0.408667 5.34045 0.698656C5.45991 0.988631 5.40915 1.24412 5.18815 1.46511L3.55258 3.10069C3.47629 3.17697 3.39832 3.23138 3.31867 3.26392C3.23903 3.29645 3.15209 3.31272 3.05785 3.31272C2.96363 3.31272 2.87669 3.29645 2.79704 3.26392C2.7174 3.23138 2.63944 3.17697 2.56315 3.10069Z" fill="#EE8444" />
+  </svg>
+</ng-template>

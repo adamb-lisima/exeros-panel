@@ -1,0 +1,4 @@
+<mat-form-field class="w-full">
+  <mat-label *ngIf="label">{{ label }}</mat-label>
+  <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" [cdkAutosizeMaxRows]="rows" [disabled]="disabled" [ngModel]="value" (ngModelChange)="handleModelChange($event)"></textarea>
+</mat-form-field>

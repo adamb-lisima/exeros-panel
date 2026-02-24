@@ -1,0 +1,12 @@
+<div class="h-[50%]">
+  <iframe name="exeros-panel" title="" id="exeros-panel-iframe" allowfullscreen></iframe>
+  <form class="flex flex-col items-center gap-3 m-5" [formGroup]="form">
+    <div class="w-full flex gap-3">
+      <input class="flex-1 p-3 bg-cultured border border-solid rounded-xl" placeholder="url" formControlName="url" />
+      <input class="flex-1 p-3 bg-cultured border border-solid rounded-xl" placeholder="width" formControlName="width" />
+      <input class="flex-1 p-3 bg-cultured border border-solid rounded-xl" placeholder="height" formControlName="height" />
+    </div>
+    <textarea class="w-full p-3 bg-cultured border border-solid rounded-xl" placeholder="token" formControlName="token"></textarea>
+    <button class="p-2 bg-light-steel-blue border border-solid rounded-xl" type="button" (click)="handlePushDataClick()">Push data to iframe</button>
+  </form>
+</div>

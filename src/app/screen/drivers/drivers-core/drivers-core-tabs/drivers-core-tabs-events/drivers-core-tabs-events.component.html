@@ -1,0 +1,12 @@
+<ng-container *ngIf="events$ | async as events">
+  <app-infinity-scroll *ngIf="eventsMeta$ | async as meta" [transparent]="true" [listGap]="true" [pageMeta]="meta" [loading]="eventsLoading$ | async">
+    <ng-container list>
+      <ng-container *ngIf="events.length > 0; else noEventsTemplate">
+        <app-events-tab-base [events]="events" [eventsLoading]="eventsLoading$ | async" [eventsMeta]="eventsMeta$ | async"> </app-events-tab-base>
+      </ng-container>
+      <ng-template #noEventsTemplate>
+        <p class="text-sm text-gray-500">There are no events</p>
+      </ng-template>
+    </ng-container>
+  </app-infinity-scroll>
+</ng-container>

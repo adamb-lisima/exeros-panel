@@ -1,0 +1,461 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": "150ee6cf-f20f-49ec-8d5b-181e7b9449a8"
+  },
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "exeros-panel": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular": {
+          "component": {
+            "changeDetection": "OnPush",
+            "style": "scss",
+            "skipTests": true
+          },
+          "directive": {
+            "skipTests": true
+          },
+          "class": {
+            "skipTests": true
+          },
+          "pipe": {
+            "skipTests": true
+          },
+          "service": {
+            "skipTests": true
+          },
+          "application": {
+            "strict": true
+          }
+        }
+      },
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/exeros-panel",
+            "index": "src/app/index.html",
+            "main": "src/app/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": ["src/styles.scss"],
+            "scripts": ["node_modules/@googlemaps/markerclustererplus/dist/index.min.js", "src/assets/html265.js", "node_modules/apexcharts/dist/apexcharts.min.js"],
+            "budgets": [
+              {
+                "type": "initial",
+                "maximumWarning": "10mb",
+                "maximumError": "15mb"
+              },
+              {
+                "type": "anyComponentStyle",
+                "maximumWarning": "2kb",
+                "maximumError": "4kb"
+              }
+            ],
+            "allowedCommonJsDependencies": ["apexcharts", "socket.io-client", "pusher-js"]
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "all",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ]
+            },
+            "staging": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.staging.ts"
+                }
+              ]
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "exeros-panel:build:production"
+            },
+            "development": {
+              "browserTarget": "exeros-panel:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "src/test.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.spec.json",
+            "karmaConfig": "karma.conf.js",
+            "inlineStyleLanguage": "scss",
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": ["src/styles.scss"],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
+          }
+        }
+      }
+    },
+    "exeros-panel-parent": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular": {
+          "component": {
+            "changeDetection": "OnPush",
+            "style": "scss",
+            "skipTests": true
+          },
+          "directive": {
+            "skipTests": true
+          },
+          "class": {
+            "skipTests": true
+          },
+          "pipe": {
+            "skipTests": true
+          },
+          "service": {
+            "skipTests": true
+          },
+          "application": {
+            "strict": true
+          }
+        }
+      },
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "parent",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/exeros-panel-parent",
+            "index": "src/parent/index.html",
+            "main": "src/parent/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.parent.json",
+            "inlineStyleLanguage": "scss",
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": ["src/styles.scss"],
+            "scripts": [],
+            "budgets": [
+              {
+                "type": "initial",
+                "maximumWarning": "4mb",
+                "maximumError": "8mb"
+              },
+              {
+                "type": "anyComponentStyle",
+                "maximumWarning": "2kb",
+                "maximumError": "4kb"
+              }
+            ]
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "all",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ]
+            },
+            "staging": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.staging.ts"
+                }
+              ]
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "exeros-panel-parent:build:production"
+            },
+            "development": {
+              "browserTarget": "exeros-panel-parent:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "src/test.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.spec.json",
+            "karmaConfig": "karma.conf.js",
+            "inlineStyleLanguage": "scss",
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": ["src/styles.scss"],
+            "scripts": []
+          }
+        }
+      }
+    },
+    "exeros-panel-iframe-api-docs": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular": {
+          "component": {
+            "changeDetection": "OnPush",
+            "style": "scss",
+            "skipTests": true
+          },
+          "directive": {
+            "skipTests": true
+          },
+          "class": {
+            "skipTests": true
+          },
+          "pipe": {
+            "skipTests": true
+          },
+          "service": {
+            "skipTests": true
+          },
+          "application": {
+            "strict": true
+          }
+        }
+      },
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "iframe-api-docs",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/exeros-panel-iframe-api-docs",
+            "index": "src/iframe-api-docs/index.html",
+            "main": "src/iframe-api-docs/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.parent.json",
+            "inlineStyleLanguage": "scss",
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": ["src/styles.scss"],
+            "scripts": [],
+            "budgets": [
+              {
+                "type": "initial",
+                "maximumWarning": "4mb",
+                "maximumError": "8mb"
+              },
+              {
+                "type": "anyComponentStyle",
+                "maximumWarning": "2kb",
+                "maximumError": "4kb"
+              }
+            ]
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "all",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ]
+            },
+            "staging": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.staging.ts"
+                }
+              ]
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "exeros-panel-iframe-api-docs:build:production"
+            },
+            "development": {
+              "browserTarget": "exeros-panel-iframe-api-docs:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "src/test.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.spec.json",
+            "karmaConfig": "karma.conf.js",
+            "inlineStyleLanguage": "scss",
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": ["src/styles.scss"],
+            "scripts": []
+          }
+        }
+      }
+    },
+    "exeros-panel-player": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular": {
+          "component": {
+            "changeDetection": "OnPush",
+            "style": "scss",
+            "skipTests": true
+          },
+          "directive": {
+            "skipTests": true
+          },
+          "class": {
+            "skipTests": true
+          },
+          "pipe": {
+            "skipTests": true
+          },
+          "service": {
+            "skipTests": true
+          },
+          "application": {
+            "strict": true
+          }
+        }
+      },
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "player",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/exeros-panel-player",
+            "index": "src/player/index.html",
+            "main": "src/player/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.player.json",
+            "inlineStyleLanguage": "scss",
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": ["src/styles.scss"],
+            "scripts": ["src/assets/html265.js"],
+            "budgets": [
+              {
+                "type": "initial",
+                "maximumWarning": "4mb",
+                "maximumError": "8mb"
+              },
+              {
+                "type": "anyComponentStyle",
+                "maximumWarning": "2kb",
+                "maximumError": "4kb"
+              }
+            ]
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "all",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ]
+            },
+            "staging": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.staging.ts"
+                }
+              ]
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "exeros-panel-player:build:production"
+            },
+            "development": {
+              "browserTarget": "exeros-panel-player:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "src/test.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.spec.json",
+            "karmaConfig": "karma.conf.js",
+            "inlineStyleLanguage": "scss",
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": ["src/styles.scss"],
+            "scripts": []
+          }
+        }
+      }
+    }
+  }
+}

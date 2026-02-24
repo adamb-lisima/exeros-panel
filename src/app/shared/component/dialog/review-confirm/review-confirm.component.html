@@ -1,0 +1,32 @@
+<div class="w-[530px] flex flex-col gap-6 p-6 rounded bg-white">
+  <div class="flex flex-col gap-3">
+    <p class="text-xl font-medium">Request Event Review</p>
+    <span class="w-full flex-[0_0_1px] bg-platinum py-[0.5px]"></span>
+
+    <p class="text-sm font-normal">Please review the video of this event and confirm whether the driver correctly marked it as a false.</p>
+
+    <div *ngIf="data.driverReview" class="mt-2 text-sm">
+      <div class="flex flex-col gap-2">
+        <div>
+          <p class="font-medium">REASON:</p>
+          <p>{{ data.driverReview.reason }}</p>
+        </div>
+
+        <div *ngIf="data.driverReview.driver_explanation" class="py-4">
+          <p class="font-medium">EXPLANATION:</p>
+          <p class="">{{ data.driverReview.driver_explanation }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span class="w-full flex-[0_0_1px] bg-platinum py-[0.5px]"></span>
+
+  <div class="flex gap-3 ml-auto">
+    <app-button type="primary" (click)="handleReviewClick()" (keydown.enter)="handleReviewClick()"
+      >Review
+      <svg width="7" height="11" viewBox="0 0 7 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4.2905 5.34425L0.21725 1.27125C0.0789167 1.13275 0.00808339 0.958667 0.00475006 0.749001C0.00158339 0.539501 0.0724167 0.36225 0.21725 0.21725C0.36225 0.0724167 0.537916 0 0.74425 0C0.950583 0 1.12625 0.0724167 1.27125 0.21725L5.7655 4.7115C5.859 4.80517 5.925 4.90392 5.9635 5.00775C6.002 5.11158 6.02125 5.22375 6.02125 5.34425C6.02125 5.46475 6.002 5.57692 5.9635 5.68075C5.925 5.78458 5.859 5.88333 5.7655 5.977L1.27125 10.4713C1.13275 10.6096 0.958666 10.6804 0.749 10.6838C0.5395 10.6869 0.36225 10.6161 0.21725 10.4713C0.0724167 10.3263 0 10.1506 0 9.94425C0 9.73792 0.0724167 9.56225 0.21725 9.41725L4.2905 5.34425Z" fill="white" />
+      </svg>
+    </app-button>
+  </div>
+</div>

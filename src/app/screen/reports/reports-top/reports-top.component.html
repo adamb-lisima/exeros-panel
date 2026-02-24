@@ -1,0 +1,34 @@
+<div class="w-full flex justify-between mt-2">
+  <h1 class="font-bold text-3xl">Reports</h1>
+  <app-tree-control *ngIf="fleetOptions$ | async as options" class="col-span-2 w-[18%] ml-auto mr-2" label="Fleet" [options]="options" [formControl]="bodyGroup.controls.fleet_id"></app-tree-control>
+
+  <div class="h-[48px] w-[165px] flex items-center justify-between gap-2 p-3 rounded cursor-pointer bg-white rounded-[4px] custom-select" [cdkMenuTriggerFor]="menu">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M6.66699 1.66602V4.16602" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M13.333 1.66602V4.16602" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M2.91699 7.57422H17.0837" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M17.5 7.08268V14.166C17.5 16.666 16.25 18.3327 13.3333 18.3327H6.66667C3.75 18.3327 2.5 16.666 2.5 14.166V7.08268C2.5 4.58268 3.75 2.91602 6.66667 2.91602H13.3333C16.25 2.91602 17.5 4.58268 17.5 7.08268Z" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M13.0788 11.4167H13.0863" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M13.0788 13.9167H13.0863" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M9.99632 11.4167H10.0038" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M9.99632 13.9167H10.0038" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M6.91185 11.4167H6.91933" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M6.91185 13.9167H6.91933" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+    <p class="font-medium text-sm">{{ selectedRangeMessage$ | async }}</p>
+    <svg width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" fill="none" width="24" height="24" />
+      <g><path d="M7 10l5 5 5-5" fill="#000000" opacity="0.5" /></g>
+    </svg>
+  </div>
+</div>
+
+<ng-template #menu>
+  <div class="w-[250px] flex flex-col gap-2 bg-white shadow-lg" cdkMenu>
+    <a *ngFor="let range of RANGES; trackByField: 'id'" class="p-2 font-medium text-sm cursor-pointer" cdkMenuItem (click)="handleDaysClick(range.id)">
+      {{ range.text }}
+    </a>
+    <span class="flex-[0_0_1px] w-full bg-platinum"></span>
+    <app-calendar-control class="flex-[0_0_40px]" [formControl]="rangeFilterControl"></app-calendar-control>
+  </div>
+</ng-template>

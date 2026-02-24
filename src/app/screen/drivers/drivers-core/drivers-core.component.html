@@ -1,0 +1,44 @@
+<div *ngIf="driver$ | async" class="grid grid-cols-3 auto-rows-max gap-4">
+  <div class="exeros-fragment row-start-1 col-span-1 h-[130px]">
+    <app-drivers-core-driving-time></app-drivers-core-driving-time>
+  </div>
+  <div class="exeros-fragment row-start-1 col-span-1 h-[130px]">
+    <app-drivers-core-distance-driven></app-drivers-core-distance-driven>
+  </div>
+  <div class="exeros-fragment row-start-1 col-span-1 h-[130px]">
+    <app-drivers-core-events-count></app-drivers-core-events-count>
+  </div>
+  <div class="exeros-fragment row-start-2 col-span-1 h-[130px]">
+    <app-drivers-core-average-score></app-drivers-core-average-score>
+  </div>
+  <div class="exeros-fragment row-start-2 col-span-1 h-[130px]">
+    <app-drivers-core-current-score></app-drivers-core-current-score>
+  </div>
+  <div class="exeros-fragment row-start-2 col-span-1 h-[130px]">
+    <app-drivers-core-vehicle-check></app-drivers-core-vehicle-check>
+  </div>
+  <div class="exeros-fragment row-start-3 col-start-1 col-end-3 h-[450px]">
+    <app-drivers-core-safety-score></app-drivers-core-safety-score>
+  </div>
+  <div class="exeros-fragment row-start-3 row-span-2 col-start-3 col-end-4 h-[450px]">
+    <app-drivers-core-tabs></app-drivers-core-tabs>
+  </div>
+
+  <div class="grid grid-cols-2 gap-4 row-start-5 col-start-1 col-span-3">
+    <div class="flex flex-col gap-4">
+      <div class="exeros-fragment">
+        <app-drivers-core-safety-spider></app-drivers-core-safety-spider>
+      </div>
+      <div class="exeros-fragment">
+        <app-drivers-core-events-impact></app-drivers-core-events-impact>
+      </div>
+    </div>
+
+    <div class="exeros-fragment h-full">
+      <app-drivers-core-live-feed></app-drivers-core-live-feed>
+    </div>
+  </div>
+  <div class="exeros-fragment row-start-7 h-[550px] col-start-1 col-end-4">
+    <app-drivers-core-trips></app-drivers-core-trips>
+  </div>
+</div>

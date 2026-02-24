@@ -1,0 +1,12 @@
+<app-dialog-container title="{{ this.data.is_mfa_enabled ? 'Provide code from email to disable MFA' : 'Provide code from email to enable MFA' }}">
+  <div class="flex flex-col gap-8 p-5" body>
+    <div class="flex flex-col gap-4">
+      <app-text-control label="Code" [formControl]="bodyGroup.controls.code"></app-text-control>
+    </div>
+  </div>
+  <div class="flex flex-1 justify-end" footer>
+    <app-button [disabled]="!bodyGroup.dirty" (buttonClick)="handleSendCodeClick()">
+      <span class="text-sm text-white font-semibold">Send</span>
+    </app-button>
+  </div>
+</app-dialog-container>

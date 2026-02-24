@@ -1,0 +1,60 @@
+<div class="flex flex-col gap-2">
+  <div class="flex justify-center items-center gap-2" (click)="$event.stopPropagation()" (keypress)="$event.stopPropagation()">
+    <app-calendar-select [options]="months" [formControl]="monthControl" class="flex-1 w-[120px]"> </app-calendar-select>
+    <app-calendar-select [options]="years" [formControl]="yearControl" class="w-[120px] flex-1"> </app-calendar-select>
+  </div>
+  <div class="flex justify-center items-center h-full">
+    <table class="text-center border-separate" style="border-spacing: 10px">
+      <thead>
+        <tr>
+          <th *ngFor="let day of days" class="p-1 text-xs font-normal">{{ day }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of calendar">
+          <td
+            *ngFor="let cell of row"
+            class="h-[32px] w-[24px] relative rounded"
+            [ngClass]="{
+              'cursor-not-allowed text-new-gray-400 opacity-50': !cell.isAvailable || (!cell.has_video && !cell.has_telematics),
+              'cursor-pointer ': cell.isAvailable && (cell.has_video || cell.has_telematics),
+              'text-black': cell.isAvailable && cell.dayNumber !== selectedDay?.day,
+              'text-black bg-main-primary': cell.isAvailable && cell.dayNumber === selectedDay?.day
+            }"
+            (click)="handleDayClick(cell)"
+            (keydown.enter)="handleDayClick(cell)">
+            <div *ngIf="cell.isAvailable && cell.has_video" class="absolute right-0 top-2" [ngClass]="cell.dayNumber === selectedDay?.day ? 'text-[#006BFF]' : 'text-[#006BFF]'">
+              <svg width="4" height="4" viewBox="0 0 4 4" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="2" cy="2" r="2" fill="currentColor" />
+              </svg>
+            </div>
+
+            <div *ngIf="cell.isAvailable && cell.has_telematics" class="absolute right-0 top-4" [ngClass]="cell.dayNumber === selectedDay?.day ? 'text-[#1C1B1B]' : 'text-[#1C1B1B]'">
+              <svg width="4" height="4" viewBox="0 0 4 4" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="2" cy="2" r="2" fill="currentColor" />
+              </svg>
+            </div>
+            {{ cell.dayNumber }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="flex flex-row gap-2">
+    <span class="flex-row flex text-xs items-center gap-1">
+      <span class="text-[#006BFF]">
+        <svg width="4" height="4" viewBox="0 0 4 4" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="2" cy="2" r="2" fill="currentColor" />
+        </svg>
+      </span>
+      <span>video</span>
+    </span>
+    <span class="flex-row flex text-xs items-center gap-1">
+      <span class="text-[#1C1B1B)]">
+        <svg width="4" height="4" viewBox="0 0 4 4" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="2" cy="2" r="2" fill="currentColor" /></svg
+      ></span>
+      <span>telemetry</span>
+    </span>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+<ng-container *ngIf="loggedInUser$ | async as loggedInUser">
+  <div *ngIf="selectedId$ | async" class="w-full flex mt-2">
+    <div *ngIf="liveFeed$ | async as liveFeed" class="flex gap-4"></div>
+    <div class="gap-2 flex ml-auto">
+      <app-select-control *ngIf="vehicleOptions$ | async as vehicleOptions" label="Vehicle" [options]="vehicleOptions" [formControl]="vehicleControl" [showHintSpace]="false" class="flex-1 [&_.select-container]:h-8 [&_.select-container]:px-2 [&_.select-container]:text-sm"> </app-select-control>
+
+      <app-select-control label="Stream type" [options]="streamOptions" [formControl]="streamTypeControl" [showHintSpace]="false" class="flex-1 [&_.select-container]:h-8 [&_.select-container]:px-2 [&_.select-container]:text-sm"> </app-select-control>
+
+      <div class="h-[48px] flex items-center gap-3 px-4 rounded-md cursor-pointer border border-main-primary bg-white" (click)="handleViewPlaybackClick()" (keydown.enter)="handleViewPlaybackClick()">
+        <p class="font-medium text-sm text-main-primary">Open playback</p>
+      </div>
+    </div>
+  </div>
+</ng-container>

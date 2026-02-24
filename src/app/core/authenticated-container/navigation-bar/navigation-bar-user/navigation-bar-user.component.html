@@ -1,0 +1,15 @@
+<div *ngIf="loggedInUser$ | async as loggedInUser" class="flex py-2 px-1 gap-2 mx-auto" [ngClass]="{ 'justify-center': isCollapsed }">
+  <div class="flex-shrink-0">
+    <img class="rounded-lg object-cover w-5 h-5 mt-1" [ngSrc]="loggedInUser.avatar" width="20" height="20" alt="avatar" />
+  </div>
+
+  <div
+    class="flex flex-col overflow-hidden transition-all duration-300"
+    [ngStyle]="{
+      width: isCollapsed ? '0' : '140px',
+      opacity: isCollapsed ? '0' : '1'
+    }">
+    <p class="font-normal text-new-gray text-sm leading-[20px]">{{ loggedInUser.name }}</p>
+    <p class="font-normal text-manatee text-[10px]">{{ loggedInUser.email }}</p>
+  </div>
+</div>

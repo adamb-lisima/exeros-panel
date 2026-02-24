@@ -1,0 +1,56 @@
+<div class="flex-1 flex flex-col gap-4 pt-5">
+  <div class="flex items-center gap-6">
+    <span class="text-xl font-medium">{{ report?.name }}</span>
+    <app-button (buttonClick)="handleEditReportClick()"><span class="text-sm text-white font-semibold">Edit automation</span></app-button>
+  </div>
+
+  <div class="flex gap-24 mt-5">
+    <div class="flex gap-5">
+      <div class="flex flex-col items-end gap-2">
+        <span class="text-sm text-manatee">Frequency:</span>
+        <span class="text-sm text-manatee">Emails:</span>
+        <span class="text-sm text-manatee">Status:</span>
+        <span class="text-sm text-manatee">Type:</span>
+        <span *ngIf="report?.report_type === 'FLEET'" class="text-sm text-manatee">Fleets:</span>
+        <span *ngIf="report?.report_type === 'VEHICLE'" class="text-sm text-manatee">Vehicles:</span>
+      </div>
+      <div class="flex flex-col items-start gap-2">
+        <span class="text-sm text-manatee">{{ report?.type }}</span>
+        <span class="text-sm text-manatee">{{ report?.receivers }}</span>
+        <span class="text-sm text-manatee">{{ report?.status }}</span>
+        <span class="text-sm text-manatee">{{ report?.report_type }}</span>
+        <span *ngIf="report?.report_type === 'FLEET'" class="text-sm text-manatee">{{ (report?.fleet_names ?? []).join(', ') }}</span>
+        <span *ngIf="report?.report_type === 'VEHICLE'" class="text-sm text-manatee">{{ (report?.vehicle_plates ?? []).join(', ') }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex-1 flex flex-col gap-4">
+    <div class="flex justify-between items-center">
+      <p class="font-bold">Reports</p>
+    </div>
+    <table class="table-auto">
+      <thead>
+        <th></th>
+        <tr class="border-b border-bright-gray">
+          <td class="px-2 text-xs text-manatee">ID</td>
+          <td class="px-2 py-2 text-xs text-manatee">Sent date</td>
+          <td colspan="2" class="px-2 text-xs text-manatee">Report date range</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let reportItemElement of data?.data" class="border-b border-bright-gray">
+          <td class="px-2 text-sm">{{ reportItemElement.id }}</td>
+          <td class="px-2 py-4 text-sm">{{ reportItemElement.sent_at }}</td>
+          <td class="px-2 py-4 text-sm">{{ reportItemElement.from }} - {{ reportItemElement.to }}</td>
+          <td class="px-2"></td>
+          <td class="px-2">
+            <div class="flex">
+              <a [href]="reportItemElement.file_url" target="_blank" class="px-2 text-main-primary text-sm font-semibold underline cursor-pointer">Download</a>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

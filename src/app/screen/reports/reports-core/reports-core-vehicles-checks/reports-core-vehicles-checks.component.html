@@ -1,0 +1,58 @@
+<app-infinity-scroll [listDivider]="true" [loading]="vehicleChecksLoading$ | async">
+  <ng-container header>
+    <div class="flex flex-col gap-8 -mb-6">
+      <div class="flex flex-col gap-8">
+        <div class="min-h-[40px] flex flex-wrap justify-between items-center gap-2">
+          <p class="font-semibold text-xl whitespace-nowrap">Vehicles Checks</p>
+          <div *appHasPermission="[[accessGroup.VEHICLES_CHECKS_REPORTS_DOWNLOADER]]" class="flex gap-2">
+            <div class="h-[40px] w-[40px] flex justify-center items-center rounded cursor-pointer border border-platinum text-extra-two" (click)="handleExportPageClick('pdf')" (keydown.enter)="handleExportPageClick('pdf')">
+              <img src="assets/svg/pdf-file-icon.svg" width="24" height="24" alt="pdf" />
+            </div>
+            <div class="h-[40px] w-[40px] flex justify-center items-center rounded cursor-pointer border border-platinum text-extra-one" (click)="handleExportPageClick('xlsx')" (keydown.enter)="handleExportPageClick('xlsx')">
+              <img src="assets/svg/xls-file-icon.svg" alt="Export as PDF" width="24" height="24" />
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-wrap items-center gap-x-2">
+          <app-select-control class="w-[24%]" label="Status" [clearable]="true" [options]="statusOptions" [formControl]="statusControl"></app-select-control>
+          <app-select-control *ngIf="vehicleOptions$ | async as vehicleOptions" [multiple]="true" class="w-[24%]" label="Vehicle" [clearable]="true" [options]="vehicleOptions" [formControl]="vehicleControl"></app-select-control>
+          <app-select-control *ngIf="driverOptions$ | async as driverOptions" class="w-[24%]" label="Driver" [options]="driverOptions" [formControl]="driverControl"></app-select-control>
+        </div>
+      </div>
+      <div class="flex items-center pb-2 border-b border-b-bright-gray">
+        <p class="flex-[0_0_30%] text-sm text-sonic-silver">Checks</p>
+        <p class="flex-[0_0_20%] text-sm text-sonic-silver">Vehicle</p>
+        <p class="flex-[0_0_20%] text-sm text-sonic-silver">Driver</p>
+        <p class="flex-[0_0_20%] text-sm text-sonic-silver">Status</p>
+        <p class="flex-[0_0_10%] text-sm text-sonic-silver">Export</p>
+      </div>
+    </div>
+  </ng-container>
+  <ng-container list>
+    <div *ngFor="let vehicleCheck of vehicleChecks$ | async; trackByField: 'id'" class="flex items-center py-4 cursor-pointer" (click)="handleRowClick(vehicleCheck)" (keydown.enter)="handleRowClick(vehicleCheck)">
+      <div class="flex-[0_0_30%]">
+        <div class="flex items-center gap-4">
+          <div class="h-[50px] flex-[0_0_50px] flex justify-center items-center rounded-full" [ngClass]="{ 'bg-extra-one--30': vehicleCheck.status === 'Complete' && vehicleCheck.vehicle_check_status === 'PASSED', 'bg-extra-two--30': vehicleCheck.status === 'Complete' && vehicleCheck.vehicle_check_status === 'FAILED' }">
+            <img [ngSrc]="vehicleCheck.status === 'Incomplete' ? 'assets/svg/icons-gray-back/56.svg' : vehicleCheck.vehicle_check_status === 'PASSED' ? 'assets/svg/icons-gray-back/55.svg' : 'assets/svg/icons-gray-back/58.svg'" width="40" height="40" alt="icon" />
+          </div>
+          <div class="flex flex-col gap-2">
+            <p class="font-semibold text-sm">Vehicle Check</p>
+            <p class="text-xs text-sonic-silver">{{ vehicleCheck.date | dateFormat : 'serverDateFormat' : 'clientDateFormat' }}</p>
+          </div>
+        </div>
+      </div>
+      <p class="flex-[0_0_20%] font-medium text-sm">{{ vehicleCheck.registration_plate }}</p>
+      <p class="flex-[0_0_20%] font-medium text-sm">{{ vehicleCheck.driver_name }}</p>
+      <p class="flex-[0_0_20%] font-medium text-sm" [ngClass]="vehicleCheck.status === 'Complete' && vehicleCheck.vehicle_check_status === 'PASSED' ? 'text-extra-one' : 'text-extra-two'">
+        {{ vehicleCheck.vehicle_check_status ?? vehicleCheck.status }}
+      </p>
+      <div class="flex-[0_0_10%]">
+        <ng-container *appHasPermission="[[accessGroup.VEHICLES_CHECKS_REPORTS_DOWNLOADER]]">
+          <div *ngIf="vehicleCheck.vehicle_check_status" class="rounded cursor-pointer text-extra-two" (click)="handleExportItemClick($event, vehicleCheck.id)" (keydown.enter)="handleExportItem(vehicleCheck.id)">
+            <img src="assets/svg/pdf-file-icon.svg" width="24" height="24" alt="pdf" />
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </ng-container>
+</app-infinity-scroll>

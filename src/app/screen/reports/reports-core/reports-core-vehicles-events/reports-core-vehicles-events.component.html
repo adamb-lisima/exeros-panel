@@ -1,0 +1,64 @@
+<ng-container *ngIf="vehicleByDeviceId$ | async as vehicleByDeviceId">
+  <app-infinity-scroll *ngIf="eventsMeta$ | async as eventsMeta" [pageMeta]="eventsMeta" [loading]="eventsLoading$ | async" [listDivider]="true" (nextPageRequest)="handleNextPageRequest($event)">
+    <ng-container header>
+      <div class="flex flex-col gap-8">
+        <div class="flex flex-col gap-8">
+          <div class="min-h-[40px] flex flex-wrap justify-between items-center gap-2">
+            <p class="font-semibold text-xl whitespace-nowrap">Events</p>
+            <ng-container *ngIf="SHOW_EXPORT_WITHOUT_FILTERS || bodyGroup.controls.vehicle_id.value || bodyGroup.controls.driver_id.value || bodyGroup.controls.event_type.value">
+              <div *appHasPermission="[[accessGroup.EVENTS_REPORTS_DOWNLOADER]]" class="flex gap-2">
+                <button class="h-[40px] w-[40px] flex justify-center items-center rounded cursor-pointer border border-platinum text-extra-one" (click)="handleExportEventsClick('xlsx')">
+                  <img src="assets/svg/xls-file-icon.svg" alt="Export as PDF" width="24" height="24" />
+                </button>
+              </div>
+            </ng-container>
+          </div>
+          <div class="flex flex-wrap items-center gap-x-2">
+            <app-select-control *ngIf="vehicleOptions$ | async as options" class="w-[24%]" label="Vehicle" [multiple]="true" [clearable]="true" [disabled]="!!(vehiclesLoading$ | async)" [options]="options" [formControl]="bodyGroup.controls.vehicle_id"></app-select-control>
+            <app-select-control *ngIf="driverOptions$ | async as options" class="w-[24%]" label="Driver" [multiple]="true" [clearable]="true" [options]="options" [formControl]="bodyGroup.controls.driver_id"></app-select-control>
+            <app-select-control *ngIf="eventTypes$ | async as types" class="col-span-2 w-[24%]" label="Type" [multiple]="true" [clearable]="true" [options]="types" [formControl]="bodyGroup.controls.event_type"></app-select-control>
+          </div>
+        </div>
+        <div class="flex items-center pb-2 border-b border-b-bright-gray">
+          <p class="flex-[0_0_25%] text-sm text-sonic-silver">Type</p>
+          <p class="flex-[0_0_10%] text-sm text-sonic-silver">Speed</p>
+          <p class="flex-[0_0_20%] text-sm text-sonic-silver">Vehicle</p>
+          <p class="flex-[0_0_20%] text-sm text-sonic-silver">Driver</p>
+          <p class="flex-[0_0_20%] text-sm text-sonic-silver">Date</p>
+          <div class="flex-[0_0_5%] flex justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3.5 h-3.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244" />
+            </svg>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    <ng-container list>
+      <div *ngFor="let event of allEvents; trackByField: 'id'" class="flex items-center py-4">
+        <p class="flex-[0_0_25%] font-semibold text-sm">{{ event.display_name }}</p>
+        <ng-container *ngIf="event.speed !== null && event.speed !== undefined; else noSpeed">
+          <p class="flex-[0_0_10%] font-medium text-sm" *ngIf="event.speed | unitConverter | async as speed">{{ speed.value }} {{ speed.unit }}</p>
+        </ng-container>
+        <ng-template #noSpeed>
+          <p class="flex-[0_0_10%] font-medium text-sm mx-auto">-</p>
+        </ng-template>
+        <a class="flex-[0_0_20%] font-medium text-sm" (click)="event.vehicle_id !== null ? handleVehicleClick(event.vehicle_id) : null" [ngClass]="{ 'cursor-pointer': event.vehicle_id !== null, 'cursor-default': event.vehicle_id === null }">
+          {{ event.registration_plate }}
+        </a>
+        <a class="flex-[0_0_20%] font-medium text-sm" (click)="event.driver_id !== null ? handleDriverClick(event.driver_id) : null" [ngClass]="{ 'cursor-pointer': event.driver_id !== null, 'cursor-default': event.driver_id === null }">
+          <ng-container>{{ event.driver_name }}</ng-container>
+        </a>
+        <p class="flex-[0_0_20%] font-medium text-sm">{{ event.occurence_time | dateFormat : 'serverDateTimeFormat' : 'clientDateFormat' }}</p>
+        <div class="flex-[0_0_5%] flex justify-center">
+          <ng-container *ngIf="event.id">
+            <a *appHasPermission="[[accessGroup.EVENTS_VIEWER]]" class="cursor-pointer font-medium text-sm hover:underline" (click)="handleEventClick(event.id)">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3.5 h-3.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244" />
+              </svg>
+            </a>
+          </ng-container>
+        </div>
+      </div>
+    </ng-container>
+  </app-infinity-scroll>
+</ng-container>

@@ -1,0 +1,27 @@
+<google-map (mapInitialized)="onReady($event)" height="100%" width="100%" [center]="_center" [zoom]="zoom" [options]="mapOptions" [class.map-rounded]="rounded">
+  <map-polyline
+    *ngFor="let segment of _polylineSegments"
+    [path]="segment.path"
+    [options]="{
+      strokeColor: segment.strokeColor,
+      strokeWeight: 2
+    }">
+  </map-polyline>
+
+  <ng-container *ngIf="isClusterer; else withoutClusterer">
+    <map-marker-clusterer [options]="markerClustererOptions">
+      <ng-container *ngFor="let marker of _markers; trackByField: 'id'">
+        <map-marker #markerElement="mapMarker" [position]="mapCoordinatesToPosition(marker.coordinates)" [icon]="markerIcon(marker)" (mapClick)="handleMarkerClick(marker)" (mapMouseover)="handleMarkerMouseover(marker, markerElement, infoWindow)" (mapMouseout)="handleMarkerMouseout(marker, infoWindow)">
+          <map-info-window #infoWindow="mapInfoWindow" [options]="{ disableAutoPan: true }" [innerHTML]="marker.infoWindow"> </map-info-window>
+        </map-marker>
+      </ng-container>
+    </map-marker-clusterer>
+  </ng-container>
+  <ng-template #withoutClusterer>
+    <ng-container *ngFor="let marker of _markers; trackByField: 'id'">
+      <map-marker #markerElement="mapMarker" [position]="mapCoordinatesToPosition(marker.coordinates)" [icon]="markerIcon(marker)" (mapClick)="handleMarkerClick(marker)" (mapMouseover)="handleMarkerMouseover(marker, markerElement, infoWindow)" (mapMouseout)="handleMarkerMouseout(marker, infoWindow)">
+        <map-info-window #infoWindow="mapInfoWindow" [options]="{ disableAutoPan: true }" [innerHTML]="marker.infoWindow"> </map-info-window>
+      </map-marker>
+    </ng-container>
+  </ng-template>
+</google-map>

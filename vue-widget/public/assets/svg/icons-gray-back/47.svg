@@ -1,0 +1,43 @@
+<svg id="bfbbdc68-32b3-4466-9d3e-2eae7bc6a338" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28">
+  <defs>
+    <style>
+      .a9b81d61-b222-4bbd-89bc-84d8fa57c14a {
+        fill: #e6e6e6;
+      }
+
+      .ec3d0b68-4aac-44de-8e64-2cfd42e759d2 {
+        fill: #fadc0f;
+      }
+
+      .a6fffb19-9bdd-4fd0-92ac-8e97b29a9fdf {
+        fill: none;
+      }
+
+      .a6fffb19-9bdd-4fd0-92ac-8e97b29a9fdf, .e6422892-bdf4-47a1-be31-8082f1f4da73 {
+        stroke: #414042;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 1.28px;
+      }
+
+      .e6422892-bdf4-47a1-be31-8082f1f4da73 {
+        fill: #414042;
+      }
+    </style>
+  </defs>
+  <title>47</title>
+  <circle class="a9b81d61-b222-4bbd-89bc-84d8fa57c14a" cx="14" cy="14" r="14"/>
+  <g>
+    <path class="ec3d0b68-4aac-44de-8e64-2cfd42e759d2" d="M19.19,21.32A5.19,5.19,0,1,1,11,17.08V4.8a3.08,3.08,0,0,1,5.26-2.18,3.13,3.13,0,0,1,.9,2.18V17.22A5.18,5.18,0,0,1,19.19,21.32Z"/>
+    <g>
+      <line class="a6fffb19-9bdd-4fd0-92ac-8e97b29a9fdf" x1="22.89" y1="6.1" x2="22.9" y2="15.94"/>
+      <polyline class="a6fffb19-9bdd-4fd0-92ac-8e97b29a9fdf" points="21.08 14.13 22.89 15.95 24.74 14.1"/>
+      <polyline class="a6fffb19-9bdd-4fd0-92ac-8e97b29a9fdf" points="21.08 7.92 22.89 6.1 24.74 7.95"/>
+      <path class="a6fffb19-9bdd-4fd0-92ac-8e97b29a9fdf" d="M19.19,21.32A5.19,5.19,0,1,1,11,17.08V4.8a3.08,3.08,0,0,1,5.26-2.18,3.13,3.13,0,0,1,.9,2.18V17.22A5.18,5.18,0,0,1,19.19,21.32Z"/>
+      <circle class="e6422892-bdf4-47a1-be31-8082f1f4da73" cx="14" cy="21.32" r="1.44"/>
+      <line class="a6fffb19-9bdd-4fd0-92ac-8e97b29a9fdf" x1="14" y1="19.53" x2="14" y2="11.54"/>
+      <line class="a6fffb19-9bdd-4fd0-92ac-8e97b29a9fdf" x1="17.18" y1="5.91" x2="15.58" y2="5.91"/>
+      <line class="a6fffb19-9bdd-4fd0-92ac-8e97b29a9fdf" x1="17.18" y1="9.04" x2="15.58" y2="9.04"/>
+    </g>
+  </g>
+</svg>

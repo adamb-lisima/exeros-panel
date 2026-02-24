@@ -1,0 +1,44 @@
+<svg id="a1adc54a-5cb8-4a24-83e3-83749d4b809a" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80">
+  <title>82</title>
+  <g>
+    <g>
+      <path style="fill:#fff;" d="M67.65,13.26V28.77a2.55,2.55,0,0,1-2.55,2.55H15.24a2.55,2.55,0,0,1-2.54-2.55V13.26Z"/>
+      <path style="fill:#fadc0f;" d="M69.89,13.26H10.17l.28-2.59A2.58,2.58,0,0,1,13,8.38h54a2.6,2.6,0,0,1,1.07.23,2.57,2.57,0,0,1,1.49,2.06Z"/>
+      <path style="fill:#fadc0f;" d="M68.12,8.56v0a2.6,2.6,0,0,0-1.07-.23H13a2.55,2.55,0,0,0-.92.17v0l0-.16A8.51,8.51,0,0,1,20.59.71h39A8.52,8.52,0,0,1,68.1,8.37Z"/>
+      <path style="fill:#fadc0f;" d="M57.4,53.08l-.89,5.67a1.67,1.67,0,0,1-1.64,1.4H24.94a1.68,1.68,0,0,1-1.65-1.44l-.75-5.63H8.81V73.51H25.44l2.4-6.3a3.1,3.1,0,0,1,2.89-2H49.78a3.1,3.1,0,0,1,2.91,2L55,73.51H71.18V53.08ZM20.47,63H11.8a.74.74,0,0,1-.74-.73v-6.7a.88.88,0,0,1,.88-.88h5.6a1.51,1.51,0,0,1,1.41,1l2.3,6.21A.83.83,0,0,1,20.47,63Zm48.62-.73a.72.72,0,0,1-.73.73H59.69a.82.82,0,0,1-.78-1.11l2.3-6.21a1.52,1.52,0,0,1,1.42-1h5.58a.88.88,0,0,1,.88.88Z"/>
+      <path style="fill:#fadc0f;" d="M57.4,53.08H69.86l-.67-20.24-.57-17.33-.08-2.25h-.89V28.77a2.55,2.55,0,0,1-2.55,2.55H15.24a2.55,2.55,0,0,1-2.54-2.55V13.26H11.44l-.06,2L10.8,32.58l-.68,20.5H22.54l-1-7.45a1.65,1.65,0,0,1,1.64-1.88H56.92a1.65,1.65,0,0,1,1.64,1.91Z"/>
+      <path style="fill:#fff;" d="M20.47,63H11.8a.74.74,0,0,1-.74-.73v-6.7a.88.88,0,0,1,.88-.88h5.6a1.51,1.51,0,0,1,1.41,1l2.3,6.21A.83.83,0,0,1,20.47,63Z"/>
+      <path style="fill:#fff;" d="M69.09,55.58v6.7a.72.72,0,0,1-.73.73H59.69a.82.82,0,0,1-.78-1.11l2.3-6.21a1.52,1.52,0,0,1,1.42-1h5.58A.88.88,0,0,1,69.09,55.58Z"/>
+      <path style="fill:#fff;" d="M55,73.51H25.44l2.4-6.3a3.1,3.1,0,0,1,2.89-2H49.78a3.1,3.1,0,0,1,2.91,2Z"/>
+      <path style="fill:#fff;" d="M22.87,73.51v3.68a2.1,2.1,0,0,1-2.11,2.1H12.13A2.1,2.1,0,0,1,10,77.19V73.51Z"/>
+      <path style="fill:#fff;" d="M70,73.51v3.68a2.11,2.11,0,0,1-2.1,2.1H59.24a2.1,2.1,0,0,1-2.09-2.1V73.51Z"/>
+      <path style="fill:#fff;" d="M9.45,19V29.4A1.61,1.61,0,0,1,7.58,31L6,30.73l-2.11-.37a1.6,1.6,0,0,1-1.33-1.58V19.57A1.6,1.6,0,0,1,3.91,18L6,17.63l1.56-.27A1.61,1.61,0,0,1,9.45,19Z"/>
+      <path style="fill:#fff;" d="M77.42,19.84V29a1.63,1.63,0,0,1-1.34,1.59L74,31l-1.55.27a1.61,1.61,0,0,1-1.89-1.58V19.21a1.61,1.61,0,0,1,1.89-1.58l1.55.26,2.1.36A1.63,1.63,0,0,1,77.42,19.84Z"/>
+      <path style="fill:#fff;" d="M58.56,45.66,57.4,53.08l-.89,5.67a1.67,1.67,0,0,1-1.64,1.4H24.94a1.68,1.68,0,0,1-1.65-1.44l-.75-5.63-1-7.45a1.65,1.65,0,0,1,1.64-1.88H56.92A1.65,1.65,0,0,1,58.56,45.66Z"/>
+    </g>
+    <g>
+      <g>
+        <path style="fill:none;stroke:#414042;stroke-linecap:round;stroke-linejoin:round;" d="M12.7,13.27H67.65v15.5a2.54,2.54,0,0,1-2.54,2.54H15.24a2.54,2.54,0,0,1-2.54-2.54V13.27Z"/>
+        <path style="fill:none;stroke:#414042;stroke-linecap:round;stroke-linejoin:round;" d="M67.05,8.37H13a2.58,2.58,0,0,0-2.56,2.3l-.28,2.6H69.89l-.28-2.6A2.58,2.58,0,0,0,67.05,8.37Z"/>
+        <path style="fill:none;stroke:#414042;stroke-linecap:round;stroke-linejoin:round;" d="M68.12,8.56l0-.19A8.53,8.53,0,0,0,59.62.71h-39a8.51,8.51,0,0,0-8.47,7.66l0,.15"/>
+        <polyline style="fill:none;stroke:#414042;stroke-linecap:round;stroke-linejoin:round;" points="68.54 13.27 69.86 53.08 71.18 53.08 71.18 73.5 39.99 73.5 8.81 73.5 8.81 53.08 10.13 53.08 11.44 13.27"/>
+        <path style="fill:none;stroke:#414042;stroke-linecap:round;stroke-linejoin:round;" d="M11.06,55.58v6.7a.74.74,0,0,0,.74.73h8.67a.82.82,0,0,0,.78-1.11L19,55.69a1.52,1.52,0,0,0-1.42-1H11.94A.87.87,0,0,0,11.06,55.58Z"/>
+        <path style="fill:#fff;stroke:#414042;stroke-linecap:round;stroke-linejoin:round;" d="M14.48,71.59h-.84a1.15,1.15,0,0,1-1.15-1.15V66.17A1.16,1.16,0,0,1,13.64,65h0a1.16,1.16,0,0,1,1.14.93l.83,4.27A1.16,1.16,0,0,1,14.48,71.59Z"/>
+        <path style="fill:none;stroke:#414042;stroke-linecap:round;stroke-linejoin:round;" d="M69.09,55.58v6.7a.73.73,0,0,1-.73.73H59.69a.82.82,0,0,1-.78-1.11l2.3-6.21a1.5,1.5,0,0,1,1.41-1h5.6A.87.87,0,0,1,69.09,55.58Z"/>
+        <path style="fill:#fff;stroke:#414042;stroke-linecap:round;stroke-linejoin:round;" d="M65.32,71.59h.83a1.14,1.14,0,0,0,1.15-1.15V66.17A1.15,1.15,0,0,0,66.15,65h0A1.16,1.16,0,0,0,65,66l-.83,4.27A1.15,1.15,0,0,0,65.32,71.59Z"/>
+        <path style="fill:none;stroke:#414042;stroke-linecap:round;stroke-linejoin:round;" d="M25.44,73.5l2.4-6.29a3.07,3.07,0,0,1,2.89-2H49.78a3.1,3.1,0,0,1,2.91,2L55,73.5"/>
+        <path style="fill:none;stroke:#414042;stroke-linecap:round;stroke-linejoin:round;" d="M10,73.5H22.87v3.69a2.1,2.1,0,0,1-2.1,2.1H12.12a2.1,2.1,0,0,1-2.1-2.1Z"/>
+        <path style="fill:none;stroke:#414042;stroke-linecap:round;stroke-linejoin:round;" d="M57.14,73.5H70v3.69a2.1,2.1,0,0,1-2.1,2.1H59.24a2.1,2.1,0,0,1-2.1-2.1Z"/>
+        <path style="fill:none;stroke:#414042;stroke-linecap:round;stroke-linejoin:round;" d="M7.57,31l-3.66-.63a1.6,1.6,0,0,1-1.33-1.58v-9.2A1.6,1.6,0,0,1,3.91,18l3.66-.63A1.61,1.61,0,0,1,9.45,19V29.41A1.61,1.61,0,0,1,7.57,31Z"/>
+        <polyline style="fill:none;stroke:#414042;stroke-linecap:round;stroke-linejoin:round;" points="11.38 15.25 6.01 15.25 6.01 17.63"/>
+        <polyline style="fill:none;stroke:#414042;stroke-linecap:round;stroke-linejoin:round;" points="6.01 30.72 6.01 32.58 10.8 32.58"/>
+        <path style="fill:none;stroke:#414042;stroke-linecap:round;stroke-linejoin:round;" d="M72.43,31.25l3.65-.63A1.6,1.6,0,0,0,77.42,29v-9.2a1.61,1.61,0,0,0-1.34-1.59l-3.65-.63a1.61,1.61,0,0,0-1.88,1.59V29.67A1.6,1.6,0,0,0,72.43,31.25Z"/>
+        <polyline style="fill:none;stroke:#414042;stroke-linecap:round;stroke-linejoin:round;" points="68.62 15.51 73.98 15.51 73.98 17.89"/>
+        <polyline style="fill:none;stroke:#414042;stroke-linecap:round;stroke-linejoin:round;" points="73.98 30.98 73.98 32.84 69.2 32.84"/>
+        <path style="fill:none;stroke:#414042;stroke-linecap:round;stroke-linejoin:round;" d="M21.55,45.63l1.74,13.08a1.67,1.67,0,0,0,1.65,1.44H54.87a1.65,1.65,0,0,0,1.63-1.4l2.06-13.09a1.66,1.66,0,0,0-1.64-1.91H23.19A1.66,1.66,0,0,0,21.55,45.63Z"/>
+      </g>
+      <line style="fill:none;stroke:#414042;stroke-linecap:round;stroke-linejoin:round;" x1="10.13" y1="53.08" x2="22.54" y2="53.08"/>
+      <line style="fill:none;stroke:#414042;stroke-linecap:round;stroke-linejoin:round;" x1="69.86" y1="53.08" x2="57.39" y2="53.08"/>
+    </g>
+  </g>
+</svg>

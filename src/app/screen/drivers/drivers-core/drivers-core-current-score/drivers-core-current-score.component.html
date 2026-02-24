@@ -1,0 +1,22 @@
+<div *ngIf="(current_star_rating$ | async) !== null && (current_star_rating$ | async) !== undefined" class="h-full flex flex-col justify-between">
+  <p class="font-semibold text-sm">Yesterday Driver Score</p>
+  <div class="flex justify-between">
+    <div class="flex flex-col">
+      <div class="flex items-end gap-1 mb-1">
+        <ng-container *ngIf="current_star_rating$ | async as rating; else noScore">
+          <p class="font-bold text-xl text-main-primary">{{ rating | number : '1.2-2' }}</p>
+        </ng-container>
+        <ng-template #noScore>
+          <p class="font-bold text-xl text-main-primary">-</p>
+        </ng-template>
+      </div>
+      <ng-container *ngIf="current_star_rating$ | async as rating; else zeroStars">
+        <app-star-rating [score]="rating" [maxScore]="5" size="md"></app-star-rating>
+      </ng-container>
+      <ng-template #zeroStars>
+        <app-star-rating [score]="0" [maxScore]="5" size="md"></app-star-rating>
+      </ng-template>
+    </div>
+    <img ngSrc="assets/svg/icons-gray-back/7.svg" width="40" height="40" alt="icon" />
+  </div>
+</div>

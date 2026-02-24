@@ -1,0 +1,44 @@
+<svg id="bf2dbba6-5629-4b8a-9f25-a52f95cb61d2" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28">
+  <defs>
+    <style>
+      .a43abd7d-497a-4110-9f6b-94325603fc4b {
+        fill: #e6e6e6;
+      }
+
+      .a54112f4-4d0d-4cb1-b157-fbae67e3aff8 {
+        fill: #fadc0f;
+      }
+
+      .f9949277-c371-4de0-a558-db580bda41ac {
+        fill: #fff;
+      }
+
+      .b1036bfc-20e2-46e7-b2cc-b062c201a813 {
+        fill: none;
+        stroke: #414042;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 1.28px;
+      }
+    </style>
+  </defs>
+  <title>43</title>
+  <circle class="a43abd7d-497a-4110-9f6b-94325603fc4b" cx="14" cy="14" r="14"/>
+  <g>
+    <g>
+      <rect class="a54112f4-4d0d-4cb1-b157-fbae67e3aff8" x="1.02" y="8.37" width="25.96" height="11.27" rx="5.63"/>
+      <circle class="f9949277-c371-4de0-a558-db580bda41ac" cx="6.71" cy="14" r="3.05"/>
+    </g>
+    <g>
+      <rect class="b1036bfc-20e2-46e7-b2cc-b062c201a813" x="1.02" y="8.37" width="25.96" height="11.27" rx="5.63"/>
+      <circle class="b1036bfc-20e2-46e7-b2cc-b062c201a813" cx="6.71" cy="14" r="3.05"/>
+      <circle class="b1036bfc-20e2-46e7-b2cc-b062c201a813" cx="14.95" cy="14" r="1.66"/>
+      <g>
+        <polyline class="b1036bfc-20e2-46e7-b2cc-b062c201a813" points="20.11 12.34 18.13 12.34 18.13 15.66"/>
+        <line class="b1036bfc-20e2-46e7-b2cc-b062c201a813" x1="18.13" y1="13.92" x2="19.91" y2="13.92"/>
+      </g>
+      <polyline class="b1036bfc-20e2-46e7-b2cc-b062c201a813" points="23.56 12.34 21.64 12.34 21.64 15.66"/>
+      <line class="b1036bfc-20e2-46e7-b2cc-b062c201a813" x1="21.64" y1="13.92" x2="23.42" y2="13.92"/>
+    </g>
+  </g>
+</svg>

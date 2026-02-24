@@ -1,0 +1,13 @@
+<div class="h-full flex flex-col gap-4">
+  <ng-container *ngIf="isVehicleOffline">
+    <div class="p-3 overflow-y-auto mb-2">
+      <p class="font-medium">The device is offline</p>
+    </div>
+  </ng-container>
+
+  <div *ngIf="!isVehicleOffline">
+    <div class="w-full grid grid-cols-2 gap-2 p-2">
+      <app-smax-video-h265 *ngFor="let camera of videoSources; trackByField: 'channel'; let i = index" [showControls]="false" class="w-full" [ngClass]="{ 'col-span-2': videoSources.length <= 2 || (videoSources.length % 2 === 1 && i === videoSources.length - 1), 'h-full': selectedStream === 'sub_stream', 'h-auto': selectedStream === 'main_stream' }" [source]="camera" (stateChange)="handleStateChange(i, $event, videoSources)" (loadError)="handleLoadError(camera.channel, $event)" (loadStart)="handleLoadStart(camera.channel)"> </app-smax-video-h265>
+    </div>
+  </div>
+</div>

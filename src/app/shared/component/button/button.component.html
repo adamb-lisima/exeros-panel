@@ -1,0 +1,12 @@
+<button
+  class="w-full h-full flex justify-center items-center gap-2 py-2.5 px-4 rounded text-sm disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+  [ngClass]="{
+    'bg-main-primary text-white': type === 'primary',
+    'text-extra-three bg-extra-three--10': type === 'secondary',
+    'bg-white text-[#EE8444]  border-2 border-main-primary hover:bg-main-primary hover:text-white': type === 'ternary',
+    'text-main-primary bg-white underline': type === 'quaternary'
+  }"
+  [disabled]="disabled"
+  (click)="handleButtonClick()">
+  <ng-content></ng-content>
+</button>

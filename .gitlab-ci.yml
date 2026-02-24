@@ -1,0 +1,383 @@
+variables:
+  AWS_DEFAULT_REGION: eu-west-2
+  ECR_REGISTRY: 706941906840.dkr.ecr.eu-west-2.amazonaws.com
+  ECR_REPOSITORY: exeros-panel
+  SONAR_HOST_URL: "https://sonar.cosmicweb.cloud"
+
+stages:
+  - test_init_and_lint
+  - test_sonar
+  - test_sonar_vue
+  - build_staging
+  - deploy_prod_v2_vidematics
+  - build_lba
+  - build_vehicles
+  - build_fleet
+  - build_sp
+  - build_bus
+  - mirroring
+
+test_init_and_lint:
+  stage: test_init_and_lint
+  except:
+    - main
+    - production
+    - develop
+    - tags
+  before_script:
+    - rm -rf exeros-panel
+    - git clone https://${DEPLOY_USERNAME}:${DEPLOY_TOKEN}@gitlab.cosmicweb.cloud/cosmicweb/apps/exeros/exeros-panel.git exeros-panel
+    - cd exeros-panel
+    - git checkout $CI_COMMIT_REF_NAME && git pull
+  script:
+    - npm install --force
+    - npm run build_prod
+    - npm run ci:environemnt
+    - npm run lint
+  artifacts:
+    paths:
+      - exeros-panel/src
+      - exeros-panel/vue-widget
+      - exeros-panel/package*.json
+      - exeros-panel/.eslintrc*
+      - exeros-panel/webpack*
+      - exeros-panel/tsconfig*
+    expire_in: 1 hour
+
+test_sonar:
+  stage: test_sonar
+  image: openjdk:17
+  except:
+    - main
+    - production
+    - develop
+    - tags
+  needs:
+    - job: test_init_and_lint
+      artifacts: true
+  before_script:
+    - cd exeros-panel
+    - git branch -D $CI_COMMIT_REF_NAME 2>/dev/null || true
+    - git checkout $CI_COMMIT_REF_NAME && git pull
+    - rm -rf .scannerwork/ || true
+    - export PATH=/opt/sonar-scanner/bin:$PATH
+    - export SONAR_SCANNER_OPTS="-server"
+  script:
+    - sonar-scanner -Dsonar.projectKey=exeros-panel -Dsonar.sources=src -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.token=${SONAR_TOKEN}
+    - sleep 10 && python3 /home/gitlab-runner/sonar_discord_notify.py --project exeros-panel --token ${SONAR_TOKEN}
+
+test_sonar_vue:
+  stage: test_sonar_vue
+  image: openjdk:17
+  except:
+    - main
+    - production
+    - develop
+    - tags
+  needs:
+    - job: test_init_and_lint
+      artifacts: true
+  before_script:
+    - cd exeros-panel
+    - git branch -D $CI_COMMIT_REF_NAME 2>/dev/null || true
+    - git checkout $CI_COMMIT_REF_NAME && git pull
+    - cd vue-widget
+    - rm -rf .scannerwork/ || true
+    - export PATH=/opt/sonar-scanner/bin:$PATH
+    - export SONAR_SCANNER_OPTS="-server"
+  script:
+    - sonar-scanner -Dsonar.projectKey=exeros-panel-vue -Dsonar.sources=src -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.token=${SONAR_TOKEN}
+    - sleep 10 && python3 /home/gitlab-runner/sonar_discord_notify.py --project exeros-panel-vue --token ${SONAR_TOKEN}
+
+build_staging:
+  stage: build_staging
+  only:
+    - /^\d+\.\d+\.\d+$/
+    - develop
+  script:
+    - |
+      ssh -o StrictHostKeyChecking=no ubuntu@vidematics.exeros.cloud "
+        cd /home/ubuntu/exeros-prod-v2-docker-stack &&
+        git pull &&
+        aws ecr get-login-password | docker login --username AWS --password-stdin $ECR_REGISTRY &&
+        cp .env.staging .env &&
+        source .env &&
+        cd exeros-panel &&
+
+        if [ '$CI_COMMIT_TAG' ]; then
+          TAG='$CI_COMMIT_TAG' &&
+          git fetch --all --tags --force &&
+          git checkout $CI_COMMIT_TAG
+        else
+          TAG=latest &&
+          git checkout develop &&
+          git pull
+        fi &&
+
+        docker build --build-arg REPORTS_ALARMS_SHOW_EXPORT_WITHOUT_FILTERS=\${REPORTS_ALARMS_SHOW_EXPORT_WITHOUT_FILTERS} --build-arg API_URL=\${API_DOMAIN} --build-arg PUSHER_APP_KEY=\${PUSHER_APP_KEY} --build-arg PUSHER_APP_CHANNEL=\${PUSHER_APP_CHANNEL} --build-arg GUIDE_API_URL=\${GUIDE_API_URL} --build-arg GUIDE_API_TOKEN=\${GUIDE_API_TOKEN} -t ui-staging-build -f Dockerfile . &&
+        docker build --build-arg REPORTS_ALARMS_SHOW_EXPORT_WITHOUT_FILTERS=\${REPORTS_ALARMS_SHOW_EXPORT_WITHOUT_FILTERS} --build-arg API_URL=\${API_DOMAIN} --build-arg PUSHER_APP_KEY=\${PUSHER_APP_KEY} --build-arg PUSHER_APP_CHANNEL=\${PUSHER_APP_CHANNEL} --build-arg GUIDE_API_URL=\${GUIDE_API_URL} --build-arg GUIDE_API_TOKEN=\${GUIDE_API_TOKEN} -t iframe-staging-build -f DockerfileIframe . &&
+        docker build -t iframe-api-docs-staging-build -f DockerfileIframeApiDocs . &&
+        cd .. &&
+
+        docker tag ui-staging-build $ECR_REGISTRY/$ECR_REPOSITORY:ui-staging-\$TAG &&
+        docker tag iframe-staging-build $ECR_REGISTRY/$ECR_REPOSITORY:iframe-staging-\$TAG &&
+        docker tag iframe-api-docs-staging-build $ECR_REGISTRY/$ECR_REPOSITORY:iframe-api-docs-staging-\$TAG &&
+
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:ui-staging-\$TAG &&
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:iframe-staging-\$TAG &&
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:iframe-api-docs-staging-\$TAG &&
+
+        docker rmi ui-staging-build iframe-staging-build iframe-api-docs-staging-build &&
+        rm .env
+      "
+
+deploy_prod_v2_vidematics:
+  stage: deploy_prod_v2_vidematics
+  only:
+    - develop
+  script:
+    - |
+      ssh -o StrictHostKeyChecking=no ubuntu@vidematics.exeros.cloud "
+        cd /home/ubuntu/exeros-prod-v2-docker-stack &&
+        cp .env.staging .env &&
+        echo 'ECR_REGISTRY=$ECR_REGISTRY' >> .env &&
+        echo 'ECR_REPOSITORY=exeros-panel' >> .env &&
+        aws ecr get-login-password | docker login --username AWS --password-stdin $ECR_REGISTRY &&
+        docker-compose pull ui iframe iframe-api-docs &&
+        make stop_all &&
+        make run
+      "
+
+
+build_lba:
+  stage: build_lba
+  only:
+    - /^\d+\.\d+\.\d+$/
+  script:
+    - |
+      ssh -o StrictHostKeyChecking=no ubuntu@vidematics.exeros.cloud "
+        cd /home/ubuntu/exeros-prod-v2-docker-stack &&
+        git pull &&
+        aws ecr get-login-password | docker login --username AWS --password-stdin $ECR_REGISTRY &&
+        cp .env.lba .env &&
+        source .env &&
+        cd exeros-panel &&
+
+        if [ '$CI_COMMIT_TAG' ]; then
+          TAG='$CI_COMMIT_TAG' &&
+          git fetch --all --tags --force &&
+          git checkout $CI_COMMIT_TAG
+        else
+          TAG=latest &&
+          git checkout develop &&
+          git pull
+        fi &&
+
+        docker build --build-arg REPORTS_ALARMS_SHOW_EXPORT_WITHOUT_FILTERS=\${REPORTS_ALARMS_SHOW_EXPORT_WITHOUT_FILTERS} --build-arg API_URL=\${API_DOMAIN} --build-arg PUSHER_APP_KEY=\${PUSHER_APP_KEY} --build-arg PUSHER_APP_CHANNEL=\${PUSHER_APP_CHANNEL} --build-arg GUIDE_API_URL=\${GUIDE_API_URL} --build-arg GUIDE_API_TOKEN=\${GUIDE_API_TOKEN} -t ui-lba-build -f Dockerfile . &&
+        docker build --build-arg REPORTS_ALARMS_SHOW_EXPORT_WITHOUT_FILTERS=\${REPORTS_ALARMS_SHOW_EXPORT_WITHOUT_FILTERS} --build-arg API_URL=\${API_DOMAIN} --build-arg PUSHER_APP_KEY=\${PUSHER_APP_KEY} --build-arg PUSHER_APP_CHANNEL=\${PUSHER_APP_CHANNEL} --build-arg GUIDE_API_URL=\${GUIDE_API_URL} --build-arg GUIDE_API_TOKEN=\${GUIDE_API_TOKEN} -t iframe-lba-build -f DockerfileIframe . &&
+        docker build -t iframe-api-docs-lba-build -f DockerfileIframeApiDocs . &&
+        cd .. &&
+
+        docker tag ui-lba-build $ECR_REGISTRY/$ECR_REPOSITORY:ui-lba-\$TAG &&
+        docker tag iframe-lba-build $ECR_REGISTRY/$ECR_REPOSITORY:iframe-lba-\$TAG &&
+        docker tag iframe-api-docs-lba-build $ECR_REGISTRY/$ECR_REPOSITORY:iframe-api-docs-lba-\$TAG &&
+
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:ui-lba-\$TAG &&
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:iframe-lba-\$TAG &&
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:iframe-api-docs-lba-\$TAG &&
+
+        docker rmi ui-lba-build iframe-lba-build iframe-api-docs-lba-build &&
+        rm .env
+      "
+
+
+build_vehicles:
+  stage: build_vehicles
+  only:
+    - /^\d+\.\d+\.\d+$/
+  script:
+    - |
+      ssh -o StrictHostKeyChecking=no ubuntu@vidematics.exeros.cloud "
+        cd /home/ubuntu/exeros-prod-v2-docker-stack &&
+        git pull &&
+        aws ecr get-login-password | docker login --username AWS --password-stdin $ECR_REGISTRY &&
+        cp .env.vehicles .env &&
+        source .env &&
+        cd exeros-panel &&
+
+        if [ '$CI_COMMIT_TAG' ]; then
+          TAG='$CI_COMMIT_TAG' &&
+          git fetch --all --tags --force &&
+          git checkout $CI_COMMIT_TAG
+        else
+          TAG=latest &&
+          git checkout develop &&
+          git pull
+        fi &&
+
+        docker build --build-arg REPORTS_ALARMS_SHOW_EXPORT_WITHOUT_FILTERS=\${REPORTS_ALARMS_SHOW_EXPORT_WITHOUT_FILTERS} --build-arg API_URL=\${API_DOMAIN} --build-arg PUSHER_APP_KEY=\${PUSHER_APP_KEY} --build-arg PUSHER_APP_CHANNEL=\${PUSHER_APP_CHANNEL} --build-arg GUIDE_API_URL=\${GUIDE_API_URL} --build-arg GUIDE_API_TOKEN=\${GUIDE_API_TOKEN} -t ui-vehicles-build -f Dockerfile . &&
+        docker build --build-arg REPORTS_ALARMS_SHOW_EXPORT_WITHOUT_FILTERS=\${REPORTS_ALARMS_SHOW_EXPORT_WITHOUT_FILTERS} --build-arg API_URL=\${API_DOMAIN} --build-arg PUSHER_APP_KEY=\${PUSHER_APP_KEY} --build-arg PUSHER_APP_CHANNEL=\${PUSHER_APP_CHANNEL} --build-arg GUIDE_API_URL=\${GUIDE_API_URL} --build-arg GUIDE_API_TOKEN=\${GUIDE_API_TOKEN} -t iframe-vehicles-build -f DockerfileIframe . &&
+        docker build -t iframe-api-docs-vehicles-build -f DockerfileIframeApiDocs . &&
+        cd .. &&
+
+        docker tag ui-vehicles-build $ECR_REGISTRY/$ECR_REPOSITORY:ui-vehicles-\$TAG &&
+        docker tag iframe-vehicles-build $ECR_REGISTRY/$ECR_REPOSITORY:iframe-vehicles-\$TAG &&
+        docker tag iframe-api-docs-vehicles-build $ECR_REGISTRY/$ECR_REPOSITORY:iframe-api-docs-vehicles-\$TAG &&
+
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:ui-vehicles-\$TAG &&
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:iframe-vehicles-\$TAG &&
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:iframe-api-docs-vehicles-\$TAG &&
+
+        docker rmi ui-vehicles-build iframe-vehicles-build iframe-api-docs-vehicles-build &&
+        rm .env
+      "
+
+
+
+build_fleet:
+  stage: build_fleet
+  only:
+    - /^\d+\.\d+\.\d+$/
+  script:
+    - |
+      ssh -o StrictHostKeyChecking=no ubuntu@vidematics.exeros.cloud "
+        cd /home/ubuntu/exeros-prod-v2-docker-stack &&
+        git pull &&
+        aws ecr get-login-password | docker login --username AWS --password-stdin $ECR_REGISTRY &&
+        cp .env.fleet .env &&
+        source .env &&
+        cd exeros-panel &&
+
+        if [ '$CI_COMMIT_TAG' ]; then
+          TAG='$CI_COMMIT_TAG' &&
+          git fetch --all --tags --force &&
+          git checkout $CI_COMMIT_TAG
+        else
+          TAG=latest &&
+          git checkout develop &&
+          git pull
+        fi &&
+
+        docker build --build-arg REPORTS_ALARMS_SHOW_EXPORT_WITHOUT_FILTERS=\${REPORTS_ALARMS_SHOW_EXPORT_WITHOUT_FILTERS} --build-arg API_URL=\${API_DOMAIN} --build-arg PUSHER_APP_KEY=\${PUSHER_APP_KEY} --build-arg PUSHER_APP_CHANNEL=\${PUSHER_APP_CHANNEL} --build-arg GUIDE_API_URL=\${GUIDE_API_URL} --build-arg GUIDE_API_TOKEN=\${GUIDE_API_TOKEN} -t ui-fleet-build -f Dockerfile . &&
+        docker build --build-arg REPORTS_ALARMS_SHOW_EXPORT_WITHOUT_FILTERS=\${REPORTS_ALARMS_SHOW_EXPORT_WITHOUT_FILTERS} --build-arg API_URL=\${API_DOMAIN} --build-arg PUSHER_APP_KEY=\${PUSHER_APP_KEY} --build-arg PUSHER_APP_CHANNEL=\${PUSHER_APP_CHANNEL} --build-arg GUIDE_API_URL=\${GUIDE_API_URL} --build-arg GUIDE_API_TOKEN=\${GUIDE_API_TOKEN} -t iframe-fleet-build -f DockerfileIframe . &&
+        docker build -t iframe-api-docs-fleet-build -f DockerfileIframeApiDocs . &&
+        cd .. &&
+
+        docker tag ui-fleet-build $ECR_REGISTRY/$ECR_REPOSITORY:ui-fleet-\$TAG &&
+        docker tag iframe-fleet-build $ECR_REGISTRY/$ECR_REPOSITORY:iframe-fleet-\$TAG &&
+        docker tag iframe-api-docs-fleet-build $ECR_REGISTRY/$ECR_REPOSITORY:iframe-api-docs-fleet-\$TAG &&
+
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:ui-fleet-\$TAG &&
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:iframe-fleet-\$TAG &&
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:iframe-api-docs-fleet-\$TAG &&
+
+        docker rmi ui-fleet-build iframe-fleet-build iframe-api-docs-fleet-build &&
+        rm .env
+      "
+
+
+build_sp:
+  stage: build_sp
+  only:
+    - /^\d+\.\d+\.\d+$/
+  script:
+    - |
+      ssh -o StrictHostKeyChecking=no ubuntu@vidematics.exeros.cloud "
+        cd /home/ubuntu/exeros-prod-v2-docker-stack &&
+        git pull &&
+        aws ecr get-login-password | docker login --username AWS --password-stdin $ECR_REGISTRY &&
+        cp .env.sp .env &&
+        source .env &&
+        cd exeros-panel &&
+
+        if [ '$CI_COMMIT_TAG' ]; then
+          TAG='$CI_COMMIT_TAG' &&
+          git fetch --all --tags --force &&
+          git checkout $CI_COMMIT_TAG
+        else
+          TAG=latest &&
+          git checkout develop &&
+          git pull
+        fi &&
+
+        docker build --build-arg REPORTS_ALARMS_SHOW_EXPORT_WITHOUT_FILTERS=\${REPORTS_ALARMS_SHOW_EXPORT_WITHOUT_FILTERS} --build-arg API_URL=\${API_DOMAIN} --build-arg PUSHER_APP_KEY=\${PUSHER_APP_KEY} --build-arg PUSHER_APP_CHANNEL=\${PUSHER_APP_CHANNEL} --build-arg GUIDE_API_URL=\${GUIDE_API_URL} --build-arg GUIDE_API_TOKEN=\${GUIDE_API_TOKEN} -t ui-sp-build -f Dockerfile . &&
+        docker build --build-arg REPORTS_ALARMS_SHOW_EXPORT_WITHOUT_FILTERS=\${REPORTS_ALARMS_SHOW_EXPORT_WITHOUT_FILTERS} --build-arg API_URL=\${API_DOMAIN} --build-arg PUSHER_APP_KEY=\${PUSHER_APP_KEY} --build-arg PUSHER_APP_CHANNEL=\${PUSHER_APP_CHANNEL} --build-arg GUIDE_API_URL=\${GUIDE_API_URL} --build-arg GUIDE_API_TOKEN=\${GUIDE_API_TOKEN} -t iframe-sp-build -f DockerfileIframe . &&
+        docker build -t iframe-api-docs-sp-build -f DockerfileIframeApiDocs . &&
+        cd .. &&
+
+        docker tag ui-sp-build $ECR_REGISTRY/$ECR_REPOSITORY:ui-sp-\$TAG &&
+        docker tag iframe-sp-build $ECR_REGISTRY/$ECR_REPOSITORY:iframe-sp-\$TAG &&
+        docker tag iframe-api-docs-sp-build $ECR_REGISTRY/$ECR_REPOSITORY:iframe-api-docs-sp-\$TAG &&
+
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:ui-sp-\$TAG &&
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:iframe-sp-\$TAG &&
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:iframe-api-docs-sp-\$TAG &&
+
+        docker rmi ui-sp-build iframe-sp-build iframe-api-docs-sp-build &&
+        rm .env
+      "
+
+
+
+build_bus:
+  stage: build_bus
+  only:
+    - /^\d+\.\d+\.\d+$/
+  script:
+    - |
+      ssh -o StrictHostKeyChecking=no ubuntu@vidematics.exeros.cloud "
+        cd /home/ubuntu/exeros-prod-v2-docker-stack &&
+        git pull &&
+        aws ecr get-login-password | docker login --username AWS --password-stdin $ECR_REGISTRY &&
+        cp .env.bus .env &&
+        source .env &&
+        cd exeros-panel &&
+
+        if [ '$CI_COMMIT_TAG' ]; then
+          TAG='$CI_COMMIT_TAG' &&
+          git fetch --all --tags --force &&
+          git checkout $CI_COMMIT_TAG
+        else
+          TAG=latest &&
+          git checkout develop &&
+          git pull
+        fi &&
+
+        docker build --build-arg REPORTS_ALARMS_SHOW_EXPORT_WITHOUT_FILTERS=\${REPORTS_ALARMS_SHOW_EXPORT_WITHOUT_FILTERS} --build-arg API_URL=\${API_DOMAIN} --build-arg PUSHER_APP_KEY=\${PUSHER_APP_KEY} --build-arg PUSHER_APP_CHANNEL=\${PUSHER_APP_CHANNEL} --build-arg GUIDE_API_URL=\${GUIDE_API_URL} --build-arg GUIDE_API_TOKEN=\${GUIDE_API_TOKEN} -t ui-bus-build -f Dockerfile . &&
+        docker build --build-arg REPORTS_ALARMS_SHOW_EXPORT_WITHOUT_FILTERS=\${REPORTS_ALARMS_SHOW_EXPORT_WITHOUT_FILTERS} --build-arg API_URL=\${API_DOMAIN} --build-arg PUSHER_APP_KEY=\${PUSHER_APP_KEY} --build-arg PUSHER_APP_CHANNEL=\${PUSHER_APP_CHANNEL} --build-arg GUIDE_API_URL=\${GUIDE_API_URL} --build-arg GUIDE_API_TOKEN=\${GUIDE_API_TOKEN} -t iframe-bus-build -f DockerfileIframe . &&
+        docker build -t iframe-api-docs-bus-build -f DockerfileIframeApiDocs . &&
+        cd .. &&
+
+        docker tag ui-bus-build $ECR_REGISTRY/$ECR_REPOSITORY:ui-bus-\$TAG &&
+        docker tag iframe-bus-build $ECR_REGISTRY/$ECR_REPOSITORY:iframe-bus-\$TAG &&
+        docker tag iframe-api-docs-bus-build $ECR_REGISTRY/$ECR_REPOSITORY:iframe-api-docs-bus-\$TAG &&
+
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:ui-bus-\$TAG &&
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:iframe-bus-\$TAG &&
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:iframe-api-docs-bus-\$TAG &&
+
+        docker rmi ui-bus-build iframe-bus-build iframe-api-docs-bus-build &&
+        rm .env
+      "
+
+
+
+mirroring:
+  stage: mirroring
+  image: ubuntu:22.04
+  variables:
+    TARGET_URL: 'https://${MIRRORING_DEPLOY_USERNAME}:${MIRRORING_DEPLOY_TOKEN}@gitlab.com/exeros-technologies/exeros-panel.git'
+    DEBIAN_FRONTEND: 'noninteractive'
+  script:
+    - git clone --mirror $CI_REPOSITORY_URL repo
+    - cd repo
+    - git filter-repo --name-callback "return b'Anonymous'" --email-callback "return b'anon@cosmicweb.io'"
+    - |
+      for branch in "production" "develop"; do
+        git push --force $TARGET_URL "refs/heads/$branch:refs/heads/$branch"
+      done
+  only:
+    refs:
+      - production
+      - develop
+  needs: []

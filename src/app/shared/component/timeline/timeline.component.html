@@ -1,0 +1,105 @@
+<app-timeline-tabs [selectedTab]="selectedTab" (selectedTabChange)="handleSelectedTabChange($event)" class="text-sm font-normal">
+  <app-timeline-events [clipToEventActive]="clipToEventActive" [playbackShareActive]="playbackShareActive" [data]="data?.eventTimeline" [alarmTimeline]="data?.alarmTimeline" *timelineTab="'timeline'; text: 'Timeline'" [position]="position" [marker]="marker" [playbackDownloadActive]="playbackDownloadActive" (positionChange)="handlePositionChange($event)" (markerChange)="handleMarkerChange($event)"></app-timeline-events>
+  <app-timeline-speed-graph [clipToEventActive]="clipToEventActive" [playbackShareActive]="playbackShareActive" *timelineTab="'speed graph'; text: 'Speed Graph'" [data]="data?.speedTimeline" [position]="position" [marker]="marker" [playbackDownloadActive]="playbackDownloadActive" (positionChange)="handlePositionChange($event)" (markerChange)="handleMarkerChange($event)"></app-timeline-speed-graph>
+  <app-timeline-fuel-graph [clipToEventActive]="clipToEventActive" [playbackShareActive]="playbackShareActive" *timelineTab="'fuel graph'; text: 'Fuel Graph'" [data]="data?.fuelTimeline" [hybridData]="data?.hybridTimeline" [maxFuel]="data?.maxFuel" [position]="position" [marker]="marker" [playbackDownloadActive]="playbackDownloadActive" (positionChange)="handlePositionChange($event)" (markerChange)="handleMarkerChange($event)"></app-timeline-fuel-graph>
+  <app-timeline-events [clipToEventActive]="clipToEventActive" [playbackShareActive]="playbackShareActive" *timelineTab="'driver'; text: 'Driver'" [data]="data?.driverTimeline" [position]="position" [marker]="marker" [playbackDownloadActive]="playbackDownloadActive" (positionChange)="handlePositionChange($event)" (markerChange)="handleMarkerChange($event)"></app-timeline-events>
+
+  <div timelineTabMenuItem class="mr-[35%] flex flex-row items-center gap-2">
+    <svg (click)="skipBackward()" (keydown.enter)="skipBackward()" class="cursor-pointer" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <mask id="mask0_2440_3292" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
+        <rect x="0.5" y="0.5" width="23" height="23" fill="#D9D9D9" stroke="black" />
+      </mask>
+      <g mask="url(#mask0_2440_3292)">
+        <path d="M7.61483 16.7754C7.47296 16.7754 7.35427 16.7275 7.25875 16.6316C7.16324 16.5358 7.11548 16.4171 7.11548 16.2754V8.04459C7.11548 7.90292 7.16346 7.78417 7.25943 7.68834C7.3554 7.5925 7.47431 7.54459 7.61618 7.54459C7.75803 7.54459 7.87671 7.5925 7.97223 7.68834C8.06774 7.78417 8.1155 7.90292 8.1155 8.04459V16.2754C8.1155 16.4171 8.06752 16.5358 7.97155 16.6316C7.87559 16.7275 7.75668 16.7754 7.61483 16.7754ZM16.3924 15.9427L11.7309 12.8311C11.495 12.6682 11.377 12.4441 11.377 12.1589C11.377 11.8737 11.495 11.6504 11.7309 11.4888L16.3924 8.37729C16.6617 8.18625 16.9392 8.16932 17.2251 8.32649C17.511 8.48365 17.654 8.72623 17.654 9.05421V15.2658C17.654 15.5888 17.511 15.8312 17.2251 15.9927C16.9392 16.1542 16.6617 16.1376 16.3924 15.9427Z" fill="#EE8444" />
+      </g>
+    </svg>
+
+    <div class="border rounded-lg border-main-primary p-1 cursor-pointer">
+      <ng-container *ngIf="!isPlaying">
+        <svg (click)="togglePlayPause(true)" (keydown.enter)="togglePlayPause(true)" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <mask id="mask0_2440_3294" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
+            <rect width="24" height="24" fill="#EE8444" />
+          </mask>
+          <g mask="url(#mask0_2440_3294)">
+            <path d="M9.90964 18.185C9.57631 18.4016 9.23881 18.4141 8.89714 18.2225C8.55548 18.0308 8.38464 17.735 8.38464 17.335V6.98497C8.38464 6.58497 8.55548 6.28914 8.89714 6.09747C9.23881 5.90581 9.57631 5.91831 9.90964 6.13497L18.0596 11.31C18.3596 11.51 18.5096 11.7933 18.5096 12.16C18.5096 12.5266 18.3596 12.81 18.0596 13.01L9.90964 18.185Z" fill="#EE8444" />
+          </g>
+        </svg>
+      </ng-container>
+
+      <ng-container *ngIf="isPlaying">
+        <svg (click)="togglePlayPause(false)" (keydown.enter)="togglePlayPause(false)" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <mask id="mask0_5_13" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
+            <rect width="24" height="24" fill="#D9D9D9" />
+          </mask>
+          <g mask="url(#mask0_5_13)">
+            <path d="M16.3847 19.16C15.8347 19.16 15.3639 18.9642 14.9722 18.5725C14.5805 18.1808 14.3847 17.71 14.3847 17.16V7.15999C14.3847 6.60999 14.5805 6.13916 14.9722 5.74749C15.3639 5.35582 15.8347 5.15999 16.3847 5.15999C16.9347 5.15999 17.4055 5.35582 17.7972 5.74749C18.1889 6.13916 18.3847 6.60999 18.3847 7.15999V17.16C18.3847 17.71 18.1889 18.1808 17.7972 18.5725C17.4055 18.9642 16.9347 19.16 16.3847 19.16ZM8.3847 19.16C7.8347 19.16 7.36386 18.9642 6.9722 18.5725C6.58053 18.1808 6.3847 17.71 6.3847 17.16V7.15999C6.3847 6.60999 6.58053 6.13916 6.9722 5.74749C7.36386 5.35582 7.8347 5.15999 8.3847 5.15999C8.9347 5.15999 9.40553 5.35582 9.7972 5.74749C10.1889 6.13916 10.3847 6.60999 10.3847 7.15999V17.16C10.3847 17.71 10.1889 18.1808 9.7972 18.5725C9.40553 18.9642 8.9347 19.16 8.3847 19.16Z" fill="#EE8444" />
+          </g>
+        </svg>
+      </ng-container>
+    </div>
+
+    <svg (click)="skipForward()" (keydown.enter)="skipForward()" class="cursor-pointer" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <mask id="mask0_2440_3295" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
+        <rect x="0.5" y="0.5" width="23" height="23" fill="#D9D9D9" stroke="black" />
+      </mask>
+      <g mask="url(#mask0_2440_3295)">
+        <path d="M17.1533 16.7754C17.0114 16.7754 16.8927 16.7275 16.7972 16.6316C16.7017 16.5358 16.654 16.4171 16.654 16.2754V8.04459C16.654 7.90292 16.7019 7.78417 16.7979 7.68834C16.8939 7.5925 17.0128 7.54459 17.1546 7.54459C17.2965 7.54459 17.4152 7.5925 17.5107 7.68834C17.6062 7.78417 17.654 7.90292 17.654 8.04459V16.2754C17.654 16.4171 17.606 16.5358 17.51 16.6316C17.4141 16.7275 17.2951 16.7754 17.1533 16.7754ZM8.37703 15.9427C8.10779 16.1376 7.83023 16.1542 7.54433 15.9927C7.25843 15.8312 7.11548 15.5888 7.11548 15.2658V9.05421C7.11548 8.72623 7.25843 8.48365 7.54433 8.32649C7.83023 8.16932 8.10779 8.18625 8.37703 8.37729L13.0386 11.4888C13.2745 11.6518 13.3924 11.8759 13.3924 12.1611C13.3924 12.4462 13.2745 12.6696 13.0386 12.8311L8.37703 15.9427Z" fill="#EE8444" />
+      </g>
+    </svg>
+  </div>
+  <div timelineTabMenuItem #timelineTabMenuItem class="flex items-center cursor-pointer" [cdkMenuPosition]="[{ originX: 'center', originY: 'bottom', overlayX: 'center', overlayY: 'top', offsetX: 0, offsetY: 10 }]" [cdkMenuTriggerFor]="menu" (click)="downloadClick()" (keydown.enter)="downloadClick()">
+    <div [appTooltip]="showTooltip ? 'A clip is a selected part <br /> of a video that you can: <br />  • turn into an event, <br /> • download, <br /> • or share.' : undefined" class="bg-main-primary text-white border-main-primary rounded-lg px-4 py-1.5 items-center flex flex-row">
+      <span>Create clip</span>
+      <span>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <mask id="mask0_4133_2356" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
+            <rect width="24" height="24" fill="#D9D9D9" />
+          </mask>
+          <g mask="url(#mask0_4133_2356)">
+            <path d="M11.9978 13.28L16.0708 9.20674C16.2093 9.06841 16.3834 8.99758 16.5931 8.99424C16.8026 8.99108 16.9798 9.06191 17.1248 9.20674C17.2696 9.35174 17.3421 9.52741 17.3421 9.73374C17.3421 9.94007 17.2696 10.1157 17.1248 10.2607L12.6306 14.755C12.5369 14.8485 12.4381 14.9145 12.3343 14.953C12.2305 14.9915 12.1183 15.0107 11.9978 15.0107C11.8773 15.0107 11.7651 14.9915 11.6613 14.953C11.5575 14.9145 11.4587 14.8485 11.3651 14.755L6.8708 10.2607C6.73247 10.1222 6.66164 9.94816 6.6583 9.73849C6.65514 9.52899 6.72597 9.35174 6.8708 9.20674C7.0158 9.06191 7.19147 8.98949 7.3978 8.98949C7.60414 8.98949 7.77981 9.06191 7.92481 9.20674L11.9978 13.28Z" fill="white" />
+          </g>
+        </svg>
+      </span>
+    </div>
+  </div>
+</app-timeline-tabs>
+
+<ng-template #menu>
+  <div class="w-[130px] flex flex-col gap-2 py-3 bg-white justify-center shadow-lg">
+    <button
+      class="px-3 py-1 hover:bg-new-gray-200 text-sm w-full text-left"
+      [ngClass]="{
+        'bg-new-gray-300': playbackDownloadActive,
+        'cursor-pointer': !clipToEventActive && !playbackShareActive,
+        'cursor-not-allowed opacity-50': clipToEventActive || playbackShareActive
+      }"
+      [disabled]="clipToEventActive || playbackShareActive"
+      (click)="!clipToEventActive && !playbackShareActive && activateClipSelection()">
+      Download
+    </button>
+
+    <button
+      class="px-3 py-1 hover:bg-new-gray-200 text-sm w-full text-left"
+      [ngClass]="{
+        'bg-new-gray-300': playbackShareActive,
+        'cursor-pointer': !clipToEventActive && !playbackDownloadActive,
+        'cursor-not-allowed opacity-50': clipToEventActive || playbackDownloadActive
+      }"
+      [disabled]="clipToEventActive || playbackDownloadActive"
+      (click)="!clipToEventActive && !playbackDownloadActive && activateShareSelection()">
+      Share
+    </button>
+
+    <button
+      class="px-3 py-1 hover:bg-new-gray-200 text-sm w-full text-left"
+      [ngClass]="{
+        'bg-new-gray-300': clipToEventActive,
+        'cursor-pointer': !playbackShareActive && !playbackDownloadActive,
+        'cursor-not-allowed opacity-50': playbackShareActive || playbackDownloadActive
+      }"
+      [disabled]="playbackShareActive || playbackDownloadActive"
+      (click)="!playbackShareActive && !playbackDownloadActive && activateClipToEventSelection()">
+      Change into event
+    </button>
+  </div>
+</ng-template>

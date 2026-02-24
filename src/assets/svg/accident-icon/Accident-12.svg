@@ -1,0 +1,39 @@
+<svg id="a59313d6-d64c-4d1a-bea8-0ff47f89c94c" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80">
+  <defs>
+    <style>
+      .e40bad3d-ef88-40fc-b4de-1eced3891503 {
+        fill: #fadc0f;
+      }
+
+      .af78d455-fda2-475d-8f47-652f9372af63 {
+        fill: #fff;
+      }
+
+      .f7a6093f-0dc0-42f0-888d-f85442e60bf0 {
+        fill: none;
+        stroke: #414042;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .ab9ae084-216f-4eb4-b7fd-61c287ba1ef3 {
+        font-size: 23.58px;
+        fill: #414042;
+        font-family: AvertaCY-Light;
+        font-weight: 300;
+      }
+    </style>
+  </defs>
+  <title>Accident-12</title>
+  <g>
+    <g>
+      <rect class="e40bad3d-ef88-40fc-b4de-1eced3891503" x="1.23" y="1.23" width="77.55" height="77.55" rx="6.9"/>
+      <rect class="af78d455-fda2-475d-8f47-652f9372af63" x="6.45" y="6.45" width="67.1" height="67.1" rx="2.46"/>
+    </g>
+    <g>
+      <rect class="f7a6093f-0dc0-42f0-888d-f85442e60bf0" x="6.45" y="6.45" width="67.1" height="67.1" rx="2.46"/>
+      <rect class="f7a6093f-0dc0-42f0-888d-f85442e60bf0" x="1.23" y="1.23" width="77.55" height="77.55" rx="6.9"/>
+      <text class="ab9ae084-216f-4eb4-b7fd-61c287ba1ef3" transform="translate(12.88 48.09)">TYPE</text>
+    </g>
+  </g>
+</svg>

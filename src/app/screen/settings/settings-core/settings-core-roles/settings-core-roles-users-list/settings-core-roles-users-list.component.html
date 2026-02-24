@@ -1,0 +1,47 @@
+<div class="flex-1 flex flex-col gap-4 pt-5">
+  <p class="font-bold">All users</p>
+  <table class="table-auto">
+    <thead>
+      <th></th>
+      <tr class="border-b border-bright-gray">
+        <td class="px-2"></td>
+        <td class="px-2 py-2 text-xs text-manatee">Name</td>
+        <td class="px-2 text-xs text-manatee">E-mail</td>
+        <td class="px-2 text-xs text-manatee">Company</td>
+        <td class="px-2 text-xs text-manatee">Role</td>
+        <td class="px-2 text-xs text-manatee">Last Login At</td>
+        <td class="px-2"></td>
+      </tr>
+    </thead>
+    <tbody *ngIf="data$ | async as response">
+      <tr *ngFor="let user of response.data" class="border-b border-bright-gray">
+        <td class="px-2 text-sm"></td>
+        <td class="px-2 py-4 text-sm">{{ user.name }}</td>
+        <td class="px-2 text-sm">{{ user.email }}</td>
+        <td class="px-2 text-sm">{{ user.company_name }}</td>
+        <td class="px-2 text-sm">{{ user.role }}</td>
+        <td class="px-2">
+          <div class="flex items-center group cursor-pointer" (click)="openLoginHistory(user)" (keydown.enter)="openLoginHistory(user)">
+            <span class="text-xs text-manatee group-hover:text-main-primary transition-colors">
+              {{ user.last_login_at ? (user.last_login_at | dateFormat : 'serverDateTimeFormat' : 'clientDateTimeFormat') : 'Never' }}
+            </span>
+            <div class="ml-1 text-xs text-manatee group-hover:text-main-primary transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 8v4l3 3"></path>
+                <path d="M3.05 11a9 9 0 1 1 .5 4"></path>
+              </svg>
+            </div>
+          </div>
+        </td>
+        <td>
+          <div class="flex">
+            <span class="px-2 text-main-primary text-sm font-semibold underline cursor-pointer" (click)="handleEditUserClick(user)" (keydown.enter)="handleEditUserClick(user)">Edit</span>
+            <span class="px-2 text-main-primary text-sm font-semibold underline cursor-pointer" (click)="handleResetPasswordClick(user)" (keydown.enter)="handleResetPasswordClick(user)">Reset Password</span>
+            <span *ngIf="user.is_mfa_enabled" class="px-2 text-main-primary text-sm font-semibold underline cursor-pointer" (click)="handleResetMFAClick(user)" (keydown.enter)="handleResetMFAClick(user)">Reset MFA</span>
+            <span class="px-2 text-main-primary text-sm font-semibold underline cursor-pointer" (click)="handleDeleteUserClick(user)" (keydown.enter)="handleDeleteUserClick(user)">Delete</span>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

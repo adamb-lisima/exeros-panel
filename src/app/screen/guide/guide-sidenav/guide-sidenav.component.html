@@ -1,0 +1,18 @@
+<div class="flex flex-col h-full">
+  <div class="p-4">
+    <img src="assets/svg/logo-icon.svg" width="122" height="31" alt="logo-icon" />
+  </div>
+
+  <ul class="flex-1 overflow-y-auto">
+    <li *ngFor="let item of menuItems$ | async" [class.bg-blue-100]="(activeSlug$ | async) === item.slug" [class.text-blue-700]="(activeSlug$ | async) === item.slug" [class.font-medium]="(activeSlug$ | async) === item.slug" class="px-4 py-3 cursor-pointer hover:bg-indigo-100 hover:text-indigo-700 hover:font-medium transition-colors duration-150" (click)="navigateTo(item.slug)" (keydown.enter)="navigateTo(item.slug)">
+      {{ item.title }}
+    </li>
+  </ul>
+
+  <div class="p-4 mt-auto">
+    <a [routerLink]="['/dashboard']" class="flex items-center px-4 py-3 cursor-pointer hover:bg-indigo-100 hover:text-indigo-700 hover:font-medium transition-colors duration-150">
+      <i class="fas fa-arrow-left mr-2"></i>
+      Back to Vidematics
+    </a>
+  </div>
+</div>

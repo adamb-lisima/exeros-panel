@@ -1,0 +1,39 @@
+.map-rounded .map-container {
+  @apply rounded-md;
+}
+
+.gm-style {
+  .gm-style-iw {
+    padding: 0 !important;
+
+    > .gm-style-iw-d {
+      overflow: auto !important;
+    }
+
+    > button {
+      display: none !important;
+    }
+  }
+
+  .gm-style-cc,
+  .gmnoprint {
+    display: none;
+  }
+}
+
+.dark {
+  .gm-style {
+    .gm-style-iw-t::after {
+      box-shadow: none !important;
+      background: var(--chinese-white) !important;
+    }
+
+    .gm-style-iw {
+      @apply bg-chinese-white #{!important};
+
+      .gm-style-iw-d {
+        @apply bg-chinese-white #{!important};
+      }
+    }
+  }
+}

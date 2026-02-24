@@ -1,0 +1,12 @@
+<div class="w-[530px] flex flex-col gap-6 p-6 rounded bg-white">
+  <div class="flex flex-col gap-2">
+    <p class="font-bold text-lg">{{ data.header }}</p>
+    <p *ngIf="data.content">{{ data.content }}</p>
+    <p *ngIf="countdown">Video will stop in {{ countdown }} seconds.</p>
+  </div>
+  <app-textarea-control *ngIf="data.showTextInput" [(ngModel)]="text" [rows]="4"></app-textarea-control>
+  <div class="flex gap-3">
+    <app-button (buttonClick)="handleYesClick()">{{ data.yes ?? 'Yes' }}</app-button>
+    <app-button (buttonClick)="handleNoClick()">{{ data.no ?? 'No' }}</app-button>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+<svg id="b4e7a9d7-8b15-480a-a049-125e6229087d" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28">
+  <defs>
+    <style>
+      .e962b61d-3ba6-4cee-b6a2-0d41a5dc6d47 {
+        fill: #e6e6e6;
+      }
+
+      .b1fa7ae7-e062-4d74-b44c-ef2f9f4c56e6 {
+        fill: #fff;
+      }
+
+      .bc2c90a2-d0b9-4a6e-a993-658db0d51d58 {
+        fill: #fadc0f;
+      }
+
+      .ecce7de8-fc51-462c-ade2-23e0398d5a05 {
+        fill: none;
+        stroke: #414042;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 1.28px;
+      }
+    </style>
+  </defs>
+  <title>1</title>
+  <circle class="e962b61d-3ba6-4cee-b6a2-0d41a5dc6d47" cx="14" cy="14" r="14"/>
+  <g>
+    <g>
+      <rect class="b1fa7ae7-e062-4d74-b44c-ef2f9f4c56e6" x="6.67" y="7.72" width="12.04" height="10.82"/>
+      <polygon class="bc2c90a2-d0b9-4a6e-a993-658db0d51d58" points="26.49 15.22 26.49 18.54 18.7 18.54 18.7 9.95 23.32 9.95 26.49 15.22"/>
+      <circle class="b1fa7ae7-e062-4d74-b44c-ef2f9f4c56e6" cx="10.82" cy="18.54" r="1.74"/>
+      <circle class="b1fa7ae7-e062-4d74-b44c-ef2f9f4c56e6" cx="22.24" cy="18.54" r="1.74"/>
+    </g>
+    <g>
+      <polyline class="ecce7de8-fc51-462c-ade2-23e0398d5a05" points="8.94 18.54 6.67 18.54 6.67 7.72 18.7 7.72 18.7 18.54 12.69 18.54"/>
+      <circle class="ecce7de8-fc51-462c-ade2-23e0398d5a05" cx="10.82" cy="18.54" r="1.74"/>
+      <circle class="ecce7de8-fc51-462c-ade2-23e0398d5a05" cx="22.24" cy="18.54" r="1.74"/>
+      <polyline class="ecce7de8-fc51-462c-ade2-23e0398d5a05" points="24.06 18.54 26.49 18.54 26.49 15.22 23.32 9.95 18.7 9.95"/>
+      <line class="ecce7de8-fc51-462c-ade2-23e0398d5a05" x1="18.7" y1="18.54" x2="20.43" y2="18.54"/>
+      <line class="ecce7de8-fc51-462c-ade2-23e0398d5a05" x1="4.29" y1="13.13" x2="1.51" y2="13.13"/>
+      <line class="ecce7de8-fc51-462c-ade2-23e0398d5a05" x1="6.67" y1="9" x2="3.62" y2="9"/>
+      <line class="ecce7de8-fc51-462c-ade2-23e0398d5a05" x1="2.81" y1="17.28" x2="2.47" y2="17.28"/>
+      <line class="ecce7de8-fc51-462c-ade2-23e0398d5a05" x1="6.67" y1="17.28" x2="4.71" y2="17.28"/>
+    </g>
+  </g>
+</svg>

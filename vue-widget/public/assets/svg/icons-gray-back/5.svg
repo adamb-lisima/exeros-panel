@@ -1,0 +1,35 @@
+<svg id="e555a16d-355e-4267-b998-34d372b79123" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28">
+  <defs>
+    <style>
+      .fe1a55f5-aaf6-4f6a-aaf1-544df0e1a5a8 {
+        fill: #e6e6e6;
+      }
+
+      .a0cfaf2f-eb13-42d5-8a75-405550b2b42a {
+        fill: #fadc0f;
+      }
+
+      .b1568050-65a8-4c78-9ba2-c3fd0a1f6113 {
+        fill: none;
+        stroke: #414042;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 1.28px;
+      }
+    </style>
+  </defs>
+  <title>5</title>
+  <circle class="fe1a55f5-aaf6-4f6a-aaf1-544df0e1a5a8" cx="14" cy="14" r="14"/>
+  <g>
+    <circle class="a0cfaf2f-eb13-42d5-8a75-405550b2b42a" cx="14" cy="14" r="10.42"/>
+    <g>
+      <circle class="b1568050-65a8-4c78-9ba2-c3fd0a1f6113" cx="14" cy="14" r="10.42"/>
+      <line class="b1568050-65a8-4c78-9ba2-c3fd0a1f6113" x1="14" y1="21.42" x2="14" y2="22.64"/>
+      <line class="b1568050-65a8-4c78-9ba2-c3fd0a1f6113" x1="21.42" y1="14" x2="22.64" y2="14"/>
+      <line class="b1568050-65a8-4c78-9ba2-c3fd0a1f6113" x1="14" y1="6.58" x2="14" y2="5.36"/>
+      <line class="b1568050-65a8-4c78-9ba2-c3fd0a1f6113" x1="6.58" y1="14" x2="5.36" y2="14"/>
+      <line class="b1568050-65a8-4c78-9ba2-c3fd0a1f6113" x1="9.77" y1="12.32" x2="14.9" y2="14.36"/>
+      <line class="b1568050-65a8-4c78-9ba2-c3fd0a1f6113" x1="18.67" y1="8.96" x2="13.34" y2="14.71"/>
+    </g>
+  </g>
+</svg>

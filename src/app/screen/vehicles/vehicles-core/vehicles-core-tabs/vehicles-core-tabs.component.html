@@ -1,0 +1,14 @@
+<div class="h-full flex flex-col gap-4">
+  <div class="flex gap-4 items-center overflow-hidden">
+    <p class="mb-1 pb-1 font-semibold text-sm text-center text-manatee border-b-2 cursor-pointer" [ngClass]="mode === 'events' ? 'border-main-primary' : 'border-transparent'" (click)="handleModeClick('events')" (keydown.enter)="handleModeClick('events')">Recent Events</p>
+    <p class="mb-1 pb-1 font-semibold text-sm text-center text-manatee border-b-2 cursor-pointer" [ngClass]="mode === 'alarms' ? 'border-main-primary' : 'border-transparent'" (click)="handleModeClick('alarms')" (keydown.enter)="handleModeClick('alarms')">Alarms</p>
+    <p class="mb-1 pb-1 font-semibold text-sm text-center text-manatee border-b-2 cursor-pointer" [ngClass]="mode === 'checks' ? 'border-main-primary' : 'border-transparent'" (click)="handleModeClick('checks')" (keydown.enter)="handleModeClick('checks')">Vehicle Checks</p>
+    <p class="mb-1 pb-1 font-semibold text-sm text-center text-manatee border-b-2 cursor-pointer" [ngClass]="mode === 'accidents' ? 'border-main-primary' : 'border-transparent'" (click)="handleModeClick('accidents')" (keydown.enter)="handleModeClick('accidents')">Accidents</p>
+  </div>
+  <div class="h-full overflow-auto" [ngSwitch]="mode">
+    <app-vehicles-core-tabs-events *ngSwitchCase="'events'"></app-vehicles-core-tabs-events>
+    <app-vehicles-core-tabs-alarms *ngSwitchCase="'alarms'"></app-vehicles-core-tabs-alarms>
+    <app-vehicles-core-tabs-checks *ngSwitchCase="'checks'"></app-vehicles-core-tabs-checks>
+    <app-vehicles-core-tabs-accidents *ngSwitchCase="'accidents'"></app-vehicles-core-tabs-accidents>
+  </div>
+</div>

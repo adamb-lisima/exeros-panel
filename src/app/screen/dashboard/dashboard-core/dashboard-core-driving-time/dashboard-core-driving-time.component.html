@@ -1,0 +1,12 @@
+<div *ngIf="chartOptions$ | async as chartOptions" class="flex flex-col h-full">
+  <p class="font-semibold text-xl">Driving Time</p>
+  <app-line-chart [height]="270" [data]="chartOptions.series" [options]="{ overlayTemplate: overlay }" class="flex-1"></app-line-chart>
+</div>
+<ng-template #overlay let-data>
+  <div class="flex flex-col gap-1 py-1 px-2 bg-outer-space rounded-md translate-x-[-50%] w-max bottom-2 absolute pointer-events-none">
+    <p class="text-white text-xs opacity-80">
+      {{ data.x | dateFormat : 'jsDate' : 'clientDateFormat' }}
+    </p>
+    <p class="text-white text-xs">{{ data.y }} {{ data.unit }}</p>
+  </div>
+</ng-template>

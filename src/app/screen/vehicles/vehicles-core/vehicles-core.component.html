@@ -1,0 +1,20 @@
+<div *ngIf="vehicle$ | async" class="grid grid-cols-3 auto-rows-max gap-4">
+  <div class="exeros-fragment row-start-1 h-[130px]">
+    <app-vehicles-core-driving-time></app-vehicles-core-driving-time>
+  </div>
+  <div class="exeros-fragment row-start-1 h-[130px]">
+    <app-vehicles-core-distance-driven></app-vehicles-core-distance-driven>
+  </div>
+  <div class="exeros-fragment row-start-1 row-end-3 h-[696px]">
+    <app-vehicles-core-tabs></app-vehicles-core-tabs>
+  </div>
+  <div class="exeros-fragment row-start-2 col-start-1 col-end-3 h-[550px]">
+    <app-vehicles-core-live-feed></app-vehicles-core-live-feed>
+  </div>
+  <div class="exeros-fragment col-start-1 col-end-4">
+    <app-vehicles-core-details></app-vehicles-core-details>
+  </div>
+  <div class="exeros-fragment row-start-7 h-[550px] col-start-1 col-end-4">
+    <app-vehicles-core-trips></app-vehicles-core-trips>
+  </div>
+</div>

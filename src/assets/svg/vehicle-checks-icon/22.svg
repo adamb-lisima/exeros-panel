@@ -1,0 +1,21 @@
+<svg id="b9107074-b8ba-4b03-9131-b75aee567f71" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80">
+  <title>22</title>
+  <g>
+    <path style="fill:#fff;" d="M57.26,42.56c-8.94,17.88-24.7,20.73-24.7,20.73l-.91.9,2.46,2.46-12,10.52a35.47,35.47,0,0,1-12.5-12.5l.51-.51C21.62,58,24.83,49.86,25.5,47.79c7.84.36,17.21-1.08,21.76-5.38,4.27-3.39,7-3.82,9.46-2.1A1.79,1.79,0,0,1,57.26,42.56Z"/>
+    <path style="fill:#fff;" d="M25.64,47.28s0,.18-.14.51C24.83,49.86,21.62,58,10.13,64.16L.63,56.05.91,19.86Z"/>
+    <polygon style="fill:#fadc0f;" points="62.08 46.14 57.57 52.39 55.71 54.98 51.16 61.28 46.73 58.09 52.47 50.13 54.69 47.05 57.65 42.94 62.08 46.14"/>
+    <path style="fill:#fff;" d="M78,62.51l-2.62,4a1.49,1.49,0,0,1-1,.67,1.63,1.63,0,0,1-.31,0,1.58,1.58,0,0,1-.89-.27L55.71,55l1.86-2.59L73.63,63.46,78,56.77Z"/>
+    <polygon style="fill:#fadc0f;" points="65.93 7.92 46.68 27.18 41.73 32.14 36.62 27.04 28.26 18.67 33.22 13.71 41.58 22.08 60.84 2.83 65.93 7.92"/>
+  </g>
+  <g>
+    <path style="fill:none;stroke:#414042;stroke-linecap:round;stroke-linejoin:round;" d="M25.5,47.78c7.84.37,17.2-1.07,21.77-5.37,4.27-3.39,7-3.82,9.45-2.09a1.8,1.8,0,0,1,.55,2.24c-9,17.89-24.71,20.72-24.71,20.72l-.91.91,2.46,2.46-12,10.52a35.47,35.47,0,0,1-12.5-12.5l.51-.51"/>
+    <path style="fill:none;stroke:#414042;stroke-linecap:round;stroke-linejoin:round;" d="M.91,19.86,25.64,47.28S23.42,57,10.13,64.16L.63,56.05"/>
+    <rect style="fill:none;stroke:#414042;stroke-linecap:round;stroke-linejoin:round;" x="51.67" y="42.78" width="5.47" height="18.67" transform="translate(40.76 -21.98) rotate(35.79)"/>
+    <g>
+      <path style="fill:none;stroke:#414042;stroke-linecap:round;stroke-linejoin:round;" d="M78,62.51l-2.61,4a1.6,1.6,0,0,1-1,.69,1.57,1.57,0,0,1-1.2-.25L55.84,55"/>
+      <polyline style="fill:none;stroke:#414042;stroke-linecap:round;stroke-linejoin:round;" points="57.64 52.44 73.63 63.46 77.99 56.77"/>
+    </g>
+    <polygon style="fill:none;stroke:#414042;stroke-linecap:round;stroke-linejoin:round;" points="65.93 7.92 46.68 27.18 41.73 32.14 36.62 27.04 28.26 18.67 33.22 13.71 41.58 22.08 60.84 2.83 65.93 7.92"/>
+    <path style="fill:none;stroke:#414042;stroke-linecap:round;stroke-linejoin:round;" d="M1,79.26h63.5A13.53,13.53,0,0,0,78,65.73V36.91"/>
+  </g>
+</svg>

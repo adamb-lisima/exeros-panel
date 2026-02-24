@@ -1,0 +1,60 @@
+<app-dialog-container [title]="title">
+  <div class="flex flex-col gap-8 p-5" body>
+    <app-text-control label="Search users" [prefixIcon]="'search'" [formControl]="searchControl"></app-text-control>
+
+    <ng-container *ngIf="isStandardNotificationType">
+      <table>
+        <thead class="border-b border-bright-gray">
+          <td class="w-6"><app-checkbox-control [ngModel]="allUsers" (ngModelChange)="handleAllUsersClick($event)"></app-checkbox-control></td>
+          <td class="text-xs text-manatee py-3">Name</td>
+          <td class="text-xs text-manatee">Email</td>
+          <th></th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of tempUsers">
+            <td><app-checkbox-control [ngModel]="user.checked" (ngModelChange)="handleCheckboxChange($event, user.id)"></app-checkbox-control></td>
+            <td class="text-sm">{{ user.name }}</td>
+            <td class="text-sm text-dark-electric-blue">{{ user.email }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </ng-container>
+
+    <ng-container *ngIf="!isStandardNotificationType">
+      <table>
+        <thead class="border-b border-bright-gray">
+          <td class="w-6"><app-checkbox-control [ngModel]="allUsers" (ngModelChange)="handleAllUsersClick($event)"></app-checkbox-control></td>
+          <td class="text-xs text-manatee py-3">Name and E-mail Address</td>
+          <td class="w-6"><app-checkbox-control [ngModel]="allOccurredUsers" (ngModelChange)="handleAllOccurredUsersClick($event)"></app-checkbox-control></td>
+          <td class="text-xs text-manatee">Event Occurred</td>
+          <td class="w-6"><app-checkbox-control [ngModel]="allEscalatedUsers" (ngModelChange)="handleAllEscalatedUsersClick($event)"></app-checkbox-control></td>
+          <td class="text-xs text-manatee">Event Escalated</td>
+          <th></th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of tempUsers">
+            <td><app-checkbox-control [ngModel]="user.checked" (ngModelChange)="handleCheckboxChange($event, user.id)"></app-checkbox-control></td>
+            <td class="text-sm">
+              <div class="flex flex-col py-2" [ngClass]="{ 'opacity-50': !user.checked }">
+                <span>{{ user.name }}</span> <span class="font-normal text-dark-electric-blue">{{ user.email }}</span>
+              </div>
+            </td>
+            <td class="w-6">
+              <app-checkbox-control [ngModel]="user.occurredChecked" (ngModelChange)="handleOccurredCheckboxChange($event, user.id)" [disabled]="!user.checked"> </app-checkbox-control>
+            </td>
+            <td class="text-sm" [ngClass]="{ 'opacity-50': !user.checked }">Notifications {{ user.occurredChecked ? 'on' : 'off' }}</td>
+            <td class="w-6">
+              <app-checkbox-control [ngModel]="user.escalatedChecked" (ngModelChange)="handleEscalatedCheckboxChange($event, user.id)" [disabled]="!user.checked"> </app-checkbox-control>
+            </td>
+            <td class="text-sm" [ngClass]="{ 'opacity-50': !user.checked }">Notifications {{ user.escalatedChecked ? 'on' : 'off' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </ng-container>
+  </div>
+  <div class="flex flex-1 justify-end" footer>
+    <app-button (buttonClick)="handleEditNotificationsClick()">
+      <span class="text-sm text-white font-semibold">Save</span>
+    </app-button>
+  </div>
+</app-dialog-container>

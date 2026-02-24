@@ -1,0 +1,6 @@
+<mat-form-field [ngClass]="showHintSpace ? '' : '-mb-[1.25em]'" class="w-full" [appearance]="'outline'">
+  <mat-label *ngIf="label">{{ label }}</mat-label>
+  <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" [cdkAutosizeMaxRows]="rows" [disabled]="disabled" [ngModel]="value" (ngModelChange)="handleModelChange($event)"></textarea>
+  <mat-error *ngIf="error">{{ errorMessage }}</mat-error>
+  <mat-icon *ngIf="prefixIcon" matPrefix>{{ prefixIcon }}</mat-icon>
+</mat-form-field>

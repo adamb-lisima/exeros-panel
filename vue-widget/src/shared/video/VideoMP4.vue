@@ -1,0 +1,607 @@
+<template>
+  <div :class="{ 'loader loader--small': !firstPlaying.value }">
+    <div class="w-full flex items-center p-1 mx-auto flex-col">
+      <div class="relative w-full overflow-hidden rounded-xl">
+        <video
+          ref="videoRef"
+          oncontextmenu="return false;"
+          class="w-full max-h-full mx-auto rounded-xl"
+          :style="{
+            transform: isZoomMode ? `scale(${zoomScale}) translate(${zoomX}px, ${zoomY}px)` : '',
+            'transform-origin': 'center center',
+            transition: 'transform 0.1s ease',
+            cursor: isZoomMode ? (zoomScale > 1 ? 'grab' : 'zoom-in') : 'pointer'
+          }"
+          muted
+          :aria-label="`Event video recording: ${currentEvent?.event_type || 'Event recording'}`"
+          @wheel="handleZoomWheel"
+          @mousedown="handleZoomMouseDown"
+          @mousemove="handleZoomMouseMove"
+          @mouseup="handleZoomMouseUp"
+          @mouseleave="handleZoomMouseUp"
+          @canplaythrough="handleCanPlayThrough"
+          @loadedmetadata="handleLoadedMetadata"
+          @timeupdate="handleTimeUpdate"
+          @play="handlePlay"
+          @pause="handlePause"
+          @error="handleVideoError">
+          <source :src="source.stream" type="video/mp4" />
+          <track v-if="source.description" label="Description" kind="descriptions" srclang="en" :src="source.description" />
+        </video>
+      </div>
+      <div v-if="progress.canPlay" class="w-full flex flex-col gap-2 py-2 px-4 bg-white">
+        <div class="group h-2 flex overflow-hidden cursor-pointer bg-bright-gray rounded" @click="handleProgressClick" @mousedown="handleProgressMousedown" @mousemove="handleProgressMousemove" @mouseup="handleProgressMouseup" @mouseleave="handleProgressMouseup">
+          <div class="relative w-full h-4 rounded border border-transparent group-hover:border-carmel transition-all">
+            <div class="absolute h-full bg-main-primary rounded" :style="{ width: progress.value + '%' }"></div>
+            <div
+              v-if="currentEvent?.occurence_start_time && currentEvent?.occurence_time"
+              class="absolute h-full bg-extra-one rounded"
+              :style="{
+                'margin-left': calculateNotificationPercentage(progress.duration, calculateElapsedTime(currentEvent.occurence_start_time, currentEvent.occurence_time)) + '%',
+                width: '5%'
+              }"></div>
+          </div>
+        </div>
+        <div class="flex justify-center items-center">
+          <div class="flex flex-1 whitespace-nowrap text-xs text-dark-electric-blue">{{ formatTime(videoElement?.currentTime) }} / {{ formatTime(progress.duration) }} s</div>
+          <div class="flex items-center gap-2">
+            <div :class="{ 'text-main-primary cursor-pointer': videoPaused, 'text-dim-gray': !videoPaused }" class="flex justify-center items-center px-1 select-none" @keydown.enter="() => handleMoveFrameClick(-1)" @click="() => handleMoveFrameClick(-1)">
+              <svg width="11" height="10" viewBox="0 0 11 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0.614798 9.77539C0.472931 9.77539 0.354239 9.72747 0.258723 9.63164C0.163206 9.5358 0.115448 9.41705 0.115448 9.27539V1.04459C0.115448 0.90292 0.163431 0.78417 0.259398 0.688336C0.355365 0.592503 0.474281 0.544586 0.616148 0.544586C0.757998 0.544586 0.876681 0.592503 0.972198 0.688336C1.06771 0.78417 1.11547 0.90292 1.11547 1.04459V9.27539C1.11547 9.41705 1.06749 9.5358 0.971523 9.63164C0.875556 9.72747 0.756648 9.77539 0.614798 9.77539ZM9.3924 8.94269L4.73085 5.83114C4.49495 5.66817 4.377 5.44409 4.377 5.15891C4.377 4.87373 4.49495 4.65037 4.73085 4.48884L9.3924 1.37729C9.66163 1.18625 9.9392 1.16932 10.2251 1.32649C10.511 1.48365 10.6539 1.72623 10.6539 2.05421V8.26576C10.6539 8.58885 10.511 8.83115 10.2251 8.99269C9.9392 9.15422 9.66163 9.13755 9.3924 8.94269Z" fill="currentColor" />
+              </svg>
+            </div>
+            <div class="h-8 w-8 flex justify-center items-center border-2 border-main-primary rounded-lg text-main-primary cursor-pointer select-none" @click="handlePlayPauseClick" @keydown.enter="handlePlayPauseClick">
+              <svg v-if="!videoPaused" width="13" height="15" viewBox="0 0 13 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10.3847 14.16C9.8347 14.16 9.36386 13.9642 8.9722 13.5725C8.58053 13.1808 8.3847 12.71 8.3847 12.16V2.15999C8.3847 1.60999 8.58053 1.13916 8.9722 0.747488C9.36386 0.355822 9.8347 0.159988 10.3847 0.159988C10.9347 0.159988 11.4055 0.355822 11.7972 0.747488C12.1889 1.13916 12.3847 1.60999 12.3847 2.15999V12.16C12.3847 12.71 12.1889 13.1808 11.7972 13.5725C11.4055 13.9642 10.9347 14.16 10.3847 14.16ZM2.3847 14.16C1.8347 14.16 1.36386 13.9642 0.972197 13.5725C0.58053 13.1808 0.384697 12.71 0.384697 12.16V2.15999C0.384697 1.60999 0.58053 1.13916 0.972197 0.747488C1.36386 0.355822 1.8347 0.159988 2.3847 0.159988C2.9347 0.159988 3.40553 0.355822 3.7972 0.747488C4.18886 1.13916 4.3847 1.60999 4.3847 2.15999V12.16C4.3847 12.71 4.18886 13.1808 3.7972 13.5725C3.40553 13.9642 2.9347 14.16 2.3847 14.16Z" fill="currentColor" />
+              </svg>
+              <svg v-else width="11" height="14" viewBox="0 0 11 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1.9097 13.185C1.57636 13.4017 1.23886 13.4142 0.897197 13.2225C0.55553 13.0308 0.384697 12.735 0.384697 12.335V1.98499C0.384697 1.58499 0.55553 1.28916 0.897197 1.09749C1.23886 0.905822 1.57636 0.918322 1.9097 1.13499L10.0597 6.30999C10.3597 6.50999 10.5097 6.79332 10.5097 7.15999C10.5097 7.52666 10.3597 7.80999 10.0597 8.00999L1.9097 13.185Z" fill="currentColor" />
+              </svg>
+            </div>
+            <div :class="{ 'text-main-primary cursor-pointer': videoPaused, 'text-dim-gray': !videoPaused }" class="flex justify-center items-center px-1 select-none" @keydown.enter="() => handleMoveFrameClick(1)" @click="() => handleMoveFrameClick(1)">
+              <svg width="11" height="10" viewBox="0 0 11 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10.1532 9.77539C10.0114 9.77539 9.89271 9.72747 9.7972 9.63164C9.70168 9.5358 9.65392 9.41705 9.65392 9.27539V1.04459C9.65392 0.90292 9.70191 0.78417 9.79787 0.688336C9.89384 0.592503 10.0127 0.544586 10.1546 0.544586C10.2965 0.544586 10.4152 0.592503 10.5107 0.688336C10.6062 0.78417 10.6539 0.90292 10.6539 1.04459V9.27539C10.6539 9.41705 10.606 9.5358 10.51 9.63164C10.414 9.72747 10.2951 9.77539 10.1532 9.77539ZM1.377 8.94269C1.10776 9.13755 0.830198 9.15422 0.544298 8.99269C0.258398 8.83115 0.115448 8.58885 0.115448 8.26576V2.05421C0.115448 1.72623 0.258398 1.48365 0.544298 1.32649C0.830198 1.16932 1.10776 1.18625 1.377 1.37729L6.03855 4.48884C6.27445 4.6518 6.3924 4.87588 6.3924 5.16106C6.3924 5.44625 6.27445 5.6696 6.03855 5.83114L1.377 8.94269Z" fill="currentColor" />
+              </svg>
+            </div>
+          </div>
+          <div class="flex flex-1 justify-end items-center gap-1">
+            <div class="text-black">
+              <svg width="17" height="12" viewBox="0 0 17 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10.6673 11.9667C9.03685 11.9667 7.65586 11.4009 6.5243 10.2693C5.39275 9.13778 4.82697 7.7568 4.82697 6.12638C4.82697 4.50815 5.39275 3.13252 6.5243 1.99951C7.65586 0.866495 9.03685 0.299988 10.6673 0.299988C12.2855 0.299988 13.6611 0.866495 14.7941 1.99951C15.9272 3.13252 16.4937 4.50815 16.4937 6.12638C16.4937 7.7568 15.9272 9.13778 14.7941 10.2693C13.6611 11.4009 12.2855 11.9667 10.6673 11.9667ZM10.6603 11.1333C12.0492 11.1333 13.2298 10.6472 14.202 9.67499C15.1742 8.70277 15.6603 7.52221 15.6603 6.13332C15.6603 4.74443 15.1742 3.56388 14.202 2.59165C13.2298 1.61943 12.0492 1.13332 10.6603 1.13332C9.27144 1.13332 8.09088 1.61943 7.11866 2.59165C6.14644 3.56388 5.66033 4.74443 5.66033 6.13332C5.66033 7.52221 6.14644 8.70277 7.11866 9.67499C8.09088 10.6472 9.27144 11.1333 10.6603 11.1333ZM11.077 5.97626V3.47307C11.077 3.35502 11.037 3.25606 10.957 3.1762C10.8771 3.09634 10.778 3.0564 10.6598 3.0564C10.5415 3.0564 10.4426 3.09634 10.363 3.1762C10.2835 3.25606 10.2437 3.35502 10.2437 3.47307V6.04197C10.2437 6.12708 10.2599 6.20952 10.2925 6.2893C10.3251 6.36908 10.3775 6.44536 10.4497 6.51813L12.4215 8.50511C12.5027 8.597 12.5992 8.64295 12.7108 8.64295C12.8224 8.64295 12.9242 8.597 13.0161 8.50511C13.108 8.41324 13.1539 8.31415 13.1539 8.20784C13.1539 8.10154 13.108 8.00245 13.0161 7.91057L11.077 5.97626ZM1.39749 3.21665C1.27944 3.21665 1.18048 3.17667 1.10062 3.0967C1.02076 3.01674 0.980825 2.91765 0.980825 2.79943C0.980825 2.6812 1.02076 2.5823 1.10062 2.50272C1.18048 2.42312 1.27944 2.38332 1.39749 2.38332H3.57697C3.69503 2.38332 3.79398 2.42331 3.87385 2.50328C3.95371 2.58324 3.99364 2.68233 3.99364 2.80055C3.99364 2.91877 3.95371 3.01768 3.87385 3.09726C3.79398 3.17686 3.69503 3.21665 3.57697 3.21665H1.39749ZM0.564158 6.54999C0.446103 6.54999 0.347144 6.51 0.267283 6.43003C0.187422 6.35006 0.147491 6.25097 0.147491 6.13276C0.147491 6.01454 0.187422 5.91563 0.267283 5.83605C0.347144 5.75645 0.446103 5.71665 0.564158 5.71665H3.57697C3.69503 5.71665 3.79398 5.75664 3.87385 5.83661C3.95371 5.91658 3.99364 6.01568 3.99364 6.13388C3.99364 6.25211 3.95371 6.35101 3.87385 6.43059C3.79398 6.51019 3.69503 6.54999 3.57697 6.54999H0.564158ZM1.39749 9.88332C1.27944 9.88332 1.18048 9.84334 1.10062 9.76336C1.02076 9.68339 0.980825 9.5843 0.980825 9.46609C0.980825 9.34787 1.02076 9.24897 1.10062 9.16938C1.18048 9.08979 1.27944 9.04999 1.39749 9.04999H3.57697C3.69503 9.04999 3.79398 9.08997 3.87385 9.16995C3.95371 9.24992 3.99364 9.34901 3.99364 9.46722C3.99364 9.58544 3.95371 9.68434 3.87385 9.76392C3.79398 9.84352 3.69503 9.88332 3.57697 9.88332H1.39749Z" fill="currentColor" />
+              </svg>
+            </div>
+            <div class="w-14 flex justify-center items-center gap-1 py-1 rounded border border-dark-electric-blue cursor-pointer relative" @click.stop="toggleRateMenu">
+              <span class="text-dark-electric-blue text-xs">{{ playbackRate }}x</span>
+              <div class="text-xs">
+                <svg width="6" height="3" viewBox="0 0 6 3" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3.00001 2.53847L0.461548 0H5.53848L3.00001 2.53847Z" fill="currentColor" />
+                </svg>
+              </div>
+              <div v-if="showRateMenu" class="w-14 flex flex-col mt-1 rounded shadow-lg border border-dark-electric-blue bg-white absolute z-10 top-full left-0">
+                <div v-for="rate in rates" :key="rate.value" :class="{ 'bg-bright-gray': rate.value === playbackRate }" class="flex justify-center px-1 py-1 text-xs text-dark-electric-blue rounded cursor-pointer hover:bg-bright-gray" @click.stop="handleRateClick(rate.value)">
+                  {{ rate.label }}
+                </div>
+              </div>
+            </div>
+            <div :class="{ 'text-main-primary': isZoomMode, 'text-black': !isZoomMode }" class="flex justify-center items-center px-1 cursor-pointer select-none" @keydown.enter="handleZoomToggle" @click="handleZoomToggle" title="Toggle zoom mode">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" fill="currentColor" />
+                <path d="M12 10h-2v2H9v-2H7V9h2V7h1v2h2v1z" fill="currentColor" />
+              </svg>
+            </div>
+            <div v-if="isZoomMode" class="flex items-center text-xs text-dark-electric-blue">{{ Math.round(zoomScale * 100) }}%</div>
+            <div class="flex justify-center items-center px-1 cursor-pointer select-none text-main-primary" @keydown.enter="handleFullscreenClick" @click="handleFullscreenClick">
+              <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
+                <path d="M120-120v-200h80v120h120v80H120Zm520 0v-80h120v-120h80v200H640ZM120-640v-200h200v80H200v120h-80Zm640 0v-120H640v-80h200v200h-80Z" fill="currentColor" />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import { DateTime } from 'luxon';
+import Mp4Utils from '../../utils/mp4.utils';
+
+export default {
+  name: 'VideoMP4',
+  props: {
+    source: {
+      type: Object,
+      required: true
+    },
+    currentEvent: {
+      type: Object,
+      required: true
+    }
+  },
+  data() {
+    return {
+      player: null,
+      firstPlaying: { value: true },
+      videoPaused: true,
+
+      progress: { value: 0, duration: 0, canPlay: false },
+      progressDragging: false,
+      progressWasPlaying: false,
+      showRateMenu: false,
+      playbackRate: 1,
+
+      isZoomMode: false,
+      zoomScale: 1.0,
+      zoomX: 0,
+      zoomY: 0,
+      isDragging: false,
+      lastMouseX: 0,
+      lastMouseY: 0,
+
+      zoomLevels: [1.0, 1.25, 1.5, 1.75, 2.0, 2.5, 3.0, 4.0, 5.0],
+      FRAME_RATE: 30,
+      rates: [
+        { label: '0.25x', value: 0.25 },
+        { label: '0.5x', value: 0.5 },
+        { label: '1x', value: 1 },
+        { label: '1.5x', value: 1.5 },
+        { label: '2x', value: 2 }
+      ],
+
+      progressInterval: null
+    };
+  },
+  computed: {
+    videoElement() {
+      return this.$refs.videoRef;
+    },
+    isVideoPaused() {
+      return this.videoElement?.paused ?? true;
+    }
+  },
+  mounted() {
+    this.initPlayer();
+    document.addEventListener('click', this.closeRateMenu);
+  },
+  beforeDestroy() {
+    this.destroyPlayer();
+    document.removeEventListener('click', this.closeRateMenu);
+
+    if (this.progressInterval) {
+      clearInterval(this.progressInterval);
+      this.progressInterval = null;
+    }
+  },
+  watch: {
+    'source.stream': {
+      handler(newStream) {
+        if (newStream) {
+          this.destroyPlayer();
+          this.$nextTick(() => {
+            this.initPlayer();
+          });
+        }
+      }
+    }
+  },
+  methods: {
+    initPlayer() {
+      if (!this.videoElement || !this.source?.stream) return;
+
+      if (!('videoPaused' in this)) {
+        this.videoPaused = true;
+      }
+
+      this.player = new Mp4Utils(
+        this.videoElement,
+        { source: this.source.stream },
+        {
+          onStateChange: state => {
+            if (state.paused !== undefined) {
+              this.videoPaused = state.paused;
+            }
+
+            this.emitStateChange(state);
+
+            if (state.duration && state.duration > 0) {
+              this.progress = {
+                ...this.progress,
+                duration: state.duration,
+                canPlay: true
+              };
+            }
+          }
+        }
+      );
+
+      this._playHandler = () => {
+        this.videoPaused = false;
+        this.$forceUpdate();
+      };
+
+      this._pauseHandler = () => {
+        this.videoPaused = true;
+        this.$forceUpdate();
+      };
+
+      this.videoElement.addEventListener('play', this._playHandler);
+      this.videoElement.addEventListener('pause', this._pauseHandler);
+
+      this.firstPlaying = { value: false };
+
+      this.startProgressTracking();
+    },
+
+    destroyPlayer() {
+      if (this.videoElement && this._playHandler && this._pauseHandler) {
+        this.videoElement.removeEventListener('play', this._playHandler);
+        this.videoElement.removeEventListener('pause', this._pauseHandler);
+      }
+
+      if (this.player && typeof this.player.destroy === 'function') {
+        this.player.destroy();
+        this.player = null;
+      }
+
+      if (this.progressInterval) {
+        clearInterval(this.progressInterval);
+        this.progressInterval = null;
+      }
+    },
+
+    startProgressTracking() {
+      if (this.progressInterval) {
+        clearInterval(this.progressInterval);
+      }
+
+      this.progressInterval = setInterval(() => {
+        if (!this.videoElement) return;
+
+        const currentTime = this.videoElement.currentTime;
+        const duration = this.videoElement.duration;
+
+        if (duration > 0) {
+          const currentValue = Math.round((currentTime / duration) * 100);
+
+          if (this.progress.value !== currentValue) {
+            this.progress = {
+              ...this.progress,
+              value: currentValue
+            };
+
+            this.emitTimeUpdate(currentTime);
+          }
+        }
+      }, 100);
+    },
+
+    updateVideoProgress() {
+      if (!this.videoElement || !this.progress.canPlay) return;
+
+      const currentTime = this.videoElement.currentTime;
+      const duration = this.videoElement.duration;
+
+      let progressValue = 0;
+      if (duration > 0) {
+        progressValue = Math.round((currentTime / duration) * 100);
+      }
+
+      this.progress = {
+        ...this.progress,
+        value: progressValue,
+        duration: duration
+      };
+
+      this.emitTimeUpdate(currentTime);
+    },
+
+    handleProgressMousedown(event) {
+      this.progressDragging = true;
+      this.handleProgressMousemove(event);
+    },
+
+    handleProgressMouseup() {
+      this.progressDragging = false;
+    },
+
+    handleProgressMousemove(event) {
+      if (!this.progressDragging || !this.videoElement) return;
+
+      const offsetX = event.offsetX || 0;
+      const targetWidth = event.currentTarget.offsetWidth;
+
+      if (targetWidth > 0) {
+        const newTime = (offsetX * this.videoElement.duration) / targetWidth;
+
+        if (newTime >= 0 && newTime <= this.videoElement.duration) {
+          this.videoElement.currentTime = newTime;
+
+          const progressValue = Math.round((newTime / this.videoElement.duration) * 100);
+          this.progress = {
+            ...this.progress,
+            value: progressValue
+          };
+
+          this.emitTimeUpdate(newTime);
+        }
+      }
+    },
+
+    handleProgressClick(event) {
+      if (!this.videoElement) return;
+
+      const wasPaused = this.videoElement.paused;
+
+      this.handleProgressMousemove(event);
+
+      if (!wasPaused) {
+        this.videoElement
+          .play()
+          .then(() => {
+            this.videoPaused = false;
+          })
+          .catch(e => console.error('Error resuming playback:', e));
+      }
+    },
+
+    handleCanPlayThrough(event) {
+      if (this.firstPlaying && typeof this.firstPlaying === 'object') {
+        this.firstPlaying.value = true;
+      } else {
+        this.firstPlaying = { value: true };
+      }
+
+      this.videoPaused = event.target.paused;
+
+      this.emitStateChange({
+        paused: event.target.paused,
+        currentTime: event.target.currentTime,
+        duration: event.target.duration,
+        playbackRate: event.target.playbackRate
+      });
+    },
+
+    handleLoadedMetadata(event) {
+      if (event.target && event.target.duration) {
+        this.progress = {
+          ...this.progress,
+          duration: event.target.duration,
+          canPlay: true
+        };
+
+        this.startProgressTracking();
+      }
+    },
+
+    handleTimeUpdate(event) {
+      if (this.progressDragging) return;
+
+      const currentTime = event.target.currentTime;
+      const duration = event.target.duration;
+
+      let progressValue = 0;
+      if (duration > 0) {
+        progressValue = (currentTime / duration) * 100;
+      }
+
+      this.progress = {
+        ...this.progress,
+        value: progressValue,
+        duration: duration
+      };
+    },
+
+    handlePlay(event) {
+      this.videoPaused = false;
+      this.$forceUpdate();
+
+      this.emitStateChange({
+        paused: false,
+        currentTime: event.target.currentTime,
+        duration: event.target.duration,
+        playbackRate: event.target.playbackRate
+      });
+    },
+
+    handlePause(event) {
+      this.videoPaused = true;
+      this.$forceUpdate();
+
+      this.emitStateChange({
+        paused: true,
+        currentTime: event.target.currentTime,
+        duration: event.target.duration,
+        playbackRate: event.target.playbackRate
+      });
+    },
+
+    handleVideoError(event) {
+      if (this.progressInterval) {
+        clearInterval(this.progressInterval);
+        this.progressInterval = null;
+      }
+    },
+
+    handlePlayPauseClick() {
+      if (!this.videoElement) return;
+
+      if (this.videoElement.paused) {
+        this.videoElement
+          .play()
+          .then(() => {
+            this.videoPaused = false;
+            this.$forceUpdate();
+          })
+          .catch(error => {
+            console.error('Error playing video:', error);
+          });
+      } else {
+        this.videoElement.pause();
+        this.videoPaused = true;
+        this.$forceUpdate();
+      }
+    },
+
+    handleMoveFrameClick(frameCount) {
+      if (!this.videoElement || !this.videoElement.paused) {
+        return;
+      }
+
+      const frameTime = Math.floor(frameCount * (1 / this.FRAME_RATE) * 1000) / 1000;
+      const timeToSet = this.videoElement.currentTime + frameTime;
+      const duration = this.progress.duration;
+
+      let newTime;
+      if (timeToSet <= 0) {
+        newTime = 0;
+      } else if (timeToSet >= duration) {
+        newTime = duration;
+      } else {
+        newTime = timeToSet;
+      }
+
+      this.videoElement.currentTime = newTime;
+      this.updateVideoProgress();
+    },
+
+    toggleRateMenu(event) {
+      event.stopPropagation();
+      this.showRateMenu = !this.showRateMenu;
+    },
+
+    closeRateMenu() {
+      this.showRateMenu = false;
+    },
+
+    handleRateClick(rate) {
+      if (!this.videoElement) return;
+
+      this.videoElement.playbackRate = rate;
+      this.playbackRate = rate;
+      this.showRateMenu = false;
+    },
+
+    handleFullscreenClick() {
+      if (!this.videoElement) return;
+
+      if (document.fullscreenElement) {
+        document.exitFullscreen();
+      } else {
+        this.videoElement.requestFullscreen().catch(err => {
+          console.error('Error attempting to enable fullscreen:', err);
+        });
+      }
+    },
+
+    handleZoomToggle() {
+      this.isZoomMode = !this.isZoomMode;
+
+      if (!this.isZoomMode) {
+        this.resetZoom();
+      }
+    },
+
+    handleZoomWheel(event) {
+      if (!this.isZoomMode) return;
+
+      event.preventDefault();
+
+      const currentIndex = this.zoomLevels.findIndex(level => level === this.zoomScale);
+
+      let newIndex;
+      if (event.deltaY > 0) {
+        newIndex = Math.max(0, currentIndex - 1);
+      } else {
+        newIndex = Math.min(this.zoomLevels.length - 1, currentIndex + 1);
+      }
+
+      this.zoomScale = this.zoomLevels[newIndex];
+    },
+
+    handleZoomMouseDown(event) {
+      if (!this.isZoomMode || this.zoomScale === 1) return;
+
+      this.isDragging = true;
+      this.lastMouseX = event.clientX;
+      this.lastMouseY = event.clientY;
+      event.preventDefault();
+    },
+
+    handleZoomMouseMove(event) {
+      if (!this.isDragging || !this.isZoomMode) return;
+
+      const deltaX = event.clientX - this.lastMouseX;
+      const deltaY = event.clientY - this.lastMouseY;
+
+      this.zoomX += deltaX;
+      this.zoomY += deltaY;
+
+      this.lastMouseX = event.clientX;
+      this.lastMouseY = event.clientY;
+    },
+
+    handleZoomMouseUp() {
+      this.isDragging = false;
+    },
+
+    resetZoom() {
+      this.zoomScale = 1.0;
+      this.zoomX = 0;
+      this.zoomY = 0;
+    },
+
+    emitStateChange(state) {
+      const stateCopy = { ...state };
+
+      if (stateCopy.element) {
+        delete stateCopy.element;
+      }
+
+      this.$emit('state-change', stateCopy);
+    },
+
+    emitTimeUpdate(time) {
+      this.$emit('time-update', time);
+
+      if (this.currentEvent?.occurence_start_time) {
+        try {
+          const videoCurrentTime = DateTime.fromFormat(this.currentEvent.occurence_start_time, 'yyyy-MM-dd HH:mm:ss').plus({ second: time });
+
+          const customEvent = new CustomEvent('video-current-time-change', {
+            detail: { videoCurrentTime }
+          });
+          window.dispatchEvent(customEvent);
+        } catch (error) {
+          console.error('Error calculating video current time:', error);
+        }
+      }
+    },
+
+    formatTime(time) {
+      if (!time) return '0.00';
+      return Number(time).toFixed(2);
+    },
+
+    calculateNotificationPercentage(duration, notificationTime) {
+      if (duration > 0) {
+        return Math.round((notificationTime / duration) * 100);
+      }
+      return 0;
+    },
+
+    calculateElapsedTime(startTime, eventTime) {
+      if (!startTime || !eventTime) return 0;
+
+      try {
+        const start = DateTime.fromFormat(startTime, 'yyyy-MM-dd HH:mm:ss');
+        const event = DateTime.fromFormat(eventTime, 'yyyy-MM-dd HH:mm:ss');
+
+        return Math.round(event.diff(start, 'seconds').seconds);
+      } catch (e) {
+        console.error('Error calculating elapsed time:', e);
+        return 0;
+      }
+    }
+  }
+};
+</script>

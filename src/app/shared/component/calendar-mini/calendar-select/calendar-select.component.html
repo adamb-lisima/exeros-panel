@@ -1,0 +1,16 @@
+<div class="relative" [class]="class">
+  <div class="select-container flex items-center justify-between cursor-pointer" [class.disabled]="disabled" (click)="toggleDropdown($event)" (keydown.enter)="toggleDropdown($event)">
+    <span style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap">
+      {{ getSelectedLabel() }}
+    </span>
+    <svg style="width: 1rem; height: 1rem; transition: transform 0.2s ease" [style.transform]="isOpen ? 'rotate(180deg)' : 'rotate(0)'" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+      <polyline points="6 9 12 15 18 9"></polyline>
+    </svg>
+  </div>
+
+  <div *ngIf="isOpen" class="select-menu">
+    <button *ngFor="let option of options" class="select-option" [class.selected]="option.value === value" [class.disabled]="disabled" (click)="onSelect(option.value, $event)">
+      {{ option.label }}
+    </button>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+<mat-form-field class="w-full" [ngClass]="showHintSpace ? '' : '-mb-[1.25em]'" [appearance]="'outline'">
+  <mat-label *ngIf="label">{{ label }}</mat-label>
+  <mat-select [multiple]="multiple" [disabled]="disabled" [ngModel]="value" (ngModelChange)="handleModelChange($event)" (openedChange)="handleOpenedChange($event)">
+    <div class="sticky top-0 z-10 bg-white/95 backdrop-blur-sm border-b border-gray-200">
+      <input #searchInput class="w-full text-sm p-3 outline-none bg-transparent placeholder-gray-400" [ngModel]="search" (ngModelChange)="handleSearchChange($event)" (keydown)="$event.stopPropagation()" placeholder="Type to search..." />
+    </div>
+
+    <ng-container *ngTemplateOutlet="recursiveOptions; context: { $implicit: options, depth: 1 }"></ng-container>
+
+    <ng-template #recursiveOptions let-list let-depth="depth">
+      <ng-container *ngFor="let row of list; trackBy: trackByValue">
+        <mat-option *ngIf="isItemVisible(row.value)" [ngStyle]="{ 'padding-left.rem': depth > 1 ? depth : null }" [value]="row.value">
+          {{ row.label }}
+        </mat-option>
+        <ng-container *ngIf="row.children?.length">
+          <ng-container *ngTemplateOutlet="recursiveOptions; context: { $implicit: row.children, depth: depth + 1 }"> </ng-container>
+        </ng-container>
+      </ng-container>
+    </ng-template>
+  </mat-select>
+  <mat-icon *ngIf="prefixIcon" matPrefix>{{ prefixIcon }}</mat-icon>
+</mat-form-field>

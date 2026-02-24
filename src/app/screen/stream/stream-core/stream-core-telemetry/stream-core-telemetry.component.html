@@ -1,0 +1,9 @@
+<div class="w-full">
+  <div class="border border-new-gray-300 rounded-lg p-3 bg-white overflow-y-auto">
+    <app-telemetry-header [liveData$]="liveData$" [telemetryData$]="telemetryData$" (driverClick)="handleDriverClick($event)"> </app-telemetry-header>
+
+    <div class="border-b border-new-gray-300 w-[100%] py-1"></div>
+
+    <app-telemetry-metrics [telemetryData$]="telemetryData$" [showAlerts]="false"> </app-telemetry-metrics>
+  </div>
+</div>

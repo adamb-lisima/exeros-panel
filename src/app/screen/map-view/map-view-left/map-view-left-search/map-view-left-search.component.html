@@ -1,0 +1,62 @@
+<cdk-accordion>
+  <cdk-accordion-item class="flex flex-col gap-1" #accordionItem="cdkAccordionItem" expanded>
+    <div class="flex justify-between items-center">
+      <h1 class="font-medium text-[32px] leading-[40px] pb-2">Map view</h1>
+      <div class="flex flex-row ml-auto bg-white border border-chinese-silver py-1 px-3 rounded-full h-7 cursor-pointer items-center" (click)="accordionItem.toggle()" (keydown.enter)="accordionItem.toggle()">
+        <div class="text-sonic-silver" [ngClass]="{ 'rotate-180': !accordionItem.expanded }">
+          <svg class="transition-transform duration-300" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <mask id="mask0_2078_31182" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="20" height="20">
+              <rect width="20" height="20" fill="#D9D9D9" />
+            </mask>
+            <g mask="url(#mask0_2078_31182)">
+              <path d="M9.99993 8.71147L6.60576 12.1058C6.49034 12.2211 6.34528 12.2801 6.17055 12.2829C5.99597 12.2856 5.84826 12.2265 5.72743 12.1058C5.60673 11.985 5.54639 11.8386 5.54639 11.6667C5.54639 11.4947 5.60673 11.3483 5.72743 11.2275L9.47264 7.4823C9.62333 7.33175 9.7991 7.25647 9.99993 7.25647C10.2008 7.25647 10.3765 7.33175 10.5272 7.4823L14.2724 11.2275C14.3877 11.3429 14.4467 11.488 14.4495 11.6627C14.4522 11.8373 14.3931 11.985 14.2724 12.1058C14.1516 12.2265 14.0052 12.2869 13.8333 12.2869C13.6613 12.2869 13.5149 12.2265 13.3941 12.1058L9.99993 8.71147Z" fill="#1C1B1B" />
+            </g>
+          </svg>
+        </div>
+        <p class="font-normal text-sm items-center">{{ accordionItem.expanded ? 'Hide' : 'Show' }} filters</p>
+      </div>
+    </div>
+    <div class="w-full mb-[-10px]">
+      <mat-form-field class="w-full" appearance="outline">
+        <mat-label>Search by location</mat-label>
+        <mat-select #locationSelect [multiple]="false" [disabled]="false" [ngModel]="locationValue" (ngModelChange)="handleLocationModelChange($event)" (click)="forceOpenLocationDropdown()" (keydown.enter)="accordionItem.toggle()" tabindex="0" panelClass="custom-dropdown">
+          <div class="sticky top-0 z-10 bg-white/95 backdrop-blur-sm">
+            <div class="border-b border-gray-200">
+              <input class="w-full text-sm p-3 outline-none bg-transparent placeholder-gray-400" [(ngModel)]="locationSearch" (ngModelChange)="handleLocationSearchChange($event)" (keydown)="$event.stopPropagation()" placeholder="Type location to search..." (click)="$event.stopPropagation(); forceOpenLocationDropdown()" />
+            </div>
+          </div>
+
+          <mat-option *ngIf="locationOptions.length === 0" [disabled]="true">No results found</mat-option>
+
+          <mat-option *ngFor="let option of locationOptions; trackBy: trackByLocationValue" [value]="option.display_name">
+            {{ option.display_name }}
+          </mat-option>
+        </mat-select>
+        <button *ngIf="locationValue" matSuffix mat-icon-button (click)="handleLocationClearClick($event)">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+    <div class="flex flex-col bg-white rounded-xl gap-3 p-3 mb-2" [ngClass]="{ hidden: !accordionItem.expanded }">
+      <div class="flex justify-between items-center">
+        <p class="font-semibold text-xl">Search</p>
+      </div>
+
+      <app-tree-control *ngIf="fleetOptions$ | async as options" class="w-full" label="Fleet Name" [prefixIcon]="'search'" [options]="options" [formControl]="paramsGroup.controls.fleet_id"> </app-tree-control>
+      <div class="col-span-2 flex flex-col mt-[-10px]">
+        <button class="group flex items-center gap-1 text-main-primary hover:bg-gray-50 px-2 rounded w-fit" (click)="isOpen = !isOpen">
+          <span class="text-sm font-medium pb-1">Advanced filters</span>
+          <svg class="w-3 h-3 transform transition-transform" [ngClass]="isOpen ? 'rotate-180' : ''" viewBox="0 0 24 24" fill="none">
+            <path d="M7 10l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
+        <div class="mt-1 space-y-1.5 gap-1" *ngIf="isOpen">
+          <div class="grid grid-cols-2 gap-1.5 py-0.5 mb-[-15px]">
+            <app-select-control *ngIf="filteredVehicleOptions$ | async as vehicleOptions" class="w-full" label="Vehicle" [prefixIcon]="'search'" [clearable]="true" [multiple]="true" [options]="vehicleOptions" [formControl]="paramsGroup.controls.vehicle_id"> </app-select-control>
+            <app-select-control *ngIf="driverOptions$ | async as driverOptions" label="Driver Name" [prefixIcon]="'search'" [clearable]="true" [options]="driverOptions" [formControl]="paramsGroup.controls.driver_id!"> </app-select-control>
+          </div>
+        </div>
+      </div>
+    </div>
+  </cdk-accordion-item>
+</cdk-accordion>

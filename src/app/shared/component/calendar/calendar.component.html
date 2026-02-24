@@ -1,0 +1,47 @@
+<div class="flex flex-col gap-2">
+  <div class="flex justify-between items-center">
+    <div class="h-[40px] w-[40px] flex justify-center items-center rounded cursor-pointer bg-cultured" (click)="handlePreviousMonthClick()" (keydown.enter)="handlePreviousMonthClick()">
+      <svg width="8" height="14" viewBox="0 0 8 14" fill="none">
+        <path d="M7 13L1 7L7 1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor" />
+      </svg>
+    </div>
+    <p class="font-semibold">{{ dateHeader }}</p>
+    <div class="h-[40px] w-[40px] flex justify-center items-center rounded cursor-pointer bg-cultured" (click)="handleNextMonthClick()" (keydown.enter)="handlePreviousMonthClick()">
+      <svg width="8" height="14" viewBox="0 0 8 14" fill="none">
+        <path d="M1 13L7 7L1 1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor" />
+      </svg>
+    </div>
+  </div>
+  <div class="flex justify-center items-center h-full">
+    <table class="text-center border-separate" style="border-spacing: 10px">
+      <thead>
+        <tr>
+          <th *ngFor="let day of days" class="p-1">{{ day }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        ćń
+        <tr *ngFor="let row of calendar">
+          <td
+            *ngFor="let cell of row"
+            class="h-[48px] w-[48px] relative rounded border"
+            [ngClass]="{
+              'cursor-not-allowed text-dim-gray border-anti-flash-white': !cell.isAvailable,
+              'cursor-pointer border-main-primary': cell.isAvailable,
+              'text-main-primary': cell.isAvailable && cell.dayNumber !== selectedDay?.day,
+              'text-white bg-main-primary': cell.isAvailable && cell.dayNumber === selectedDay?.day
+            }"
+            (click)="handleDayClick(cell)"
+            (keydown.enter)="handleDayClick(cell)">
+            <div *ngIf="cell.showIcon" class="absolute right-0.5 top-0.5" [ngClass]="cell.dayNumber === selectedDay?.day ? 'text-white' : 'text-main-primary'">
+              <svg width="6" height="6" viewBox="0 0 6 6">
+                <path d="M3 0C1.34314 0 0 1.34314 0 3C0 4.65686 1.34314 6 3 6C4.65686 6 6 4.65686 6 3C6 1.34314 4.65686 0 3 0ZM2.18031 4.30482V1.69518L4.44033 3L2.18031 4.30482Z" fill="currentColor" />
+              </svg>
+            </div>
+            {{ cell.dayNumber }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+<div #chartContainer class="h-full">
+  <svg class="w-full h-full overflow-visible">
+    <svg *ngIf="_chart$ | async as chart" [attr.x]="chart.x" [attr.y]="chart.y" [attr.width]="chart.width" [attr.height]="chart.height">
+      <g *ngIf="_yAxis$ | async as yAxis">
+        <line *ngFor="let tick of yAxis.ticks" x1="0" x2="100%" [attr.y1]="tick.y" [attr.y2]="tick.y" [attr.stroke]="_yAxisColor" stroke-width="1" stroke-dasharray="6"></line>
+      </g>
+      <g *ngFor="let bar of chart.bars" class="bar" style="clip-path: inset(0% 0% 0% 0% round 16px)">
+        <rect #pointRectangle *ngFor="let point of bar.points" class="cursor-pointer hover:filter" [attr.x]="bar.chartX" [attr.y]="point.chartY" [attr.height]="point.chartHeight" [attr.width]="bar.width" [attr.fill]="point.color" (mouseover)="showPointOverlay(point, pointRectangle)" (mouseleave)="hidePointOverlay()" (focus)="showPointOverlay(point, pointRectangle)"></rect>
+      </g>
+    </svg>
+
+    <svg *ngIf="_yAxis$ | async as yAxis" [attr.x]="yAxis.x" [attr.y]="yAxis.y" [attr.width]="yAxis.width" [attr.height]="yAxis.height">
+      <text *ngFor="let tick of yAxis.ticks" class="text-xs" style="fill: var(--black)" [attr.y]="tick.y" x="0%" text-anchor="start" alignment-baseline="middle">
+        {{ tick.text }}
+      </text>
+    </svg>
+
+    <svg *ngIf="_xAxis$ | async as xAxis" class="overflow-visible" [attr.x]="xAxis.x" [attr.y]="xAxis.y" [attr.width]="xAxis.width" [attr.height]="xAxis.height">
+      <text *ngFor="let tick of xAxis.ticks" style="fill: var(--black)" [attr.x]="tick.x" y="26" text-anchor="middle" class="text-xs">
+        {{ tick.text }}
+      </text>
+    </svg>
+  </svg>
+
+  <ng-template *ngIf="_overlayData as overlayData" cdkConnectedOverlay [cdkConnectedOverlayOrigin]="overlayData.overlayOrigin" [cdkConnectedOverlayOpen]="true">
+    <div class="flex flex-col gap-1 py-1 px-2 bg-outer-space rounded-md">
+      <p class="text-white text-xs opacity-80">{{ overlayData.overlayPoint.data.x | dateFormat : 'serverDateFormat' : 'clientDateFormat' }}</p>
+      <p class="text-white text-xs">{{ overlayData.overlayPoint.data.name }}:{{ overlayData.overlayPoint.data.y }}</p>
+    </div>
+  </ng-template>
+</div>

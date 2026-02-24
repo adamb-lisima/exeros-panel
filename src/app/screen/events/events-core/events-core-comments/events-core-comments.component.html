@@ -1,0 +1,30 @@
+<div *ngIf="event$ | async as event" class="flex flex-col gap-4">
+  <p class="font-semibold text-sm">Add Comments</p>
+  <div class="flex flex-col gap-2 relative">
+    <app-textarea-control #commentInput [formControl]="bodyGroup.controls.comment" [rows]="4" (input)="handleInput($event)" (keydown)="handleKeyDown($event)"> </app-textarea-control>
+
+    <div *ngIf="(showUsersList | async) && (filteredUsers$ | async) as users" class="users-list absolute z-50 w-full mt-[70px] bg-white rounded-md shadow-lg max-h-60 overflow-y-auto animate-fadeIn">
+      <div *ngFor="let user of users; let i = index" (mousedown)="selectUser(user); $event.preventDefault(); $event.stopPropagation()" (mouseover)="activeIndex = i" (focus)="activeIndex = i" [class.bg-main-primary--10]="i === activeIndex" class="flex items-center gap-3 px-4 py-2 cursor-pointer hover:bg-main-primary--5">
+        <div class="flex-shrink-0">
+          <div *ngIf="user.avatar; else defaultAvatar" class="w-8 h-8 rounded-full bg-center bg-cover" [style.background-image]="'url(' + user.avatar + ')'"></div>
+          <ng-template #defaultAvatar>
+            <div class="w-8 h-8 rounded-full flex items-center justify-center">
+              <span class="text-main-primary font-medium">{{ user.name | firstCharacter }}</span>
+            </div>
+          </ng-template>
+        </div>
+        <div class="flex flex-col">
+          <span class="text-sm font-medium">{{ user.name }}</span>
+          <span class="text-xs text-extra-three">{{ user.email }}</span>
+        </div>
+        <span class="ml-auto text-xs text-extra-three">{{ user.role | lowercase }}</span>
+      </div>
+      <div *ngIf="users.length === 0" class="px-4 py-3 text-sm text-extra-three text-center">No users found</div>
+    </div>
+
+    <div class="flex items-center justify-end gap-2">
+      <vue-kudos-button [attr.event-id]="event.id" [attr.active]="event.has_given_kudos ? 'true' : 'false'"> </vue-kudos-button>
+      <app-button class="w-[100px]" [disabled]="!bodyGroup.dirty" (buttonClick)="handleSendClick()">Send</app-button>
+    </div>
+  </div>
+</div>

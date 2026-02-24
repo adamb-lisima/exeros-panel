@@ -1,0 +1,25 @@
+<app-dialog-container [title]="title">
+  <div class="flex flex-col gap-8 p-5" body>
+    <form [formGroup]="form" class="flex flex-col gap-4">
+      <app-text-control [error]="form.controls.title.invalid && form.controls.title.touched" errorText="The title field is required" label="E-mail title*" formControlName="title"> </app-text-control>
+      <app-text-description-control label="E-mail content*" [rows]="10" formControlName="content"> </app-text-description-control>
+      <ng-container *ngIf="!readOnly || form.get('status')?.value !== 'completed'">
+        <app-checkbox-control label="Schedule e-mail" formControlName="schedule_email"> </app-checkbox-control>
+
+        <app-date-time-control [label]="'Schedule Hour'" *ngIf="form.get('schedule_email')?.value" formControlName="send_time"> </app-date-time-control>
+        <div>
+          <app-date-time-control [label]="'Start Hour'" formControlName="start_hour"></app-date-time-control>
+        </div>
+        <div>
+          <app-date-time-control [label]="'End Hour'" formControlName="end_hour"></app-date-time-control>
+        </div>
+      </ng-container>
+    </form>
+  </div>
+  <div class="flex flex-1 justify-end gap-4" footer>
+    <span class="text-main-primary underline font-sm font-medium cursor-pointer px-5" (click)="saveDraft()" (keydown.enter)="saveDraft()"> Save draft </span>
+    <app-button (buttonClick)="handleSaveClick()">
+      <span class="text-sm text-white font-semibold">{{ button }}</span>
+    </app-button>
+  </div>
+</app-dialog-container>

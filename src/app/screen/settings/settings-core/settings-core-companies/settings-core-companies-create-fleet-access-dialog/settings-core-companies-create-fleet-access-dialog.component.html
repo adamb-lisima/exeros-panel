@@ -1,0 +1,51 @@
+<app-dialog-container [title]="title">
+  <div class="flex flex-col gap-8 p-5" body>
+    <div class="flex flex-col gap-4">
+      <app-text-control [formControl]="bodyGroup.controls.companyName" [showHintSpace]="false" label="Company*"></app-text-control>
+      <app-text-control [error]="bodyGroup.controls.name.invalid && bodyGroup.controls.name.touched" errorText="The name field is required" [formControl]="bodyGroup.controls.name" label="Fleet access name*"></app-text-control>
+    </div>
+    <span class="text-sm font-medium">Assign branches and vehicles</span>
+    <div class="flex flex-col gap-2">
+      <app-text-control label="Search branches and vehicles" [prefixIcon]="'search'" [formControl]="searchControl"></app-text-control>
+      <div class="flex flex-col mt-2 gap-2">
+        <div class="flex items-center border-b border-bright-gray">
+          <app-checkbox-control [ngModel]="allFleets" (ngModelChange)="handleAllFleetsClick($event)" />
+          <span class="text-xs text-manatee p-2">Branches and vehicles</span>
+        </div>
+        <ng-container *ngTemplateOutlet="branchTemplate; context: { fleets: tempFleets, index: 1 }" />
+      </div>
+    </div>
+    <span class="text-xs text-dim-gray">* - mandatory fields</span>
+  </div>
+  <div class="flex flex-1 justify-end" footer>
+    <app-button [disabled]="false" (buttonClick)="data.type === 'edit' ? handleUpdateFleetAccessClick(data.fleet.id) : handleAddFleetAccessClick()">
+      <span class="text-sm text-white font-semibold">{{ button }}</span>
+    </app-button>
+  </div>
+</app-dialog-container>
+
+<ng-template #branchTemplate let-fleets="fleets" let-index="index">
+  <app-accordion *ngFor="let fleet of fleets ?? []; trackByField: 'id'" class="block" [ngStyle]="{ 'margin-left': (index - 1) * 10 + 'px' }" [expanded]="index === 1">
+    <ng-container title>
+      <app-checkbox-control [ngModel]="fleet.checked" (ngModelChange)="handleCheckboxChange($event, fleet.id)" />
+      <span class="text-xs">{{ fleet.name }}</span>
+    </ng-container>
+    <ng-container content>
+      <app-accordion *ngFor="let vehicle of fleet.vehicles; trackByField: 'id'" class="block" [ngStyle]="{ 'margin-left': (fleet.children?.length ? 0 : 40) + 'px' }">
+        <ng-container title>
+          <app-checkbox-control [ngModel]="vehicle.checked" (ngModelChange)="handleCheckboxChange($event, fleet.id, vehicle.id)" />
+          <span class="text-xs">{{ vehicle.brand_name }} {{ vehicle.model_name }} {{ vehicle.registration_plate }}</span>
+        </ng-container>
+        <ng-container content>
+          <div *ngFor="let camera of vehicle.camerasCheckBox; trackByField: 'id'" class="flex flex-col ml-8">
+            <div class="flex items-center">
+              <app-checkbox-control [ngModel]="camera.checked" (ngModelChange)="handleCheckboxChange($event, fleet.id, vehicle.id, camera.id)" />
+              <span class="text-xs ml-2">{{ camera.name }}</span>
+            </div>
+          </div>
+        </ng-container>
+      </app-accordion>
+      <ng-container *ngTemplateOutlet="branchTemplate; context: { fleets: fleet.children, index: index + 1 }" />
+    </ng-container>
+  </app-accordion>
+</ng-template>

@@ -1,0 +1,49 @@
+<div class="flex flex-col gap-5 p-5">
+  <app-text-control class="w-[534px]" label="Search role or user" [prefixIcon]="'search'" [formControl]="searchControl"></app-text-control>
+  <div class="flex gap-5">
+    <div class="w-72 flex flex-col gap-6 p-5 border-r border-bright-gray">
+      <app-button class="font-semibold" [disabled]="!selectedCompany?.id!" (buttonClick)="handleCreateRoleClick()"> Create new role </app-button>
+      <div class="h-[500px] flex flex-col gap-2 overflow-y-auto">
+        <ng-container *appIsSuperAdmin="true">
+          <div class="flex items-center gap-1">
+            <div class="w-5 text-main-primary">
+              <svg width="6" height="4" viewBox="0 0 6 4" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2.56327 3.10069L0.927679 1.46511C0.706698 1.24412 0.655941 0.988631 0.775408 0.698656C0.894874 0.408667 1.11222 0.263672 1.42746 0.263672H4.68852C5.00374 0.263672 5.22109 0.408667 5.34057 0.698656C5.46003 0.988631 5.40927 1.24412 5.18827 1.46511L3.5527 3.10069C3.47642 3.17697 3.39845 3.23138 3.31879 3.26392C3.23915 3.29645 3.15221 3.31272 3.05798 3.31272C2.96375 3.31272 2.87682 3.29645 2.79716 3.26392C2.71752 3.23138 2.63956 3.17697 2.56327 3.10069Z" fill="currentColor" />
+              </svg>
+            </div>
+            <span class="text-sm text-main-primary font-medium cursor-pointer" (click)="handleAllRolesClick()" (keydown.enter)="handleAllRolesClick()">All users</span>
+          </div>
+        </ng-container>
+        <ng-container *ngFor="let company of companyElements$ | async">
+          <div class="flex items-center ml-4 gap-1 cursor-pointer" (click)="handleCompanyClick(company)" (keydown.enter)="handleCompanyClick(company)">
+            <div class="w-5 flex justify-center transform transition-transform" [ngClass]="selectedCompany?.id === company.id ? 'rotate-90 text-main-primary' : 'text-dark-electric-blue'">
+              <svg width="4" height="5" viewBox="0 0 4 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1.38894 4.63006C1.16794 4.85105 0.91246 4.90181 0.622485 4.78233C0.332495 4.66286 0.1875 4.44552 0.1875 4.1303V0.869218C0.1875 0.553999 0.332495 0.336657 0.622485 0.21719C0.91246 0.0977087 1.16794 0.148466 1.38894 0.369462L3.02451 2.00506C3.1008 2.08133 3.15521 2.15929 3.18774 2.23894C3.22028 2.31858 3.23655 2.40552 3.23655 2.49976C3.23655 2.594 3.22028 2.68093 3.18774 2.76057C3.15521 2.84023 3.1008 2.91819 3.02451 2.99446L1.38894 4.63006Z" fill="currentColor" />
+              </svg>
+            </div>
+            <span class="text-sm font-medium" [ngClass]="selectedCompany?.id === company.id ? 'text-main-primary' : 'text-dark-electric-blue'"> {{ company.name }}</span>
+          </div>
+          <ng-container *ngIf="selectedCompany?.id === company.id">
+            <div *ngFor="let role of companyRoles" class="flex items-center ml-14 gap-1 cursor-pointer" (click)="handleRoleClick(role)" (keydown.enter)="handleRoleClick(role)">
+              <span class="text-sm font-medium" [ngClass]="selectedRole?.id === role.id ? 'text-main-primary' : 'text-dark-electric-blue'"> {{ role.name }}</span>
+            </div>
+          </ng-container>
+        </ng-container>
+      </div>
+    </div>
+    <div class="flex-1 flex flex-col gap-4">
+      <app-settings-core-roles-users-list class="flex-1" *ngIf="!selectedRole; else assignedUsers" [data$]="usersResponse$" (editUser)="handleEditUserClick($event)" (deleteUser)="handleDeleteUserClick($event)" (resetPassword)="handleResetPasswordClick($event)" (resetMFA)="handleResetMFAClick($event)"></app-settings-core-roles-users-list>
+      <ng-template #assignedUsers>
+        <app-settings-core-roles-assigned-users-list class="flex-1" [role]="selectedRole!" [data$]="usersResponse$" (createNewUser)="handleCreateUserClick()" (editUser)="handleEditUserClick($event)" (deleteUser)="handleDeleteUserClick($event)" (resetPassword)="handleResetPasswordClick($event)" (resetMFA)="handleResetMFAClick($event)" (editRole)="handleEditRoleClick($event)"></app-settings-core-roles-assigned-users-list>
+      </ng-template>
+      <div class="flex flex-col gap-5">
+        <ng-container *ngIf="usersResponse$ | async as response">
+          <ng-container *ngIf="perPage$ | async as perPage">
+            <app-paginator class="flex justify-center" *ngIf="response.meta.total_items > 0" [info]="{ page: response.meta.current_page, perPage, totalItems: response.meta.total_items }" (pageChange)="onPageChange($event)"></app-paginator>
+          </ng-container>
+          <span *ngIf="selectedRole" (click)="response.meta.total_items > 0 ? null : handleDeleteRoleClick()" (keydown.enter)="response.meta.total_items > 0 ? null : handleDeleteRoleClick()" class="text-sm text-main-primary font-semibold underline cursor-pointer" [ngClass]="{ 'opacity-50': response.meta.total_items > 0 }">Delete role</span>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>

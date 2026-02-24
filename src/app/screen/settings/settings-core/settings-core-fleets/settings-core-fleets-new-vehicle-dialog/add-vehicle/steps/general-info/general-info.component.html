@@ -1,0 +1,24 @@
+<div class="flex flex-col gap-4 p-4">
+  <div *ngIf="data.type === 'create'" class="flex justify-between items-center"></div>
+  <div class="flex flex-col">
+    <div class="flex flex-col gap-2" *ngIf="selectedAction === 'addNew'">
+      <app-text-control label="Brand name*" [formControl]="bodyGroup.controls.brand_name" [error]="bodyGroup.controls.brand_name.invalid && bodyGroup.controls.brand_name.touched" errorText="Brand name is required"> </app-text-control>
+      <app-text-control label="Model name*" [formControl]="bodyGroup.controls.model_name" [error]="bodyGroup.controls.model_name.invalid && bodyGroup.controls.model_name.touched" errorText="Model name is required"> </app-text-control>
+      <app-text-control label="Registration plate*" [formControl]="bodyGroup.controls.registration_plate" [error]="bodyGroup.controls.registration_plate.invalid && bodyGroup.controls.registration_plate.touched" errorText="Registration plate is required"> </app-text-control>
+      <app-text-control label="Colour" [formControl]="bodyGroup.controls.colour"></app-text-control>
+      <app-text-control label="Fuel type" [formControl]="bodyGroup.controls.fuel_type"></app-text-control>
+      <app-text-control label="Fuel capacity" type="number" [formControl]="bodyGroup.controls.fuel_capacity"> </app-text-control>
+      <app-text-control label="Gross vehicle weight" type="number" [formControl]="bodyGroup.controls.gross_vehicle_weight"></app-text-control>
+      <app-select-control label="Type*" [formControl]="bodyGroup.controls.type" [options]="typeOptions" [error]="bodyGroup.controls.type.invalid && bodyGroup.controls.type.touched" errorText="Vehicle type is required"></app-select-control>
+      <app-text-control label="Bus Id" [formControl]="bodyGroup.controls.bus_id"></app-text-control>
+      <app-text-control *ngIf="bodyGroup.controls.type.value === 'BUS'" label="Route" [formControl]="bodyGroup.controls.route"></app-text-control>
+      <div class="flex gap-3">
+        <app-date-control class="flex-1" [formControl]="bodyGroup.controls.mot_expiry_due" label="MOT due"></app-date-control>
+        <app-date-control class="flex-1" [formControl]="bodyGroup.controls.service_due" label="Service due"></app-date-control>
+      </div>
+      <app-select-control label="Fleet*" [options]="(fleetOptions$ | async) || []" [formControl]="bodyGroup.controls.fleet_id" [error]="bodyGroup.controls.fleet_id.invalid && bodyGroup.controls.fleet_id.touched" errorText="Fleet is required"> </app-select-control>
+      <app-select-control label="Driver mode" [formControl]="bodyGroup.controls.driver_mode" [options]="driverModeOptions" [clearable]="true" [showSearchInput]="false"></app-select-control>
+    </div>
+  </div>
+  <div class="flex flex-col gap-3" *ngIf="selectedAction === 'assignExisting'"></div>
+</div>

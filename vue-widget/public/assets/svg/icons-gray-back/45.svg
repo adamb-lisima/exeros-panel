@@ -1,0 +1,47 @@
+<svg id="b0eeb793-e4e0-4014-b259-7913fc01d558" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28">
+  <defs>
+    <style>
+      .b5a16a57-5acb-4bd8-9c8e-6f9be6a58776 {
+        fill: #e6e6e6;
+      }
+
+      .af231416-0083-4dbf-80a8-fa6c8374c282 {
+        fill: #fadc0f;
+      }
+
+      .ec22481c-f725-4ef2-806e-182705eeca4a {
+        fill: #fff;
+      }
+
+      .ad740de5-50e6-4a0c-8c16-1ccf7e2e93fc {
+        fill: #414042;
+      }
+
+      .b96b73af-f658-4147-a2ee-49761b7c9a3f {
+        fill: none;
+        stroke: #414042;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 1.28px;
+      }
+    </style>
+  </defs>
+  <title>45</title>
+  <circle class="b5a16a57-5acb-4bd8-9c8e-6f9be6a58776" cx="14" cy="14" r="14"/>
+  <g>
+    <g>
+      <rect class="af231416-0083-4dbf-80a8-fa6c8374c282" x="8.3" y="20.92" width="11.4" height="4.11"/>
+      <rect class="ec22481c-f725-4ef2-806e-182705eeca4a" x="8.3" y="4.63" width="11.4" height="16.29"/>
+      <rect class="ec22481c-f725-4ef2-806e-182705eeca4a" x="11.1" y="2.8" width="5.79" height="1.83"/>
+    </g>
+    <g>
+      <g>
+        <circle class="ad740de5-50e6-4a0c-8c16-1ccf7e2e93fc" cx="14" cy="16.45" r="0.7"/>
+        <path class="ad740de5-50e6-4a0c-8c16-1ccf7e2e93fc" d="M14,14.69h0a.66.66,0,0,1-.66-.62l-.21-4.76A.87.87,0,0,1,14,8.4h0a.87.87,0,0,1,.87.91l-.21,4.76A.66.66,0,0,1,14,14.69Z"/>
+      </g>
+      <rect class="b96b73af-f658-4147-a2ee-49761b7c9a3f" x="8.3" y="4.63" width="11.4" height="20.4"/>
+      <rect class="b96b73af-f658-4147-a2ee-49761b7c9a3f" x="11.1" y="2.8" width="5.79" height="1.83"/>
+      <line class="b96b73af-f658-4147-a2ee-49761b7c9a3f" x1="8.3" y1="20.92" x2="19.7" y2="20.92"/>
+    </g>
+  </g>
+</svg>

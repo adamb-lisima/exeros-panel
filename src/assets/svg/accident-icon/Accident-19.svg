@@ -1,0 +1,37 @@
+<svg id="baff9d58-72c3-4e96-8c0a-a61f6ddc8d99" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80">
+  <defs>
+    <style>
+      .ebc2101b-6660-4a6e-8d38-231e69de871c {
+        fill: #fadc0f;
+      }
+
+      .b8940592-b4bd-416d-9d69-e020b14abbba {
+        fill: #fff;
+      }
+
+      .fca8ca2f-ea7d-4002-b187-e3a4790c98aa {
+        fill: none;
+        stroke: #414042;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+    </style>
+  </defs>
+  <title>Accident-19</title>
+  <g>
+    <g>
+      <rect class="ebc2101b-6660-4a6e-8d38-231e69de871c" x="34.29" y="59.72" width="11.42" height="15.3"/>
+      <polygon class="b8940592-b4bd-416d-9d69-e020b14abbba" points="66.72 31.02 66.72 75.02 45.71 75.02 45.71 59.72 34.29 59.72 34.29 75.02 13.28 75.02 13.28 31.02 40 4.98 56.09 20.66 63.21 27.6 66.72 31.02"/>
+      <polygon class="ebc2101b-6660-4a6e-8d38-231e69de871c" points="63.21 8.47 63.21 27.6 56.09 20.66 56.09 8.47 63.21 8.47"/>
+    </g>
+    <g>
+      <polyline class="fca8ca2f-ea7d-4002-b187-e3a4790c98aa" points="13.28 31.03 13.28 75.02 40 75.02"/>
+      <line class="fca8ca2f-ea7d-4002-b187-e3a4790c98aa" x1="1.64" y1="42.37" x2="40" y2="4.98"/>
+      <polyline class="fca8ca2f-ea7d-4002-b187-e3a4790c98aa" points="34.29 75.02 34.29 59.72 40 59.72"/>
+      <polyline class="fca8ca2f-ea7d-4002-b187-e3a4790c98aa" points="66.72 31.03 66.72 75.02 40 75.02"/>
+      <line class="fca8ca2f-ea7d-4002-b187-e3a4790c98aa" x1="78.36" y1="42.37" x2="40" y2="4.98"/>
+      <polyline class="fca8ca2f-ea7d-4002-b187-e3a4790c98aa" points="45.71 75.02 45.71 59.72 40 59.72"/>
+      <polyline class="fca8ca2f-ea7d-4002-b187-e3a4790c98aa" points="56.09 20.67 56.09 8.47 63.2 8.47 63.2 27.6"/>
+    </g>
+  </g>
+</svg>

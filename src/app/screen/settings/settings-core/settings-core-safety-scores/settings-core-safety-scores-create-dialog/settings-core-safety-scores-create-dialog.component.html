@@ -1,0 +1,47 @@
+<app-dialog-container [title]="title">
+  <div class="flex flex-col p-5" body>
+    <app-text-control [formControl]="formTitle" label="Scoring name"></app-text-control>
+    <div class="flex flex-col mt-8">
+      <span class="text-xs text-dim-gray">Assign values to the events you want to count to the scoring.</span>
+      <span class="text-xs text-dim-gray"> Values between:</span>
+      <div class="flex items-center gap-2">
+        <span class="text-dim-gray">&#x2022;</span>
+        <span class="text-xs text-extra-three">-100 and -1 decrease the score,</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="text-dim-gray">&#x2022;</span>
+        <span class="text-xs text-extra-three">1 and 100 increase the score.</span>
+      </div>
+    </div>
+    <div class="flex flex-col gap-2 mt-8">
+      <div class="flex items-center gap-4 py-2 border-b border-bright-gray">
+        <span class="w-[100px] text-xs text-manatee">Scoring [%]</span>
+        <span class="text-xs text-manatee">Event</span>
+      </div>
+      <div class="flex flex-col gap-4">
+        <ng-container *ngFor="let group of eventGroup">
+          <span class="text-xs text-dim-gray">{{ group.name }}</span>
+          <div class="flex flex-col gap-2">
+            <ng-container *ngFor="let item of group.items">
+              <div class="flex gap-4">
+                <div class="flex flex-col">
+                  <app-text-control class="w-[100px]" type="number" label="Score" [showHintSpace]="false" [formControl]="form.controls[item.default_name]" [error]="form.controls[item.default_name].invalid && form.controls[item.default_name].touched" errorMessage="Wrong value"></app-text-control>
+                </div>
+                <div class="flex items-center gap-2">
+                  <app-event-icon [eventIcon]="item.event_icon"></app-event-icon>
+                  <span class="text-sm">{{ item.name }}</span>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+    <span class="mt-8 text-xs text-dim-gray">* - mandatory fields</span>
+  </div>
+  <div class="flex flex-1 justify-end" footer>
+    <app-button [disabled]="!formTitle.valid || !form.valid" (buttonClick)="handleSaveClick()">
+      <span class="text-sm text-white font-semibold">Save</span>
+    </app-button>
+  </div>
+</app-dialog-container>

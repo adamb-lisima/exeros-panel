@@ -1,0 +1,7 @@
+<div *ngIf="event$ | async as event" class="flex flex-col gap-2">
+  <ng-container *ngIf="loggedInUser$ | async as loggedInUser">
+    <div class="vue-component-container">
+      <events-status [attr.event-data]="eventData" [attr.user-data]="userData" #eventsStatus> </events-status>
+    </div>
+  </ng-container>
+</div>

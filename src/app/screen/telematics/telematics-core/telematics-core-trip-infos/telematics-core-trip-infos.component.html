@@ -1,0 +1,51 @@
+<div class="h-full flex flex-col gap-3 p-3 border border-bright-gray rounded-md bg-white">
+  <div class="flex gap-7">
+    <p class="pb-3 font-semibold text-sm" [ngClass]="view === 'trip' ? 'border-b-2 border-main-primary' : 'opacity-50 cursor-pointer'" (keydown.enter)="changeView('trip')" (click)="changeView('trip')">Trip Informations</p>
+    <p class="pb-3 font-semibold text-sm" [ngClass]="view === 'histogram' ? 'border-b-2 border-main-primary ' : 'opacity-50 cursor-pointer'" (keydown.enter)="changeView('histogram')" (click)="changeView('histogram')">Histogram</p>
+  </div>
+  <div *ngIf="view === 'trip'" class="mt-5 grid grid-cols-[40px_1fr_1fr_1fr_1fr_1fr] auto-rows-auto overflow-auto">
+    <div class="border-b border-bright-gray"></div>
+    <div class="pb-3 border-b border-bright-gray text-xs text-dark-electric-blue">Start</div>
+    <div class="pb-3 border-b border-bright-gray text-xs text-dark-electric-blue">End</div>
+    <div class="pb-3 border-b border-bright-gray text-xs text-dark-electric-blue">Avg. Speed</div>
+    <div class="pb-3 border-b border-bright-gray text-xs text-dark-electric-blue">Distance</div>
+    <div class="pb-3 border-b border-bright-gray text-xs text-dark-electric-blue">Duration</div>
+    <ng-container *ngIf="tripInfos && tripInfos.length > 0; else noData">
+      <ng-container *ngFor="let trip of tripInfos; let i = index">
+        <div class="h-full flex flex-col items-center">
+          <div class="h-3" [ngClass]="{ 'border-l-[1px] border-dashed': i > 0 }"></div>
+          <div class="my-1">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="9" cy="9" r="8.5" stroke="#E4E4E4" />
+              <circle cx="9" cy="9" r="4" fill="#006BFF" />
+            </svg>
+          </div>
+          <div
+            class="flex-1"
+            [ngClass]="{
+              'border-l-[1px] border-dashed': i < tripInfos.length - 1
+            }"></div>
+        </div>
+        <div class="py-4 pr-6 border-b border-bright-gray text-xs font-medium">
+          {{ trip.start }}
+        </div>
+        <div class="py-4 pr-6 border-b border-bright-gray text-xs font-medium">
+          {{ trip.end }}
+        </div>
+        <div class="py-4 pr-6 border-b border-bright-gray text-xs font-medium">
+          {{ trip.averageSpeed }}
+        </div>
+        <div class="py-4 pr-6 border-b border-bright-gray text-xs font-medium">
+          {{ trip.distance }}
+        </div>
+        <div class="py-4 pr-6 border-b border-bright-gray text-xs font-medium">
+          {{ trip.duration }}
+        </div>
+      </ng-container>
+    </ng-container>
+    <ng-template #noData>
+      <div></div>
+      <div class="py-4 text-xs font-medium">No Data</div>
+    </ng-template>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+<ng-container *ngIf="playback$ | async as playback">
+  <div class="overflow-y-auto max-h-[320px]">
+    <div class="border border-new-gray-300 rounded-lg p-2 bg-white">
+      <app-telemetry-header [liveData$]="null" [playbackScope$]="playbackScope$" [showExport]="true" [hasTelematics]="playback.has_telematics" (driverClick)="handleDriverClick($event)" (exportClick)="handleExportClick()"> </app-telemetry-header>
+
+      <div class="border-b border-new-gray-300 w-[100%] py-1"></div>
+
+      <app-telemetry-metrics [telemetryData$]="telemetryData$" [showAlerts]="true"> </app-telemetry-metrics>
+    </div>
+  </div>
+</ng-container>

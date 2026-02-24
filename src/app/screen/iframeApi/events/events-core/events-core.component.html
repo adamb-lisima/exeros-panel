@@ -1,0 +1,12 @@
+<ng-container>
+  <ng-container *ngIf="event$ | async as event">
+    <ng-container *ngIf="cameras$ | async as cameras">
+      <ng-container *ngFor="let camera of cameras; trackByField: 'key'; let i = index">
+        <app-smax-video-mp4 *ngIf="camera.stream && event.occurence_start_time && event.occurence_end_time; else noStream" class="max-w-[900px] w-full mx-auto" [source]="getCamera(camera)" (stateChange)="handleStateChange(i, $event)"> </app-smax-video-mp4>
+        <ng-template #noStream>
+          <img class="max-w-[900px] w-full mx-auto" [src]="camera.picture" alt="thumb" />
+        </ng-template>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+</ng-container>

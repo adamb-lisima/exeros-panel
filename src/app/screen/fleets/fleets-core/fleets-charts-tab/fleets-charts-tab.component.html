@@ -1,0 +1,53 @@
+<div class="flex flex-col gap-4">
+  <div class="my-8">
+    <p class="text-xl font-medium">Events trends</p>
+    <div class="items-center gap-2 flex flex-wrap w-[100%]">
+      <app-fleets-charts-filters></app-fleets-charts-filters>
+    </div>
+  </div>
+  <div class="flex flex-row gap-4 h-full">
+    <div class="flex flex-row w-2/3">
+      <div class="flex flex-col w-full">
+        <div class="">
+          <div class="bg-white rounded-t-2xl">
+            <div class="flex justify-between items-center p-4">
+              <p *ngIf="isPerDayChart" class="text-lg font-medium">Events per day</p>
+              <p *ngIf="!isPerDayChart" class="text-lg font-medium">Events per day of the week</p>
+
+              <div class="flex items-center p-1.5 rounded-lg bg-bright-gray justify-end">
+                <p class="px-4 py-2 rounded-md cursor-pointer font-bold" (keydown.enter)="toggleChart('perDay')" (click)="toggleChart('perDay')" [class.bg-white]="isPerDayChart" [class.opacity-50]="!isPerDayChart">Per day</p>
+                <a class="px-4 py-2 rounded-md font-bold cursor-pointer" (keydown.enter)="toggleChart('perWeek')" (click)="toggleChart('perWeek')" [class.bg-white]="!isPerDayChart" [class.opacity-50]="isPerDayChart">Per day of the week</a>
+              </div>
+            </div>
+          </div>
+          <div class="bg-white rounded-md mb-4" id="chart" *ngIf="isPerDayChart">
+            <apx-chart [series]="eventsPerDay.series" [chart]="eventsPerDay.chart" [xaxis]="eventsPerDay.xaxis" [fill]="eventsPerDay.fill" [tooltip]="eventsPerDay.tooltip" [dataLabels]="eventsPerDay.dataLabels" [grid]="eventsPerDay.grid" [yaxis]="eventsPerDay.yaxis"> </apx-chart>
+          </div>
+          <div class="bg-white rounded-md mb-4" id="chart2" *ngIf="!isPerDayChart">
+            <apx-chart [series]="eventsPerWeek.series" [chart]="eventsPerWeek.chart" [xaxis]="eventsPerWeek.xaxis" [fill]="eventsPerWeek.fill" [tooltip]="eventsPerWeek.tooltip" [dataLabels]="eventsPerWeek.dataLabels" [grid]="eventsPerWeek.grid" [yaxis]="eventsPerWeek.yaxis"> </apx-chart>
+          </div>
+          <div class="bg-white rounded-t-2xl">
+            <div class="flex justify-between items-center p-4">
+              <p *ngIf="isPerHourChart" class="text-lg font-medium">Hour of the day</p>
+              <p *ngIf="!isPerHourChart" class="text-lg font-medium">Hour of the day per vehicle</p>
+
+              <div class="flex items-center p-1.5 rounded-lg bg-bright-gray justify-end">
+                <p class="px-4 py-2 rounded-md cursor-pointer font-bold" (keydown.enter)="toggleHourChart('perHour')" (click)="toggleHourChart('perHour')" [class.bg-white]="isPerHourChart" [class.opacity-50]="!isPerHourChart">All</p>
+                <a class="px-4 py-2 rounded-md font-bold cursor-pointer" (keydown.enter)="toggleHourChart('perHourBus')" (click)="toggleHourChart('perHourBus')" [class.bg-white]="!isPerHourChart" [class.opacity-50]="isPerHourChart">Per vehicle</a>
+              </div>
+            </div>
+          </div>
+          <div class="bg-white rounded-md" id="chart1" *ngIf="isPerHourChart" [class.loader]="eventsTrendsLoading$ | async">
+            <apx-chart [series]="hourOfTheDay.series" [chart]="hourOfTheDay.chart" [xaxis]="hourOfTheDay.xaxis" [grid]="hourOfTheDay.grid" [tooltip]="hourOfTheDay.tooltip" [yaxis]="hourOfTheDay.yaxis" [legend]="hourOfTheDay.legend" [markers]="hourOfTheDay.markers" [colors]="hourOfTheDay.colors"></apx-chart>
+          </div>
+          <div class="bg-white rounded-md" id="chart3" *ngIf="!isPerHourChart" [class.loader]="eventsTrendsLoading$ | async">
+            <apx-chart [series]="hourOfTheDayBus.series" [chart]="hourOfTheDayBus.chart" [xaxis]="hourOfTheDayBus.xaxis" [fill]="hourOfTheDayBus.fill" [tooltip]="hourOfTheDayBus.tooltip" [grid]="hourOfTheDayBus.grid" [yaxis]="hourOfTheDayBus.yaxis" [legend]="hourOfTheDayBus.legend" [markers]="hourOfTheDayBus.markers"></apx-chart>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-row w-1/3 h-[765px] bg-white rounded-2xl p-4">
+      <app-fleets-map class="w-full h-full"></app-fleets-map>
+    </div>
+  </div>
+</div>

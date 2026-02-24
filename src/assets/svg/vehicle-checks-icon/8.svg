@@ -1,0 +1,23 @@
+<svg id="efbe6e62-a8cb-43fb-b7b6-ea8807ef6091" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80">
+  <title>8</title>
+  <g>
+    <g>
+      <path style="fill: #fff;" d="M70.93,6H9.07A1.61,1.61,0,0,0,7.46,7.57v38.5a1.62,1.62,0,0,0,1.61,1.61H70.93a1.62,1.62,0,0,0,1.61-1.61V7.57A1.61,1.61,0,0,0,70.93,6Zm-4.27,35.1H13V11.56H66.66Z"/>
+      <rect style="fill: #fadc0f;" x="12.95" y="11.56" width="53.71" height="29.5"/>
+      <path style="fill: #fff;" d="M77.85,3.17V25l-5.3,12.77h0V7.57A1.61,1.61,0,0,0,70.93,6H9.07A1.61,1.61,0,0,0,7.46,7.57V37.78h0L2.15,25V3.17A2.52,2.52,0,0,1,4.67.65H75.33A2.52,2.52,0,0,1,77.85,3.17Z"/>
+      <path style="fill: #fff;" d="M43.79,47.68V66.47a4.14,4.14,0,1,1-8.27,0V47.68Z"/>
+      <path style="fill: #fff;" d="M55.79,65.68A13.67,13.67,0,0,1,42.11,79.35H38A13.67,13.67,0,0,1,24.31,65.68,2.48,2.48,0,0,1,25,63.92a2.4,2.4,0,0,1,1.75-.73h8.73v3.28a4.14,4.14,0,1,0,8.27,0V63.19h9.52A2.48,2.48,0,0,1,55.79,65.68Z"/>
+    </g>
+    <g>
+      <rect style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" x="7.45" y="5.96" width="65.09" height="41.73" rx="1.61"/>
+      <rect style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" x="12.95" y="11.55" width="53.7" height="29.5"/>
+      <path style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" d="M72.55,37.77,77.85,25V3.17A2.51,2.51,0,0,0,75.33.66H4.67A2.51,2.51,0,0,0,2.15,3.17V25l5.3,12.77"/>
+      <path style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" d="M35.52,47.68H43.8a0,0,0,0,1,0,0V66.47a4.14,4.14,0,0,1-4.14,4.14h0a4.14,4.14,0,0,1-4.14-4.14V47.68a0,0,0,0,1,0,0Z"/>
+      <path style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" d="M44,63.19h9.32a2.48,2.48,0,0,1,2.48,2.48h0A13.67,13.67,0,0,1,42.12,79.34H38A13.67,13.67,0,0,1,24.31,65.67h0a2.48,2.48,0,0,1,2.48-2.48h8.57"/>
+      <line style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" x1="65.07" y1="44.29" x2="61.06" y2="44.29"/>
+      <line style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" x1="56.67" y1="44.29" x2="52.66" y2="44.29"/>
+      <line style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" x1="25.37" y1="44.29" x2="21.36" y2="44.29"/>
+      <line style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" x1="16.96" y1="44.29" x2="12.95" y2="44.29"/>
+    </g>
+  </g>
+</svg>

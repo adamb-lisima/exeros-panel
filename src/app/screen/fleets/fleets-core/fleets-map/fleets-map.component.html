@@ -1,0 +1,6 @@
+<div *ngIf="totalLOcations$ | async as totalLacations" class="h-full flex flex-col gap-2 w-full">
+  <p class="">
+    Events locations <span>(total: {{ totalLacations.total_event_locations }})</span>
+  </p>
+  <app-map class="h-full" [eventMarkers]="markers$ | async" [zoom]="5" (mapReady)="onMapReady($event)"></app-map>
+</div>

@@ -1,0 +1,42 @@
+<div class="flex flex-col bg-white">
+  <header class="flex mb-1 items-center justify-center">
+    <img ngSrc="assets/svg/logo-icon.svg" width="122" height="31" alt="logo-icon" />
+  </header>
+
+  <div *ngIf="loading" class="flex flex-col items-center py-8">
+    <div class="spinner mb-4">
+      <div class="w-10 h-10 border-4 border-t-transparent border-[#EE8444] rounded-full animate-spin"></div>
+    </div>
+    <p class="text-gray-600">Loading clip...</p>
+  </div>
+
+  <div *ngIf="!loading && requiresPassword" class="mb-4">
+    <form [formGroup]="passwordForm" (ngSubmit)="submitPassword()">
+      <div class="mb-4 mx-12">
+        <span class="block text-gray-700 text-sm font-bold mb-2"> This clip is password protected. Please enter the password: </span>
+        <app-text-control label="Password" [formControl]="passwordForm.controls.password" [ngClass]="{ 'border-red-500': invalidPassword }" type="password"> </app-text-control>
+        <p *ngIf="invalidPassword" class="text-extra-two text-xs mt-1">The password you entered is incorrect.</p>
+      </div>
+      <div class="flex items-center justify-between mx-12">
+        <button class="bg-main-primary text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline transition" type="submit" [disabled]="!passwordForm.valid || loading">Submit</button>
+      </div>
+    </form>
+  </div>
+
+  <div *ngIf="!loading && processingClip" class="border border-new-gray-300 mx-4 px-4 py-3 rounded mb-4">
+    <p>The video is still being processed.</p>
+  </div>
+
+  <div *ngIf="!loading && clipReady && (cameras$ | async) as cameras">
+    <ng-container *ngIf="cameras.length; else noCamerasTemplate">
+      <div class="flex flex-col gap-4">
+        <ng-container *ngFor="let camera of cameras; let i = index">
+          <app-smax-video-mp4 class="max-w-[700px] w-full mx-auto" [source]="getCamera(camera)" (stateChange)="handleStateChange(i, $event)" muted> </app-smax-video-mp4>
+        </ng-container>
+      </div>
+    </ng-container>
+    <ng-template #noCamerasTemplate>
+      <p class="font-bold text-center">There are no cameras available</p>
+    </ng-template>
+  </div>
+</div>

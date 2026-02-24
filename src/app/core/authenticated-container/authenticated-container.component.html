@@ -1,0 +1,23 @@
+<ng-container>
+  <ng-container *ngIf="(this.iframeService.isIframe && fullApp) || !this.iframeService.isIframe; else iframeTemplate">
+    <div *ngIf="isReady$ | async" class="flex h-full">
+      <ng-container *ngIf="{ routeData: routeData$ | async, routeQueryParams: routeQueryParams$ | async } as ctx">
+        <ng-container *ngIf="!ctx.routeData?.hideNavBar && ctx.routeQueryParams?.mode !== 'screenshot'">
+          <app-navigation-bar></app-navigation-bar>
+          <router-outlet name="left-menu"></router-outlet>
+        </ng-container>
+        <div class="w-full flex flex-col" [ngClass]="{ 'm-3': !ctx.routeData?.removeContainerMargin, 'overflow-auto': ctx.routeQueryParams?.mode !== 'screenshot' }">
+          <app-top-bar *ngIf="!ctx.routeData?.hideTopBar && ctx.routeQueryParams?.mode !== 'screenshot'" class="mb-5">
+            <router-outlet name="top-menu"></router-outlet>
+          </app-top-bar>
+          <router-outlet></router-outlet>
+        </div>
+      </ng-container>
+    </div>
+  </ng-container>
+  <ng-template #iframeTemplate>
+    <div style="background-color: transparent !important">
+      <router-outlet></router-outlet>
+    </div>
+  </ng-template>
+</ng-container>

@@ -1,0 +1,54 @@
+<app-dialog-container>
+  <div class="flex flex-col p-4" body [formGroup]="form">
+    <app-select-control label="Provider*" *ngIf="providerOptions$ | async as options" [options]="options" [formControl]="form.controls.providerId" [error]="form.controls.providerId.invalid && form.controls.providerId.touched" errorText="Provider is required"> </app-select-control>
+
+    <app-text-control label="Name*" formControlName="name" [error]="form.controls.name.invalid && form.controls.name.touched" errorText="Name is required"> </app-text-control>
+
+    <ng-container *ngIf="selectedProviderType === ProviderType.STREAMAX">
+      <span class="py-2 mb-1 font-semibold">Authorization</span>
+      <app-text-control label="Api login*" formControlName="api_login" [error]="form.controls.api_login.invalid && form.controls.api_login.touched" errorText="Api login is required"> </app-text-control>
+
+      <app-text-control label="Api password*" formControlName="api_password" [error]="form.controls.api_password.invalid && form.controls.api_password.touched" errorText="Api password is required"> </app-text-control>
+
+      <app-text-control label="Domain*" formControlName="domain" [error]="form.controls.domain.invalid && form.controls.domain.touched" errorText="Domain is required"> </app-text-control>
+
+      <span class="py-2 mb-1 font-semibold">Mongo</span>
+      <app-text-control label="Mongo host" formControlName="mongo_host"> </app-text-control>
+
+      <app-text-control label="Mongo port" formControlName="mongo_port"> </app-text-control>
+
+      <app-text-control label="Mongo database*" formControlName="mongo_database" [error]="form.controls.mongo_database.invalid && form.controls.mongo_database.touched" errorText="Mongo database is required"> </app-text-control>
+
+      <app-text-control label="Mongo username" formControlName="mongo_username"> </app-text-control>
+
+      <app-text-control label="Mongo password" formControlName="mongo_password"> </app-text-control>
+
+      <span class="py-2 mb-1 font-semibold">MySQL</span>
+      <app-text-control label="Host*" formControlName="host" [error]="form.controls.host.invalid && form.controls.host.touched" errorText="Host is required"> </app-text-control>
+
+      <app-text-control label="Port*" formControlName="port" [error]="form.controls.port.invalid && form.controls.port.touched" errorText="Port is required"> </app-text-control>
+
+      <app-text-control label="Database*" formControlName="database" [error]="form.controls.database.invalid && form.controls.database.touched" errorText="Database is required"> </app-text-control>
+
+      <app-text-control label="Username*" formControlName="username" [error]="form.controls.username.invalid && form.controls.username.touched" errorText="Username is required"> </app-text-control>
+
+      <app-text-control label="Password*" formControlName="password" [error]="form.controls.password.invalid && form.controls.password.touched" errorText="Password is required"> </app-text-control>
+    </ng-container>
+
+    <ng-container *ngIf="selectedProviderType === ProviderType.FLESPI">
+      <app-text-control label="Flespi provider url*" formControlName="flespi_provider_url"> </app-text-control>
+    </ng-container>
+
+    <ng-container *ngIf="selectedProviderType === ProviderType.FT_CLOUD">
+      <app-text-control label="PT Cloud provider url*" formControlName="ft_cloud_provider_url"> </app-text-control>
+    </ng-container>
+
+    <ng-container *ngIf="selectedProviderType === ProviderType.MANUAL || selectedProviderType === ProviderType.ANALYTIC"> </ng-container>
+  </div>
+  <div footer class="flex flex-1 justify-end gap-4">
+    <app-button type="quaternary" (keydown.enter)="dialogRef.close()" (click)="dialogRef.close()">Cancel</app-button>
+    <app-button type="primary" (keydown.enter)="saveProvider()" (click)="saveProvider()">
+      {{ isEditMode ? 'Update' : 'Save' }}
+    </app-button>
+  </div>
+</app-dialog-container>

@@ -1,0 +1,49 @@
+<svg id="b5294f7c-c152-4645-8637-863fe5743f3e" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28">
+  <defs>
+    <style>
+      .b7638f1f-2fc5-4a1d-ba38-8d30fd8c05b8 {
+        fill: #e6e6e6;
+      }
+
+      .f6f23b2c-4c20-4335-bcdf-22c698c1f32c {
+        fill: #fadc0f;
+      }
+
+      .beff0c6a-0835-4741-a2b3-2e1964bd7425 {
+        fill: #fff;
+      }
+
+      .b5514f3f-c086-45c1-82fc-aba529cee852 {
+        fill: none;
+        stroke: #414042;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 1.28px;
+      }
+    </style>
+  </defs>
+  <title>4-1</title>
+  <circle class="b7638f1f-2fc5-4a1d-ba38-8d30fd8c05b8" cx="14" cy="14" r="14"/>
+  <g>
+    <g>
+      <path class="f6f23b2c-4c20-4335-bcdf-22c698c1f32c" d="M16.77,3.69v9.86a5.45,5.45,0,0,0-4.3,5.32,5.17,5.17,0,0,0,.08.89H4.65V3.69Z"/>
+      <path class="beff0c6a-0835-4741-a2b3-2e1964bd7425" d="M18.42,20.42h-1a1.19,1.19,0,0,1-1.18-1.06l-.11-1a.46.46,0,0,1,.45-.51h2.7a.46.46,0,0,1,.45.51l-.11,1A1.19,1.19,0,0,1,18.42,20.42Z"/>
+    </g>
+    <g>
+      <polyline class="b5514f3f-c086-45c1-82fc-aba529cee852" points="12.28 19.77 4.66 19.77 4.66 3.69 16.77 3.69 16.77 13.44"/>
+      <polyline class="b5514f3f-c086-45c1-82fc-aba529cee852" points="6.92 8.18 7.57 8.83 9.09 7.31"/>
+      <line class="b5514f3f-c086-45c1-82fc-aba529cee852" x1="11.72" y1="8.07" x2="14.45" y2="8.07"/>
+      <polyline class="b5514f3f-c086-45c1-82fc-aba529cee852" points="6.92 12 7.57 12.65 9.09 11.13"/>
+      <line class="b5514f3f-c086-45c1-82fc-aba529cee852" x1="11.72" y1="11.89" x2="14.45" y2="11.89"/>
+      <polyline class="b5514f3f-c086-45c1-82fc-aba529cee852" points="6.92 15.58 7.57 16.24 9.09 14.72"/>
+      <line class="b5514f3f-c086-45c1-82fc-aba529cee852" x1="11.49" y1="15.48" x2="11.49" y2="15.48"/>
+      <g>
+        <path class="b5514f3f-c086-45c1-82fc-aba529cee852" d="M18.42,20.42h-1a1.19,1.19,0,0,1-1.18-1.06l-.11-1a.46.46,0,0,1,.45-.51h2.7a.46.46,0,0,1,.45.51l-.11,1A1.19,1.19,0,0,1,18.42,20.42Z"/>
+        <circle class="b5514f3f-c086-45c1-82fc-aba529cee852" cx="17.91" cy="18.87" r="5.43"/>
+        <line class="b5514f3f-c086-45c1-82fc-aba529cee852" x1="16.15" y1="18.67" x2="12.48" y2="18.67"/>
+        <line class="b5514f3f-c086-45c1-82fc-aba529cee852" x1="23.34" y1="18.67" x2="19.68" y2="18.67"/>
+        <line class="b5514f3f-c086-45c1-82fc-aba529cee852" x1="17.91" y1="20.42" x2="17.91" y2="24.31"/>
+      </g>
+    </g>
+  </g>
+</svg>

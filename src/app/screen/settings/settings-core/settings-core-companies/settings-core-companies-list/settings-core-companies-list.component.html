@@ -1,0 +1,28 @@
+<div class="flex-1 flex flex-col gap-4 pt-5">
+  <p *appIsSuperAdmin="true" class="font-bold">All companies</p>
+  <table class="table-auto">
+    <thead *appIsSuperAdmin="true">
+      <th></th>
+      <tr class="border-b border-bright-gray">
+        <td class="px-2"></td>
+        <td class="px-2 py-2 text-xs text-manatee">Company name</td>
+        <td class="px-2 text-xs text-manatee">Licence end date</td>
+        <td class="px-2"></td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let company of data" class="border-b border-bright-gray">
+        <td class="px-2 text-sm"></td>
+        <td class="px-2 py-4 text-sm">{{ company.name }}</td>
+        <td class="px-2 text-sm">{{ company.licence_end_date | dateFormat : 'serverDateFormat' : 'clientDateFormat' }}</td>
+
+        <td class="px-2">
+          <div class="flex">
+            <span class="px-2 text-main-primary text-sm font-semibold underline cursor-pointer" (click)="handleEditCompanyClick(company)" (keydown.enter)="handleEditCompanyClick(company)">Edit</span>
+            <span class="px-2 text-main-primary text-sm font-semibold underline cursor-pointer" (click)="handleDeleteCompanyClick(company)" (keydown.enter)="handleDeleteCompanyClick(company)">Delete</span>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

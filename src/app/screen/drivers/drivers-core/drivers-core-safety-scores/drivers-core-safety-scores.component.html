@@ -1,0 +1,24 @@
+<div class="h-full flex flex-col">
+  <div class="h-min flex items-center gap-4 mb-4">
+    <p class="font-semibold text-sm">Driver Score</p>
+  </div>
+  <div class="flex-grow overflow-hidden">
+    <ng-container *ngIf="chartOptions$ | async as chartOptions">
+      <ng-container *ngIf="chartOptions.series?.[0]?.data?.length; else noData">
+        <app-bar-chart [data]="[chartOptions.series[0]]" [options]="{ overlayTemplate: overlay, barColor: 'var(--main-primary)' }"> </app-bar-chart>
+      </ng-container>
+    </ng-container>
+    <ng-template #noData>
+      <div class="h-full flex items-start justify-center pt-8">
+        <p class="text-sm text-gray-500">No data available for this period</p>
+      </div>
+    </ng-template>
+  </div>
+</div>
+
+<ng-template #overlay let-data>
+  <div class="flex flex-col gap-1 py-1 px-2 bg-outer-space rounded-md translate-x-[-50%] w-max bottom-2 absolute pointer-events-none">
+    <p class="text-white text-xs opacity-80">{{ data.data.x | dateFormat : 'serverDateTimeFormat' : 'clientDateFormat' }}</p>
+    <p class="text-white text-xs">{{ data.data.y }}</p>
+  </div>
+</ng-template>

@@ -1,0 +1,27 @@
+<svg id="eab19606-61f2-40f9-a95d-eaf924f43fef" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28">
+  <defs>
+    <style>
+      .e93e7312-06e9-4939-bee7-1a6999aded69 {
+        fill: #e6e6e6;
+      }
+
+      .ab3c33fa-bb8a-4b6c-b98c-66bc96241472 {
+        fill: #fadc0f;
+      }
+
+      .a8287678-4c25-422f-8b8e-303827004bf8 {
+        fill: none;
+        stroke: #414042;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 1.28px;
+      }
+    </style>
+  </defs>
+  <title>33</title>
+  <circle class="e93e7312-06e9-4939-bee7-1a6999aded69" cx="14" cy="14" r="14"/>
+  <g>
+    <path class="ab3c33fa-bb8a-4b6c-b98c-66bc96241472" d="M14,2A12,12,0,1,0,26,14,12,12,0,0,0,14,2ZM4.75,14A9.25,9.25,0,0,1,19.62,6.65l-13,13A9.2,9.2,0,0,1,4.75,14ZM14,23.25a9.16,9.16,0,0,1-5.4-1.74L21.51,8.6A9.25,9.25,0,0,1,14,23.25Z"/>
+    <path class="a8287678-4c25-422f-8b8e-303827004bf8" d="M14,2A12,12,0,1,0,26,14,12,12,0,0,0,14,2ZM4.75,14A9.25,9.25,0,0,1,19.62,6.65l-13,13A9.2,9.2,0,0,1,4.75,14ZM14,23.25a9.16,9.16,0,0,1-5.4-1.74L21.51,8.6A9.25,9.25,0,0,1,14,23.25Z"/>
+  </g>
+</svg>

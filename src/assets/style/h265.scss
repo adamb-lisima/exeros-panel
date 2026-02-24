@@ -1,0 +1,8 @@
+.st-player-wrapper {
+  @apply rounded-xl;
+
+  .st-player-container > canvas {
+    width: fit-content !important;
+    max-width: 100%;
+  }
+}

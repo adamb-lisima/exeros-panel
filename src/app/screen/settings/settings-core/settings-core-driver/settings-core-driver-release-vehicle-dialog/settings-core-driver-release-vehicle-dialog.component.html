@@ -1,0 +1,12 @@
+<app-dialog-container title="Release vehicle from driver">
+  <div class="flex flex-col gap-8 p-5" body>
+    <div class="flex flex-col gap-4">
+      <p>Are you sure you want to release the vehicle from this driver?</p>
+    </div>
+  </div>
+  <div class="flex flex-1 justify-end" footer>
+    <app-button (buttonClick)="handleReleaseVehicleClick()">
+      <span class="text-sm text-white font-semibold">Release vehicle</span>
+    </app-button>
+  </div>
+</app-dialog-container>

@@ -1,0 +1,60 @@
+<svg id="bf53be29-6dce-423a-91aa-c374193fb5db" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80">
+  <title>47</title>
+  <g>
+    <g>
+      <g>
+        <polygon style="fill: #fff;" points="75.37 6.06 75.37 33.65 74.19 32.46 60.22 46.42 54.16 40.37 50.56 43.96 56.12 49.52 4.64 49.52 4.64 6.06 75.37 6.06"/>
+        <polygon style="fill: #fff;" points="75.37 38.7 75.37 49.52 64.54 49.52 75.37 38.7"/>
+        <path style="fill: #fff;" d="M70.55,53V49.53h-6l-4.21,4.2L56.62,50l-.5-.5H8.59V53h.69v11H33.8V60.49H46.34v3.58H71.46V53Zm-56.9,7.08a1.8,1.8,0,1,1,1.8-1.8A1.8,1.8,0,0,1,13.65,60.12Zm6,0a1.8,1.8,0,1,1,1.8-1.8A1.81,1.81,0,0,1,19.6,60.12Zm41.08,0a1.8,1.8,0,1,1,1.8-1.8A1.8,1.8,0,0,1,60.68,60.12Zm6,0a1.8,1.8,0,1,1,1.79-1.8A1.81,1.81,0,0,1,66.64,60.12Z"/>
+        <path style="fill: #fff;" d="M26.74,64.07V71.8a2.15,2.15,0,0,1-2.15,2.14H20.16A2.14,2.14,0,0,1,18,71.8a2.14,2.14,0,0,1-2.15,2.14H11.42A2.14,2.14,0,0,1,9.28,71.8V64.07Z"/>
+        <path style="fill: #fff;" d="M71.46,64.07V71.8a2.14,2.14,0,0,1-2.15,2.14H64.87a2.14,2.14,0,0,1-2.14-2.14,2.14,2.14,0,0,1-2.15,2.14H56.15A2.14,2.14,0,0,1,54,71.8V64.07Z"/>
+        <circle style="fill: #fff;" cx="13.65" cy="58.32" r="1.8"/>
+        <circle style="fill: #e41414;" cx="19.6" cy="58.32" r="1.8"/>
+        <circle style="fill: #e41414;" cx="60.68" cy="58.32" r="1.8"/>
+        <path style="fill: #fff;" d="M68.43,58.32a1.8,1.8,0,1,1-1.79-1.8A1.8,1.8,0,0,1,68.43,58.32Z"/>
+        <rect style="fill: #fff;" x="33.8" y="60.49" width="12.54" height="5.75"/>
+      </g>
+      <polygon style="fill: #fadc0f;" points="77.89 36.17 75.37 38.7 64.54 49.52 60.33 53.73 56.62 50.03 56.12 49.52 50.56 43.96 54.16 40.37 60.22 46.42 74.19 32.46 75.37 33.65 77.89 36.17"/>
+    </g>
+    <g>
+      <g>
+        <line style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" x1="75.37" y1="6.05" x2="75.37" y2="33.64"/>
+        <polyline style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" points="56.13 49.52 4.63 49.52 4.63 6.05"/>
+        <polyline style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" points="75.37 38.69 75.37 49.52 65.56 49.52"/>
+        <polyline style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" points="61.76 53.04 71.46 53.04 71.46 64.07 46.38 64.07"/>
+        <polyline style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" points="33.74 64.07 9.28 64.07 9.28 53.04 59.36 53.04"/>
+        <polyline style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" points="58.52 53.04 8.59 53.04 8.59 49.52 55.78 49.52"/>
+        <polyline style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" points="64.53 49.52 70.55 49.52 70.55 53.04 61.02 53.04"/>
+        <path style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" d="M9.28,64.07H18a0,0,0,0,1,0,0V71.8a2.15,2.15,0,0,1-2.15,2.15H11.43A2.15,2.15,0,0,1,9.28,71.8V64.07A0,0,0,0,1,9.28,64.07Z"/>
+        <path style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" d="M18,64.07h8.73a0,0,0,0,1,0,0V71.8a2.15,2.15,0,0,1-2.15,2.15H20.16A2.15,2.15,0,0,1,18,71.8V64.07A0,0,0,0,1,18,64.07Z"/>
+        <path style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" d="M54,64.07h8.73a0,0,0,0,1,0,0V71.8a2.15,2.15,0,0,1-2.15,2.15H56.15A2.15,2.15,0,0,1,54,71.8V64.07A0,0,0,0,1,54,64.07Z"/>
+        <path style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" d="M62.73,64.07h8.73a0,0,0,0,1,0,0V71.8a2.15,2.15,0,0,1-2.15,2.15H64.88a2.15,2.15,0,0,1-2.15-2.15V64.07A0,0,0,0,1,62.73,64.07Z"/>
+        <circle style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" cx="13.64" cy="58.32" r="1.8"/>
+        <circle style="fill: none; stroke: #e41414; stroke-linecap: round; stroke-linejoin: round;" cx="19.6" cy="58.32" r="1.8"/>
+        <circle style="fill: none; stroke: #e41414; stroke-linecap: round; stroke-linejoin: round;" cx="60.68" cy="58.32" r="1.8"/>
+        <circle style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" cx="66.64" cy="58.32" r="1.8"/>
+        <rect style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" x="33.79" y="60.5" width="12.55" height="5.75"/>
+        <line style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" x1="40.07" y1="6.05" x2="40.07" y2="49.52"/>
+        <g>
+          <line style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" x1="34.04" y1="9.24" x2="34.04" y2="22.62"/>
+          <line style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" x1="46.09" y1="9.24" x2="46.09" y2="22.62"/>
+        </g>
+      </g>
+      <circle style="fill: #e41414;" cx="72.99" cy="58.32" r="6.46"/>
+      <g>
+        <line style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" x1="71.76" y1="55.87" x2="74.45" y2="54.74"/>
+        <line style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" x1="74.45" y1="61.9" x2="71.76" y2="60.77"/>
+        <line style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" x1="71.76" y1="58.31" x2="74.55" y2="58.31"/>
+      </g>
+      <circle style="fill: #e41414;" cx="7.01" cy="58.32" r="6.46"/>
+      <g>
+        <line style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" x1="8.24" y1="55.87" x2="5.55" y2="54.74"/>
+        <line style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" x1="5.55" y1="61.9" x2="8.24" y2="60.77"/>
+        <line style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" x1="8.24" y1="58.31" x2="5.45" y2="58.31"/>
+      </g>
+      <polygon style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" points="77.89 36.17 60.33 53.73 56.63 50.02 50.56 43.96 54.16 40.36 60.22 46.43 74.19 32.46 77.89 36.17"/>
+      <path style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round; stroke-width: 0.5px;" d="M67.87,54.38a6.45,6.45,0,1,1,.31,8.25"/>
+      <path style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round; stroke-width: 0.5px;" d="M12.39,54.74a6.45,6.45,0,1,0,0,7.19"/>
+    </g>
+  </g>
+</svg>

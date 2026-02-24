@@ -1,0 +1,60 @@
+<div class="self-stretch h-16 px-5 py-1.5 border-t border-b border-new-gray-300 flex justify-between items-center overflow-hidden">
+  <div class="text-center justify-start text-stone-900 text-base font-medium">{{ label }}</div>
+  <div class="flex justify-start items-center gap-2.5">
+    <div class="flex justify-start items-center gap-1">
+      <div class="w-7 h-10 relative overflow-hidden">
+        <div class="w-7 h-6 left-0 top-[7px] absolute rounded-sm outline outline-1 outline-offset-[-1px] outline-new-gray-300 overflow-hidden">
+          <input type="text" [(ngModel)]="hours" (input)="onHoursInput($event)" class="w-7 h-6 text-center text-stone-900 text-sm font-medium bg-transparent border-none outline-none" maxlength="2" />
+        </div>
+        <div class="w-6 h-6 origin-top-left" (click)="incrementHours()" (keydown.enter)="incrementHours()">
+          <svg width="25" height="15" viewBox="0 0 25 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <mask id="mask0_3256_25585" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="-9" width="25" height="24">
+              <rect x="24.7783" y="15" width="24" height="24" transform="rotate(180 24.7783 15)" fill="#D9D9D9" />
+            </mask>
+            <g mask="url(#mask0_3256_25585)">
+              <path d="M13.4111 0.278164L15.5031 2.42385C15.7858 2.71377 15.8507 3.04894 15.6979 3.42935C15.5451 3.80978 15.2671 4 14.8639 4L10.6928 4C10.2896 4 10.0116 3.80978 9.85875 3.42935C9.70594 3.04894 9.77087 2.71377 10.0535 2.42385L12.1455 0.278164C12.2431 0.178087 12.3428 0.106707 12.4447 0.0640243C12.5466 0.0213416 12.6578 -2.04032e-07 12.7783 -2.1457e-07C12.8988 -2.25106e-07 13.01 0.0213416 13.1119 0.0640242C13.2138 0.106707 13.3135 0.178086 13.4111 0.278164Z" fill="#BDBDBD" />
+            </g>
+          </svg>
+        </div>
+        <div class="w-6 h-6" (click)="decrementHours()" (keydown.enter)="decrementHours()">
+          <svg width="25" height="15" viewBox="0 0 25 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <mask id="mask0_3256_25588" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="24">
+              <rect width="24" height="24" transform="matrix(-1 -8.74228e-08 -8.74228e-08 1 24.7783 0)" fill="#D9D9D9" />
+            </mask>
+            <g mask="url(#mask0_3256_25588)">
+              <path d="M13.4111 14.7218L15.5031 12.5762C15.7858 12.2862 15.8507 11.9511 15.6979 11.5706C15.5451 11.1902 15.2671 11 14.8639 11L10.6928 11C10.2896 11 10.0116 11.1902 9.85875 11.5706C9.70594 11.9511 9.77087 12.2862 10.0535 12.5762L12.1455 14.7218C12.2431 14.8219 12.3428 14.8933 12.4447 14.936C12.5466 14.9787 12.6578 15 12.7783 15C12.8988 15 13.01 14.9787 13.1119 14.936C13.2138 14.8933 13.3135 14.8219 13.4111 14.7218Z" fill="#BDBDBD" />
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <div class="text-center justify-center text-stone-900 text-sm font-medium">:</div>
+
+      <div class="w-7 h-10 relative overflow-hidden">
+        <div class="w-7 h-6 left-0 top-[7px] absolute rounded-sm outline outline-1 outline-offset-[-1px] outline-new-gray-300 overflow-hidden">
+          <input type="text" [(ngModel)]="minutes" (input)="onMinutesInput($event)" class="w-7 h-6 text-center text-stone-900 text-sm font-medium bg-transparent border-none outline-none" maxlength="2" />
+        </div>
+        <div class="w-6 h-6 origin-top-left" (click)="incrementMinutes()" (keydown.enter)="incrementMinutes()">
+          <svg width="25" height="15" viewBox="0 0 25 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <mask id="mask0_3256_25585" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="-9" width="25" height="24">
+              <rect x="24.7783" y="15" width="24" height="24" transform="rotate(180 24.7783 15)" fill="#D9D9D9" />
+            </mask>
+            <g mask="url(#mask0_3256_25585)">
+              <path d="M13.4111 0.278164L15.5031 2.42385C15.7858 2.71377 15.8507 3.04894 15.6979 3.42935C15.5451 3.80978 15.2671 4 14.8639 4L10.6928 4C10.2896 4 10.0116 3.80978 9.85875 3.42935C9.70594 3.04894 9.77087 2.71377 10.0535 2.42385L12.1455 0.278164C12.2431 0.178087 12.3428 0.106707 12.4447 0.0640243C12.5466 0.0213416 12.6578 -2.04032e-07 12.7783 -2.1457e-07C12.8988 -2.25106e-07 13.01 0.0213416 13.1119 0.0640242C13.2138 0.106707 13.3135 0.178086 13.4111 0.278164Z" fill="#BDBDBD" />
+            </g>
+          </svg>
+        </div>
+        <div class="w-6 h-6" (click)="decrementMinutes()" (keydown.enter)="decrementMinutes()">
+          <svg width="25" height="15" viewBox="0 0 25 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <mask id="mask0_3256_25588" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="24">
+              <rect width="24" height="24" transform="matrix(-1 -8.74228e-08 -8.74228e-08 1 24.7783 0)" fill="#D9D9D9" />
+            </mask>
+            <g mask="url(#mask0_3256_25588)">
+              <path d="M13.4111 14.7218L15.5031 12.5762C15.7858 12.2862 15.8507 11.9511 15.6979 11.5706C15.5451 11.1902 15.2671 11 14.8639 11L10.6928 11C10.2896 11 10.0116 11.1902 9.85875 11.5706C9.70594 11.9511 9.77087 12.2862 10.0535 12.5762L12.1455 14.7218C12.2431 14.8219 12.3428 14.8933 12.4447 14.936C12.5466 14.9787 12.6578 15 12.7783 15C12.8988 15 13.01 14.9787 13.1119 14.936C13.2138 14.8933 13.3135 14.8219 13.4111 14.7218Z" fill="#BDBDBD" />
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

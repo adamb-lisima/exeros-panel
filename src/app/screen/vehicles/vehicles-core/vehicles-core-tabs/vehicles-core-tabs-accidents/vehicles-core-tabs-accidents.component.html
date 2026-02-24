@@ -1,0 +1,1 @@
+<app-accidents-tab-base [accidents]="accidents$ | async" [accidentsMeta]="accidentsMeta$ | async" [accidentsLoading]="accidentsLoading$ | async" (rowClick)="handleRowClick($event)" (exportItem)="handleExportItemClick($event.event, $event.id)" (exportItemKeyDown)="handleExportItemKeyDown($event)"></app-accidents-tab-base>

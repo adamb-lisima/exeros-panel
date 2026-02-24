@@ -1,0 +1,1 @@
+<app-vehicle-check-tab-base [vehicleChecks]="vehicleChecks$ | async" [vehicleChecksLoading]="vehicleChecksLoading$ | async" [statusOptions]="statusOptions" [formParams]="formParams" (rowClick)="handleRowClick($event)" (exportItem)="handleExportItemClick($event.event, $event.id)" (exportItemKeyDown)="handleExportItemKeyDown($event)"> </app-vehicle-check-tab-base>

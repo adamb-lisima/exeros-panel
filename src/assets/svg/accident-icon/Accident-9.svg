@@ -1,0 +1,46 @@
+<svg id="b000864a-9396-401a-970a-029143e73a04" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80">
+  <defs>
+    <style>
+      .e86e7443-3b36-46aa-b13c-b917e1e67750 {
+        fill: #fff;
+      }
+
+      .f2cb4f3e-d252-4bce-9cca-f14d5d675fb6 {
+        fill: #fadc0f;
+      }
+
+      .b2fdd70c-8212-425a-94f2-fc1cc3c98378 {
+        fill: none;
+        stroke: #414042;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .bdf95c83-0b28-4f0b-aceb-93829837fe6e {
+        font-size: 6.14px;
+        fill: #414042;
+        font-family: AvertaCY-Light;
+        font-weight: 300;
+      }
+    </style>
+  </defs>
+  <title>Accident-9</title>
+  <g>
+    <g>
+      <rect class="e86e7443-3b36-46aa-b13c-b917e1e67750" x="0.99" y="16.86" width="78.02" height="46.28" rx="3.7"/>
+      <rect class="f2cb4f3e-d252-4bce-9cca-f14d5d675fb6" x="38.46" y="35.87" width="27.27" height="8.52"/>
+    </g>
+    <g>
+      <rect class="b2fdd70c-8212-425a-94f2-fc1cc3c98378" x="0.99" y="16.86" width="78.02" height="46.28" rx="3.7"/>
+      <circle class="b2fdd70c-8212-425a-94f2-fc1cc3c98378" cx="14.94" cy="35.44" r="4.37"/>
+      <path class="b2fdd70c-8212-425a-94f2-fc1cc3c98378" d="M7,46.83a7.73,7.73,0,0,1,7.94-7,7.71,7.71,0,0,1,7.93,7"/>
+      <rect class="b2fdd70c-8212-425a-94f2-fc1cc3c98378" x="4.66" y="26.89" width="20.47" height="20.06"/>
+      <line class="b2fdd70c-8212-425a-94f2-fc1cc3c98378" x1="0.99" y1="30.34" x2="4.66" y2="30.34"/>
+      <line class="b2fdd70c-8212-425a-94f2-fc1cc3c98378" x1="25.13" y1="30.34" x2="79.01" y2="30.34"/>
+      <rect class="b2fdd70c-8212-425a-94f2-fc1cc3c98378" x="38.46" y="35.87" width="27.27" height="8.52"/>
+      <line class="b2fdd70c-8212-425a-94f2-fc1cc3c98378" x1="36.26" y1="49.22" x2="67.92" y2="49.22"/>
+      <line class="b2fdd70c-8212-425a-94f2-fc1cc3c98378" x1="36.26" y1="54.35" x2="56.79" y2="54.35"/>
+    </g>
+  </g>
+  <text class="bdf95c83-0b28-4f0b-aceb-93829837fe6e" transform="translate(38.82 42.32)"><tspan xml:space="preserve"> #333333</tspan></text>
+</svg>

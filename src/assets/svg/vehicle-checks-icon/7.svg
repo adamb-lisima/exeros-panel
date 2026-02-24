@@ -1,0 +1,18 @@
+<svg id="b3891397-d839-40e6-aa16-808efe2d1935" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80">
+  <title>7</title>
+  <g>
+    <g>
+      <path style="fill: #fff;" d="M79.35,13.47V23.71a4.92,4.92,0,0,1-4.92,4.92H5.58A4.93,4.93,0,0,1,.65,23.71V13.47a1,1,0,0,1,1-1H78.37A1,1,0,0,1,79.35,13.47Z"/>
+      <path style="fill: #fff;" d="M8.26,28.63v7.13A31.75,31.75,0,0,0,56,63.21,31.69,31.69,0,0,0,71.75,35.76V28.63ZM40,59.93A10.68,10.68,0,1,1,50.68,49.25,10.68,10.68,0,0,1,40,59.93Z"/>
+      <path style="fill: #fadc0f;" d="M40,38.58A10.68,10.68,0,1,0,50.68,49.25,10.67,10.67,0,0,0,40,38.58Zm0,16.51a5.84,5.84,0,1,1,5.84-5.84A5.83,5.83,0,0,1,40,55.09Z"/>
+      <path style="fill: #fadc0f;" d="M45.84,49.25A5.84,5.84,0,1,1,40,43.42,5.84,5.84,0,0,1,45.84,49.25Z"/>
+    </g>
+    <g>
+      <path style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" d="M1.63,12.49H78.37a1,1,0,0,1,1,1V23.71a4.92,4.92,0,0,1-4.92,4.92H5.57A4.92,4.92,0,0,1,.65,23.71V13.47A1,1,0,0,1,1.63,12.49Z"/>
+      <path style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" d="M8.26,28.63v7.14A31.74,31.74,0,0,0,40,67.51h0A31.75,31.75,0,0,0,71.75,35.77V28.63"/>
+      <circle style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" cx="40" cy="49.25" r="5.83"/>
+      <circle style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" cx="40" cy="49.25" r="10.68"/>
+      <path style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" d="M24.38,63.23V49.39A15.79,15.79,0,0,1,40.17,33.6h0A15.79,15.79,0,0,1,56,49.39V63.21"/>
+    </g>
+  </g>
+</svg>

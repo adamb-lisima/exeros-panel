@@ -1,0 +1,24 @@
+<div class="relative">
+  <div class="absolute top-[-60px]">
+    <app-stream-left-live-feed-menu></app-stream-left-live-feed-menu>
+  </div>
+</div>
+
+<div class="border-b border-platinum w-[100%] mt-[-15px] mb-6"></div>
+<div class="grid grid-cols-3 gap-4 h-full">
+  <ng-container *ngIf="loggedInUser$ | async as loggedInUser">
+    <ng-container *ngIf="selectedId$ | async">
+      <div class="col-span-1 min-h-[440px]">
+        <app-stream-left-live-feed-map></app-stream-left-live-feed-map>
+        <app-stream-left-recent-event></app-stream-left-recent-event>
+      </div>
+      <div class="col-span-2 flex flex-col h-[540px]">
+        <app-stream-core-live-feed-videos></app-stream-core-live-feed-videos>
+
+        <div *ngIf="liveFeed$ | async as liveFeed" class="flex gap-4 w-full">
+          <app-stream-core-telemetry class="w-full flex"></app-stream-core-telemetry>
+        </div>
+      </div>
+    </ng-container>
+  </ng-container>
+</div>

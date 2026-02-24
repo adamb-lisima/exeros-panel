@@ -1,0 +1,30 @@
+<div class="relative">
+  <div class="h-[40px] w-[40px] flex justify-center items-center rounded cursor-pointer border border-platinum text-sonic-silver" (click)="toggleFilters()" (keydown.enter)="toggleFilters()" appTooltip="Filters">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M14.1667 2H1.83333C1.3731 2 1 2.3731 1 2.83333C1 3.29357 1.3731 3.66667 1.83333 3.66667H14.1667C14.6269 3.66667 15 3.29357 15 2.83333C15 2.3731 14.6269 2 14.1667 2ZM11.5 7.83333C11.5 7.3731 11.1269 7 10.6667 7H5.33333C4.8731 7 4.5 7.3731 4.5 7.83333C4.5 8.29357 4.8731 8.66667 5.33333 8.66667H10.6667C11.1269 8.66667 11.5 8.29357 11.5 7.83333ZM8.16667 12C8.16667 11.5398 7.79357 11.1667 7.33333 11.1667H4.66667C4.20643 11.1667 3.83333 11.5398 3.83333 12C3.83333 12.4602 4.20643 12.8333 4.66667 12.8333H7.33333C7.79357 12.8333 8.16667 12.4602 8.16667 12Z" fill="currentColor" />
+    </svg>
+  </div>
+
+  <div *ngIf="isOpen" class="fixed inset-y-0 right-0 w-80 bg-white shadow-lg transform transition-transform duration-300 ease-in-out z-50">
+    <div class="flex flex-col h-full">
+      <div class="flex items-center justify-between p-4 border-b border-platinum">
+        <span class="font-semibold text-xl">{{ title }}</span>
+        <button (click)="toggleFilters()" class="text-manatee hover:text-sonic-silver">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="flex-1 overflow-y-auto p-4">
+        <ng-content select="[filters]"></ng-content>
+      </div>
+
+      <div class="p-4 border-t border-platinum">
+        <div class="flex gap-2">
+          <button (click)="handleClear()" class="flex-1 h-10 rounded border border-platinum font-medium text-sm">Clear</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

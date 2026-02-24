@@ -1,0 +1,56 @@
+<app-dialog-container [title]="title">
+  <div class="flex flex-col gap-8 p-5" body>
+    <div class="flex flex-row w-full items-center gap-2">
+      <app-select-control-counter
+        class="flex-grow"
+        label="Access type"
+        [showHintSpace]="false"
+        [clearable]="false"
+        [multiple]="false"
+        [mode]="''"
+        [options]="[
+          { label: 'Limited', value: 'LIMITED' },
+          { label: 'Unlimited', value: 'UNLIMITED' }
+        ]"
+        [formControl]="bodyGroup.controls.access_type">
+      </app-select-control-counter>
+
+      <div class="flex items-center" [appTooltip]="'Unlimited – Team members can share clips with any e-mail address, including people outside your organization.<br /> Limited – Clips can only be shared with the specific e-mail addresses listed below.'">
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f">
+          <path d="M440-280h80v-240h-80v240Zm40-320q17 0 28.5-11.5T520-640q0-17-11.5-28.5T480-680q-17 0-28.5 11.5T440-640q0 17 11.5 28.5T480-600Zm0 520q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z" />
+        </svg>
+      </div>
+    </div>
+    <div class="flex flex-col gap-4">
+      <div class="flex justify-between items-center">
+        <h3 class="text-lg font-medium">E-mail Recipients</h3>
+        <span class="px-2 text-main-primary text-sm font-semibold underline cursor-pointer" (click)="addContactRow()" (keydown.enter)="addContactRow()">Add recipient</span>
+      </div>
+
+      <div *ngFor="let contactGroup of contactsArray.controls; let i = index" class="flex flex-col gap-4 p-4 border border-chinese-silver rounded-lg relative">
+        <div class="flex gap-4">
+          <app-text-control class="flex-1" [showHintSpace]="false" [formControl]="contactGroup.controls.name" label="Name*"> </app-text-control>
+          <app-text-control class="flex-1 pr-2" [showHintSpace]="false" [formControl]="contactGroup.controls.email" label="E-mail*"> </app-text-control>
+          <button class="my-auto text-red-500 hover:text-red-700" (click)="removeRow(i)" type="button">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <mask id="mask0_41_503" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
+                <rect width="24" height="24" fill="#D9D9D9" />
+              </mask>
+              <g mask="url(#mask0_41_503)">
+                <path d="M7.56887 20.1398C7.06374 20.1398 6.63617 19.9648 6.28617 19.6148C5.93617 19.2648 5.76117 18.8372 5.76117 18.3321V5.63982H5.51117C5.29835 5.63982 5.12015 5.56803 4.97657 5.42445C4.83297 5.28087 4.76117 5.10267 4.76117 4.88985C4.76117 4.67703 4.83297 4.49883 4.97657 4.35525C5.12015 4.21165 5.29835 4.13985 5.51117 4.13985H9.26114C9.26114 3.88858 9.34896 3.67833 9.52459 3.5091C9.70024 3.33987 9.91371 3.25525 10.165 3.25525H14.3573C14.6086 3.25525 14.822 3.33987 14.9977 3.5091C15.1733 3.67833 15.2611 3.88858 15.2611 4.13985H19.0111C19.2239 4.13985 19.4021 4.21165 19.5457 4.35525C19.6893 4.49883 19.7611 4.67703 19.7611 4.88985C19.7611 5.10267 19.6893 5.28087 19.5457 5.42445C19.4021 5.56803 19.2239 5.63982 19.0111 5.63982H18.7611V18.3321C18.7611 18.8372 18.5861 19.2648 18.2361 19.6148C17.8861 19.9648 17.4586 20.1398 16.9534 20.1398H7.56887ZM7.26114 5.63982V18.3321C7.26114 18.4219 7.28999 18.4956 7.34769 18.5533C7.40539 18.611 7.47912 18.6398 7.56887 18.6398H16.9534C17.0432 18.6398 17.1169 18.611 17.1746 18.5533C17.2323 18.4956 17.2611 18.4219 17.2611 18.3321V5.63982H7.26114ZM9.66502 15.8899C9.66502 16.1027 9.73681 16.2809 9.88039 16.4244C10.024 16.568 10.2022 16.6398 10.415 16.6398C10.6278 16.6398 10.806 16.568 10.9496 16.4244C11.0932 16.2809 11.165 16.1027 11.165 15.8899V8.3898C11.165 8.17698 11.0932 7.99878 10.9496 7.8552C10.806 7.71162 10.6278 7.63982 10.415 7.63982C10.2022 7.63982 10.024 7.71162 9.88039 7.8552C9.73681 7.99878 9.66502 8.17698 9.66502 8.3898V15.8899ZM13.3573 15.8899C13.3573 16.1027 13.4291 16.2809 13.5727 16.4244C13.7163 16.568 13.8945 16.6398 14.1073 16.6398C14.3201 16.6398 14.4983 16.568 14.6419 16.4244C14.7855 16.2809 14.8573 16.1027 14.8573 15.8899V8.3898C14.8573 8.17698 14.7855 7.99878 14.6419 7.8552C14.4983 7.71162 14.3201 7.63982 14.1073 7.63982C13.8945 7.63982 13.7163 7.71162 13.5727 7.8552C13.4291 7.99878 13.3573 8.17698 13.3573 8.3898V15.8899ZM7.26114 5.63982V18.3321C7.26114 18.4219 7.28999 18.4956 7.34769 18.5533C7.40539 18.611 7.47912 18.6398 7.56887 18.6398H7.26114V5.63982Z" fill="currentColor" />
+              </g>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div *ngIf="contactsArray.length === 0" class="text-gray-500 text-center py-4">No e-mail recipients added. Click "Add recipient" to add recipients.</div>
+    </div>
+  </div>
+
+  <div class="flex flex-1 justify-end" footer>
+    <app-button (buttonClick)="handleSaveClick()">
+      <span class="text-sm text-white font-semibold">Save</span>
+    </app-button>
+  </div>
+</app-dialog-container>

@@ -1,0 +1,24 @@
+<svg id="aa8e1399-0c95-4497-ae1a-51d8703338d8" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28">
+  <defs>
+    <style>
+      .ef54d470-f47f-425b-95d1-46825579b8ae {
+        fill: #e6e6e6;
+      }
+
+      .ae262f52-5144-4234-878c-76eb6928d38f {
+        fill: none;
+        stroke: #414042;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 1.28px;
+      }
+    </style>
+  </defs>
+  <title>21</title>
+  <circle class="ef54d470-f47f-425b-95d1-46825579b8ae" cx="14" cy="14" r="14"/>
+  <g>
+    <polyline class="ae262f52-5144-4234-878c-76eb6928d38f" points="4.47 19.25 7.75 17.24 7.21 23.33 10.24 21.53"/>
+    <polyline class="ae262f52-5144-4234-878c-76eb6928d38f" points="9.12 12.22 14.32 10.93 11.05 18.79 15.83 17.67"/>
+    <polyline class="ae262f52-5144-4234-878c-76eb6928d38f" points="16.17 5.73 22.45 5.75 16.49 13.74 22.24 13.82"/>
+  </g>
+</svg>

@@ -1,0 +1,249 @@
+<div class="h-full flex flex-col gap-1">
+  <div *appHasPermission="[[eventsViewerAccess]]" class="w-[460px] pt-1 rounded-tl-lg">
+    <div class="bg-bright-gray rounded-lg flex gap-1.5 py-[3px] px-2">
+      <a class="flex-1 h-[32px] cursor-pointer flex justify-center items-center font-medium relative {{ eventsType === 'NEW' ? 'text-black' : '' }}" (click)="handleSwitchEventsTypeClick('NEW')">
+        <span class="absolute inset-0 {{ eventsType === 'NEW' ? 'bg-white' : '' }} rounded-md"></span>
+        <span class="relative z-10">New</span>
+      </a>
+
+      <button *appHasPermission="[[escalatedEventsViewerAccess]]" class="flex-1 h-[32px] cursor-pointer flex justify-center items-center font-medium relative bg-transparent border-0 {{ eventsType === 'ESCALATED' ? 'text-black' : '' }}" (click)="handleSwitchEventsTypeClick('ESCALATED')">
+        <span class="absolute inset-0 {{ eventsType === 'ESCALATED' ? 'bg-white' : '' }} rounded-md"></span>
+        <span class="relative z-10">Escalated</span>
+      </button>
+
+      <button *appHasPermission="[[reviewedEventsViewerAccess]]" class="flex-1 h-[32px] cursor-pointer flex justify-center items-center font-medium relative bg-transparent border-0 {{ eventsType === 'REVIEWED' ? 'text-black' : '' }}" (click)="handleSwitchEventsTypeClick('REVIEWED')">
+        <span class="absolute inset-0 {{ eventsType === 'REVIEWED' ? 'bg-white' : '' }} rounded-md"></span>
+        <span class="relative z-10">Reviewed</span>
+      </button>
+
+      <button *appHasPermission="[[archivedEventsViewerAccess]]" class="flex-1 h-[32px] cursor-pointer flex justify-center items-center font-medium relative bg-transparent border-0 {{ eventsType === 'ARCHIVED' ? 'text-black' : '' }}" (click)="handleSwitchEventsTypeClick('ARCHIVED')">
+        <span class="absolute inset-0 {{ eventsType === 'ARCHIVED' ? 'bg-white' : '' }} rounded-md"></span>
+        <span class="relative z-10">Archived</span>
+      </button>
+    </div>
+  </div>
+  <div *ngIf="eventsType === 'NEW'" class="w-[284px] flex items-center gap-1">
+    <label class="flex items-center cursor-pointer">
+      <input type="checkbox" [formControl]="includeReviewOptionalControl" class="w-4 h-4 cursor-pointer" />
+      <span class="font-['Poppins'] text-sm pl-1 font-normal leading-[21px]">Show only events requiring a review</span>
+    </label>
+  </div>
+  <div class="relative">
+    <div *ngIf="showNewEventsInfo$ | async" (click)="dismissNotification()" (keydown.enter)="dismissNotification()" class="absolute top-4 left-1/2 transform -translate-x-1/2 bg-main-primary text-white px-4 py-2 rounded-lg z-10 cursor-pointer">Show {{ newEventsCount$ | async }} new events.</div>
+  </div>
+  <ng-container *ngIf="{ selectedId: selectedId$ | async } as ctx">
+    <app-virtual-infinity-scroll #scrollableContainer class="scrollable-container" *ngIf="allLoadedEvents.length > 0" [items]="allLoadedEvents" [itemSize]="155" [keyofItem]="'id'" [pageMeta]="eventsMeta$ | async" [loading]="eventsLoading$ | async" [listGap]="true" (nextPageRequest)="loadNextPage($event)">
+      <ng-template #item [appVirtualInfinityScrollContext]="allLoadedEvents" let-event>
+        <div class="flex gap-3 p-2 rounded-md cursor-pointer border" [ngClass]="[ctx.selectedId === event.id ? 'border-main-primary' : 'border-transparent', (highlightedEvents$ | async)?.includes(event.id) ? 'bg-main-primary--30 ease-in-out duration-200' : 'bg-white']" (click)="handleEventClick(event)" (keydown.enter)="handleEventClick(event)">
+          <ng-container *ngIf="event.thumbs[0] as thumb; else emptyThumbTemplate">
+            <div class="w-[132px] h-[125px] rounded-md overflow-hidden flex items-center justify-center">
+              <img height="90" width="120" class="rounded-md object-cover w-full h-full" [src]="thumb" alt="thumb" />
+            </div>
+          </ng-container>
+          <ng-template #emptyThumbTemplate>
+            <div class="h-[132px] w-[132px] rounded-md bg-new-gray-100 flex justify-center items-center">
+              <div style="transform-origin: center center" class="transform scale-[2.5]">
+                <app-event-icon class="text-extra-two" [eventIcon]="event.event_icon"></app-event-icon>
+              </div>
+            </div>
+          </ng-template>
+
+          <div class="w-full flex flex-col gap-3">
+            <div class="flex items-center">
+              <div class="flex flex-row">
+                <app-event-icon class="text-extra-two w-[16px] h-[16px]" [eventIcon]="event.event_icon"></app-event-icon>
+                <p class="font-['Poppins'] font-medium text-sm leading-[16px] pl-1.5">{{ event.display_name }}</p>
+              </div>
+
+              <div class="flex ml-auto gap-1 items-end">
+                <div class="flex flex-row gap-1 items-center">
+                  <span *ngIf="!event.is_overlimit" class="mb">
+                    <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <mask id="mask0_2064_16984" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="20" height="21">
+                        <rect y="0.5" width="20" height="20" fill="#D9D9D9" />
+                      </mask>
+                      <g mask="url(#mask0_2064_16984)">
+                        <path class="fill-black dark:fill-cultured" fill="currentColor" d="M8.96479 13.1602C9.22326 13.4188 9.555 13.5366 9.96 13.5135C10.3649 13.4906 10.6603 13.3451 10.8463 13.0769L14.0475 8.61084C14.1611 8.44612 14.1514 8.29723 14.0183 8.16417C13.8854 8.03126 13.7363 8.02133 13.571 8.13438L9.08979 11.3204C8.8109 11.5064 8.65569 11.7949 8.62417 12.1858C8.59264 12.577 8.70618 12.9017 8.96479 13.1602ZM10 4.66667C10.5961 4.66667 11.1506 4.72438 11.6635 4.8398C12.1763 4.95521 12.6779 5.12987 13.1683 5.36376C13.2836 5.41501 13.3835 5.49917 13.4679 5.61626C13.5524 5.7332 13.5684 5.84244 13.516 5.94396C13.4637 6.04549 13.3606 6.11223 13.2067 6.14417C13.0529 6.17625 12.9167 6.16667 12.7981 6.11542C12.3653 5.90487 11.9212 5.74966 11.4656 5.6498C11.0099 5.54994 10.5214 5.50001 10 5.50001C8.15278 5.50001 6.57986 6.14931 5.28125 7.44792C3.98264 8.74653 3.33333 10.3194 3.33333 12.1667C3.33333 12.75 3.41319 13.3264 3.57292 13.8958C3.73264 14.4653 3.95833 15 4.25 15.5H15.75C16.0694 14.9722 16.3021 14.4236 16.4479 13.8542C16.5938 13.2847 16.6667 12.6945 16.6667 12.0833C16.6667 11.6581 16.6194 11.2051 16.5248 10.7244C16.4302 10.2435 16.2777 9.78841 16.0673 9.35896C16.016 9.24035 16.0022 9.12334 16.0256 9.00792C16.0491 8.89264 16.111 8.80056 16.2113 8.73167C16.3044 8.66917 16.4052 8.65501 16.5135 8.68917C16.622 8.72334 16.7019 8.79487 16.7531 8.90376C17.0256 9.46473 17.2174 9.99869 17.3285 10.5056C17.4397 11.0126 17.4968 11.5353 17.5 12.0738C17.5032 12.7906 17.4236 13.4594 17.2613 14.0802C17.0989 14.7009 16.8462 15.327 16.5031 15.9583C16.4359 16.0695 16.3344 16.1597 16.1988 16.2292C16.0631 16.2986 15.9135 16.3333 15.75 16.3333H4.25C4.09722 16.3333 3.95569 16.296 3.82542 16.2213C3.695 16.1464 3.58549 16.0374 3.49688 15.8942C3.22118 15.4081 2.98611 14.8597 2.79167 14.2492C2.59722 13.6386 2.5 12.9445 2.5 12.1667C2.5 11.1421 2.69431 10.1751 3.08292 9.26584C3.47153 8.35639 4.00194 7.55987 4.67417 6.87626C5.34653 6.19278 6.1416 5.65362 7.05938 5.25875C7.97701 4.86403 8.95722 4.66667 10 4.66667Z" />
+                      </g>
+                    </svg>
+                  </span>
+                  <span [appTooltip]="'Vehicle is exceeding the speed limit'" class="mb" *ngIf="event.is_overlimit">
+                    <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <mask id="mask0_2064_16979" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="20" height="21">
+                        <rect y="0.5" width="20" height="20" fill="#D9D9D9" />
+                      </mask>
+                      <g mask="url(#mask0_2064_16979)">
+                        <path d="M8.96479 13.1602C9.22326 13.4188 9.555 13.5366 9.96 13.5135C10.3649 13.4906 10.6603 13.3451 10.8463 13.0769L14.0475 8.61082C14.1611 8.4461 14.1514 8.29721 14.0183 8.16416C13.8854 8.03124 13.7363 8.02131 13.571 8.13437L9.08979 11.3204C8.8109 11.5064 8.65569 11.7949 8.62417 12.1858C8.59264 12.5769 8.70618 12.9017 8.96479 13.1602ZM10 4.66666C10.5961 4.66666 11.1506 4.72436 11.6635 4.83978C12.1763 4.9552 12.6779 5.12985 13.1683 5.36374C13.2836 5.41499 13.3835 5.49916 13.4679 5.61624C13.5524 5.73318 13.5684 5.84242 13.516 5.94395C13.4637 6.04548 13.3606 6.11221 13.2067 6.14416C13.0529 6.17624 12.9167 6.16666 12.7981 6.11541C12.3653 5.90485 11.9212 5.74964 11.4656 5.64978C11.0099 5.54992 10.5214 5.49999 10 5.49999C8.15278 5.49999 6.57986 6.1493 5.28125 7.44791C3.98264 8.74652 3.33333 10.3194 3.33333 12.1667C3.33333 12.75 3.41319 13.3264 3.57292 13.8958C3.73264 14.4653 3.95833 15 4.25 15.5H15.75C16.0694 14.9722 16.3021 14.4236 16.4479 13.8542C16.5938 13.2847 16.6667 12.6944 16.6667 12.0833C16.6667 11.658 16.6194 11.2051 16.5248 10.7244C16.4302 10.2435 16.2777 9.78839 16.0673 9.35895C16.016 9.24034 16.0022 9.12332 16.0256 9.00791C16.0491 8.89263 16.111 8.80055 16.2113 8.73166C16.3044 8.66916 16.4052 8.65499 16.5135 8.68916C16.622 8.72332 16.7019 8.79485 16.7531 8.90374C17.0256 9.46471 17.2174 9.99867 17.3285 10.5056C17.4397 11.0126 17.4968 11.5353 17.5 12.0737C17.5032 12.7905 17.4236 13.4594 17.2613 14.0802C17.0989 14.7009 16.8462 15.3269 16.5031 15.9583C16.4359 16.0694 16.3344 16.1597 16.1988 16.2292C16.0631 16.2986 15.9135 16.3333 15.75 16.3333H4.25C4.09722 16.3333 3.95569 16.296 3.82542 16.2212C3.695 16.1464 3.58549 16.0374 3.49688 15.8942C3.22118 15.408 2.98611 14.8597 2.79167 14.2492C2.59722 13.6386 2.5 12.9444 2.5 12.1667C2.5 11.1421 2.69431 10.1751 3.08292 9.26582C3.47153 8.35638 4.00194 7.55985 4.67417 6.87624C5.34653 6.19277 6.1416 5.6536 7.05938 5.25874C7.97701 4.86402 8.95722 4.66666 10 4.66666Z" fill="#FE3C3C" />
+                      </g>
+                    </svg>
+                  </span>
+                  <ng-container *ngIf="event.speed !== null && event.speed !== undefined">
+                    <p *ngIf="event.speed | unitConverter | async as speed" [ngClass]="[event.is_overlimit ? 'text-extra-two' : 'text-black']" class="text-sm leading-[14px]">{{ speed.value }} {{ speed.unit }}</p>
+                  </ng-container>
+                  <ng-container *ngIf="event.speed === null || event.speed === undefined">
+                    <p class="text-sm leading-[16px]">0 MPH</p>
+                  </ng-container>
+                  <ng-container *ngIf="event.speed_limit | unitConverter | async as converted">
+                    <div *ngIf="event.is_overlimit" class="flex w-4 h-4 p-[9px] justify-center items-center gap-1 rounded-[40px] border-2 border-[#FE3C3C] bg-white text-[11px]">{{ converted.value | number : '1.0-0' }}</div>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+            <div class="flex items-center -mt-2">
+              <div class="flex items-center gap-2 w-full">
+                <div class="flex items-center gap-1">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <mask id="mask0_1886_2146" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="14" height="14">
+                      <rect width="14" height="14" fill="#D9D9D9" />
+                    </mask>
+                    <g mask="url(#mask0_1886_2146)">
+                      <path class="fill-black dark:fill-cultured" fill="currentColor" d="M3.27564 10.7917V11.3413C3.27564 11.5127 3.21561 11.6584 3.09554 11.7784C2.97547 11.8983 2.82964 11.9583 2.65804 11.9583C2.48654 11.9583 2.34095 11.8983 2.22127 11.7784C2.10159 11.6584 2.04175 11.5127 2.04175 11.3413V7.22662C2.04175 7.16605 2.04569 7.10548 2.05356 7.04491C2.06144 6.98434 2.07466 6.9263 2.09323 6.87079L3.13783 3.91737C3.20773 3.70727 3.33441 3.5366 3.51787 3.40535C3.70133 3.274 3.90666 3.20833 4.13387 3.20833H9.86629C10.0935 3.20833 10.2988 3.274 10.4823 3.40535C10.6657 3.5366 10.7924 3.70727 10.8623 3.91737L11.9069 6.87079C11.9255 6.9263 11.9387 6.98434 11.9466 7.04491C11.9545 7.10548 11.9584 7.16605 11.9584 7.22662V11.3413C11.9584 11.5127 11.8984 11.6584 11.7783 11.7784C11.6581 11.8983 11.5123 11.9583 11.3408 11.9583C11.1692 11.9583 11.0236 11.8983 10.9039 11.7784C10.7843 11.6584 10.7245 11.5127 10.7245 11.3413V10.7917H3.27564ZM3.27127 6.16991H10.7289L10.0379 4.20116C10.023 4.16373 10.0005 4.13476 9.97056 4.11424C9.94062 4.09363 9.90508 4.08333 9.86396 4.08333H4.13621C4.09508 4.08333 4.05955 4.09363 4.0296 4.11424C3.99966 4.13476 3.9772 4.16373 3.96223 4.20116L3.27127 6.16991ZM4.35394 9.24364C4.56617 9.24364 4.74618 9.16931 4.89396 9.02066C5.04164 8.87211 5.11548 8.69171 5.11548 8.47947C5.11548 8.26724 5.0412 8.08723 4.89264 7.93945C4.74399 7.79177 4.56355 7.71793 4.35131 7.71793C4.13907 7.71793 3.95912 7.79221 3.81144 7.94077C3.66366 8.08942 3.58977 8.26986 3.58977 8.4821C3.58977 8.69434 3.6641 8.87429 3.81275 9.02197C3.9613 9.16975 4.1417 9.24364 4.35394 9.24364ZM9.64885 9.24364C9.86109 9.24364 10.041 9.16931 10.1887 9.02066C10.3365 8.87211 10.4104 8.69171 10.4104 8.47947C10.4104 8.26724 10.3361 8.08723 10.1874 7.93945C10.0389 7.79177 9.85846 7.71793 9.64623 7.71793C9.43399 7.71793 9.25398 7.79221 9.10621 7.94077C8.95853 8.08942 8.88469 8.26986 8.88469 8.4821C8.88469 8.69434 8.95896 8.87429 9.10752 9.02197C9.25617 9.16975 9.43662 9.24364 9.64885 9.24364ZM2.91675 9.91666H11.0834V7.04491H2.91675V9.91666Z" />
+                    </g>
+                  </svg>
+                  <p class="font-['Poppins'] text-xs leading-[14px]">{{ event.registration_plate }}</p>
+                </div>
+                <div class="relative">
+                  <div [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger" (click)="$event.stopPropagation()" (keydown.enter)="$event.stopPropagation()" class="flex items-center gap-1 py-3 px-1.5 rounded-md cursor-pointer hover:bg-anti-flash-white">
+                    <div class="w-[2.5px] h-[2.5px] rounded-full bg-outer-space"></div>
+                    <div class="w-[2.5px] h-[2.5px] rounded-full bg-outer-space"></div>
+                    <div class="w-[2.5px] h-[2.5px] rounded-full bg-outer-space"></div>
+                  </div>
+
+                  <mat-menu #menu="matMenu" [hasBackdrop]="true">
+                    <div (click)="$event.stopPropagation()" (keydown.enter)="$event.stopPropagation()">
+                      <button mat-menu-item (click)="event.vehicle_status !== 'Inactive' && handleStream(event.vehicle_id)" [disabled]="event.vehicle_status === 'Inactive'" [appTooltip]="event.vehicle_status === 'Inactive' ? 'Vehicle must be active' : ''">Show stream</button>
+                      <button mat-menu-item (click)="event.vehicle_status !== 'Inactive' && handlePlayback(event.vehicle_id)" [disabled]="event.vehicle_status === 'Inactive'" [appTooltip]="event.vehicle_status === 'Inactive' ? 'Vehicle must be active' : ''">Show playback</button>
+                      <button mat-menu-item (click)="handleRegistrationClick(event)">
+                        {{ isVehicleCurrentlyFiltered(event.vehicle_id) ? 'Clear vehicle filter' : 'Filter by vehicle' }}
+                      </button>
+                      <button *appHasPermission="[[AccessGroup.EVENTS_EDITOR]]" mat-menu-item (click)="handleMessageClick(event)">Message driver</button>
+                    </div>
+                  </mat-menu>
+                </div>
+                <div class="flex flex-row gap-1 items-center ml-auto">
+                  <div *ngIf="event.weather_type" class="flex items-center gap-1">
+                    <img class="brightness-0 dark:invert" [appTooltip]="event.weather_type" *ngIf="event.weather_type === 'Clouds'" ngSrc="assets/svg/weather-icons/atmosphere.svg" width="14" height="14" alt="icon" />
+                    <img class="brightness-0 dark:invert" [appTooltip]="event.weather_type" *ngIf="event.weather_type === 'Atmosphere'" ngSrc="assets/svg/weather-icons/atmosphere.svg" width="14" height="14" alt="icon" />
+                    <img class="brightness-0 dark:invert" [appTooltip]="event.weather_type" *ngIf="event.weather_type === 'Clear'" ngSrc="assets/svg/weather-icons/clear.svg" width="14" height="14" alt="icon" />
+                    <img class="brightness-0 dark:invert" [appTooltip]="event.weather_type" *ngIf="event.weather_type === 'Thunderstorm'" ngSrc="assets/svg/weather-icons/thunderstorm.svg" width="14" height="14" alt="icon" />
+                    <img class="brightness-0 dark:invert" [appTooltip]="event.weather_type" *ngIf="event.weather_type === 'Rain'" ngSrc="assets/svg/weather-icons/rain.svg" width="14" height="14" alt="icon" />
+                    <img class="brightness-0 dark:invert" [appTooltip]="event.weather_type" *ngIf="event.weather_type === 'Drizzle'" ngSrc="assets/svg/weather-icons/drizzle.svg" width="14" height="14" alt="icon" />
+                    <img class="brightness-0 dark:invert" [appTooltip]="event.weather_type" *ngIf="event.weather_type === 'Snow'" ngSrc="assets/svg/weather-icons/snow.svg" width="14" height="14" alt="icon" />
+                    <p class="text-xs leading-[14px]">{{ event.temperature }}°C</p>
+                  </div>
+                </div>
+                <div class="flex items-center" *ngIf="hasNoCoordinates(event)">
+                  <svg width="16" height="16" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_2790_5048)">
+                      <path d="M10.1957 10.196C10.9422 10.196 11.5472 9.59096 11.5472 8.84455C11.5472 8.09813 10.9422 7.49304 10.1957 7.49304C9.44933 7.49304 8.84424 8.09813 8.84424 8.84455C8.84424 9.59096 9.44933 10.196 10.1957 10.196Z" fill="black" />
+                      <path d="M14.2354 8.81447C14.2516 9.61316 14.0265 10.3982 13.5897 11.067L13.4845 11.2247L10.1959 16L6.91474 11.1871L6.80962 11.067C6.37276 10.3982 6.14773 9.61316 6.1639 8.81447C6.20878 7.77425 6.65359 6.79152 7.40552 6.07133C8.15746 5.35113 9.15844 4.9491 10.1996 4.9491C11.2408 4.9491 12.2418 5.35113 12.9938 6.07133C13.7457 6.79152 14.1905 7.77425 14.2354 8.81447Z" stroke="black" stroke-width="0.669223" stroke-linecap="round" stroke-linejoin="round" />
+                      <rect x="1.88585" y="2.38573" width="16.2286" height="16.2286" rx="8.11429" stroke="#FF3B30" stroke-width="0.914286" />
+                      <path d="M16.0364 5.1074C16.2141 4.92971 16.2141 4.64162 16.0364 4.46393C15.8587 4.28624 15.5707 4.28624 15.393 4.46393L16.0364 5.1074ZM4.60787 16.536L16.0364 5.1074L15.393 4.46393L3.9644 15.8925L4.60787 16.536Z" fill="#FF3B30" />
+                    </g>
+                    <defs>
+                      <clipPath id="clip0_2790_5048">
+                        <rect width="20" height="20" fill="white" transform="translate(0 0.5)" />
+                      </clipPath>
+                    </defs>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="flex items-start gap-1 font-['Poppins'] -mt-2">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <mask id="mask0_1845_16346" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="14" height="14">
+                  <rect width="14" height="14" fill="#D9D9D9" />
+                </mask>
+                <g mask="url(#mask0_1845_16346)">
+                  <path class="fill-black dark:fill-cultured" fill="currentColor" d="M3.09627 12.5417C2.80159 12.5417 2.55216 12.4396 2.348 12.2354C2.14383 12.0313 2.04175 11.7818 2.04175 11.4872V3.67953C2.04175 3.38485 2.14383 3.13543 2.348 2.93126C2.55216 2.72709 2.80159 2.62501 3.09627 2.62501H3.90389V1.8397C3.90389 1.71185 3.94672 1.6051 4.03237 1.51945C4.11803 1.43389 4.22478 1.39111 4.35262 1.39111C4.48057 1.39111 4.58732 1.43389 4.67287 1.51945C4.75853 1.6051 4.80135 1.71185 4.80135 1.8397V2.62501H9.22127V1.82861C9.22127 1.70446 9.26312 1.60048 9.34683 1.51668C9.43064 1.43297 9.53462 1.39111 9.65877 1.39111C9.78292 1.39111 9.88685 1.43297 9.97056 1.51668C10.0544 1.60048 10.0963 1.70446 10.0963 1.82861V2.62501H10.9039C11.1986 2.62501 11.448 2.72709 11.6522 2.93126C11.8563 3.13543 11.9584 3.38485 11.9584 3.67953V11.4872C11.9584 11.7818 11.8563 12.0313 11.6522 12.2354C11.448 12.4396 11.1986 12.5417 10.9039 12.5417H3.09627ZM3.09627 11.6667H10.9039C10.9488 11.6667 10.9899 11.648 11.0273 11.6105C11.0647 11.5732 11.0834 11.5321 11.0834 11.4872V6.01286H2.91675V11.4872C2.91675 11.5321 2.93546 11.5732 2.97289 11.6105C3.01023 11.648 3.05135 11.6667 3.09627 11.6667ZM2.91675 5.13786H11.0834V3.67953C11.0834 3.63461 11.0647 3.59349 11.0273 3.55615C10.9899 3.51872 10.9488 3.50001 10.9039 3.50001H3.09627C3.05135 3.50001 3.01023 3.51872 2.97289 3.55615C2.93546 3.59349 2.91675 3.63461 2.91675 3.67953V5.13786ZM7.00008 8.21159C6.85726 8.21159 6.73554 8.16128 6.63491 8.06066C6.53439 7.96013 6.48412 7.8384 6.48412 7.69549C6.48412 7.55267 6.53439 7.43095 6.63491 7.33032C6.73554 7.22979 6.85726 7.17953 7.00008 7.17953C7.1429 7.17953 7.26462 7.22979 7.36525 7.33032C7.46578 7.43095 7.51604 7.55267 7.51604 7.69549C7.51604 7.8384 7.46578 7.96013 7.36525 8.06066C7.26462 8.16128 7.1429 8.21159 7.00008 8.21159ZM4.66675 8.21159C4.52393 8.21159 4.40221 8.16128 4.30158 8.06066C4.20105 7.96013 4.15079 7.8384 4.15079 7.69549C4.15079 7.55267 4.20105 7.43095 4.30158 7.33032C4.40221 7.22979 4.52393 7.17953 4.66675 7.17953C4.80957 7.17953 4.93129 7.22979 5.03192 7.33032C5.13244 7.43095 5.18271 7.55267 5.18271 7.69549C5.18271 7.8384 5.13244 7.96013 5.03192 8.06066C4.93129 8.16128 4.80957 8.21159 4.66675 8.21159ZM9.33342 8.21159C9.1906 8.21159 9.06887 8.16128 8.96825 8.06066C8.86772 7.96013 8.81746 7.8384 8.81746 7.69549C8.81746 7.55267 8.86772 7.43095 8.96825 7.33032C9.06887 7.22979 9.1906 7.17953 9.33342 7.17953C9.47623 7.17953 9.59796 7.22979 9.69858 7.33032C9.79911 7.43095 9.84937 7.55267 9.84937 7.69549C9.84937 7.8384 9.79911 7.96013 9.69858 8.06066C9.59796 8.16128 9.47623 8.21159 9.33342 8.21159ZM7.00008 10.5C6.85726 10.5 6.73554 10.4497 6.63491 10.3491C6.53439 10.2485 6.48412 10.1269 6.48412 9.98405C6.48412 9.84113 6.53439 9.71941 6.63491 9.61888C6.73554 9.51826 6.85726 9.46795 7.00008 9.46795C7.1429 9.46795 7.26462 9.51826 7.36525 9.61888C7.46578 9.71941 7.51604 9.84113 7.51604 9.98405C7.51604 10.1269 7.46578 10.2485 7.36525 10.3491C7.26462 10.4497 7.1429 10.5 7.00008 10.5ZM4.66675 10.5C4.52393 10.5 4.40221 10.4497 4.30158 10.3491C4.20105 10.2485 4.15079 10.1269 4.15079 9.98405C4.15079 9.84113 4.20105 9.71941 4.30158 9.61888C4.40221 9.51826 4.52393 9.46795 4.66675 9.46795C4.80957 9.46795 4.93129 9.51826 5.03192 9.61888C5.13244 9.71941 5.18271 9.84113 5.18271 9.98405C5.18271 10.1269 5.13244 10.2485 5.03192 10.3491C4.93129 10.4497 4.80957 10.5 4.66675 10.5ZM9.33342 10.5C9.1906 10.5 9.06887 10.4497 8.96825 10.3491C8.86772 10.2485 8.81746 10.1269 8.81746 9.98405C8.81746 9.84113 8.86772 9.71941 8.96825 9.61888C9.06887 9.51826 9.1906 9.46795 9.33342 9.46795C9.47623 9.46795 9.59796 9.51826 9.69858 9.61888C9.79911 9.71941 9.84937 9.84113 9.84937 9.98405C9.84937 10.1269 9.79911 10.2485 9.69858 10.3491C9.59796 10.4497 9.47623 10.5 9.33342 10.5Z" />
+                </g>
+              </svg>
+
+              <p class="text-xs leading-[14px]">{{ event.occurence_time | dateFormat : 'serverDateTimeFormat' : 'clientDateTimeFormat' }}</p>
+              <p class="text-xs leading-[14px]">|</p>
+              <div class="flex justify-between items-center">
+                <div class="flex gap-1">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <mask id="mask0_1845_16508" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="14" height="14">
+                      <rect width="14" height="14" fill="#D9D9D9" />
+                    </mask>
+                    <g mask="url(#mask0_1845_16508)">
+                      <path class="fill-black dark:fill-cultured" fill="currentColor" d="M7 6.82052C6.43854 6.82052 5.95792 6.62063 5.55815 6.22085C5.15827 5.82097 4.95833 5.34031 4.95833 4.77885C4.95833 4.21739 5.15827 3.73677 5.55815 3.337C5.95792 2.93712 6.43854 2.73718 7 2.73718C7.56146 2.73718 8.04208 2.93712 8.44185 3.337C8.84173 3.73677 9.04167 4.21739 9.04167 4.77885C9.04167 5.34031 8.84173 5.82097 8.44185 6.22085C8.04208 6.62063 7.56146 6.82052 7 6.82052ZM2.625 10.3767V9.96599C2.625 9.68036 2.70258 9.41581 2.85775 9.17237C3.01292 8.92893 3.22029 8.74177 3.47987 8.61091C4.0564 8.32829 4.63803 8.11629 5.22477 7.97493C5.81151 7.83357 6.40325 7.76289 7 7.76289C7.59675 7.76289 8.18849 7.83357 8.77523 7.97493C9.36197 8.11629 9.9436 8.32829 10.5201 8.61091C10.7797 8.74177 10.9871 8.92893 11.1423 9.17237C11.2974 9.41581 11.375 9.68036 11.375 9.96599V10.3767C11.375 10.6226 11.2888 10.8319 11.1164 11.0043C10.9441 11.1767 10.7348 11.2629 10.4888 11.2629H3.51123C3.26516 11.2629 3.05594 11.1767 2.88356 11.0043C2.71119 10.8319 2.625 10.6226 2.625 10.3767ZM3.5 10.3879H10.5V9.96599C10.5 9.84787 10.4658 9.73849 10.3973 9.63787C10.3289 9.53734 10.236 9.45529 10.1186 9.3917C9.61601 9.14418 9.10355 8.95663 8.58127 8.82908C8.0589 8.70162 7.53181 8.63789 7 8.63789C6.46819 8.63789 5.9411 8.70162 5.41873 8.82908C4.89645 8.95663 4.38399 9.14418 3.88135 9.3917C3.76401 9.45529 3.67111 9.53734 3.60267 9.63787C3.53422 9.73849 3.5 9.84787 3.5 9.96599V10.3879ZM7 5.94552C7.32083 5.94552 7.59549 5.83128 7.82396 5.60281C8.05243 5.37434 8.16667 5.09968 8.16667 4.77885C8.16667 4.45802 8.05243 4.18336 7.82396 3.95489C7.59549 3.72642 7.32083 3.61218 7 3.61218C6.67917 3.61218 6.40451 3.72642 6.17604 3.95489C5.94757 4.18336 5.83333 4.45802 5.83333 4.77885C5.83333 5.09968 5.94757 5.37434 6.17604 5.60281C6.40451 5.83128 6.67917 5.94552 7 5.94552Z" />
+                    </g>
+                  </svg>
+                  <p class="text-xs leading-[14px]">{{ event.driver_name }}</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex flex-col mt-auto">
+              <div *appHasPermission="[[accessGroup.EVENTS_EDITOR]]">
+                <div *ngIf="event.driver_requested_status_change">
+                  <span class="bg-[#f24822] rounded-sm text-xs text-white px-2 py-0.5">flagged as false by driver</span>
+                </div>
+              </div>
+              <div class="flex flex-row mt-auto">
+                <div class="items-center flex">
+                  <p
+                    class="text-xs rounded-sm p-1 px-1.5 mr-auto"
+                    [ngClass]="{
+                      ' bg-[#14A54D4C]': (event.last_status || event.status) === 'REVIEW_OPTIONAL',
+                      'text-extra-one': (event.last_status || event.status) === 'DO_NOT_ESCALATE',
+                      'text-green-600': (event.last_status || event.status) === 'REVIEWED',
+                      'text-extra-two': (event.last_status || event.status) === 'FALSE_EVENT',
+                      'bg-[#f5be1833]': (event.last_status || event.status) === 'REVIEW_REQUIRED' || (event.last_status || event.status) === 'ESCALATED'
+                    }">
+                    {{ event.last_status || event.status | humanize }}
+                  </p>
+                </div>
+                <p *ngIf="event.provider_name" class="text-xs rounded-sm p-1 px-1.5 bg-[#447E99] items-center flex ml-2 gap-1">
+                  {{ getProviderLabel(event.provider_name) }}
+                </p>
+                <div *ngIf="event.star_rating !== null" class="items-center flex ml-2 gap-1">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <mask id="mask0_3258_20271" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="14" height="14">
+                      <rect width="14" height="14" fill="#D9D9D9" />
+                    </mask>
+                    <g mask="url(#mask0_3258_20271)">
+                      <path class="fill-black dark:fill-cultured" fill="currentColor" d="M7.00016 8.32042L8.03558 8.95202C8.13134 9.01259 8.22798 9.00919 8.3255 8.94181C8.42311 8.87453 8.45923 8.78329 8.43385 8.66808L8.15895 7.48348L9.08339 6.68475C9.17313 6.60473 9.19948 6.51053 9.16243 6.40212C9.12539 6.29372 9.0463 6.23466 8.92516 6.22494L7.71693 6.12285L7.2402 5.01117C7.19538 4.90568 7.11537 4.85294 7.00016 4.85294C6.88495 4.85294 6.80494 4.90568 6.76012 5.01117L6.28339 6.12285L5.07516 6.22494C4.95402 6.23466 4.87493 6.29372 4.83789 6.40212C4.80085 6.51053 4.8272 6.60473 4.91693 6.68475L5.84137 7.48348L5.56648 8.66808C5.5411 8.78329 5.57722 8.87453 5.67483 8.94181C5.77234 9.00919 5.86898 9.01259 5.96475 8.95202L7.00016 8.32042ZM5.16937 11.375H3.67968C3.38879 11.375 3.14029 11.272 2.93418 11.066C2.72817 10.8599 2.62516 10.6114 2.62516 10.3205V8.83083L1.54148 7.7381C1.44202 7.63271 1.36686 7.5161 1.31602 7.38825C1.26517 7.2603 1.23975 7.1309 1.23975 7.00004C1.23975 6.86918 1.26517 6.73978 1.31602 6.61183C1.36686 6.48398 1.44202 6.36737 1.54148 6.26198L2.62516 5.16925V3.67956C2.62516 3.38867 2.72817 3.14017 2.93418 2.93406C3.14029 2.72805 3.38879 2.62504 3.67968 2.62504H5.16937L6.2621 1.54135C6.36749 1.44189 6.48411 1.36674 6.61195 1.31589C6.7399 1.26505 6.8693 1.23962 7.00016 1.23962C7.13102 1.23962 7.26043 1.26505 7.38837 1.31589C7.51622 1.36674 7.63284 1.44189 7.73822 1.54135L8.83095 2.62504H10.3206C10.6115 2.62504 10.86 2.72805 11.0661 2.93406C11.2722 3.14017 11.3752 3.38867 11.3752 3.67956V5.16925L12.4588 6.26198C12.5583 6.36737 12.6335 6.48398 12.6843 6.61183C12.7352 6.73978 12.7606 6.86918 12.7606 7.00004C12.7606 7.1309 12.7352 7.2603 12.6843 7.38825C12.6335 7.5161 12.5583 7.63271 12.4588 7.7381L11.3752 8.83083V10.3205C11.3752 10.6114 11.2722 10.8599 11.0661 11.066C10.86 11.272 10.6115 11.375 10.3206 11.375H8.83095L7.73822 12.4587C7.63284 12.5582 7.51622 12.6333 7.38837 12.6842C7.26043 12.735 7.13102 12.7605 7.00016 12.7605C6.8693 12.7605 6.7399 12.735 6.61195 12.6842C6.48411 12.6333 6.36749 12.5582 6.2621 12.4587L5.16937 11.375ZM5.54183 10.5L6.8711 11.8293C6.90474 11.863 6.94776 11.8798 7.00016 11.8798C7.05257 11.8798 7.09559 11.863 7.12923 11.8293L8.4585 10.5H10.3206C10.373 10.5 10.4161 10.4832 10.4497 10.4496C10.4833 10.4159 10.5002 10.3729 10.5002 10.3205V8.45837L11.8294 7.1291C11.8631 7.09546 11.8799 7.05244 11.8799 7.00004C11.8799 6.94764 11.8631 6.90462 11.8294 6.87098L10.5002 5.54171V3.67956C10.5002 3.62716 10.4833 3.58414 10.4497 3.5505C10.4161 3.51686 10.373 3.50004 10.3206 3.50004H8.4585L7.12923 2.17077C7.09559 2.13713 7.05257 2.12031 7.00016 2.12031C6.94776 2.12031 6.90474 2.13713 6.8711 2.17077L5.54183 3.50004H3.67968C3.62728 3.50004 3.58426 3.51686 3.55062 3.5505C3.51698 3.58414 3.50016 3.62716 3.50016 3.67956V5.54171L2.17089 6.87098C2.13725 6.90462 2.12043 6.94764 2.12043 7.00004C2.12043 7.05244 2.13725 7.09546 2.17089 7.1291L3.50016 8.45837V10.3205C3.50016 10.3729 3.51698 10.4159 3.55062 10.4496C3.58426 10.4832 3.62728 10.5 3.67968 10.5H5.54183Z" />
+                    </g>
+                  </svg>
+                  <span class="text-xs"> {{ event.star_rating.toFixed(2) }} </span>
+                </div>
+                <div class="flex flex-row ml-auto items-center mt-auto">
+                  <div class="relative">
+                    <div *ngIf="event.has_telematics" (mouseenter)="showTelemetry(event)" (mouseleave)="hideTelemetry()" (click)="fetchTelemetry(event)" (keydown.enter)="fetchTelemetry(event)" class="flex items-center gap-1 py-0.5 px-0.5 rounded-md cursor-pointer hover:bg-anti-flash-white">
+                      <div>
+                        <img ngSrc="/assets/svg/telemetry-icons/telemetry-active-icon.svg" width="20" height="20" alt="telemetry icon" />
+                      </div>
+                    </div>
+                    <div *ngIf="!event.has_telematics">
+                      <div>
+                        <img ngSrc="/assets/svg/telemetry-icons/telemetry-inactive-icon.svg" width="20" height="20" alt="telemetry icon" />
+                      </div>
+                    </div>
+
+                    <div (mouseenter)="isHovered = true" (mouseleave)="hideTelemetry()" *ngIf="isHovered && hoveredEventId === event.id" class="absolute z-[9999] top-20 right-[-25px] transform -translate-y-full w-[450px] bg-white rounded-lg p-3 border border-new-gray-300 transition-all duration-300 ease-in-out" [class.opacity-0]="!isHovered" [class.opacity-100]="isHovered" [class.translate-y-[-120%]]="isHovered" [class.pointer-events-none]="!isHovered" style="box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)">
+                      <app-events-left-telemetry></app-events-left-telemetry>
+                    </div>
+                  </div>
+                  <div>
+                    <svg width="16" height="13" viewBox="0 0 16 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect x="0.349748" y="0.349748" width="14.6894" height="11.8914" rx="2.44823" stroke="#9E9E9E" stroke-width="0.699495" />
+                      <mask id="mask0_3197_5251" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="-1" y="-3" width="18" height="18">
+                        <rect x="-0.699219" y="-2.09851" width="16.7879" height="16.7879" fill="#D9D9D9" />
+                      </mask>
+                      <g mask="url(#mask0_3197_5251)">
+                        <path d="M6.23275 10.6218C5.99958 10.7734 5.7635 10.7821 5.52451 10.6481C5.28551 10.514 5.16602 10.3071 5.16602 10.0273V2.78749C5.16602 2.5077 5.28551 2.30076 5.52451 2.16669C5.7635 2.03262 5.99958 2.04137 6.23275 2.19292L11.9336 5.81281C12.1435 5.95271 12.2484 6.1509 12.2484 6.40738C12.2484 6.66386 12.1435 6.86205 11.9336 7.00195L6.23275 10.6218Z" fill="#9E9E9E" />
+                      </g>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </app-virtual-infinity-scroll>
+  </ng-container>
+</div>

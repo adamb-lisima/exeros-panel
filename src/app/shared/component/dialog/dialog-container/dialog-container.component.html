@@ -1,0 +1,18 @@
+<div class="w-[700px] flex flex-col rounded-lg bg-white min-h-[233px]">
+  <div class="flex justify-between items-center p-5">
+    <p class="font-medium">{{ title }}</p>
+    <div class="cursor-pointer p-2" (click)="handleCloseClick($event)" (keydown.enter)="handleCloseKeyDown()" style="margin: -8px">
+      <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M7.26122 7.69492L2.18812 12.768C2.04967 12.9065 1.87563 12.9773 1.66602 12.9805C1.45642 12.9837 1.27918 12.9129 1.13432 12.768C0.989434 12.6231 0.916992 12.4475 0.916992 12.2411C0.916992 12.0347 0.989434 11.8591 1.13432 11.7142L6.20739 6.6411L1.13432 1.568C0.99585 1.42955 0.925017 1.25552 0.921817 1.0459C0.9186 0.8363 0.989434 0.659067 1.13432 0.5142C1.27918 0.369317 1.45482 0.296875 1.66122 0.296875C1.86762 0.296875 2.04325 0.369317 2.18812 0.5142L7.26122 5.58727L12.3343 0.5142C12.4728 0.375733 12.6468 0.3049 12.8564 0.3017C13.066 0.298483 13.2433 0.369317 13.3881 0.5142C13.533 0.659067 13.6054 0.8347 13.6054 1.0411C13.6054 1.2475 13.533 1.42313 13.3881 1.568L8.31504 6.6411L13.3881 11.7142C13.5266 11.8527 13.5974 12.0267 13.6006 12.2363C13.6038 12.4459 13.533 12.6231 13.3881 12.768C13.2433 12.9129 13.0676 12.9853 12.8612 12.9853C12.6548 12.9853 12.4792 12.9129 12.3343 12.768L7.26122 7.69492Z" fill="currentColor" />
+      </svg>
+    </div>
+  </div>
+  <span class="w-full flex-[0_0_1px] bg-bright-gray"></span>
+  <div class="w-full max-h-[70vh] min-h-[82px] overflow-y-auto">
+    <ng-content select="[body]"></ng-content>
+  </div>
+  <span class="w-full flex-[0_0_1px] bg-bright-gray"></span>
+  <div class="flex p-5">
+    <ng-content select="[footer]"></ng-content>
+  </div>
+</div>

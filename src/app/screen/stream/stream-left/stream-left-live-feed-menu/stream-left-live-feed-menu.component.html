@@ -1,0 +1,36 @@
+<div class="flex justify-between items-center mb-5 gap-2">
+  <div class="text-2xl flex flex-row items-center gap-1">
+    <p appTooltip="Go back to vehicles list" class="text-new-gray-700 cursor-pointer" (keydown.enter)="handleViewStreamClick()" (click)="handleViewStreamClick()">Play</p>
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <mask id="mask0_2440_3306" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
+        <rect width="24" height="24" fill="#D9D9D9" />
+      </mask>
+      <g mask="url(#mask0_2440_3306)">
+        <path d="M7.47697 20.7731C7.32954 20.6256 7.25582 20.4484 7.25582 20.2414C7.25582 20.0343 7.32954 19.8571 7.47697 19.7096L15.1866 12L7.45197 4.26537C7.30837 4.12179 7.23657 3.95193 7.23657 3.75578C7.23657 3.55961 7.31671 3.3814 7.47697 3.22115C7.62441 3.07372 7.80165 3 8.0087 3C8.21575 3 8.39299 3.07372 8.54042 3.22115L16.7481 11.4346C16.8353 11.5218 16.8965 11.6109 16.9318 11.7019C16.967 11.7929 16.9847 11.8923 16.9847 12C16.9847 12.1077 16.967 12.2071 16.9318 12.2981C16.8965 12.3891 16.8353 12.4782 16.7481 12.5654L8.51542 20.7981C8.37184 20.9417 8.20293 21.0135 8.0087 21.0135C7.81446 21.0135 7.63722 20.9333 7.47697 20.7731Z" fill="#616161" />
+      </g>
+    </svg>
+    <p>Live video</p>
+  </div>
+  <div class="flex items-center gap-1">
+    <div class="h-[35px] flex items-center gap-0.5 px-1.5 rounded-md cursor-pointer border border-main-primary bg-white" (keydown.enter)="handleBackClick()" (click)="handleBackClick()">
+      <div class="rotate-90">
+        <svg width="16" height="16" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <mask id="mask0_3914_19612" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="21" height="21">
+            <rect x="0.289062" y="0.5" width="20" height="20" fill="#D9D9D9" />
+          </mask>
+          <g mask="url(#mask0_3914_19612)">
+            <path d="M10.2869 11.7799L14.3599 7.70662C14.4984 7.56829 14.6725 7.49746 14.8821 7.49412C15.0916 7.49095 15.2689 7.56179 15.4139 7.70662C15.5587 7.85162 15.6311 8.02729 15.6311 8.23362C15.6311 8.43995 15.5587 8.61562 15.4139 8.76062L10.9196 13.2549C10.826 13.3484 10.7272 13.4144 10.6234 13.4529C10.5195 13.4914 10.4074 13.5106 10.2869 13.5106C10.1664 13.5106 10.0542 13.4914 9.95037 13.4529C9.84654 13.4144 9.74778 13.3484 9.65412 13.2549L5.15987 8.76062C5.02153 8.62212 4.9507 8.44804 4.94737 8.23837C4.9442 8.02887 5.01503 7.85162 5.15987 7.70662C5.30487 7.56179 5.48053 7.48937 5.68687 7.48937C5.8932 7.48937 6.06887 7.56179 6.21387 7.70662L10.2869 11.7799Z" fill="#EE8444" />
+          </g>
+        </svg>
+      </div>
+      <p class="font-medium text-xs text-main-primary whitespace-nowrap">Back</p>
+    </div>
+    <div appTooltip="Report issue" class="h-[35px] w-[35px] flex items-center justify-center rounded-md cursor-pointer border border-red-500 bg-white hover:bg-red-50" (keydown.enter)="openReportIssueModal()" (click)="openReportIssueModal()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#FF3B30" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M12 8V12" stroke="#FF3B30" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        <circle cx="12" cy="16" r="1" fill="#FF3B30" />
+      </svg>
+    </div>
+  </div>
+</div>

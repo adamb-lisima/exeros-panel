@@ -1,0 +1,15 @@
+<app-dialog-container title="Delete driver">
+  <div class="p-5" body>
+    <p class="text-sm">
+      Admin notice will be deleted:
+      <span class="text-sm font-medium">{{ data.title }}</span>
+      . Are you sure you want to continue?
+    </p>
+  </div>
+  <div class="flex flex-1 items-center justify-end gap-9" footer>
+    <span class="text-sm text-main-primary underline font-semibold cursor-pointer" (click)="handleCloseClick()" (keydown.enter)="handleCloseClick()">Discard</span>
+    <app-button (buttonClick)="handleDeleteClick()">
+      <span class="text-sm text-white font-semibold">Delete</span>
+    </app-button>
+  </div>
+</app-dialog-container>

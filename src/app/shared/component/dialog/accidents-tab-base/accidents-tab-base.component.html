@@ -1,0 +1,38 @@
+<ng-container *ngIf="accidents">
+  <app-infinity-scroll [pageMeta]="accidentsMeta ?? { total_items: 0, current_page: 0, first: true, last: true, fetch_in_background: false }" [listDivider]="true" (nextPageRequest)="handleNextPageRequest($event)">
+    <ng-container header>
+      <ng-container *ngIf="showTitle; else onlySelect">
+        <div class="min-h-[40px] flex justify-between items-center">
+          <ng-content select="[title]"></ng-content>
+        </div>
+      </ng-container>
+
+      <ng-template #onlySelect> </ng-template>
+    </ng-container>
+    <ng-container list>
+      <ng-container *ngIf="accidents.length; else emptyAccidentsTemplate">
+        <div *ngFor="let accident of accidents; trackByField: 'id'" class="flex items-center justify-between py-4 cursor-pointer" (click)="handleRowClick(accident)" (keydown.enter)="handleRowClick(accident)">
+          <div class="flex items-center gap-4">
+            <img src="assets/svg/icons-gray-back/54.svg" width="40" height="40" alt="icon" />
+            <div class="flex flex-col gap-2">
+              <p class="font-semibold">{{ accident.vehicle.registration_plate }}</p>
+              <div class="flex items-center gap-2">
+                <p class="font-semibold text-xs text-arsenic">{{ accident.driver.name }}</p>
+                <svg class="text-dark-electric-blue" width="2" height="2" viewBox="0 0 2 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="1" cy="1" r="1" fill="currentColor" />
+                </svg>
+                <p class="text-xs text-dark-electric-blue">{{ accident.date | dateFormat : 'serverDateTimeFormat' : 'clientDateTimeFormat' }}</p>
+              </div>
+            </div>
+          </div>
+          <div *appHasPermission="[[accidentsDownloaderAccess]]" class="rounded cursor-pointer text-extra-two" (click)="handleExportItemClick($event, accident.id)" (keydown.enter)="handleExportItemKeyDown(accident.id)">
+            <img src="assets/svg/pdf-file-icon.svg" width="30" height="30" alt="pdf" />
+          </div>
+        </div>
+      </ng-container>
+      <ng-template #emptyAccidentsTemplate>
+        <p class="text-sm">There are no accidents available</p>
+      </ng-template>
+    </ng-container>
+  </app-infinity-scroll>
+</ng-container>

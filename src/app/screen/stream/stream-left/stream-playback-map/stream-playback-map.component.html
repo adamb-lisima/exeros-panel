@@ -1,0 +1,45 @@
+<ng-container *ngIf="playback$ | async as playback">
+  <div *ngIf="!isFullscreen" class="h-full bg-new-gray-50 rounded-lg border border-new-gray-300 w-full">
+    <div class="flex flex-row items-center gap-2 mx-3 mt-3">
+      <app-select-control label="Trip" class="mx-auto w-full flex" [options]="(tripSelectOptions$ | async) || []" [ngModel]="selectedTripIndex$ | async" (ngModelChange)="onTripSelect($event)"> </app-select-control>
+      <button (click)="toggleFullscreen()" class="p-[11px] w-[42px] h-[42px] mb-5 rounded-lg border border-new-gray-400 hover:bg-new-gray-200 transition-colors">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <mask id="mask0_2432_232" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="20" height="20">
+            <rect width="20" height="20" fill="#D9D9D9" />
+          </mask>
+          <g mask="url(#mask0_2432_232)">
+            <path class="fill-black dark:fill-cultured" d="M5.83325 14.1667H8.54159C8.71867 14.1667 8.86714 14.2266 8.987 14.3465C9.10672 14.4663 9.16658 14.6148 9.16658 14.7919C9.16658 14.9691 9.10672 15.1175 8.987 15.2371C8.86714 15.3568 8.71867 15.4167 8.54159 15.4167H5.33659C5.12311 15.4167 4.94422 15.3445 4.79992 15.2C4.65547 15.0557 4.58325 14.8768 4.58325 14.6633V11.4583C4.58325 11.2813 4.64318 11.1328 4.76304 11.0129C4.8829 10.8932 5.03138 10.8333 5.20846 10.8333C5.38568 10.8333 5.53409 10.8932 5.65367 11.0129C5.77339 11.1328 5.83325 11.2813 5.83325 11.4583V14.1667ZM14.1666 5.83334H11.4583C11.2812 5.83334 11.1327 5.77341 11.0128 5.65355C10.8931 5.53369 10.8333 5.38522 10.8333 5.20813C10.8333 5.03091 10.8931 4.88251 11.0128 4.76293C11.1327 4.6432 11.2812 4.58334 11.4583 4.58334H14.6633C14.8767 4.58334 15.0556 4.65557 15.1999 4.80001C15.3444 4.94432 15.4166 5.1232 15.4166 5.33668V8.54168C15.4166 8.71876 15.3567 8.86723 15.2368 8.98709C15.1169 9.10682 14.9685 9.16668 14.7914 9.16668C14.6142 9.16668 14.4658 9.10682 14.3462 8.98709C14.2264 8.86723 14.1666 8.71876 14.1666 8.54168V5.83334Z" fill="currentColor" />
+          </g>
+        </svg>
+      </button>
+    </div>
+
+    <div class="relative h-full">
+      <div class="absolute top-4 right-4 z-10">
+        <button (click)="toggleMapType()" class="p-[10.5px] w-[42px] h-[42px] rounded-lg border border-new-gray-400 bg-white hover:bg-new-gray-200 transition-colors" [appTooltip]="currentMapType === 'terrain' ? 'Switch to Satellite view' : 'Switch to Terrain view'">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path class="fill-black dark:fill-cultured" d="M10 2C5.73 2 2 5.73 2 10s3.73 8 8 8 8-3.73 8-8-3.73-8-8-8zm-0.8 14.34c-3.16-0.39-5.6-3.08-5.6-6.34 0-0.5 0.06-0.97 0.17-1.43L7.2 12v0.8c0 0.88 0.72 1.6 1.6 1.6v1.94zM15.52 13.17c-0.21-0.65-0.8-1.11-1.52-1.11h-0.8v-2.4c0-0.44-0.36-0.8-0.8-0.8H7.2v-1.6h1.6c0.44 0 0.8-0.36 0.8-0.8V5.6h1.6c0.88 0 1.6-0.72 1.6-1.6v-0.33C15.34 4.78 17 7.25 17 10c0 1.66-0.64 3.17-1.68 4.31z" fill="currentColor" />
+          </svg>
+        </button>
+      </div>
+
+      <app-map #mapComponent *ngIf="{ mapData: mapData$ | async } as ctx" class="h-full" [center]="ctx.mapData?.center" [playbackMarkers]="ctx.mapData?.markers" [polyline]="ctx.mapData?.polyline" [routeSegments]="ctx.mapData?.segments" [zoom]="ctx.mapData?.center ? 10 : 5" [isClusterer]="false" (segmentClick)="onSegmentClick($event)"> </app-map>
+    </div>
+  </div>
+
+  <div *ngIf="isFullscreen" class="fullscreen-container">
+    <button (click)="exitFullscreen()" class="p-[10.5px] w-[42px] h-[42px] fixed top-4 right-4 z-[10000] rounded-lg border border-new-gray-400 bg-white hover:bg-new-gray-200 transition-colors">
+      <svg class="fill-black dark:fill-cultured" xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="currentColor"><path d="M440-440v240h-80v-160H200v-80h240Zm160-320v160h160v80H520v-240h80Z" /></svg>
+    </button>
+
+    <div class="absolute top-4 left-4 z-[10000]">
+      <button (click)="toggleMapType()" class="p-[10.5px] w-[42px] h-[42px] rounded-lg border border-new-gray-400 bg-white hover:bg-new-gray-200 transition-colors" [appTooltip]="currentMapType === 'terrain' ? 'Switch to Satellite view' : 'Switch to Terrain view'">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path class="fill-black dark:fill-cultured" d="M10 2C5.73 2 2 5.73 2 10s3.73 8 8 8 8-3.73 8-8-3.73-8-8-8zm-0.8 14.34c-3.16-0.39-5.6-3.08-5.6-6.34 0-0.5 0.06-0.97 0.17-1.43L7.2 12v0.8c0 0.88 0.72 1.6 1.6 1.6v1.94zM15.52 13.17c-0.21-0.65-0.8-1.11-1.52-1.11h-0.8v-2.4c0-0.44-0.36-0.8-0.8-0.8H7.2v-1.6h1.6c0.44 0 0.8-0.36 0.8-0.8V5.6h1.6c0.88 0 1.6-0.72 1.6-1.6v-0.33C15.34 4.78 17 7.25 17 10c0 1.66-0.64 3.17-1.68 4.31z" fill="currentColor" />
+        </svg>
+      </button>
+    </div>
+
+    <app-map #mapComponent *ngIf="{ mapData: mapData$ | async } as ctx" class="h-full w-full" [center]="ctx.mapData?.center" [playbackMarkers]="ctx.mapData?.markers" [polyline]="ctx.mapData?.polyline" [routeSegments]="ctx.mapData?.segments" [zoom]="ctx.mapData?.center ? 10 : 5" [isClusterer]="false" (segmentClick)="onSegmentClick($event)"> </app-map>
+  </div>
+</ng-container>

@@ -1,0 +1,56 @@
+<div *ngIf="{ trip: trip$ | async } as ctx" class="h-[800px] w-[800px] flex flex-col gap-5 rounded-md bg-white">
+  <div class="flex justify-between items-center px-5 pt-5">
+    <p class="font-medium">Trip Details</p>
+    <div class="rounded-md cursor-pointer bg-anti-flash-white" (click)="handleCloseClick()" (keydown.enter)="handleCloseClick()" aria-label="Close">
+      <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12.7279 21.2129L21.2132 12.7276" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M21.2132 21.2138L12.7279 12.7285" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </div>
+  </div>
+  <span class="w-full flex-[0_0_1px] bg-platinum"></span>
+  <div class="h-full flex flex-col gap-4 px-5 pb-5 overflow-auto" [class.loader]="tripLoading$ | async">
+    <app-select-control class="w-[130px]" label="Sort by" [prefixIcon]="'sort'" [options]="sortOrderOptions" [formControl]="paramsGroup.controls.sort_order"></app-select-control>
+    <div class="h-full flex gap-2 overflow-auto">
+      <app-infinity-scroll *ngIf="tripsMeta$ | async as meta" class="flex-[0_0_300px]" [transparent]="true" [listGap]="true" [pageMeta]="meta" [loading]="tripsLoading$ | async" (nextPageRequest)="handleNextPageRequest($event)">
+        <ng-container list>
+          <div *ngFor="let trip of trips$ | async; trackByField: 'id'" class="flex flex-col gap-2 p-4 rounded-lg cursor-pointer border" [ngClass]="trip.id === ctx.trip?.id ? 'border-main-primary' : 'border-bright-gray'" (click)="handleTripClick(trip)" (keydown.enter)="handleTripClick(trip)">
+            <div class="flex justify-between items-center gap-2">
+              <p class="text-sm font-bold">{{ trip.vehicle_registration_plate }}</p>
+              <ng-container *ngIf="trip.status === 'DURING'; else completedStatusTemplate">
+                <div class="flex items-center gap-2 px-2 py-1 rounded-md bg-honeydew">
+                  <svg class="text-extra-one" width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="4" cy="4" r="4" fill="currentColor" />
+                  </svg>
+                  <p class="font-medium text-xs text-extra-one">LIVE</p>
+                </div>
+              </ng-container>
+              <ng-template #completedStatusTemplate>
+                <div class="flex items-center gap-1 py-1 px-2 rounded-md bg-anti-flash-white">
+                  <svg class="text-extra-three" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M11 3.61548V6.7463C11 7.02323 10.9706 7.28478 10.9043 7.52325C10.6321 8.65405 9.73437 9.36177 8.49816 9.36177H6.49669L4.27447 10.908C3.94334 11.1464 3.50184 10.8926 3.50184 10.4772V9.36177C2.75128 9.36177 2.12583 9.10023 1.69169 8.64638C1.25019 8.18482 1 7.53093 1 6.7463V3.61548C1 2.1539 1.86829 1.14617 3.20751 1.0154C3.30316 1.00771 3.39882 1 3.50184 1H8.49816C9.99927 1 11 2.0462 11 3.61548Z" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                  <p class="font-medium text-xs text-extra-three">Completed</p>
+                </div>
+              </ng-template>
+            </div>
+            <p class="text-xs opacity-50">{{ trip.created_at | dateFormat : 'serverDateTimeFormat' : 'clientDateTimeFormat' }}</p>
+            <div class="flex gap-2">
+              <svg width="12" height="34" viewBox="0 0 12 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle class="text-anti-flash-white" cx="6" cy="6" r="5.5" stroke="currentColor" />
+                <circle class="text-extra-three" cx="6.00065" cy="6.00065" r="2.66667" fill="currentColor" />
+                <line class="text-black" x1="6.5" y1="14.5" x2="6.5" y2="20.5" stroke="currentColor" stroke-linecap="round" stroke-dasharray="3 3" />
+                <path class="text-main-primary" d="M10.933 26.6356C10.4607 23.8558 7.64287 22.3986 5.02225 23.235C3.1932 23.818 1.99902 25.463 1.99902 27.5921C2.00935 28.3978 2.31794 29.3448 2.99706 30.1548C4.01611 31.3701 5.0617 32.5664 6.09402 33.7707C6.35726 34.0776 6.64005 34.0772 6.90513 33.7707C7.89788 32.6147 8.89063 31.4584 9.88338 30.3017C10.7974 29.2283 11.1642 28.0006 10.933 26.6356ZM6.50142 28.9236C6.15201 28.9241 5.81028 28.8254 5.51948 28.6399C5.22867 28.4544 5.00186 28.1905 4.86774 27.8815C4.73362 27.5725 4.69823 27.2324 4.76604 26.9041C4.83385 26.5758 5.00181 26.2742 5.24867 26.0374C5.49553 25.8006 5.8102 25.6392 6.15285 25.5737C6.49551 25.5083 6.85074 25.5416 7.17361 25.6695C7.49648 25.7974 7.77246 26.0142 7.96665 26.2924C8.16083 26.5706 8.26448 26.8977 8.26448 27.2323C8.26351 27.6801 8.07754 28.1093 7.7472 28.4262C7.41685 28.7431 6.96898 28.9219 6.50142 28.9236Z" fill="currentColor" />
+              </svg>
+              <div class="flex flex-col justify-between">
+                <p class="text-xs">{{ trip.from }}</p>
+                <p class="text-xs">{{ trip.to }}</p>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </app-infinity-scroll>
+      <app-map *ngIf="{ mapData: mapData$ | async } as ctx" class="h-full w-full rounded-md border border-platinum" [center]="ctx.mapData?.center" [markers]="ctx.mapData?.markers" [polyline]="ctx.mapData?.polyline" [zoom]="15" [rounded]="true"></app-map>
+    </div>
+  </div>
+</div>

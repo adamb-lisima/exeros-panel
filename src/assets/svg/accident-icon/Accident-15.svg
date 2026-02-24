@@ -1,0 +1,47 @@
+<svg id="e5148c26-e917-41fd-8474-bb5ad72bf6a7" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80">
+  <defs>
+    <style>
+      .fd3b09bd-128a-46a9-8b73-b020e520e829 {
+        fill: #fadc0f;
+      }
+
+      .ad0cbb6f-4703-4e13-bd7e-a36e8a49f45b {
+        fill: #fff;
+      }
+
+      .bf037a71-9878-4321-b99f-d4c98400065e {
+        font-size: 15.5px;
+        fill: #414042;
+        font-family: AvertaCY-Light;
+        font-weight: 300;
+      }
+
+      .a29ac78b-1cbd-4434-a1cd-7edfb6da5614 {
+        fill: none;
+        stroke: #414042;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+    </style>
+  </defs>
+  <title>Accident-15</title>
+  <g>
+    <g>
+      <path class="fd3b09bd-128a-46a9-8b73-b020e520e829" d="M23.92,49.16a3.63,3.63,0,1,1-3.62-3.62A3.62,3.62,0,0,1,23.92,49.16Z"/>
+      <path class="fd3b09bd-128a-46a9-8b73-b020e520e829" d="M50.9,49.16a3.62,3.62,0,1,1-3.62-3.62A3.62,3.62,0,0,1,50.9,49.16Z"/>
+      <path class="ad0cbb6f-4703-4e13-bd7e-a36e8a49f45b" d="M54.5,41.38v7.78H50.9a3.62,3.62,0,0,0-7.24,0H23.92a3.63,3.63,0,0,0-7.25,0H11.89V47.69c0-2.06,1-4.38,3-4.88,5.86-1.48,16.73-8.65,22.51-8.25C44.68,34.26,54.5,41.38,54.5,41.38Z"/>
+    </g>
+    <g>
+      <text class="bf037a71-9878-4321-b99f-d4c98400065e" transform="translate(5.85 11.64)">MODEL</text>
+      <g>
+        <circle class="a29ac78b-1cbd-4434-a1cd-7edfb6da5614" cx="33.42" cy="43.56" r="26.93"/>
+        <line class="a29ac78b-1cbd-4434-a1cd-7edfb6da5614" x1="53.79" y1="61.53" x2="74.16" y2="79.49"/>
+        <circle class="a29ac78b-1cbd-4434-a1cd-7edfb6da5614" cx="20.29" cy="49.16" r="3.62"/>
+        <circle class="a29ac78b-1cbd-4434-a1cd-7edfb6da5614" cx="47.28" cy="49.16" r="3.62"/>
+        <line class="a29ac78b-1cbd-4434-a1cd-7edfb6da5614" x1="16.42" y1="49.16" x2="11.89" y2="49.16"/>
+        <line class="a29ac78b-1cbd-4434-a1cd-7edfb6da5614" x1="43.5" y1="49.16" x2="24.16" y2="49.16"/>
+        <path class="a29ac78b-1cbd-4434-a1cd-7edfb6da5614" d="M11.89,49V47.69c0-2.06,1-4.38,3-4.88,5.88-1.49,16.74-8.66,22.52-8.26,7.27-.3,17.1,6.83,17.1,6.83v7.78H51.12"/>
+      </g>
+    </g>
+  </g>
+</svg>

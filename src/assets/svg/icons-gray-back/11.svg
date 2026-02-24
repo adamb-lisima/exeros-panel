@@ -1,0 +1,31 @@
+<svg id="e52b9cd9-54c4-4c2b-9e4d-62b325a4f919" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28">
+  <defs>
+    <style>
+      .bedcbbc9-e27c-4cda-ad66-58dfe6a735fc {
+        fill: #e6e6e6;
+      }
+
+      .aa22285f-17f5-4146-9c8e-d3ff36feca1d {
+        fill: #fadc0f;
+      }
+
+      .be505dab-0889-4fae-b9d0-8f414509ee63 {
+        fill: none;
+        stroke: #414042;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 1.28px;
+      }
+    </style>
+  </defs>
+  <title>11</title>
+  <circle class="bedcbbc9-e27c-4cda-ad66-58dfe6a735fc" cx="14" cy="14" r="14"/>
+  <g>
+    <polygon class="aa22285f-17f5-4146-9c8e-d3ff36feca1d" points="17.27 15.29 11.79 18.99 11.79 11.59 17.27 15.29"/>
+    <g>
+      <polygon class="be505dab-0889-4fae-b9d0-8f414509ee63" points="17.27 15.29 11.79 18.99 11.79 11.59 17.27 15.29"/>
+      <path class="be505dab-0889-4fae-b9d0-8f414509ee63" d="M7.46,7.05A10.17,10.17,0,1,1,4.19,19"/>
+      <polyline class="be505dab-0889-4fae-b9d0-8f414509ee63" points="8.67 2.68 7.28 7.11 11.3 8.72"/>
+    </g>
+  </g>
+</svg>

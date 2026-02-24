@@ -1,0 +1,7 @@
+<div class="flex items-center">
+  <app-checkbox-control [ngModel]="value" (ngModelChange)="handleCheckClick($event)"></app-checkbox-control>
+  <span class="text-xs">{{ name }}</span>
+  <div class="w-[120px] ml-auto">
+    <ng-content></ng-content>
+  </div>
+</div>

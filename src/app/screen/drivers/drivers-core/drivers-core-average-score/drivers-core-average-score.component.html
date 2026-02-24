@@ -1,0 +1,12 @@
+<div *ngIf="(overall_star_rating$ | async) !== null && (overall_star_rating$ | async) !== undefined" class="h-full flex flex-col justify-between">
+  <p class="font-semibold text-sm">Overall Driver Score</p>
+  <div class="flex justify-between">
+    <div class="flex flex-col">
+      <div class="flex items-end gap-1 mb-1">
+        <p class="font-bold text-xl text-main-primary">{{ overall_star_rating$ | async | number : '1.2-2' }}</p>
+      </div>
+      <app-star-rating *ngIf="(overall_star_rating$ | async) !== null && (overall_star_rating$ | async) !== undefined" [score]="(overall_star_rating$ | async) ?? 0" [maxScore]="5" size="md"></app-star-rating>
+    </div>
+    <img ngSrc="assets/svg/icons-gray-back/6.svg" width="40" height="40" alt="icon" />
+  </div>
+</div>

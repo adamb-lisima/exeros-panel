@@ -1,0 +1,118 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --white: #ffffff;
+    --cultured: #f8f8f8;
+    --black: #000000;
+    --chinese-white: #d9eadf;
+    --dust-storm: #e5d0d0;
+    --platinum: #e0e2e9;
+    --light-steel-blue: #adbfd8;
+    --anti-flash-white: #f1f1f1;
+    --chinese-silver: #cbcbcb;
+    --manatee: #9295a2;
+    --bright-gray: #eeeeee;
+    --arsenic: #3f4254;
+    --dark-electric-blue: #64677a;
+    --sonic-silver: #74767b;
+    --honeydew: #e4faed;
+    --outer-space: #454e49;
+    --old-lace: #fcf3e5;
+    --dim-gray: #6a6a6a;
+    --quartz: #4c4d50;
+    --carmel: #ffd693;
+    --transparent: rgba(0, 0, 0, 0);
+    --new-gray: #616161;
+    --new-gray-50: #fafafa;
+    --new-gray-100: #f5f5f5;
+    --new-gray-200: #eeeeee;
+    --new-gray-300: #e0e0e0;
+    --new-gray-400: #bdbdbd;
+    --new-gray-500: #9e9e9e;
+    --new-gray-600: #757575;
+    --new-gray-700: #616161;
+    --new-gray-800: #424242;
+    --new-gray-900: #212121;
+
+    --main-primary: #ee8444;
+    --main-primary--10: rgba(238, 132, 68, 0.1);
+    --main-primary--30: rgba(238, 132, 68, 0.3);
+    --extra-one: #14a54d;
+    --extra-one--10: rgba(20, 165, 77, 0.1);
+    --extra-one--30: rgba(20, 165, 77, 0.3);
+    --extra-two: #fe3c3c;
+    --extra-two--10: rgba(254, 60, 60, 0.1);
+    --extra-two--30: rgba(254, 60, 60, 0.3);
+    --extra-three: #006bff;
+    --extra-three--10: rgba(0, 107, 255, 0.1);
+    --extra-three--30: rgba(0, 107, 255, 0.3);
+    --extra-four: #f5be18;
+    --extra-four--10: rgba(245, 190, 24, 0.1);
+    --extra-four--30: rgba(245, 190, 24, 0.3);
+  }
+
+  .dark {
+    --white: #181a23;
+    --cultured: #0e0f15;
+    --black: #ffffff;
+    --chinese-white: #425449;
+    --dust-storm: #624d4d;
+    --platinum: #292b34;
+    --light-steel-blue: #485363;
+    --anti-flash-white: #4b4c50;
+    --chinese-silver: #5b5c63;
+    --manatee: #777a8b;
+    --bright-gray: #292b34;
+    --arsenic: #8b8c91;
+    --dark-electric-blue: #8b8c91;
+    --sonic-silver: #ffffff99;
+    --honeydew: rgba(228, 250, 237, 0.07);
+    --outer-space: #c0c0c0;
+    --old-lace: #2b1c05;
+    --dim-gray: #979797;
+    --quartz: #9f9fa1;
+    --carmel: #947440;
+    --transparent: rgba(0, 0, 0, 0);
+    --new-gray: #c4c3c3;
+
+    --new-gray-50: #212121;
+    --new-gray-100: #424242;
+    --new-gray-200: #616161;
+    --new-gray-300: #757575;
+    --new-gray-400: #9e9e9e;
+    --new-gray-500: #bdbdbd;
+    --new-gray-600: #e0e0e0;
+    --new-gray-700: #eeeeee;
+    --new-gray-800: #f5f5f5;
+    --new-gray-900: #fafafa;
+
+    --main-primary: #ee8444;
+    --main-primary--10: rgba(238, 132, 68, 0.1);
+    --main-primary--30: rgba(238, 132, 68, 0.3);
+    --extra-one: #14a54d;
+    --extra-one--10: rgba(20, 165, 77, 0.1);
+    --extra-one--30: rgba(20, 165, 77, 0.3);
+    --extra-two: #fe3c3c;
+    --extra-two--10: rgba(254, 60, 60, 0.1);
+    --extra-two--30: rgba(254, 60, 60, 0.3);
+    --extra-three: #006bff;
+    --extra-three--10: rgba(0, 107, 255, 0.1);
+    --extra-three--30: rgba(0, 107, 255, 0.3);
+    --extra-four: #f5be18;
+    --extra-four--10: rgba(245, 190, 24, 0.1);
+    --extra-four--30: rgba(245, 190, 24, 0.3);
+  }
+}
+
+@layer components {
+  .exeros-fragment {
+    @apply p-6 bg-white rounded-xl;
+  }
+}
+
+body {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}

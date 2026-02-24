@@ -1,0 +1,37 @@
+<svg id="bbd0c639-3311-4517-91b4-ca5b1d5432ec" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28">
+  <defs>
+    <style>
+      .af852f41-918a-4aaf-9e6f-a28dabcd48a1 {
+        fill: #e6e6e6;
+      }
+
+      .a6a0ff24-93cc-4b06-bac9-5c50165e9cae {
+        fill: #fadc0f;
+      }
+
+      .a0bda9af-4fc0-47c5-9c7e-3670ae4687df {
+        fill: #414042;
+      }
+
+      .b00f4098-794b-44cd-89d3-273ce3a74fb6 {
+        fill: none;
+        stroke: #414042;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 1.28px;
+      }
+    </style>
+  </defs>
+  <title>42</title>
+  <circle class="af852f41-918a-4aaf-9e6f-a28dabcd48a1" cx="14" cy="14" r="14"/>
+  <g>
+    <path class="a6a0ff24-93cc-4b06-bac9-5c50165e9cae" d="M23.9,19.9H4.1a1.07,1.07,0,0,1-.91-1.63l9.9-16a1.07,1.07,0,0,1,1.82,0l9.9,16A1.07,1.07,0,0,1,23.9,19.9Z"/>
+    <g>
+      <g>
+        <circle class="a0bda9af-4fc0-47c5-9c7e-3670ae4687df" cx="14" cy="16.8" r="0.84"/>
+        <path class="a0bda9af-4fc0-47c5-9c7e-3670ae4687df" d="M14,14.68h0a.79.79,0,0,1-.79-.75L13,8.23a1,1,0,0,1,1-1.09h0a1,1,0,0,1,1,1.09l-.25,5.7A.79.79,0,0,1,14,14.68Z"/>
+      </g>
+      <path class="b00f4098-794b-44cd-89d3-273ce3a74fb6" d="M23.9,19.9H4.1a1.07,1.07,0,0,1-.91-1.63l9.9-16a1.07,1.07,0,0,1,1.82,0l9.9,16A1.07,1.07,0,0,1,23.9,19.9Z"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,63 @@
+<app-dialog-container [title]="title">
+  <div class="flex flex-col gap-8 p-4" body>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="flex flex-col gap-6">
+      <app-text-control label="Template Name*" [formControl]="$any(form.controls.name)"> </app-text-control>
+
+      <div class="grid grid-cols-2 gap-4">
+        <app-select-control label="Alarm Type*" [formControl]="$any(form.controls.alarm_type_id)" [options]="alarmTypeOptions"> </app-select-control>
+
+        <app-text-control type="number" label="Status" [formControl]="$any(form.controls.status)"> </app-text-control>
+      </div>
+
+      <div class="grid grid-cols-2 gap-4">
+        <app-text-control type="number" label="Time Before (seconds)*" [formControl]="$any(form.controls.time_before)"> </app-text-control>
+
+        <app-text-control type="number" label="Time After (seconds)*" [formControl]="$any(form.controls.time_after)"> </app-text-control>
+      </div>
+
+      <div class="grid grid-cols-3 gap-4">
+        <app-checkbox-control label="Main Stream" [formControl]="$any(form.controls.main_stream)"> </app-checkbox-control>
+
+        <app-checkbox-control label="Sub Stream" [formControl]="$any(form.controls.sub_stream)"> </app-checkbox-control>
+      </div>
+
+      <div class="grid grid-cols-3 gap-4">
+        <app-checkbox-control label="Black Box GPS" [formControl]="$any(form.controls.bbox_gps)"> </app-checkbox-control>
+
+        <app-checkbox-control label="Black Box Log" [formControl]="$any(form.controls.bbox_log)"> </app-checkbox-control>
+
+        <app-checkbox-control label="Black Box Acc" [formControl]="$any(form.controls.bbox_acc)"> </app-checkbox-control>
+      </div>
+
+      <div class="grid grid-cols-3 gap-4">
+        <app-text-control label="Black Box" [formControl]="$any(form.controls.bbox)"> </app-text-control>
+
+        <app-text-control label="Video Channel" [formControl]="$any(form.controls.video_channel)"> </app-text-control>
+
+        <app-text-control label="Picture Channel" [formControl]="$any(form.controls.pic_channel)"> </app-text-control>
+      </div>
+
+      <div class="grid grid-cols-3 gap-4">
+        <app-text-control type="number" label="Flag" [formControl]="$any(form.controls.flag)"> </app-text-control>
+
+        <app-text-control type="number" label="Command Type" [formControl]="$any(form.controls.cmd_type)"> </app-text-control>
+
+        <app-text-control type="number" label="Interval (sec)" [formControl]="$any(form.controls.interval_sec)"> </app-text-control>
+      </div>
+
+      <div class="grid grid-cols-2 gap-4">
+        <app-text-control type="number" label="Alarm Count" [formControl]="$any(form.controls.alarm_count)"> </app-text-control>
+      </div>
+
+      <app-textarea-control label="Remark" [rows]="3" [formControl]="$any(form.controls.remark)"> </app-textarea-control>
+
+      <span class="text-xs text-dim-gray">* - mandatory fields</span>
+    </form>
+  </div>
+
+  <div class="flex flex-1 justify-end" footer>
+    <app-button [disabled]="form.invalid || loading" (buttonClick)="onSubmit()">
+      <span class="text-sm text-white font-semibold">{{ isEdit ? 'Update' : 'Create' }}</span>
+    </app-button>
+  </div>
+</app-dialog-container>

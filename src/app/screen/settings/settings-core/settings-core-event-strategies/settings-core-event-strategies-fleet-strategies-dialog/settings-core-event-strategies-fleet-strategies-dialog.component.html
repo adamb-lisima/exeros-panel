@@ -1,0 +1,49 @@
+<app-dialog-container title="Fleet Event Strategies">
+  <div class="p-5" body>
+    <div class="flex gap-6">
+      <div class="w-1/2">
+        <h3 class="text-lg font-semibold mb-4">Select Fleet</h3>
+        <div class="space-y-2 max-h-96 overflow-y-auto">
+          <button *ngFor="let fleet of fleetEventStrategies$ | async" class="w-full p-3 border border-new-gray-300 rounded cursor-pointer hover:bg-new-gray-50 transition-colors" [class.bg-blue-50]="form.value.selectedFleet?.fleet_id === fleet.fleet_id" [class.border-blue-300]="form.value.selectedFleet?.fleet_id === fleet.fleet_id" (click)="onFleetSelect(fleet)" (keydown)="onFleetKeydown($event, fleet)">
+            <div class="font-medium">{{ fleet.fleet_name }}</div>
+            <div class="text-sm text-new-gray-600">
+              <span *ngIf="Object.keys(fleet.event_strategies).length > 0; else noStrategies"> {{ Object.keys(fleet.event_strategies).length }} strategies assigned </span>
+              <ng-template #noStrategies>
+                <span class="text-new-gray-500">No strategies assigned</span>
+              </ng-template>
+            </div>
+          </button>
+
+          <div *ngIf="(fleetEventStrategies$ | async)?.length === 0" class="text-center text-new-gray-500 py-8">No fleets available</div>
+        </div>
+      </div>
+
+      <div class="w-1/2" *ngIf="form.value.selectedFleet">
+        <app-text-control label="Search strategies" [prefixIcon]="'search'" [formControl]="searchControl"></app-text-control>
+
+        <h3 class="text-lg font-semibold mb-4">Event Strategies for "{{ form.value.selectedFleet.fleet_name }}"</h3>
+        <div class="space-y-2 max-h-96 overflow-y-auto">
+          <div *ngFor="let strategy of eventStrategies$ | async; let i = index" class="flex items-center gap-3 p-2 hover:bg-new-gray-50 rounded">
+            <input type="checkbox" [formControl]="$any(strategiesArray.at(i))" class="rounded border-new-gray-300 cursor-pointer" />
+            <span class="text-sm flex-1">{{ strategy.name + ' (' + getAlarmTypeName(strategy.alarm_type_id) + ')' }}</span>
+          </div>
+
+          <div *ngIf="(eventStrategies$ | async)?.length === 0" class="text-center text-gray-500 py-8">No strategies available</div>
+        </div>
+      </div>
+
+      <div class="w-1/2 flex items-center justify-center text-gray-400" *ngIf="!form.value.selectedFleet">
+        <div class="text-center">
+          <p>Select a fleet to view and manage its event strategies</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex flex-1 items-center justify-end gap-9" footer>
+    <span class="text-sm text-main-primary underline font-semibold cursor-pointer" (click)="handleCloseClick()" (keydown.enter)="handleCloseClick()"> Cancel </span>
+    <app-button [disabled]="!form.value.selectedFleet" (buttonClick)="handleSaveClick()">
+      <span class="text-sm text-white font-semibold">Save Changes</span>
+    </app-button>
+  </div>
+</app-dialog-container>

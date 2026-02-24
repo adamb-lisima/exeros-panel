@@ -1,0 +1,37 @@
+<div class="relative">
+  <div class="absolute top-[-85px]">
+    <app-playbacks-top-actions></app-playbacks-top-actions>
+  </div>
+</div>
+
+<div class="border-b border-platinum w-[100%] mt-[-15px] mb-6"></div>
+<div class="grid grid-cols-3 gap-4">
+  <div class="col-start-1 h-[calc(100vh-220px)]">
+    <app-stream-playback-map class="mt-5 transition-all duration-300"> </app-stream-playback-map>
+  </div>
+
+  <div class="col-start-2 col-span-2 flex flex-col">
+    <div class="flex flex-col gap-3">
+      <ng-container *ngIf="playback$ | async as playback">
+        <div class="h-[calc(65vh-160px)]">
+          <app-stream-core-playback-videos class="h-full"></app-stream-core-playback-videos>
+        </div>
+      </ng-container>
+
+      <div class="w-full">
+        <app-playbacks-telemetry class="w-full"></app-playbacks-telemetry>
+      </div>
+    </div>
+  </div>
+
+  <div
+    *ngIf="hasAvailableData$ | async"
+    class="fixed bottom-0 right-0 z-[1] transition-all duration-300"
+    [ngStyle]="{
+      left: isMenuCollapsed ? '60px' : '180px',
+      'margin-right': '12px',
+      transform: isBottomHidden ? 'translateY(100%)' : 'translateY(0)'
+    }">
+    <app-playbacks-bottom [isHidden]="isBottomHidden" (hideClick)="toggleBottom()"></app-playbacks-bottom>
+  </div>
+</div>

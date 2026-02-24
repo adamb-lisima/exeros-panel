@@ -1,0 +1,31 @@
+<app-dialog-container [title]="title">
+  <div class="flex flex-col gap-8 p-5" body>
+    <div class="flex flex-col gap-4"></div>
+    <div class="flex flex-col gap-4">
+      <app-text-control label="Name*" [formControl]="bodyGroup.controls.name" [showHintSpace]="false" [error]="bodyGroup.controls.name.invalid && bodyGroup.controls.name.touched" errorText="The name field is required"></app-text-control>
+      <app-select-control class="col-span-2" label="Report type" [showSearchInput]="false" [customDisable]="(title === 'Edit report').toString()" [mode]="mode" [options]="reportTypes" [formControl]="bodyGroup.controls.report_type"></app-select-control>
+      <div *ngIf="bodyGroup.controls.report_type.value === 'EVENT'">
+        <app-select-control *ngIf="eventTypes$ | async as types" class="col-span-2" label="Event type" [clearable]="true" [multiple]="true" [selectAll]="true" [mode]="mode" [options]="types" [formControl]="bodyGroup.controls.event_types"></app-select-control>
+      </div>
+      <app-select-control class="col-span-2" label="Resource type" [showSearchInput]="false" [customDisable]="(title === 'Edit report').toString()" [mode]="mode" [options]="resourceTypes" [formControl]="bodyGroup.controls.resource_type"></app-select-control>
+      <div *ngIf="bodyGroup.controls.resource_type.value === 'FLEET'">
+        <app-multiselect-tree *ngIf="fleetOptions$ | async as options" class="col-span-2" label="Fleet" [options]="options" [multiple]="true" [formControl]="bodyGroup.controls.fleet_ids" [selectChildren]="true"> </app-multiselect-tree>
+      </div>
+      <div *ngIf="bodyGroup.controls.resource_type.value === 'VEHICLE'">
+        <app-select-control *ngIf="vehicleOptions$ | async as options" class="col-span-2" label="Vehicle" [clearable]="true" [multiple]="true" [options]="options" [formControl]="bodyGroup.controls.vehicle_ids"></app-select-control>
+      </div>
+      <div *ngIf="bodyGroup.controls.resource_type.value === 'DRIVER'">
+        <app-select-control *ngIf="driverOptions$ | async as options" class="col-span-2" label="Driver" [clearable]="true" [multiple]="true" [options]="options" [formControl]="bodyGroup.controls.driver_ids"></app-select-control>
+      </div>
+      <app-text-control label="E-mail receivers" [formControl]="bodyGroup.controls.receivers"></app-text-control>
+      <app-tree-control label="Frequency" [formControl]="bodyGroup.controls.type" [options]="typeOptions"></app-tree-control>
+    </div>
+    <td><app-checkbox-control label="ACTIVE" [formControl]="bodyGroup.controls.status"></app-checkbox-control></td>
+    <span class="text-xs text-dim-gray">* - mandatory fields</span>
+  </div>
+  <div class="flex flex-1 justify-end" footer>
+    <app-button (buttonClick)="data?.id ? handleUpdateReportClick() : handleAddReportClick()">
+      <span class="text-sm text-white font-semibold">{{ button }}</span>
+    </app-button>
+  </div>
+</app-dialog-container>

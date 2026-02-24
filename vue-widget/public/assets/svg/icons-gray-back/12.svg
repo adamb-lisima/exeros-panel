@@ -1,0 +1,53 @@
+<svg id="ec746fda-8856-4b33-a9bf-01e93a9112ba" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28">
+  <defs>
+    <style>
+      .f49ebe90-0ec1-4580-ac0c-e21c24f43bef {
+        fill: #e6e6e6;
+      }
+
+      .a87fa4a8-0cf5-4e36-8589-983dd959fa27 {
+        fill: #fadc0f;
+      }
+
+      .a4309f1d-96da-4dfe-9728-1e7e00bb0126 {
+        fill: #fff;
+      }
+
+      .bf71e041-abe0-4bc5-8b53-ecb178b8075c {
+        fill: none;
+      }
+
+      .bf71e041-abe0-4bc5-8b53-ecb178b8075c, .f5f36b30-44a4-47fe-a07d-94b09e505b2a {
+        stroke: #414042;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 1.28px;
+      }
+
+      .f5f36b30-44a4-47fe-a07d-94b09e505b2a {
+        fill: #414042;
+      }
+    </style>
+  </defs>
+  <title>12</title>
+  <circle class="f49ebe90-0ec1-4580-ac0c-e21c24f43bef" cx="14" cy="14" r="14"/>
+  <g>
+    <g>
+      <circle class="a87fa4a8-0cf5-4e36-8589-983dd959fa27" cx="14.02" cy="14.96" r="8.77"/>
+      <path class="a4309f1d-96da-4dfe-9728-1e7e00bb0126" d="M9.34,5.19A25.33,25.33,0,0,1,4.86,9.67a3.12,3.12,0,0,1-.93-2.24A3.17,3.17,0,0,1,9.34,5.19Z"/>
+      <path class="a4309f1d-96da-4dfe-9728-1e7e00bb0126" d="M18.66,5.19a25.33,25.33,0,0,0,4.48,4.48,3.12,3.12,0,0,0,.93-2.24,3.17,3.17,0,0,0-5.41-2.24Z"/>
+    </g>
+    <g>
+      <g>
+        <circle class="bf71e041-abe0-4bc5-8b53-ecb178b8075c" cx="14.02" cy="14.96" r="8.77"/>
+        <line class="bf71e041-abe0-4bc5-8b53-ecb178b8075c" x1="13.35" y1="15.68" x2="11.62" y2="17.53"/>
+        <line class="bf71e041-abe0-4bc5-8b53-ecb178b8075c" x1="14.02" y1="10.06" x2="14.02" y2="13.97"/>
+        <line class="bf71e041-abe0-4bc5-8b53-ecb178b8075c" x1="7.93" y1="21.26" x2="5.49" y2="23.7"/>
+        <line class="bf71e041-abe0-4bc5-8b53-ecb178b8075c" x1="20.12" y1="21.26" x2="22.47" y2="23.61"/>
+        <circle class="f5f36b30-44a4-47fe-a07d-94b09e505b2a" cx="14.02" cy="14.96" r="0.79"/>
+      </g>
+      <path class="bf71e041-abe0-4bc5-8b53-ecb178b8075c" d="M9.34,5.19A25.33,25.33,0,0,1,4.86,9.67a3.12,3.12,0,0,1-.93-2.24A3.17,3.17,0,0,1,9.34,5.19Z"/>
+      <path class="bf71e041-abe0-4bc5-8b53-ecb178b8075c" d="M18.66,5.19a25.33,25.33,0,0,0,4.48,4.48,3.12,3.12,0,0,0,.93-2.24,3.17,3.17,0,0,0-5.41-2.24Z"/>
+    </g>
+  </g>
+</svg>

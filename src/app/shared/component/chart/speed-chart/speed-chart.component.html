@@ -1,0 +1,94 @@
+<div class="flex flex-row gap-1 items-start">
+  <ng-container *ngIf="_position$ | async as position">
+    <div class="bg-[rgba(0,107,255,.07)] p-2 rounded-md flex flex-row gap-1">
+      <span class="text-xs text-dim-gray mt-0.5">Speed : </span>
+      <ng-container *ngIf="event?.speed !== undefined">
+        <span *ngIf="event!.speed | unitConverter | async as speed" [ngClass]="[event?.is_overlimit ? 'text-extra-two' : 'text-black']" class="font-semibold text-sm flex items-center">{{ speed.value }} {{ speed.unit }}</span>
+      </ng-container>
+      <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <mask id="mask0_2064_16979" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="20" height="21">
+          <rect y="0.5" width="20" height="20" fill="#D9D9D9" />
+        </mask>
+        <g mask="url(#mask0_2064_16979)">
+          <path d="M8.96479 13.1602C9.22326 13.4188 9.555 13.5366 9.96 13.5135C10.3649 13.4906 10.6603 13.3451 10.8463 13.0769L14.0475 8.61082C14.1611 8.4461 14.1514 8.29721 14.0183 8.16416C13.8854 8.03124 13.7363 8.02131 13.571 8.13437L9.08979 11.3204C8.8109 11.5064 8.65569 11.7949 8.62417 12.1858C8.59264 12.5769 8.70618 12.9017 8.96479 13.1602ZM10 4.66666C10.5961 4.66666 11.1506 4.72436 11.6635 4.83978C12.1763 4.9552 12.6779 5.12985 13.1683 5.36374C13.2836 5.41499 13.3835 5.49916 13.4679 5.61624C13.5524 5.73318 13.5684 5.84242 13.516 5.94395C13.4637 6.04548 13.3606 6.11221 13.2067 6.14416C13.0529 6.17624 12.9167 6.16666 12.7981 6.11541C12.3653 5.90485 11.9212 5.74964 11.4656 5.64978C11.0099 5.54992 10.5214 5.49999 10 5.49999C8.15278 5.49999 6.57986 6.1493 5.28125 7.44791C3.98264 8.74652 3.33333 10.3194 3.33333 12.1667C3.33333 12.75 3.41319 13.3264 3.57292 13.8958C3.73264 14.4653 3.95833 15 4.25 15.5H15.75C16.0694 14.9722 16.3021 14.4236 16.4479 13.8542C16.5938 13.2847 16.6667 12.6944 16.6667 12.0833C16.6667 11.658 16.6194 11.2051 16.5248 10.7244C16.4302 10.2435 16.2777 9.78839 16.0673 9.35895C16.016 9.24034 16.0022 9.12332 16.0256 9.00791C16.0491 8.89263 16.111 8.80055 16.2113 8.73166C16.3044 8.66916 16.4052 8.65499 16.5135 8.68916C16.622 8.72332 16.7019 8.79485 16.7531 8.90374C17.0256 9.46471 17.2174 9.99867 17.3285 10.5056C17.4397 11.0126 17.4968 11.5353 17.5 12.0737C17.5032 12.7905 17.4236 13.4594 17.2613 14.0802C17.0989 14.7009 16.8462 15.3269 16.5031 15.9583C16.4359 16.0694 16.3344 16.1597 16.1988 16.2292C16.0631 16.2986 15.9135 16.3333 15.75 16.3333H4.25C4.09722 16.3333 3.95569 16.296 3.82542 16.2212C3.695 16.1464 3.58549 16.0374 3.49688 15.8942C3.22118 15.408 2.98611 14.8597 2.79167 14.2492C2.59722 13.6386 2.5 12.9444 2.5 12.1667C2.5 11.1421 2.69431 10.1751 3.08292 9.26582C3.47153 8.35638 4.00194 7.55985 4.67417 6.87624C5.34653 6.19277 6.1416 5.6536 7.05938 5.25874C7.97701 4.86402 8.95722 4.66666 10 4.66666Z" fill="#FE3C3C" />
+        </g>
+      </svg>
+    </div>
+  </ng-container>
+  <div class="flex-1"></div>
+  <div class="bg-[rgba(0,107,255,.07)] p-2 rounded-md flex items-center">
+    <span class="text-xs">Accelerator : </span>
+    <span class="font-semibold text-sm">Null</span>
+  </div>
+  <div class="bg-[rgba(0,107,255,.07)] p-2 rounded-md flex items-center">
+    <span class="text-xs">Brake pedal : </span>
+    <span class="font-semibold text-sm">Null</span>
+  </div>
+  <div class="bg-[rgba(0,107,255,.07)] p-2 rounded-md flex items-center">
+    <span class="text-xs">Indicator usage : </span>
+    <span class="font-semibold text-sm">None</span>
+  </div>
+</div>
+
+<div #chartContainer class="h-[250px] relative overflow-x-auto overflow-y-visible" (mousewheel)="_chartContainerWheel($event)">
+  <ng-container *ngIf="_chart$ | async as chart">
+    <ng-container *ngIf="_yAxis$ | async as yAxis">
+      <svg class="absolute h-full" [style.left]="chart.x + 'px'" [style.top]="0" [attr.width]="chart.width">
+        <g>
+          <line *ngFor="let tick of yAxis.ticks" x1="0" x2="100%" [attr.y1]="tick.y" [attr.y2]="tick.y" [attr.stroke]="_yAxisColor" stroke-width="1"></line>
+        </g>
+        <g>
+          <g>
+            <path class="pointer-events-none" [attr.d]="chart.lineData" fill="none" style="stroke: var(--extra-three)"></path>
+          </g>
+          <g *ngFor="let point of chart.points">
+            <rect [attr.x]="point.rect.x" [attr.y]="point.rect.y" [attr.width]="point.rect.width" [attr.height]="point.rect.height" class="cursor-pointer" fill="transparent" stroke="transparent" (mouseover)="_showPointHover(point)" (mouseleave)="_hidePointHover()" (click)="_selectPoint(point.data)" (keydown.enter)="_selectPoint(point.data)" (focus)="_showPointHover(point)"></rect>
+          </g>
+          <g *ngFor="let label of _xAxis$ | async as xAxis; let i = index">
+            <line [attr.x1]="label.x" [attr.x2]="label.x" [attr.stroke]="_yAxisColor" class="pointer-events-none" y1="0%" [attr.y2]="chart.height" stroke-width="1"></line>
+            <text class="text-xs w-12" style="fill: var(--dim-gray)" [attr.x]="label.x - 24" [attr.y]="chart.height + 20" text-anchor="start" alignment-baseline="middle">{{ label.date | dateFormat : 'jsDate' : 'timeFormat' }}</text>
+          </g>
+          <g *ngIf="_eventStart$ | async as eventStart">
+            <line [attr.x1]="eventStart.pos" [attr.x2]="eventStart.pos" style="stroke: var(--main-primary)" class="pointer-events-none" y1="0%" [attr.y2]="chart.height" stroke-width="2"></line>
+            <image [attr.xlink:href]="eventStart.type" height="36" width="36" y="50%" [attr.x]="eventStart.pos - 18"></image>
+          </g>
+          <g *ngIf="_smoothPosition$ | async as point">
+            <line [attr.x1]="point.x" [attr.x2]="point.x" style="stroke: var(--outer-space)" class="pointer-events-none" y1="0%" y2="100%" stroke-width="1"></line>
+            <circle #circle class="pointer-events-none" r="4" [attr.cx]="point.x" [attr.cy]="point.y" style="stroke: var(--main-primary)" fill="white" stroke-width="4"></circle>
+            <rect [attr.x]="point.x - 30" [attr.y]="10" [attr.width]="60" [attr.height]="20" class="" fill="white" stroke="black"></rect>
+            <text class="text-xs w-12 border border-black" style="fill: var(--dim-gray)" [attr.x]="point.x - 24" [attr.y]="20" text-anchor="start" alignment-baseline="middle">{{ point.time | dateFormat : 'jsDate' : 'timeFormat' }}</text>
+          </g>
+          <g *ngIf="_selectedPoint$ | async as point">
+            <line [attr.x1]="point.x" [attr.x2]="point.x" style="stroke: var(--outer-space)" class="opacity-50 pointer-events-none" y1="0%" y2="100%" stroke-width="1"></line>
+            <circle #circle class="pointer-events-none opacity-50" r="4" [attr.cx]="point.x" [attr.cy]="point.y" style="stroke: var(--main-primary)" fill="white" stroke-width="4"></circle>
+            <ng-container [ngSwitch]="point.position">
+              <rect *ngSwitchCase="'first'" [attr.x]="point.x" [attr.y]="10" [attr.width]="60" [attr.height]="35" class="" fill="white" stroke="black"></rect>
+              <text *ngSwitchCase="'first'" class="text-xs w-12 border border-black" style="fill: var(--dim-gray)" [attr.x]="point.x + 6" [attr.y]="20" text-anchor="start" alignment-baseline="middle">{{ point.date | dateFormat : 'jsDate' : 'timeFormat' }}</text>
+              <text *ngSwitchCase="'first'" class="text-xs w-12 border border-black" style="fill: var(--dim-gray)" [attr.x]="point.x + 6" [attr.y]="35" text-anchor="start" alignment-baseline="middle">
+                <ng-container [ngTemplateOutlet]="speedValue"></ng-container>
+              </text>
+              <rect *ngSwitchCase="'last'" [attr.x]="point.x - 60" [attr.y]="10" [attr.width]="60" [attr.height]="35" class="" fill="white" stroke="black"></rect>
+              <text *ngSwitchCase="'last'" class="text-xs w-12 border border-black" style="fill: var(--dim-gray)" [attr.x]="point.x - 54" [attr.y]="20" text-anchor="start" alignment-baseline="middle">{{ point.date | dateFormat : 'jsDate' : 'timeFormat' }}</text>
+              <text *ngSwitchCase="'last'" class="text-xs w-12 border border-black" style="fill: var(--dim-gray)" [attr.x]="point.x - 54" [attr.y]="35" text-anchor="start" alignment-baseline="middle">
+                <ng-container [ngTemplateOutlet]="speedValue"></ng-container>
+              </text>
+              <rect *ngSwitchDefault [attr.x]="point.x - 30" [attr.y]="10" [attr.width]="60" [attr.height]="35" class="" fill="white" stroke="black"></rect>
+              <text *ngSwitchDefault class="text-xs w-12 border border-black" style="fill: var(--dim-gray)" [attr.x]="point.x - 24" [attr.y]="20" text-anchor="start" alignment-baseline="middle">{{ point.date | dateFormat : 'jsDate' : 'timeFormat' }}</text>
+              <text *ngSwitchDefault class="text-xs w-12 border border-black" style="fill: var(--dim-gray)" [attr.x]="point.x - 24" [attr.y]="35" text-anchor="start" alignment-baseline="middle">
+                <ng-container [ngTemplateOutlet]="speedValue"></ng-container>
+              </text>
+              <ng-template #speedValue>
+                <ng-container *ngIf="point.speed | unitAdder : true | async as speed">{{ speed.value | number : '.0-1' }} {{ speed.unit }}</ng-container>
+              </ng-template>
+            </ng-container>
+          </g>
+        </g>
+      </svg>
+      <svg class="overflow-visible sticky h-full" style="background-color: var(--white)" [style.left]="0" [style.top]="0" [attr.width]="yAxis.width">
+        <ng-container *ngFor="let tick of yAxis.ticks">
+          <text *ngIf="tick.text | unitAdder : true | async as yValue" class="text-xs" style="fill: var(--dim-gray)" [attr.y]="tick.y" x="0%" text-anchor="start" alignment-baseline="middle">{{ yValue.value | number : '.0-1' }} {{ yValue.unit }}</text>
+        </ng-container>
+      </svg>
+    </ng-container>
+  </ng-container>
+</div>

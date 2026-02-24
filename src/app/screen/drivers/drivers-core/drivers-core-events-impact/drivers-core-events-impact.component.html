@@ -1,0 +1,19 @@
+<div class="flex flex-col h-[500px] p-4">
+  <div class="flex justify-between items-center mb-2">
+    <p class="font-semibold text-sm">Events Impact Analysis</p>
+  </div>
+
+  <div class="flex-1 -mx-6 -mt-2">
+    <ng-container *ngIf="eventImpactData$ | async as eventImpactData">
+      <ng-container *ngIf="hasData(eventImpactData); else noData">
+        <app-pie-chart [data]="eventImpactData" [height]="400" [colors]="['#006BFF', '#FF9E2D', '#FF4D4F', '#52C41A', '#722ED1', '#13C2C2', '#FAAD14', '#EB2F96']"> </app-pie-chart>
+      </ng-container>
+    </ng-container>
+
+    <ng-template #noData>
+      <div class="h-full flex items-center justify-center">
+        <p class="text-sm text-gray-500">No event impact data available for this period</p>
+      </div>
+    </ng-template>
+  </div>
+</div>

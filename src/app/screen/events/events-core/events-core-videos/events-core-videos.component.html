@@ -1,0 +1,5 @@
+<div *ngIf="event$ | async as event">
+  <div class="vue-component-container">
+    <events-video [attr.event-data]="eventData" [attr.mode-data]="modeString" [attr.user-permissions]="permissionsString" #eventsVideo></events-video>
+  </div>
+</div>

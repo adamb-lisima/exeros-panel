@@ -1,0 +1,98 @@
+<div class="w-[650px] flex flex-col gap-6 rounded-md bg-white overflow-y-auto max-h-[90vh]">
+  <div class="flex justify-between items-center px-5 pt-5">
+    <p class="font-medium">Share clip</p>
+    <div class="rounded-md cursor-pointer bg-anti-flash-white" (click)="handleCloseClick()" (keydown.enter)="handleCloseClick()">
+      <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12.7279 21.2129L21.2132 12.7276" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M21.2132 21.2138L12.7279 12.7285" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </div>
+  </div>
+  <span class="w-full flex-[0_0_1px] bg-platinum"></span>
+  <div class="flex flex-col gap-3 px-5">
+    <app-text-control label="Clip name*" [formControl]="bodyGroup.controls.name"></app-text-control>
+
+    <ng-container *ngIf="sharedClipsAccessType$ | async as accessType">
+      <div class="flex flex-row w-full items-center gap-2">
+        <app-select-control class="flex-grow" label="e-mails" [options]="contactOptions" [multiple]="true" [formControl]="bodyGroup.controls.selectedContacts"> </app-select-control>
+        <div *appHasPermission="[[accessGroup.SETTINGS_SHARED_CLIPS_EMAILS]]" class="flex pb-5" [appTooltip]="'Predefined E-mail Recipients can be managed in settings-Shared Clips E-mails page.'">
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f">
+            <path d="M440-280h80v-240h-80v240Zm40-320q17 0 28.5-11.5T520-640q0-17-11.5-28.5T480-680q-17 0-28.5 11.5T440-640q0 17 11.5 28.5T480-600Zm0 520q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z" />
+          </svg>
+          <span class="px-2 text-main-primary text-sm font-semibold underline cursor-pointer" (click)="settingsRedirect()" (keydown.enter)="settingsRedirect()">settings</span>
+        </div>
+      </div>
+      <div *ngIf="accessType !== 'LIMITED'" class="flex flex-col gap-3">
+        <app-text-control label="Additional e-mails (separate by comma)" [formControl]="bodyGroup.controls.manualEmails"> </app-text-control>
+      </div>
+    </ng-container>
+
+    <app-select-control label="Stream" [options]="streamOptions" [formControl]="bodyGroup.controls.stream"></app-select-control>
+    <app-time-control label="Clip beginning*" [formControl]="bodyGroup.controls.from"></app-time-control>
+    <app-text-control label="Days until clip expires*" type="number" [min]="1" [max]="999" [step]="1" [formControl]="bodyGroup.controls.expires_after_days"></app-text-control>
+    <div class="flex flex-col gap-1">
+      <span class="text-sm font-medium text-gray-700 mb-3">Clip duration*</span>
+      <div class="flex flex-wrap gap-2">
+        <button *ngFor="let duration of clipDurations" class="py-2 px-4 rounded-xl cursor-pointer font-medium text-xs border border-platinum bg-white select-none" [ngClass]="{ 'border-extra-three text-extra-three': selectedDuration === duration.value }" (click)="updateDuration(duration.value)">
+          {{ duration.label }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex px-5 pt-3 flex-wrap gap-4">
+    <ng-container *ngIf="cameras$ | async as cameras">
+      <div *ngFor="let camera of cameras; trackBy: trackByCamera" class="flex gap-2 py-2 px-4 rounded-xl cursor-pointer font-medium text-xs border border-platinum bg-white select-none" [ngClass]="{ 'text-extra-three border-extra-three': isSelected(camera) }" (click)="toggleSelection(camera)" (keydown.enter)="toggleSelection(camera)">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4.5067 14.6673H11.4934C13.3334 14.6673 14.0667 13.5407 14.1534 12.1673L14.5 6.66065C14.5934 5.22065 13.4467 4.00065 12 4.00065C11.5934 4.00065 11.22 3.76732 11.0334 3.40732L10.5534 2.44065C10.2467 1.83398 9.4467 1.33398 8.7667 1.33398H7.24003C6.55337 1.33398 5.75337 1.33398 5.4467 2.44065L4.9667 3.40732C4.78003 3.76732 4.4067 4.00065 4.00003 4.00065C2.55337 4.00065 1.4067 5.22065 1.50003 6.66065L1.8467 12.1673C1.9267 13.5407 2.6667 14.6673 4.5067 14.6673Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M7 5.33398H9" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M8.00007 11.9993C9.19341 11.9993 10.1667 11.026 10.1667 9.83268C10.1667 8.63935 9.19341 7.66602 8.00007 7.66602C6.80674 7.66602 5.83341 8.63935 5.83341 9.83268C5.83341 11.026 6.80674 11.9993 8.00007 11.9993Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        {{ camera.name }}
+      </div>
+    </ng-container>
+  </div>
+
+  <div class="flex flex-col pt-4 px-5">
+    <p>Additional security</p>
+    <app-checkbox-control label="Password Protection" [formControl]="bodyGroup.controls.is_password_required" (change)="togglePassword()"> </app-checkbox-control>
+
+    <div *ngIf="isPasswordRequired" class="flex flex-col justify-start pt-2 gap-2">
+      <span class="w-full relative">
+        <app-text-control label="Password" [formControl]="bodyGroup.controls.password"> </app-text-control>
+        <span class="absolute right-3 top-1.5 cursor-pointer text-main-primary px-4 py-1.5 bg-white rounded-md border border-main-primary inline-flex justify-center items-center gap-1 text-sm" (click)="confirmPassword()" (keydown.enter)="confirmPassword()">
+          {{ isPasswordConfirmed ? 'Confirmed!' : 'Confirm' }}
+        </span>
+      </span>
+      <span>
+        <app-button class="flex justify-start w-[210px] ml-[-15px] mt-[-25px]" type="quaternary" (click)="generatePassword()" (keydown.enter)="generatePassword()">
+          <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g clip-path="url(#clip0_4062_1487)">
+              <path d="M15.5293 10.7178C15.5293 9.86681 15.4972 9.02334 15.4343 8.1885C15.3309 6.81794 14.2485 5.73552 12.8779 5.63214C12.0431 5.56917 11.1996 5.53711 10.3486 5.53711C9.49767 5.53711 8.6542 5.56917 7.81936 5.63214C6.4488 5.73552 5.36638 6.81794 5.263 8.1885C5.25153 8.34055 5.24108 8.49289 5.23167 8.64551M15.5293 10.7178L17.6016 8.64551M15.5293 10.7178L13.457 8.64551M5.16797 10.7178C5.16797 11.5687 5.20003 12.4122 5.263 13.247C5.36638 14.6176 6.4488 15.7 7.81936 15.8034C8.6542 15.8664 9.49767 15.8984 10.3486 15.8984C11.1996 15.8984 12.0431 15.8664 12.8779 15.8034C14.2485 15.7 15.3309 14.6176 15.4343 13.247C15.4457 13.095 15.4562 12.9426 15.4656 12.79M5.16797 10.7178L7.24023 12.79M5.16797 10.7178L3.0957 12.79" stroke="#EE8444" stroke-width="1.24336" stroke-linecap="round" stroke-linejoin="round" />
+            </g>
+            <defs>
+              <clipPath id="clip0_4062_1487">
+                <rect width="16.5781" height="16.5781" fill="white" transform="translate(2.06055 2.42871)" />
+              </clipPath>
+            </defs>
+          </svg>
+
+          {{ passwordGenerated ? 'Password Generated' : 'Generate Password' }}
+        </app-button>
+      </span>
+    </div>
+  </div>
+  <div class="text-[10px] font-normal text-new-gray-500 px-5 pt-2">Clip will be available in about 15 minutes after you copy the link or send the invitations. Once it’s ready, invited viewers will get an e-mail with the clip details — and you’ll get a confirmation e-mail too.</div>
+
+  <span class="w-full flex-[0_0_1px] bg-platinum"></span>
+
+  <div class="flex justify-end px-5 pb-5 gap-2">
+    <app-button (keydown.enter)="handleCopyLink()" (click)="handleCopyLink()" type="quaternary" [disabled]="!bodyGroup.dirty || selectedCameras.length === 0">
+      <svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M13.2294 2.62027C12.325 1.71587 10.8587 1.71587 9.95431 2.62027L7.17527 5.39931C6.27087 6.30372 6.27087 7.77004 7.17527 8.67444C7.36725 8.86643 7.58374 9.01712 7.81425 9.12723C8.04507 9.2375 8.1428 9.514 8.03253 9.74482C7.92227 9.97564 7.64577 10.0734 7.41495 9.9631C7.09087 9.80829 6.78761 9.59684 6.52024 9.32947C5.25408 8.06331 5.25408 6.01045 6.52024 4.74429L9.29928 1.96525C10.5654 0.699084 12.6183 0.699084 13.8845 1.96525C15.1506 3.23141 15.1506 5.28427 13.8845 6.55043L12.7994 7.63547C12.6185 7.81635 12.3253 7.81635 12.1444 7.63547C11.9635 7.45459 11.9635 7.16133 12.1444 6.98045L13.2294 5.8954C14.1338 4.991 14.1338 3.52468 13.2294 2.62027ZM8.66679 5.25529C8.77705 5.02447 9.05356 4.92674 9.28437 5.037C9.60845 5.19182 9.91171 5.40327 10.1791 5.67063C11.4452 6.9368 11.4452 8.98965 10.1791 10.2558L7.40004 13.0349C6.13388 14.301 4.08102 14.301 2.81486 13.0349C1.54869 11.7687 1.54869 9.71584 2.81486 8.44967L3.8999 7.36463C4.08078 7.18375 4.37404 7.18375 4.55493 7.36463C4.73581 7.54551 4.73581 7.83878 4.55493 8.01966L3.46988 9.1047C2.56548 10.0091 2.56548 11.4754 3.46988 12.3798C4.37428 13.2842 5.84061 13.2842 6.74501 12.3798L9.52405 9.60079C10.4285 8.69639 10.4285 7.23006 9.52405 6.32566C9.33207 6.13368 9.11558 5.98299 8.88507 5.87287C8.65425 5.76261 8.55653 5.48611 8.66679 5.25529Z" fill="#EE8444" />
+      </svg>
+      {{ linkCopied ? 'Link Copied' : 'Copy share link' }}
+    </app-button>
+    <app-button (click)="handleSendInvitation()" (keydown.enter)="handleSendInvitation()" [disabled]="!bodyGroup.dirty || selectedCameras.length === 0"> Send invitation </app-button>
+  </div>
+</div>

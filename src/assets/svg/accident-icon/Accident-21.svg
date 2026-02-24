@@ -1,0 +1,36 @@
+<svg id="bfdc9caa-fcc7-4195-979b-6aefa7f57a3b" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80">
+  <defs>
+    <style>
+      .e9b92b81-da04-40ea-b712-593fb918bb7f {
+        fill: #fadc0f;
+      }
+
+      .bbbbed3d-aadc-4159-982b-701a7080f03f {
+        fill: #fff;
+      }
+
+      .b136834f-5f8f-468b-9bb2-5e69399b9b91 {
+        fill: none;
+        stroke: #414042;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+    </style>
+  </defs>
+  <title>Accident-21</title>
+  <g>
+    <g>
+      <circle class="e9b92b81-da04-40ea-b712-593fb918bb7f" cx="40" cy="40" r="39.05"/>
+      <circle class="bbbbed3d-aadc-4159-982b-701a7080f03f" cx="40" cy="40" r="34.02"/>
+    </g>
+    <g>
+      <circle class="b136834f-5f8f-468b-9bb2-5e69399b9b91" cx="40" cy="40" r="34.02"/>
+      <circle class="b136834f-5f8f-468b-9bb2-5e69399b9b91" cx="40" cy="40" r="39.05"/>
+      <line class="b136834f-5f8f-468b-9bb2-5e69399b9b91" x1="40" y1="5.98" x2="40" y2="13.28"/>
+      <line class="b136834f-5f8f-468b-9bb2-5e69399b9b91" x1="5.98" y1="40" x2="13.28" y2="40"/>
+      <line class="b136834f-5f8f-468b-9bb2-5e69399b9b91" x1="40" y1="74.02" x2="40" y2="66.72"/>
+      <line class="b136834f-5f8f-468b-9bb2-5e69399b9b91" x1="74.02" y1="40" x2="66.72" y2="40"/>
+      <polyline class="b136834f-5f8f-468b-9bb2-5e69399b9b91" points="40 19.01 40 39.48 52.25 48.47"/>
+    </g>
+  </g>
+</svg>

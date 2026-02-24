@@ -1,0 +1,33 @@
+<svg id="b8c7b6f2-c074-4c9f-a184-2916bcdf6589" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80">
+  <defs>
+    <style>
+      .f927622b-afe6-4416-8d3f-850b8e1595ce {
+        fill: #fadc0f;
+      }
+
+      .ad0abd40-355c-4e7d-879d-431ce6031f96 {
+        fill: #fff;
+      }
+
+      .a5cab038-702d-4f92-a522-0208caa4dd35 {
+        fill: none;
+        stroke: #414042;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+    </style>
+  </defs>
+  <title>Accident-8</title>
+  <g>
+    <g>
+      <path class="f927622b-afe6-4416-8d3f-850b8e1595ce" d="M65.61,69.91a39.39,39.39,0,0,1-51.16,0v-.33C15.16,57,26.32,47,40,47s24.87,10,25.55,22.65Z"/>
+      <path class="f927622b-afe6-4416-8d3f-850b8e1595ce" d="M54.06,33A14.06,14.06,0,1,1,40,18.9,14.06,14.06,0,0,1,54.06,33Z"/>
+      <path class="ad0abd40-355c-4e7d-879d-431ce6031f96" d="M79.38,40A39.27,39.27,0,0,1,65.61,69.91l-.06-.23C64.87,57.07,53.69,47,40,47A14.07,14.07,0,1,0,25.94,33,14.06,14.06,0,0,0,40,47c-13.68,0-24.84,10-25.55,22.6V70A39.38,39.38,0,1,1,79.38,40Z"/>
+    </g>
+    <g>
+      <circle class="a5cab038-702d-4f92-a522-0208caa4dd35" cx="40" cy="32.97" r="14.06"/>
+      <circle class="a5cab038-702d-4f92-a522-0208caa4dd35" cx="40" cy="40" r="39.38"/>
+      <path class="a5cab038-702d-4f92-a522-0208caa4dd35" d="M14.45,69.63C15.16,57,26.32,47,40,47s24.87,10,25.55,22.65"/>
+    </g>
+  </g>
+</svg>

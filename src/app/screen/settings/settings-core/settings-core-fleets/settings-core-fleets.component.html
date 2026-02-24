@@ -1,0 +1,67 @@
+<div class="flex flex-col gap-5 p-5">
+  <app-text-control [formControl]="searchControl" class="w-[534px]" label="Search branch or vehicle" [prefixIcon]="'search'" />
+  <div class="flex gap-5">
+    <div class="w-72 flex flex-col gap-6 p-5 border-r border-bright-gray">
+      <app-button class="font-semibold" (buttonClick)="handleCreateBranchClick()">Create new fleet</app-button>
+      <div class="h-[500px] flex flex-col gap-2 overflow-y-auto">
+        <div class="flex items-center gap-1">
+          <div class="w-5 flex justify-center rotate-90 text-main-primary">
+            <svg width="4" height="5" viewBox="0 0 4 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1.38894 4.63006C1.16794 4.85105 0.91246 4.90181 0.622485 4.78233C0.332495 4.66286 0.1875 4.44552 0.1875 4.1303V0.869218C0.1875 0.553999 0.332495 0.336657 0.622485 0.21719C0.91246 0.0977087 1.16794 0.148466 1.38894 0.369462L3.02451 2.00506C3.1008 2.08133 3.15521 2.15929 3.18774 2.23894C3.22028 2.31858 3.23655 2.40552 3.23655 2.49976C3.23655 2.594 3.22028 2.68093 3.18774 2.76057C3.15521 2.84023 3.1008 2.91819 3.02451 2.99446L1.38894 4.63006Z" fill="currentColor" />
+            </svg>
+          </div>
+          <span class="text-sm text-main-primary font-medium cursor-pointer" (click)="handleAllVehiclesClick()" (keydown.enter)="handleAllVehiclesClick()">All vehicles</span>
+        </div>
+        <ng-container *ngFor="let fleet of fleetTree$ | async">
+          <div class="flex items-center ml-5 gap-1 cursor-pointer" (click)="handleFleetClick(fleet)" (keydown.enter)="handleFleetClick(fleet)">
+            <div class="w-5 flex justify-center transform transition-transform" [ngClass]="openedFleets.includes(fleet.id) ? 'rotate-90 text-main-primary' : 'text-dark-electric-blue'">
+              <svg width="4" height="5" viewBox="0 0 4 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1.38894 4.63006C1.16794 4.85105 0.91246 4.90181 0.622485 4.78233C0.332495 4.66286 0.1875 4.44552 0.1875 4.1303V0.869218C0.1875 0.553999 0.332495 0.336657 0.622485 0.21719C0.91246 0.0977087 1.16794 0.148466 1.38894 0.369462L3.02451 2.00506C3.1008 2.08133 3.15521 2.15929 3.18774 2.23894C3.22028 2.31858 3.23655 2.40552 3.23655 2.49976C3.23655 2.594 3.22028 2.68093 3.18774 2.76057C3.15521 2.84023 3.1008 2.91819 3.02451 2.99446L1.38894 4.63006Z" fill="currentColor" />
+              </svg>
+            </div>
+            <span class="text-sm font-medium" [ngClass]="openedFleets.includes(fleet.id) ? 'text-main-primary' : 'text-dark-electric-blue'"> {{ fleet.name }}</span>
+          </div>
+          <ng-container *ngIf="fleet.children?.length && openedFleets.includes(fleet.id)">
+            <ng-container *ngTemplateOutlet="branch; context: { fleets: fleet.children, index: 2 }"></ng-container>
+          </ng-container>
+        </ng-container>
+      </div>
+    </div>
+    <div class="flex-1 flex flex-col gap-4">
+      <div class="flex-1">
+        <ng-container *ngIf="selectedFleet; else vehicleTemplate">
+          <app-settings-core-fleets-fleet class="flex-1" [fleet]="selectedFleet" [data]="vehicleResponse$ | async" (deleteVehicle)="handleDeleteVehicleClick($event)" (addVehicle)="handleAddVehicleClick()" (editFleet)="handleEditFleetClick()" (editVehicle)="handleEditVehicleClick($event)" (vehicleCommission)="handleVehicleCommissionClick($event)" />
+        </ng-container>
+        <ng-template #vehicleTemplate>
+          <app-settings-core-fleets-vehicle [data]="vehicleResponse$ | async" (deleteVehicle)="handleDeleteVehicleClick($event)" (editVehicle)="handleEditVehicleClick($event)" (commissionVehicle)="handleVehicleCommissionClick($event)" />
+        </ng-template>
+      </div>
+      <div *ngIf="vehicleResponse$ | async as response" class="flex flex-col gap-5">
+        <ng-container *ngIf="perPage$ | async as perPage">
+          <app-paginator *ngIf="response.meta.total_items > 0" class="flex justify-center" [info]="{ page: response.meta.current_page, perPage, totalItems: response.meta.total_items }" (pageChange)="onPageChange($event)" />
+        </ng-container>
+      </div>
+      <div *ngIf="selectedFleet" (click)="canDelete && handleDeleteClick()" (keydown.enter)="canDelete && handleDeleteClick()">
+        <span class="text-sm text-main-primary font-semibold cursor-pointer select-none" [ngClass]="canDelete ? '' : 'opacity-50'">Delete fleet</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #branch let-fleets="fleets" let-index="index">
+  <ng-container *ngFor="let fleet of fleets">
+    <div [ngStyle]="{ 'margin-left': index * 20 + (fleet.children?.length ? 0 : 20) + 'px' }" class="flex items-center gap-1 cursor-pointer" (click)="handleFleetClick(fleet)" (keydown.enter)="handleFleetClick(fleet)">
+      <ng-container *ngIf="fleet.children?.length">
+        <div class="w-5 flex justify-center transform transition-transform" [ngClass]="openedFleets.includes(fleet.id) ? 'rotate-90 text-main-primary' : 'text-dark-electric-blue'">
+          <svg width="4" height="5" viewBox="0 0 4 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1.38894 4.63006C1.16794 4.85105 0.91246 4.90181 0.622485 4.78233C0.332495 4.66286 0.1875 4.44552 0.1875 4.1303V0.869218C0.1875 0.553999 0.332495 0.336657 0.622485 0.21719C0.91246 0.0977087 1.16794 0.148466 1.38894 0.369462L3.02451 2.00506C3.1008 2.08133 3.15521 2.15929 3.18774 2.23894C3.22028 2.31858 3.23655 2.40552 3.23655 2.49976C3.23655 2.594 3.22028 2.68093 3.18774 2.76057C3.15521 2.84023 3.1008 2.91819 3.02451 2.99446L1.38894 4.63006Z" fill="currentColor" />
+          </svg>
+        </div>
+      </ng-container>
+      <span class="text-sm font-medium" [ngClass]="openedFleets.includes(fleet.id) ? 'text-main-primary' : 'text-dark-electric-blue'">{{ fleet.name }}</span>
+    </div>
+    <ng-container *ngIf="fleet.children?.length && openedFleets.includes(fleet.id)">
+      <ng-container *ngTemplateOutlet="branch; context: { fleets: fleet.children, index: index + 1 }" />
+    </ng-container>
+  </ng-container>
+</ng-template>

@@ -1,0 +1,13 @@
+#stage 1
+FROM node:16.14.0 as node
+WORKDIR /app
+
+COPY . .
+
+RUN npm install
+RUN npm run ci:environemnt
+RUN npm run build:iframe-api-docs
+
+#stage 2
+FROM nginx:alpine
+COPY --from=node /app/dist/exeros-panel-iframe-api-docs /usr/share/nginx/html

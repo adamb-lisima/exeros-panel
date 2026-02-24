@@ -1,0 +1,131 @@
+<ft-cloud-live *ngIf="isFtCloud" [attr.available-cameras]="JSON.stringify(availableCameras)" [attr.live-feed-status]="liveFeedStatus" [attr.max-selection]="maxSelection" [attr.config]="ftCloudConfigJson" [attr.headers]="ftCloudHeadersJson" [attr.stream-type]="ftCloudStreamType" [attr.show-controls]="showControls" #ftCloudElement> </ft-cloud-live>
+<div *ngIf="availableCameras.length === 0" class="h-full flex flex-col gap-4">
+  <div class="border border-new-gray-300 rounded-lg p-3 bg-white overflow-y-auto mb-2">
+    <p class="font-medium">No available cameras channels for this vehicle</p>
+  </div>
+</div>
+<div *ngIf="isStreamax" class="h-full flex flex-col gap-4">
+  <ng-container *ngIf="liveFeedStatus === 'Inactive'; else onlineTemplate">
+    <div class="border border-new-gray-300 rounded-lg p-3 bg-white overflow-y-auto mb-2">
+      <p class="font-medium">The device is offline</p>
+    </div>
+  </ng-container>
+  <ng-template #onlineTemplate>
+    <ng-container *ngIf="availableCameras.length; else noCamerasTemplate">
+      <ng-container *ngIf="(availableCameras | every : 'main_stream' : null) && (availableCameras | every : 'sub_stream' : null); else validConfigurationTemplate">
+        <p class="font-bold">Invalid cameras configuration</p>
+      </ng-container>
+      <ng-template #validConfigurationTemplate>
+        <div class="flex overflow-x-auto justify-start gap-2">
+          <p class="flex items-center text-sm">Show channels:</p>
+          <ng-container *ngFor="let camera of availableCameras | slice : 0 : (showAllChannels ? undefined : maxVisibleChannels); trackByField: 'channel'; let i = index">
+            <div
+              *ngIf="{ containsChannel: selectedCameras | containsProperty : 'channel' : camera.channel } as ctx"
+              class="flex gap-2 py-2 px-2 rounded-xl cursor-pointer font-normal text-sm border border-platinum bg-white select-none items-center"
+              [ngClass]="{
+                'bg-white border border-new-gray-300': ctx.containsChannel,
+                'bg-new-gray-100 border-new-gray-100': !ctx.containsChannel
+              }"
+              [appTooltip]="!ctx.containsChannel && selectedCameras.length >= maxVisibleChannels ? 'Maximum 4 cameras can be selected' : undefined"
+              (click)="handleMaxChannel(ctx.containsChannel, camera) && handleChannelClick(ctx.containsChannel, camera)"
+              (keydown.enter)="handleMaxChannel(ctx.containsChannel, camera) && handleChannelClick(ctx.containsChannel, camera)">
+              <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10 13.8333C11.3807 13.8333 12.5 12.7141 12.5 11.3333C12.5 9.95258 11.3807 8.83333 10 8.83333C8.61925 8.83333 7.5 9.95258 7.5 11.3333C7.5 12.7141 8.61925 13.8333 10 13.8333Z" stroke="currentColor" stroke-width="1.06" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M2.5 14.5V8.16666C2.5 7.23324 2.5 6.76653 2.68166 6.41001C2.84144 6.0964 3.09641 5.84144 3.41002 5.68165C3.76653 5.49999 4.23325 5.49999 5.16667 5.49999H6.04553C6.14798 5.49999 6.19921 5.5 6.24647 5.49458C6.49305 5.46634 6.71421 5.32965 6.84974 5.12174C6.87572 5.08189 6.89863 5.03606 6.94444 4.94444C7.03608 4.76118 7.08189 4.66955 7.13385 4.58985C7.40492 4.17401 7.84723 3.90064 8.34042 3.84415C8.43492 3.83333 8.53733 3.83333 8.74225 3.83333H11.2577C11.4627 3.83333 11.5651 3.83333 11.6596 3.84415C12.1527 3.90064 12.5951 4.17401 12.8662 4.58985C12.9181 4.66954 12.9639 4.7612 13.0556 4.94444C13.1013 5.03607 13.1242 5.08189 13.1502 5.12174C13.2858 5.32965 13.5069 5.46634 13.7535 5.49458C13.8008 5.5 13.852 5.49999 13.9545 5.49999H14.8333C15.7667 5.49999 16.2335 5.49999 16.59 5.68165C16.9036 5.84144 17.1586 6.0964 17.3183 6.41001C17.5 6.76653 17.5 7.23324 17.5 8.16666V14.5C17.5 15.4334 17.5 15.9002 17.3183 16.2567C17.1586 16.5702 16.9036 16.8252 16.59 16.985C16.2335 17.1667 15.7667 17.1667 14.8333 17.1667H5.16667C4.23325 17.1667 3.76653 17.1667 3.41002 16.985C3.09641 16.8252 2.84144 16.5702 2.68166 16.2567C2.5 15.9002 2.5 15.4334 2.5 14.5Z" stroke="currentColor" stroke-width="1.06" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              {{ camera.name }}
+            </div>
+          </ng-container>
+
+          <div class="relative ml-auto">
+            <div [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger" (click)="$event.stopPropagation()" (keydown.enter)="$event.stopPropagation()" class="flex items-center gap-1 py-3 px-1.5 rounded-md cursor-pointer ml-auto hover:bg-anti-flash-white">
+              <div *ngIf="availableCameras.length > maxVisibleChannels" class="flex cursor-pointer ml-auto mr-2 font-medium text-sm select-none items-center">
+                <span class="underline text-main-primary" *ngIf="!showAllChannels">{{ availableCameras.length - maxVisibleChannels }} {{ showAllChannels ? 'Show Less' : 'more' }}</span>
+              </div>
+            </div>
+
+            <mat-menu #menu="matMenu" [hasBackdrop]="true">
+              <div class="p-2">
+                <div class="flex flex-col gap-2">
+                  <ng-container *ngFor="let camera of availableCameras | slice : maxVisibleChannels; trackByField: 'channel'">
+                    <div
+                      *ngIf="{ containsChannel: selectedCameras | containsProperty : 'channel' : camera.channel } as ctx"
+                      class="flex gap-2 py-2 px-2 rounded-xl cursor-pointer font-normal text-sm border select-none items-center"
+                      [ngClass]="{
+                        'bg-white border-new-gray-300': ctx.containsChannel,
+                        'bg-new-gray-100 border-new-gray-100': !ctx.containsChannel
+                      }"
+                      [appTooltip]="!ctx.containsChannel && selectedCameras.length >= maxVisibleChannels ? 'Maximum 4 cameras can be selected' : undefined"
+                      (click)="handleMaxChannel(ctx.containsChannel, camera) && handleChannelClick(ctx.containsChannel, camera)"
+                      (keydown.enter)="handleMaxChannel(ctx.containsChannel, camera) && handleChannelClick(ctx.containsChannel, camera)">
+                      <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 13.8333C11.3807 13.8333 12.5 12.7141 12.5 11.3333C12.5 9.95258 11.3807 8.83333 10 8.83333C8.61925 8.83333 7.5 9.95258 7.5 11.3333C7.5 12.7141 8.61925 13.8333 10 13.8333Z" stroke="currentColor" stroke-width="1.06" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M2.5 14.5V8.16666C2.5 7.23324 2.5 6.76653 2.68166 6.41001C2.84144 6.0964 3.09641 5.84144 3.41002 5.68165C3.76653 5.49999 4.23325 5.49999 5.16667 5.49999H6.04553C6.14798 5.49999 6.19921 5.5 6.24647 5.49458C6.49305 5.46634 6.71421 5.32965 6.84974 5.12174C6.87572 5.08189 6.89863 5.03606 6.94444 4.94444C7.03608 4.76118 7.08189 4.66955 7.13385 4.58985C7.40492 4.17401 7.84723 3.90064 8.34042 3.84415C8.43492 3.83333 8.53733 3.83333 8.74225 3.83333H11.2577C11.4627 3.83333 11.5651 3.83333 11.6596 3.84415C12.1527 3.90064 12.5951 4.17401 12.8662 4.58985C12.9181 4.66954 12.9639 4.7612 13.0556 4.94444C13.1013 5.03607 13.1242 5.08189 13.1502 5.12174C13.2858 5.32965 13.5069 5.46634 13.7535 5.49458C13.8008 5.5 13.852 5.49999 13.9545 5.49999H14.8333C15.7667 5.49999 16.2335 5.49999 16.59 5.68165C16.9036 5.84144 17.1586 6.0964 17.3183 6.41001C17.5 6.76653 17.5 7.23324 17.5 8.16666V14.5C17.5 15.4334 17.5 15.9002 17.3183 16.2567C17.1586 16.5702 16.9036 16.8252 16.59 16.985C16.2335 17.1667 15.7667 17.1667 14.8333 17.1667H5.16667C4.23325 17.1667 3.76653 17.1667 3.41002 16.985C3.09641 16.8252 2.84144 16.5702 2.68166 16.2567C2.5 15.9002 2.5 15.4334 2.5 14.5Z" stroke="currentColor" stroke-width="1.06" stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                      {{ camera.name }}
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </mat-menu>
+          </div>
+        </div>
+        <div class="border border-new-gray-300 rounded-lg min-h-[calc(75vh-200px)]">
+          <ng-container *ngIf="selectedCameras.length === 0">
+            <div class="h-[calc(75vh-200px)] flex items-center justify-center text-gray-500">
+              <p>Select camera channels to view stream</p>
+            </div>
+          </ng-container>
+
+          <ng-container *ngIf="selectedCameras.length === 1; else multipleCamerasTemplate">
+            <div class="flex-1 grid items-center overflow-auto grid-cols-2 auto-rows-fr gap-2 p-2 h-[calc(75vh-200px)]">
+              <ng-container *ngIf="liveFeedStatus === 'Active'">
+                <app-smax-video-h265 class="max-h-full grid col-span-2 h-full" *ngFor="let camera of selectedCameras; let i = index" [source]="camera" [showControls]="showControls" (stateChange)="handleSmaxStateChange(i, $event)" (loadError)="handleSmaxLoadError(i, camera, $event)" (loadStart)="handleSmaxLoadStart(camera)"> </app-smax-video-h265>
+              </ng-container>
+            </div>
+          </ng-container>
+
+          <ng-template #multipleCamerasTemplate>
+            <div class="w-full max-h-[calc(75vh-200px)] overflow-y-auto">
+              <div
+                class="w-full grid gap-2 p-2"
+                [ngClass]="{
+                  'grid-cols-2': selectedCameras.length > 2,
+                  'grid-cols-1': selectedCameras.length === 2
+                }">
+                <ng-container *ngIf="liveFeedStatus === 'Active'">
+                  <app-smax-video-h265 *ngFor="let camera of selectedCameras; let i = index" [source]="camera" [showControls]="showControls" (stateChange)="handleSmaxStateChange(i, $event)" (loadError)="handleSmaxLoadError(i, camera, $event)" (loadStart)="handleSmaxLoadStart(camera)"> </app-smax-video-h265>
+                </ng-container>
+              </div>
+            </div>
+          </ng-template>
+          <div *ngIf="showControls && selectedCameras.length > 0" class="bg-white rounded-b-lg">
+            <div class="h-8 w-8 flex mx-auto justify-center items-center border-2 border-main-primary rounded-lg text-main-primary cursor-pointer select-none" (click)="handlePlayPause()" (keydown.enter)="handlePlayPause()">
+              <ng-container *ngIf="!isPlaying">
+                <svg width="11" height="14" viewBox="0 0 11 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1.9097 13.185C1.57636 13.4017 1.23886 13.4142 0.897197 13.2225C0.55553 13.0308 0.384697 12.735 0.384697 12.335V1.98499C0.384697 1.58499 0.55553 1.28916 0.897197 1.09749C1.23886 0.905822 1.57636 0.918322 1.9097 1.13499L10.0597 6.30999C10.3597 6.50999 10.5097 6.79332 10.5097 7.15999C10.5097 7.52666 10.3597 7.80999 10.0597 8.00999L1.9097 13.185Z" fill="currentColor" />
+                </svg>
+              </ng-container>
+              <ng-container *ngIf="isPlaying">
+                <svg width="13" height="15" viewBox="0 0 13 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M10.3847 14.16C9.8347 14.16 9.36386 13.9642 8.9722 13.5725C8.58053 13.1808 8.3847 12.71 8.3847 12.16V2.15999C8.3847 1.60999 8.58053 1.13916 8.9722 0.747488C9.36386 0.355822 9.8347 0.159988 10.3847 0.159988C10.9347 0.159988 11.4055 0.355822 11.7972 0.747488C12.1889 1.13916 12.3847 1.60999 12.3847 2.15999V12.16C12.3847 12.71 12.1889 13.1808 11.7972 13.5725C11.4055 13.9642 10.9347 14.16 10.3847 14.16ZM2.3847 14.16C1.8347 14.16 1.36386 13.9642 0.972197 13.5725C0.58053 13.1808 0.384697 12.71 0.384697 12.16V2.15999C0.384697 1.60999 0.58053 1.13916 0.972197 0.747488C1.36386 0.355822 1.8347 0.159988 2.3847 0.159988C2.9347 0.159988 3.40553 0.355822 3.7972 0.747488C4.18886 1.13916 4.3847 1.60999 4.3847 2.15999V12.16C4.3847 12.71 4.18886 13.1808 3.7972 13.5725C3.40553 13.9642 2.9347 14.16 2.3847 14.16Z" fill="currentColor" />
+                </svg>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-wrap justify-center gap-4">
+          <span class="flex-[0_0_1px] bg-platinum"></span>
+        </div>
+      </ng-template>
+    </ng-container>
+    <ng-template #noCamerasTemplate>
+      <div class="flex w-full">
+        <div class="border border-new-gray-300 rounded-lg p-3 bg-white gap-3 w-full flex flex-col mb-2">
+          <p class="font-medium">Get the full context with camera recordings.</p>
+          <p class="text-sm">For extra information <a href="mailto:vidematics@exeros-tech.co.uk" class="text-main-primary underline">contact Exeros</a></p>
+        </div>
+      </div>
+    </ng-template>
+  </ng-template>
+</div>

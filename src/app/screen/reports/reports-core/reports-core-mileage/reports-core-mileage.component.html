@@ -1,0 +1,19 @@
+<div *ngIf="options$ | async as options" class="flex flex-col h-full" [class.loader]="mileageLoading$ | async">
+  <div class="flex flex-col gap-8 -mb-6">
+    <div class="min-h-[40px] flex flex-wrap justify-between items-center gap-2">
+      <p class="font-semibold text-xl whitespace-nowrap">Mileage</p>
+      <app-export-buttons *appHasPermission="[[mileageDownloaderAccess]]" (export)="handleExportClick($event)"> </app-export-buttons>
+    </div>
+    <div class="flex flex-wrap items-center gap-x-2">
+      <app-select-control *ngIf="vehicleOptions$ | async as vehicleOptions" class="w-[230px]" label="Vehicle" [clearable]="true" [multiple]="true" [options]="vehicleOptions" [formControl]="vehicleControl"></app-select-control>
+      <app-select-control *ngIf="driverOptions$ | async as driverOptions" class="w-[230px]" label="Driver" [options]="driverOptions" [formControl]="driverControl"></app-select-control>
+    </div>
+  </div>
+  <app-bar-chart [data]="options.series" [options]="{ overlayTemplate: overlay }" class="flex-1"></app-bar-chart>
+</div>
+<ng-template #overlay let-point>
+  <div class="flex flex-col gap-1 py-1 px-2 bg-outer-space rounded-md translate-x-[-50%] w-max bottom-2 absolute pointer-events-none">
+    <p class="text-white text-xs opacity-80">{{ point.data.x | dateFormat : 'serverDateFormat' : 'clientDateFormat' }}</p>
+    <p class="text-white text-xs">{{ point.data.y | number : '1.0-0' }} Miles</p>
+  </div>
+</ng-template>

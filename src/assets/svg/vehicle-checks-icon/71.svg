@@ -1,0 +1,24 @@
+<svg id="ba77c9d9-6470-437a-9eed-7683531905ed" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80">
+  <title>71</title>
+  <g>
+    <g>
+      <path style="fill: #fadc0f;" d="M34.55,40c0,9.29-3.71,16.82-8.3,16.82-3.28,0-6.12-3.84-7.47-9.44v0h7.48c2,0,3.62-3.29,3.62-7.36s-1.61-7.36-3.62-7.36H18.78v0C20.13,27,23,23.18,26.25,23.18,30.84,23.18,34.55,30.71,34.55,40Z"/>
+      <path style="fill: #fadc0f;" d="M74.23,23.18V56.82H46.41a67.64,67.64,0,0,0,2-16.82,67.64,67.64,0,0,0-2-16.82Z"/>
+      <path style="fill: #fadc0f;" d="M40.26,40A59.06,59.06,0,0,1,38,56.82H26.25c4.59,0,8.3-7.53,8.3-16.82s-3.71-16.82-8.3-16.82H38A59,59,0,0,1,40.26,40Z"/>
+      <path style="fill: #fff;" d="M48.45,40a67.64,67.64,0,0,1-2,16.82c-3.45,13.41-11,22.5-19.87,22.5-4.43,0-8.64-2.18-12.17-6.32l6.22-5.33c1.36,1.58,3.48,3.45,5.95,3.45,4.23,0,8.78-5.43,11.43-14.3A59.06,59.06,0,0,0,40.26,40,59,59,0,0,0,38,23.18c-2.65-8.87-7.2-14.3-11.43-14.3-3,0-6.06,2.7-8.57,7.35l4.39,1.92L7.87,28.81l-2-17.87,4.57,2C14.51,5.12,20.28.68,26.54.68,35.45.68,43,9.77,46.41,23.18A67.64,67.64,0,0,1,48.45,40Z"/>
+      <path style="fill: #fff;" d="M29.87,40c0,4.07-1.61,7.36-3.62,7.36H10.4c-2,0-3.63-3.29-3.63-7.36s1.62-7.36,3.63-7.36H26.25C28.26,32.64,29.87,35.93,29.87,40Z"/>
+    </g>
+    <g>
+      <path style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" d="M18.78,32.6C20.14,27,23,23.18,26.24,23.18c4.59,0,8.31,7.53,8.31,16.82s-3.72,16.82-8.31,16.82c-3.27,0-6.11-3.85-7.46-9.43"/>
+      <path style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" d="M26.24,32.64c2,0,3.64,3.3,3.64,7.36s-1.63,7.36-3.64,7.36"/>
+      <ellipse style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" cx="10.4" cy="40" rx="3.63" ry="7.36"/>
+      <line style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" x1="46.42" y1="23.18" x2="74.23" y2="23.18"/>
+      <line style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" x1="26.24" y1="23.18" x2="37.97" y2="23.18"/>
+      <line style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" x1="46.42" y1="56.82" x2="74.23" y2="56.82"/>
+      <line style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" x1="26.24" y1="56.82" x2="37.97" y2="56.82"/>
+      <path style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" d="M26.54.68c-6.27,0-12,4.44-16.09,12.26l-4.56-2,2,17.86L22.35,18.15,18,16.23c2.51-4.65,5.62-7.36,8.57-7.36C33,8.87,40.26,21.66,40.26,40S33,71.13,26.54,71.13c-2.47,0-4.6-1.88-5.94-3.45L14.37,73c3.53,4.14,7.74,6.32,12.17,6.32,12.29,0,21.91-17.27,21.91-39.32S38.83.68,26.54.68Z"/>
+      <line style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" x1="10.4" y1="32.64" x2="26.24" y2="32.64"/>
+      <line style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" x1="10.4" y1="47.36" x2="26.24" y2="47.36"/>
+    </g>
+  </g>
+</svg>

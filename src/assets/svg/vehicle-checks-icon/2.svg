@@ -1,0 +1,17 @@
+<svg id="b2326766-a92e-4266-ad03-b7958520b19d" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80">
+  <title>2</title>
+  <g>
+    <g>
+      <path style="fill: #fff;" d="M73.34,37.52V56.09a1.35,1.35,0,0,1-.87,1.26A37,37,0,0,0,51.19,78.51a1.34,1.34,0,0,1-1.25.87H8A1.35,1.35,0,0,1,6.66,78V2A1.35,1.35,0,0,1,8,.62H38.61a1.36,1.36,0,0,1,1,.41L71.78,33.7A5.45,5.45,0,0,1,73.34,37.52Z"/>
+      <polygon style="fill: #fff;" points="63.94 35.27 47.19 35.27 47.19 18.26 63.94 35.27"/>
+      <polygon style="fill: #fadc0f;" points="63.94 35.27 12.59 35.27 12.59 7.7 36.79 7.71 63.94 35.27"/>
+      <rect style="fill: #fff;" x="52.37" y="41.96" width="12.75" height="5.22"/>
+    </g>
+    <g>
+      <path style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" d="M73.34,37.52V56.09a1.35,1.35,0,0,1-.87,1.26A37,37,0,0,0,51.19,78.51a1.34,1.34,0,0,1-1.25.87H8A1.35,1.35,0,0,1,6.66,78V2A1.35,1.35,0,0,1,8,.62H38.61a1.36,1.36,0,0,1,1,.41L71.78,33.7A5.45,5.45,0,0,1,73.34,37.52Z"/>
+      <line style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" x1="36.79" y1="7.72" x2="63.94" y2="35.27"/>
+      <polyline style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" points="63.94 35.27 12.59 35.27 12.59 7.71 36.79 7.72"/>
+      <rect style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" x="52.37" y="41.96" width="12.75" height="5.22"/>
+    </g>
+  </g>
+</svg>

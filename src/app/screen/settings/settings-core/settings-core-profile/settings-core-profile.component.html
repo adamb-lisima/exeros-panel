@@ -1,0 +1,51 @@
+<ng-container *ngIf="loggedInUser$ | async as loggedInUser">
+  <div *appHasPermission="[[accessGroup.SETTINGS_PROFILE]]" class="flex flex-col">
+    <div class="flex justify-between items-center">
+      <span class="text-xl font-bold">Profile information</span>
+      <app-button (buttonClick)="handleEditClick()">
+        <span class="text-sm text-white font-semibold">Edit profile</span>
+      </app-button>
+    </div>
+    <div class="flex gap-24 mt-5">
+      <img *ngIf="loggedInUser.avatar as avatar" class="h-fit rounded-lg aspect-square object-contain" [ngSrc]="avatar" width="144" height="144" alt="avatar" />
+      <div class="flex gap-5">
+        <div class="flex flex-col items-end gap-2">
+          <span class="text-sm text-manatee">Name:</span>
+          <span class="text-sm text-manatee">Role:</span>
+          <span class="text-sm text-manatee">E-mail:</span>
+          <span class="text-sm text-manatee">Password:</span>
+          <div class="h-[20px]"></div>
+          <span class="text-sm text-manatee">Is MFA enabled:</span>
+        </div>
+        <div class="flex flex-col items-start gap-2">
+          <span class="text-sm font-medium">{{ loggedInUser.name }}</span>
+          <span class="text-sm font-medium">{{ loggedInUser.role }}</span>
+          <span class="text-sm font-medium">{{ loggedInUser.email }}</span>
+          <span class="text-sm font-medium">********************</span>
+          <div class="text-sm text-main-primary underline font-semibold cursor-pointer" (click)="handleChangePasswordClick()" (keydown.enter)="handleChangePasswordClick()">Change password</div>
+          <span class="text-sm font-medium">{{ loggedInUser.is_mfa_enabled ? 'YES' : 'NO' }}</span>
+          <div *ngIf="!loggedInUser.is_mfa_enabled || loggedInUser.can_mfa_be_disabled" class="text-sm text-main-primary underline font-semibold cursor-pointer" (click)="handleMFAClick(loggedInUser.is_mfa_enabled)" (keydown.enter)="handleMFAClick(loggedInUser.is_mfa_enabled)">{{ loggedInUser.is_mfa_enabled ? 'Disable' : 'Enable' }} MFA</div>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-col gap-6 mt-10">
+      <span class="text-xl font-bold">Email notifications</span>
+      <div class="flex flex-col gap-4">
+        <span class="text-sm">Receiving email notifications for:</span>
+        <div *ngIf="notifications$ | async as notifications" class="flex flex-col gap-2">
+          <div *ngFor="let notification of notifications" class="flex items-center gap-2">
+            <img [ngSrc]="notification.src" width="24" height="24" [alt]="notification.name" />
+            <p class="text-sm font-medium">{{ notification.name }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-col gap-6 mt-10">
+      <span class="text-xl font-bold">Application settings</span>
+      <div class="flex items-center gap-4">
+        <span class="text-sm">Application view</span>
+        <app-select-control [showHintSpace]="false" [options]="themes" [formControl]="themeControl"></app-select-control>
+      </div>
+    </div>
+  </div>
+</ng-container>

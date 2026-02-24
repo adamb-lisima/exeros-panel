@@ -1,0 +1,88 @@
+<div class="bg-new-gray-200 h-[50%]">
+  <h1 style="padding: 10px; font-size: 24px">IFRAME API Docs</h1>
+  <iframe title="" tabindex="-1" style="width: 100%; height: 100%" name="exeros-panel" id="exeros-panel-iframe" allowfullscreen></iframe>
+  <form class="flex flex-col items-center gap-3 m-5" [formGroup]="form">
+    <div class="w-full flex gap-3">
+      <input class="p-3 bg-cultured border border-solid rounded-xl" placeholder="IFRAME API URL" formControlName="iframe_url" />
+      <input class="p-3 bg-cultured border border-solid rounded-xl" placeholder="VIDEMATICS API URL" formControlName="api_url" />
+      <input class="p-3 bg-cultured border border-solid rounded-xl" placeholder="full app mode (true/false)" formControlName="full_app_mode" />
+    </div>
+    <div class="w-full flex gap-3">
+      <select class="flex-1 p-3 bg-cultured border border-solid rounded-xl" formControlName="type" (change)="onTypeChange($event)">
+        <option value="livestream">Livestream</option>
+        <option value="playback">Playback</option>
+        <option value="events">Events</option>
+      </select>
+    </div>
+
+    <div *ngIf="isLivestream">
+      <div class="w-full grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <input class="p-3 bg-cultured border border-solid rounded-xl" placeholder="Vehicle ID" formControlName="vehicle_id" />
+        <input class="p-3 bg-cultured border border-solid rounded-xl" placeholder="Vehicle Registration Plate" formControlName="vehicle_registration_plate" />
+        <input class="p-3 bg-cultured border border-solid rounded-xl" placeholder="Stream Mode (0/1)" formControlName="stream_mode" />
+        <input class="p-3 bg-cultured border border-solid rounded-xl" placeholder="Channels (comma separated)" formControlName="channels" />
+        <input class="p-3 bg-cultured border border-solid rounded-xl" placeholder="Audio (true/false)" formControlName="audio" />
+      </div>
+      <div class="w-full p-3">
+        <p></p>
+      </div>
+    </div>
+
+    <div *ngIf="isPlayback">
+      <div class="w-full grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <input class="p-3 bg-cultured border border-solid rounded-xl" placeholder="With Timeline (true/false)" formControlName="with_timeline" />
+        <input class="p-3 bg-cultured border border-solid rounded-xl" placeholder="Vehicle ID" formControlName="vehicle_id" />
+        <input class="p-3 bg-cultured border border-solid rounded-xl" placeholder="Vehicle Registration Plate" formControlName="vehicle_registration_plate" />
+        <input class="p-3 bg-cultured border border-solid rounded-xl" placeholder="Channels (comma separated)" formControlName="channels" />
+        <input class="p-3 bg-cultured border border-solid rounded-xl" placeholder="From (datetime)" formControlName="from" />
+        <input class="p-3 bg-cultured border border-solid rounded-xl" placeholder="To (datetime)" formControlName="to" />
+      </div>
+      <div class="w-full p-3">
+        <p></p>
+      </div>
+    </div>
+
+    <div *ngIf="isEvents">
+      <div class="w-full grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <input class="p-3 bg-cultured border border-solid rounded-xl" placeholder="Event ID" formControlName="event_id" />
+        <input class="p-3 bg-cultured border border-solid rounded-xl" placeholder="Channel (optional)" formControlName="channels" />
+      </div>
+      <div class="w-full p-3">
+        <p></p>
+      </div>
+    </div>
+
+    <div class="w-full flex gap-3 mt-5">
+      <input class="flex-1 p-3 bg-cultured border border-solid rounded-xl" placeholder="Login" formControlName="login" />
+      <input class="flex-1 p-3 bg-cultured border border-solid rounded-xl" placeholder="Password" type="password" formControlName="password" />
+      <textarea class="flex-1 p-3 bg-cultured border border-solid rounded-xl" placeholder="Azure Access Token" formControlName="azure_access_token"></textarea>
+    </div>
+    <div class="w-full flex gap-3 mt-5">
+      or
+      <textarea class="flex-1 p-3 bg-cultured border border-solid rounded-xl" placeholder="Access Token" formControlName="token"></textarea>
+    </div>
+
+    <button class="p-2 bg-light-steel-blue border border-solid rounded-xl mt-3" type="button" (click)="handlePushDataClick()">Push data to iframe</button>
+  </form>
+
+  <div class="m-5 p-3 bg-cultured border border-solid rounded-xl">
+    <div class="flex justify-between items-center mb-3">
+      <h2 class="text-xl">Messages received from iframe</h2>
+      <button class="p-2 bg-light-steel-blue border border-solid rounded-xl" type="button" (click)="clearMessages()">Clear</button>
+    </div>
+
+    <div *ngIf="iframeDimensions.width" class="mb-3 p-2 bg-new-gray-100 border border-solid rounded-xl">
+      <h3 class="font-bold">Iframe dimensions:</h3>
+      <div>Width: {{ iframeDimensions.width }}px</div>
+      <div>Height: {{ iframeDimensions.height }}px</div>
+      <div>Ratio (H/W): {{ iframeDimensions.ratio | number : '1.2-2' }}</div>
+    </div>
+
+    <div *ngIf="receivedMessages.length === 0" class="text-center p-4">No messages from iframe. Wait until the iframe sends a message.</div>
+
+    <div *ngFor="let message of receivedMessages; let i = index" class="mb-2 p-2 bg-new-gray-100 border border-solid rounded-xl">
+      <div class="font-bold">Message #{{ receivedMessages.length - i }}: {{ message.type }}</div>
+      <pre class="overflow-auto max-h-28">{{ message.payload | json }}</pre>
+    </div>
+  </div>
+</div>

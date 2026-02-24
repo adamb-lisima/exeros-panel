@@ -1,0 +1,19 @@
+<div class="flex flex-col h-[500px] p-4">
+  <div class="flex justify-between items-center mb-2">
+    <p class="font-semibold text-sm">Driver Score Analysis</p>
+  </div>
+
+  <div class="flex-1 -mx-6 -mt-2">
+    <ng-container *ngIf="safetyData$ | async as safetyData">
+      <ng-container *ngIf="hasData(safetyData); else noData">
+        <app-spider-chart [data]="safetyData" [title]="''" [height]="400" [colors]="['#006BFF', '#FF9E2D']"></app-spider-chart>
+      </ng-container>
+    </ng-container>
+
+    <ng-template #noData>
+      <div class="h-full flex items-center justify-center">
+        <p class="text-sm text-gray-500">No data available for this period</p>
+      </div>
+    </ng-template>
+  </div>
+</div>

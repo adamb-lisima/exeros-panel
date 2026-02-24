@@ -1,0 +1,47 @@
+<svg id="eaf05e46-90b5-434c-aa1e-d5c207c1e774" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28">
+  <defs>
+    <style>
+      .f31b47e4-cd56-460b-8957-3c9aaacd2ff0 {
+        fill: #e6e6e6;
+      }
+
+      .e8963da5-8979-4593-b9ab-cf957ff6a70c {
+        fill: #fadc0f;
+      }
+
+      .a6c7e8cd-7520-4d02-97e5-b52c4fd42ebe {
+        fill: #fff;
+      }
+
+      .f7b547be-bdb2-40fd-875c-a73c13555a96 {
+        fill: none;
+        stroke: #414042;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 1.28px;
+      }
+    </style>
+  </defs>
+  <title>6</title>
+  <circle class="f31b47e4-cd56-460b-8957-3c9aaacd2ff0" cx="14" cy="14" r="14"/>
+  <g>
+    <g>
+      <path class="e8963da5-8979-4593-b9ab-cf957ff6a70c" d="M25.48,8.08V19.33H24a1.3,1.3,0,0,0-2.6,0H19a1.3,1.3,0,0,0-2.6,0H9.17l0-8.21v-3Z"/>
+      <path class="e8963da5-8979-4593-b9ab-cf957ff6a70c" d="M9.21,11.12l0,8.21H7a1.31,1.31,0,0,0-2.61,0H2.14v-4.1H6.63V11.12Z"/>
+      <polygon class="a6c7e8cd-7520-4d02-97e5-b52c4fd42ebe" points="6.63 11.12 6.63 15.23 2.14 15.23 2.14 14.97 4.78 11.12 6.63 11.12"/>
+      <path class="a6c7e8cd-7520-4d02-97e5-b52c4fd42ebe" d="M7,19.33A1.31,1.31,0,1,1,5.67,18,1.31,1.31,0,0,1,7,19.33Z"/>
+      <circle class="a6c7e8cd-7520-4d02-97e5-b52c4fd42ebe" cx="17.66" cy="19.33" r="1.3"/>
+      <path class="a6c7e8cd-7520-4d02-97e5-b52c4fd42ebe" d="M24,19.33a1.3,1.3,0,1,1-1.3-1.3A1.3,1.3,0,0,1,24,19.33Z"/>
+    </g>
+    <g>
+      <polyline class="f7b547be-bdb2-40fd-875c-a73c13555a96" points="24.09 19.33 25.48 19.33 25.48 8.08 9.22 8.08 9.17 19.33"/>
+      <line class="f7b547be-bdb2-40fd-875c-a73c13555a96" x1="19.06" y1="19.33" x2="21.22" y2="19.33"/>
+      <line class="f7b547be-bdb2-40fd-875c-a73c13555a96" x1="7.06" y1="19.33" x2="16.16" y2="19.33"/>
+      <polyline class="f7b547be-bdb2-40fd-875c-a73c13555a96" points="9.21 11.12 4.79 11.12 2.14 14.97 2.14 19.33 4.29 19.33"/>
+      <polyline class="f7b547be-bdb2-40fd-875c-a73c13555a96" points="4.48 15.23 6.63 15.23 6.63 12.68"/>
+      <circle class="f7b547be-bdb2-40fd-875c-a73c13555a96" cx="5.68" cy="19.33" r="1.3"/>
+      <circle class="f7b547be-bdb2-40fd-875c-a73c13555a96" cx="17.66" cy="19.33" r="1.3"/>
+      <circle class="f7b547be-bdb2-40fd-875c-a73c13555a96" cx="22.69" cy="19.33" r="1.3"/>
+    </g>
+  </g>
+</svg>

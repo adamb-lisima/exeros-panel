@@ -1,0 +1,56 @@
+<div class="date-time-picker-container" #pickerContainer (click)="$event.stopPropagation()" (keypress)="$event.stopPropagation()">
+  <mat-form-field [ngClass]="showHintSpace ? '' : '-mb-[1.25em]'" class="w-full" [appearance]="'outline'">
+    <mat-label *ngIf="label">{{ label }}</mat-label>
+    <input matInput [disabled]="disabled" [ngModel]="displayValue" placeholder="Select date and time" (click)="toggleMenu($event)" (keydown.enter)="toggleMenu($event)" readonly />
+    <mat-icon matSuffix class="items-center flex cursor-pointer" (click)="toggleMenu($event)" (keydown.enter)="toggleMenu($event)">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <mask id="mask0_3488_17276" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="22" height="22">
+          <rect width="22" height="22" fill="#D9D9D9" />
+        </mask>
+        <g mask="url(#mask0_3488_17276)">
+          <path d="M5.50008 19.3951C5.07818 19.3951 4.72591 19.2538 4.44328 18.9712C4.16064 18.6885 4.01932 18.3363 4.01932 17.9144V6.20923C4.01932 5.78734 4.16064 5.43507 4.44328 5.15243C4.72591 4.86979 5.07818 4.72847 5.50008 4.72847H7.12187V3.1772C7.12187 3.03499 7.16859 2.91717 7.26203 2.82373C7.35545 2.73031 7.47326 2.68359 7.61547 2.68359C7.75768 2.68359 7.87549 2.73031 7.96891 2.82373C8.06234 2.91717 8.10905 3.03499 8.10905 3.1772V4.72847H14.6667V3.14193C14.6667 3.01149 14.7105 2.90249 14.7981 2.81493C14.8856 2.72737 14.9946 2.68359 15.1251 2.68359C15.2555 2.68359 15.3645 2.72737 15.4521 2.81493C15.5397 2.90249 15.5834 3.01149 15.5834 3.14193V4.72847H17.2052C17.6271 4.72847 17.9794 4.86979 18.262 5.15243C18.5447 5.43507 18.686 5.78734 18.686 6.20923V17.9144C18.686 18.3363 18.5447 18.6885 18.262 18.9712C17.9794 19.2538 17.6271 19.3951 17.2052 19.3951H5.50008ZM5.50008 18.4785H17.2052C17.3462 18.4785 17.4755 18.4197 17.593 18.3022C17.7106 18.1847 17.7693 18.0554 17.7693 17.9144V9.8759H4.93598V17.9144C4.93598 18.0554 4.99474 18.1847 5.11226 18.3022C5.22979 18.4197 5.35906 18.4785 5.50008 18.4785ZM4.93598 8.95923H17.7693V6.20923C17.7693 6.06822 17.7106 5.93894 17.593 5.82141C17.4755 5.7039 17.3462 5.64514 17.2052 5.64514H5.50008C5.35906 5.64514 5.22979 5.7039 5.11226 5.82141C4.99474 5.93894 4.93598 6.06822 4.93598 6.20923V8.95923ZM11.3527 13.1195C11.1634 13.1195 10.9986 13.0493 10.8582 12.9088C10.7177 12.7684 10.6475 12.6036 10.6475 12.4144C10.6475 12.2252 10.7177 12.0603 10.8582 11.9199C10.9986 11.7795 11.1634 11.7092 11.3527 11.7092C11.5419 11.7092 11.7067 11.7795 11.8471 11.9199C11.9876 12.0603 12.0578 12.2252 12.0578 12.4144C12.0578 12.6036 11.9876 12.7684 11.8471 12.9088C11.7067 13.0493 11.5419 13.1195 11.3527 13.1195ZM7.68598 13.1195C7.49677 13.1195 7.33194 13.0493 7.19151 12.9088C7.05108 12.7684 6.98086 12.6036 6.98086 12.4144C6.98086 12.2252 7.05108 12.0603 7.19151 11.9199C7.33194 11.7795 7.49677 11.7092 7.68598 11.7092C7.8752 11.7092 8.04002 11.7795 8.18046 11.9199C8.32089 12.0603 8.39111 12.2252 8.39111 12.4144C8.39111 12.6036 8.32089 12.7684 8.18046 12.9088C8.04002 13.0493 7.8752 13.1195 7.68598 13.1195ZM15.0193 13.1195C14.8301 13.1195 14.6653 13.0493 14.5248 12.9088C14.3844 12.7684 14.3142 12.6036 14.3142 12.4144C14.3142 12.2252 14.3844 12.0603 14.5248 11.9199C14.6653 11.7795 14.8301 11.7092 15.0193 11.7092C15.2085 11.7092 15.3734 11.7795 15.5138 11.9199C15.6542 12.0603 15.7244 12.2252 15.7244 12.4144C15.7244 12.6036 15.6542 12.7684 15.5138 12.9088C15.3734 13.0493 15.2085 13.1195 15.0193 13.1195ZM11.3527 16.6451C11.1634 16.6451 10.9986 16.5749 10.8582 16.4345C10.7177 16.294 10.6475 16.1292 10.6475 15.94C10.6475 15.7508 10.7177 15.586 10.8582 15.4455C10.9986 15.3051 11.1634 15.2349 11.3527 15.2349C11.5419 15.2349 11.7067 15.3051 11.8471 15.4455C11.9876 15.586 12.0578 15.7508 12.0578 15.94C12.0578 16.1292 11.9876 16.294 11.8471 16.4345C11.7067 16.5749 11.5419 16.6451 11.3527 16.6451ZM7.68598 16.6451C7.49677 16.6451 7.33194 16.5749 7.19151 16.4345C7.05108 16.294 6.98086 16.1292 6.98086 15.94C6.98086 15.7508 7.05108 15.586 7.19151 15.4455C7.33194 15.3051 7.49677 15.2349 7.68598 15.2349C7.8752 15.2349 8.04002 15.3051 8.18046 15.4455C8.32089 15.586 8.39111 15.7508 8.39111 15.94C8.39111 16.1292 8.32089 16.294 8.18046 16.4345C8.04002 16.5749 7.8752 16.6451 7.68598 16.6451ZM15.0193 16.6451C14.8301 16.6451 14.6653 16.5749 14.5248 16.4345C14.3844 16.294 14.3142 16.1292 14.3142 15.94C14.3142 15.7508 14.3844 15.586 14.5248 15.4455C14.6653 15.3051 14.8301 15.2349 15.0193 15.2349C15.2085 15.2349 15.3734 15.3051 15.5138 15.4455C15.6542 15.586 15.7244 15.7508 15.7244 15.94C15.7244 16.1292 15.6542 16.294 15.5138 16.4345C15.3734 16.5749 15.2085 16.6451 15.0193 16.6451Z" fill="#1C1B1B" />
+        </g>
+      </svg>
+    </mat-icon>
+  </mat-form-field>
+
+  <div *ngIf="isMenuOpen" class="date-time-menu-container fixed z-[9999]" [ngStyle]="{ 'top.px': dropdownPosition.top, 'left.px': dropdownPosition.left }">
+    <div class="w-[280px] flex flex-col gap-2 bg-white shadow-lg rounded-md p-2 text-new-gray-800" (keydown.enter)="$event.stopPropagation()" (click)="$event.stopPropagation()" (mousedown)="$event.stopPropagation()">
+      <div class="calendar-container">
+        <div class="flex justify-center items-center gap-2 mb-2">
+          <select class="w-[120px] h-[30px] rounded border px-2" [(ngModel)]="selectedMonth" (change)="updateCalendar()">
+            <option *ngFor="let month of months" [value]="month.value">{{ month.label }}</option>
+          </select>
+          <select class="w-[120px] h-[30px] rounded border px-2" [(ngModel)]="selectedYear" (change)="updateCalendar()">
+            <option *ngFor="let year of years" [value]="year.value">{{ year.label }}</option>
+          </select>
+        </div>
+
+        <table class="text-center border-separate" style="border-spacing: 5px">
+          <thead>
+            <tr>
+              <th *ngFor="let day of days" class="p-1 text-xs font-normal">{{ day }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let row of calendar">
+              <td
+                *ngFor="let cell of row"
+                class="h-[32px] w-[24px] relative rounded cursor-pointer"
+                [ngClass]="{
+                  'text-gray-400': !cell.active,
+                  'bg-main-primary text-white': cell.active && cell.day === selectedDay,
+                  'hover:bg-main-primary-10': cell.active && cell.day !== selectedDay
+                }"
+                (click)="handleDayClick(cell)"
+                (keydown.enter)="handleDayClick(cell)">
+                {{ cell.day }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <app-time-select-control [currentTime]="currentTimeString" [label]="timeLabel" (timeChange)="handleTimeChange($event)"></app-time-select-control>
+    </div>
+  </div>
+</div>

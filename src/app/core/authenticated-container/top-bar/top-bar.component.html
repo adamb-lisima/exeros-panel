@@ -1,0 +1,8 @@
+<div class="flex justify-end items-start gap-2">
+  <ng-content></ng-content>
+
+  <div class="flex items-center gap-2 min-h-full mt-2">
+    <app-top-bar-notification *appHasPermission="[[notificationViewerAccess]]"></app-top-bar-notification>
+    <app-top-bar-download-task *appHasPermission="[[taskListViewerAccess]]"></app-top-bar-download-task>
+  </div>
+</div>

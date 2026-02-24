@@ -1,0 +1,38 @@
+<div *ngIf="auditTrails$ | async as event" class="flex flex-col gap-2">
+  <p class="font-semibold text-sm">Audit Trail</p>
+  <div class="flex flex-col divide-y divide-bright-gray">
+    <div *ngFor="let auditTrail of event" class="flex flex-col gap-4 py-4">
+      <div class="flex justify-between items-center">
+        <div class="flex items-center gap-2 flex-1">
+          <div class="flex-[0_0_32px] h-[32px] flex justify-center items-center rounded-full bg-main-primary">
+            <p class="font-medium text-sm text-white">{{ auditTrail.user | firstCharacter }}</p>
+          </div>
+          <p class="font-medium text-sm text-quartz">
+            <span class="font-medium text-sm">{{ auditTrail.user }}</span> {{ auditTrail.action }}
+            <span *ngIf="auditTrail.status_details"
+              ><br />
+              Reason: {{ auditTrail.status_details }}.</span
+            >
+          </p>
+        </div>
+        <p class="text-sm text-quartz">{{ auditTrail.date | dateFormat : 'serverDateTimeFormat' : 'clientDateTimeFormat' }}</p>
+      </div>
+      <p *ngIf="auditTrail.text" class="ml-8 p-2 rounded-md font-light text-sm bg-cultured">{{ auditTrail.text }}</p>
+      <span *ngIf="auditTrail.related_event_id" class="ml-8 px-2 text-main-primary text-sm font-semibold underline cursor-pointer" (click)="handleEventClick(auditTrail.related_event_id)" (keydown.enter)="handleEventClick(auditTrail.related_event_id)">Original Event</span>
+      <div *ngIf="auditTrail.driver_fatigue_fields">
+        <span><br />Did the driver physically fall asleep at the wheel?</span>
+        <p class="ml-8 p-2 rounded-md font-light text-sm bg-cultured">
+          {{ auditTrail.driver_fatigue_fields.driver_fatigue_asleep_at_wheel }}
+        </p>
+        <span><br />Is there any indication that an accident took place or suggestion of injuries?</span>
+        <p class="ml-8 p-2 rounded-md font-light text-sm bg-cultured">
+          {{ auditTrail.driver_fatigue_fields.driver_fatigue_accident_or_injury }}
+        </p>
+        <span><br />Is the driver showing continued signs of fatigue/are you concerned they may have another event?</span>
+        <p class="ml-8 p-2 rounded-md font-light text-sm bg-cultured">
+          {{ auditTrail.driver_fatigue_fields.driver_fatigue_signs_of_fatigue }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

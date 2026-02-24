@@ -1,0 +1,68 @@
+<ng-container *ngIf="vehicleByDeviceId$ | async as vehicleByDeviceId">
+  <app-infinity-scroll>
+    <ng-container header>
+      <div class="flex flex-col gap-8">
+        <div class="flex flex-col gap-8">
+          <div class="min-h-[40px] flex flex-wrap justify-between items-center gap-2">
+            <p class="font-semibold text-xl whitespace-nowrap">Alarms</p>
+            <ng-container *ngIf="SHOW_EXPORT_WITHOUT_FILTERS || bodyGroup.controls.vehicle_id.value || bodyGroup.controls.driver_id.value">
+              <div *appHasPermission="[[accessGroup.ALARMS_REPORTS_DOWNLOADER]]" class="flex gap-2">
+                <div class="h-[40px] w-[40px] flex justify-center items-center rounded cursor-pointer border border-platinum text-extra-one" (click)="handleExportAlarmsClick('xlsx')" (keydown.enter)="handleExportAlarmsClick('xlsx')">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15.9431 6.82653C15.862 6.53891 15.6906 6.28497 15.4542 6.10217C15.2178 5.91936 14.9289 5.81736 14.6301 5.81122C14.4702 5.80746 14.3104 5.81122 14.1317 5.81122V5.47055C14.1317 5.11653 14.1292 4.76083 14.1317 4.40889C14.1337 4.33343 14.1196 4.2584 14.0904 4.18879C14.0612 4.11918 14.0175 4.0566 13.9622 4.00519C12.668 2.73159 11.3739 1.45743 10.0797 0.182722C10.0041 0.108828 9.90228 0.0616531 9.81252 0.00195312H2.21788C1.94694 0.127198 1.86804 0.340948 1.8693 0.631516C1.87848 2.28767 1.87389 3.94382 1.87389 5.59955V5.80829H1.49816C0.590999 5.80829 -0.000559091 6.39861 -0.000976562 7.30121C-0.000976562 9.0666 -0.000976562 10.8321 -0.000976562 12.5978C-0.000976562 13.5 0.59392 14.0928 1.49733 14.0936H1.86637C1.8693 14.1533 1.87347 14.2034 1.87347 14.254C1.87347 14.6652 1.87347 15.0768 1.87347 15.488C1.87347 15.8036 2.06509 15.999 2.37652 15.999C6.1268 15.999 9.87667 15.999 13.6261 15.999C13.9409 15.999 14.1271 15.8095 14.1271 15.4897C14.1296 15.0305 14.1271 14.5746 14.1271 14.0936H14.4581C15.2814 14.0936 15.7669 13.7179 15.9748 12.9168C15.9805 12.9023 15.9874 12.8884 15.9953 12.875V7.00062C15.9807 6.94259 15.9598 6.8854 15.9431 6.82653ZM10.1791 1.775V1.63848L10.2333 1.60592L12.4246 3.89623L12.481 3.89163L12.4426 3.91501L12.4246 3.89623L12.3871 3.89915C12.3745 3.89915 12.3624 3.89915 12.3499 3.89915C11.808 3.89915 11.2664 3.89915 10.7251 3.89915C10.3598 3.89915 10.1799 3.71838 10.1795 3.35141C10.1782 2.82914 10.1791 2.30311 10.1791 1.77709V1.775ZM2.82155 0.946715H9.24142V1.1087C9.24142 1.85307 9.24142 2.59786 9.24142 3.34223C9.24142 4.24608 9.83506 4.83723 10.7376 4.83807C11.4924 4.83807 12.2473 4.83807 13.0024 4.83807H13.1844V5.79827H2.82155V0.946715ZM13.1823 15.0522H2.81904V14.1032H13.1823V15.0522ZM15.061 12.5932C15.061 12.9785 14.8844 13.1547 14.4978 13.1547H1.51445C1.10658 13.1547 0.936665 12.9844 0.936665 12.5769C0.936665 10.8218 0.936665 9.06674 0.936665 7.31165C0.936665 6.9142 1.10699 6.74471 1.50776 6.74471H14.4911C14.8915 6.74471 15.0614 6.9142 15.0614 7.31248C15.0625 9.07453 15.0628 10.8355 15.0622 12.5953L15.061 12.5932Z" fill="currentColor" />
+                    <path d="M12.4812 3.89258L12.4428 3.91596L12.4248 3.89717L12.4812 3.89258Z" fill="white" />
+                    <path d="M6.1218 11.8353C6.01302 11.8954 5.89534 11.9377 5.77321 11.9606C5.61415 11.9931 5.4839 11.9368 5.38246 11.7965C5.08355 11.3832 4.77629 10.9757 4.47237 10.5662C4.44147 10.5244 4.40891 10.4848 4.36884 10.433C4.33502 10.4747 4.30538 10.5069 4.2795 10.5419C3.97307 10.9565 3.66832 11.3719 3.36106 11.7856C3.17111 12.0411 2.61212 11.9852 2.46642 11.6988C2.40589 11.5806 2.47644 11.5005 2.54115 11.4187C2.90727 10.9594 3.27005 10.4948 3.64327 10.041C3.73052 9.93451 3.72468 9.87064 3.64327 9.76585C3.28383 9.3133 2.93357 8.85323 2.58247 8.39484C2.42091 8.1861 2.45724 8.0429 2.70229 7.93561C2.79829 7.8961 2.89884 7.86876 3.00162 7.8542C3.16861 7.82664 3.30428 7.88634 3.40615 8.02954C3.71967 8.46998 4.03778 8.90625 4.36633 9.36548L5.276 8.10469C5.49308 7.80368 5.88843 7.76277 6.16897 8.01242C6.28503 8.11596 6.29045 8.22409 6.17899 8.36937C5.82748 8.82777 5.47472 9.28547 5.1207 9.74247C5.08271 9.79173 5.04514 9.84183 5.0013 9.89944C5.02343 9.93159 5.04305 9.96624 5.06852 9.99755C5.44396 10.4707 5.81969 10.9438 6.19569 11.417C6.33596 11.5928 6.31926 11.7218 6.1218 11.8353Z" fill="currentColor" />
+                    <path d="M13.4378 10.9334C13.3931 11.355 13.1414 11.6285 12.7669 11.7817C12.0012 12.0957 11.2339 12.0635 10.4791 11.737C10.3666 11.6835 10.2649 11.6098 10.179 11.5195C10.042 11.383 10.0341 11.269 10.1222 11.1279C10.2266 10.9609 10.4144 10.8724 10.571 10.9338C10.6808 10.9805 10.7859 11.0375 10.8849 11.1041C11.0644 11.2207 11.2671 11.2969 11.4789 11.3276C11.6907 11.3583 11.9067 11.3427 12.1119 11.282C12.301 11.2298 12.4638 11.1363 12.4989 10.9217C12.536 10.6925 12.412 10.5343 12.2238 10.4428C11.977 10.323 11.7157 10.2341 11.4623 10.1272C11.2089 10.0204 10.9567 9.9331 10.7204 9.80493C10.3706 9.61498 10.169 9.31606 10.1923 8.90234C10.2157 8.48861 10.4553 8.23436 10.8073 8.06737C11.1717 7.8937 11.5633 7.84986 12.0877 7.83984C12.2421 7.8603 12.521 7.89245 12.7974 7.93586C12.8944 7.95402 12.9887 7.98417 13.0783 8.02562C13.2871 8.11622 13.3493 8.23144 13.295 8.39551C13.2261 8.60217 13.0508 8.70946 12.8466 8.65769C12.6358 8.60425 12.4291 8.50531 12.2175 8.4907C11.9595 8.47725 11.7009 8.49393 11.4468 8.54038C11.2832 8.56668 11.1479 8.67773 11.1316 8.86393C11.1154 9.05012 11.2377 9.15616 11.3859 9.22004C11.6289 9.32399 11.8823 9.40331 12.1269 9.50351C12.3907 9.61164 12.6617 9.71225 12.9072 9.85252C13.3159 10.0884 13.487 10.4641 13.4378 10.9334Z" fill="currentColor" />
+                    <path d="M9.80858 11.6261C9.80858 11.8119 9.69503 11.938 9.51218 11.9384C8.74153 11.9413 7.97046 11.9426 7.19981 11.9384C6.90758 11.9359 6.82617 11.8432 6.82617 11.5489C6.82617 10.4395 6.82617 9.33011 6.82617 8.22072C6.82617 7.99903 6.86374 7.94852 7.08041 7.90093C7.16176 7.88361 7.24482 7.87563 7.32797 7.87713C7.68282 7.88131 7.76506 7.96605 7.76506 8.31716V11.3101H7.9546C8.47017 11.3101 8.98575 11.3101 9.50133 11.3101C9.69545 11.3113 9.81025 11.4345 9.80858 11.6261Z" fill="currentColor" />
+                  </svg>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+          <div class="flex flex-wrap items-center gap-x-2">
+            <app-select-control *ngIf="vehicleOptions$ | async as options" class="w-[24%]" label="Vehicle" [clearable]="true" [disabled]="!!(vehiclesLoading$ | async)" [options]="options" [formControl]="bodyGroup.controls.vehicle_id"></app-select-control>
+            <app-select-control *ngIf="driverOptions$ | async as options" class="w-[24%]" label="Driver" [clearable]="true" [options]="options" [formControl]="bodyGroup.controls.driver_id"></app-select-control>
+          </div>
+        </div>
+        <div class="flex items-center pb-2 border-b border-b-bright-gray">
+          <p class="flex-[0_0_20%] text-sm text-sonic-silver">Type</p>
+          <p class="flex-[0_0_10%] text-sm text-sonic-silver">Speed</p>
+          <p class="flex-[0_0_20%] text-sm text-sonic-silver">Vehicle</p>
+          <p class="flex-[0_0_20%] text-sm text-sonic-silver">Driver</p>
+          <p class="flex-[0_0_15%] text-sm text-sonic-silver">Start Time</p>
+          <p class="flex-[0_0_15%] text-sm text-sonic-silver">End Time</p>
+        </div>
+      </div>
+    </ng-container>
+    <ng-container list>
+      <div *ngIf="isFilterChanging && (bodyGroup.controls.vehicle_id.value || bodyGroup.controls.driver_id.value)" class="loader loader--infinite-scroll absolute inset-0 z-10 items-center justify-center py-32">
+        <div class="spinner mb-4">
+          <div></div>
+        </div>
+      </div>
+      <div *ngIf="!bodyGroup.controls.vehicle_id.value && !bodyGroup.controls.driver_id.value" class="flex flex-col items-center justify-center py-12 text-center">
+        <div class="flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-gray-400">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+          </svg>
+        </div>
+        <h3 class="text-lg font-medium text-gray-900 mb-2">Select a filter to view alarms</h3>
+        <p class="text-sm text-gray-500 max-w-sm">Please select either a vehicle or driver from the filters above to display alarm data.</p>
+      </div>
+      <div *ngFor="let alarm of alarms$ | async; trackByField: 'id'" class="flex items-center py-4">
+        <p class="flex-[0_0_20%] font-semibold text-sm">{{ alarm.type }}</p>
+        <ng-container>
+          <p class="flex-[0_0_10%] font-medium text-sm" *ngIf="alarm.speed | unitConverter | async as speed">{{ speed.value }} {{ speed.unit }}</p>
+        </ng-container>
+        <a class="flex-[0_0_20%] font-medium text-sm cursor-pointer" (click)="handleVehicleClick(alarm.vehicle.id)">
+          {{ alarm.vehicle.registration_plate }}
+        </a>
+        <a class="flex-[0_0_20%] font-medium text-sm" (click)="alarm.driver ? handleDriverClick(alarm.driver.id) : null" [ngClass]="{ 'cursor-pointer': alarm.driver?.id, 'cursor-default': !alarm.driver?.id }">
+          <ng-container>{{ alarm.driver ? alarm.driver.name : '-' }}</ng-container>
+        </a>
+        <p class="flex-[0_0_15%] font-medium text-sm">{{ alarm.time }}</p>
+        <p class="flex-[0_0_15%] font-medium text-sm">{{ alarm.end_time ?? '-' }}</p>
+      </div>
+    </ng-container>
+  </app-infinity-scroll>
+</ng-container>

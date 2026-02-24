@@ -1,0 +1,27 @@
+<div class="flex flex-col flex-1 gap-3 p-3 rounded-md bg-white">
+  <p class="text-sm font-semibold">Fleet Informations</p>
+  <app-telematics-left-fleet-info-field class="flex-1" title="Vehicle location">
+    <div class="flex gap-3">
+      <div class="text-extra-three">
+        <svg width="13" height="16" viewBox="0 0 13 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12.7052 5.28814C12.0335 1.24475 8.02583 -0.874789 4.29872 0.341876C1.69741 1.18979 -0.000976562 3.58255 -0.000976562 6.67942C0.0137053 7.85141 0.45259 9.22882 1.41845 10.407C2.86776 12.1747 4.35483 13.9147 5.82302 15.6665C6.19741 16.1128 6.59959 16.1123 6.9766 15.6665C8.38851 13.9851 9.80042 12.3031 11.2123 10.6206C12.5122 9.05934 13.0339 7.27363 12.7052 5.28814ZM6.40243 8.61613C5.9055 8.61694 5.41948 8.47335 5.00589 8.20353C4.5923 7.93372 4.26972 7.5498 4.07898 7.10035C3.88823 6.65091 3.83789 6.15615 3.93433 5.67868C4.03077 5.20121 4.26965 4.76249 4.62075 4.41804C4.97184 4.07359 5.41936 3.83888 5.90669 3.74363C6.39402 3.64837 6.89924 3.69685 7.35843 3.88292C7.81762 4.06899 8.21014 4.3843 8.48631 4.78894C8.76248 5.19358 8.90989 5.66936 8.90989 6.15609C8.90851 6.8074 8.64402 7.43172 8.1742 7.89265C7.70438 8.35359 7.06741 8.61369 6.40243 8.61613Z" fill="currentColor" />
+        </svg>
+      </div>
+      <p class="font-medium text-sm">
+        {{ vehicleLocation }}
+      </p>
+    </div>
+  </app-telematics-left-fleet-info-field>
+  <div class="flex gap-3">
+    <app-telematics-left-fleet-info-field class="flex-1" title="Number of trips"
+      ><p class="font-medium text-sm">
+        {{ numberOfTrips }}
+      </p>
+    </app-telematics-left-fleet-info-field>
+    <app-telematics-left-fleet-info-field class="flex-1" title="Average trip length">
+      <p class="font-medium text-sm">
+        {{ averageTripLength }}
+      </p>
+    </app-telematics-left-fleet-info-field>
+  </div>
+</div>

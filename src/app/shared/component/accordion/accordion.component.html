@@ -1,0 +1,15 @@
+<div class="w-full flex flex-col" [ngClass]="[expanded ? expandedClass : '']">
+  <div class="flex items-center gap-2 cursor-pointer" [ngClass]="[headerClass]">
+    <div class="flex items-center justify-center transform transition-transform" [class.rotate-180]="expanded" (keydown.enter)="handleToggle()" (click)="handleToggle()">
+      <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
+      </svg>
+    </div>
+    <div class="flex items-center">
+      <ng-content select="[title]"></ng-content>
+    </div>
+  </div>
+  <div *ngIf="expanded" [ngClass]="[contentClass]">
+    <ng-content select="[content]"></ng-content>
+  </div>
+</div>

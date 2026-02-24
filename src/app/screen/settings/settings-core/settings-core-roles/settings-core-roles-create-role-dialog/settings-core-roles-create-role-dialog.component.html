@@ -1,0 +1,196 @@
+<app-dialog-container [title]="data.type === 'create' ? 'Create new role' : 'Edit role'">
+  <div *ngIf="configData$ | async as configData" class="flex flex-col gap-8 p-4" body>
+    <app-text-control label="Role name*" [formControl]="name"></app-text-control>
+    <app-select-control *ngIf="reviewerLevels$ | async as options" [options]="options" label="Reviewer Level*" [formControl]="reviewerLevel"></app-select-control>
+    <div class="flex flex-col gap-2">
+      <span class="font-medium">Assign modules</span>
+      <div class="flex items-center py-2 pr-3 border-b border-bright-gray">
+        <div class="text-manatee">
+          <app-checkbox-control [ngModel]="allModules" (ngModelChange)="handleCheckAllModulesClick($event)"></app-checkbox-control>
+        </div>
+        <span class="text-xs text-manatee">Module</span>
+        <span class="w-32 ml-auto text-xs text-manatee">Access mode</span>
+      </div>
+      <div class="h-[250px] flex flex-col gap-2 pr-2 overflow-y-auto">
+        <app-modules-list-element name="Dashboard" [value]="accessGroupsForm.controls.dashboard.value !== ''" (clickCheck)="handleCheckModuleClick('dashboard', $event)">
+          <app-select-control [showSearchInput]="false" [showHintSpace]="false" [options]="optionsMap['dashboard']" [formControl]="accessGroupsForm.controls.dashboard"></app-select-control>
+        </app-modules-list-element>
+        <app-modules-list-element name="Leaderboard" [value]="accessGroupsForm.controls.leaderboard.value !== ''" (clickCheck)="handleCheckModuleClick('leaderboard', $event)">
+          <app-select-control [showSearchInput]="false" [showHintSpace]="false" [options]="optionsMap['leaderboard']" [formControl]="accessGroupsForm.controls.leaderboard"></app-select-control>
+        </app-modules-list-element>
+
+        <span class="text-sm font-medium">Fleet</span>
+        <div class="flex flex-col gap-2 ml-6">
+          <app-modules-list-element name="Fleet - Drivers" [value]="accessGroupsForm.controls.drivers.value !== ''" (clickCheck)="handleCheckModuleClick('drivers', $event)">
+            <app-select-control [showSearchInput]="false" [showHintSpace]="false" [options]="optionsMap['drivers']" [formControl]="accessGroupsForm.controls.drivers"></app-select-control>
+          </app-modules-list-element>
+          <app-modules-list-element name="Fleet - Vehicles" [value]="accessGroupsForm.controls.vehicles.value !== ''" (clickCheck)="handleCheckModuleClick('vehicles', $event)">
+            <app-select-control [showSearchInput]="false" [showHintSpace]="false" [options]="optionsMap['vehicles']" [formControl]="accessGroupsForm.controls.vehicles"></app-select-control>
+          </app-modules-list-element>
+          <app-modules-list-element name="Analytics" [value]="accessGroupsForm.controls.fleets.value !== ''" (clickCheck)="handleCheckModuleClick('fleets', $event)">
+            <app-select-control [showSearchInput]="false" [showHintSpace]="false" [options]="optionsMap['fleets']" [formControl]="accessGroupsForm.controls.fleets"></app-select-control>
+          </app-modules-list-element>
+        </div>
+
+        <app-modules-list-element name="Stream" [value]="accessGroupsForm.controls.stream.value !== ''" (clickCheck)="handleCheckModuleClick('stream', $event)">
+          <app-select-control [showSearchInput]="false" [showHintSpace]="false" [options]="optionsMap['stream']" [formControl]="accessGroupsForm.controls.stream"></app-select-control>
+        </app-modules-list-element>
+
+        <app-modules-list-element name="Events" [value]="accessGroupsForm.controls.events.value !== ''" (clickCheck)="handleCheckModuleClick('events', $event)">
+          <app-select-control [showSearchInput]="false" [showHintSpace]="false" [options]="optionsMap['events']" [formControl]="accessGroupsForm.controls.events"></app-select-control>
+        </app-modules-list-element>
+        <app-modules-list-element name="Escalated Events" [value]="accessGroupsForm.controls.escalated_events.value !== ''" (clickCheck)="handleCheckModuleClick('escalated_events', $event)">
+          <app-select-control [showSearchInput]="false" [showHintSpace]="false" [options]="optionsMap['escalated_events']" [formControl]="accessGroupsForm.controls.escalated_events"></app-select-control>
+        </app-modules-list-element>
+        <app-modules-list-element name="Reviewed Events" [value]="accessGroupsForm.controls.reviewed_events.value !== ''" (clickCheck)="handleCheckModuleClick('reviewed_events', $event)">
+          <app-select-control [showSearchInput]="false" [showHintSpace]="false" [options]="optionsMap['reviewed_events']" [formControl]="accessGroupsForm.controls.reviewed_events"></app-select-control>
+        </app-modules-list-element>
+
+        <app-modules-list-element name="Archived Events" [value]="accessGroupsForm.controls.archived_events.value !== ''" (clickCheck)="handleCheckModuleClick('archived_events', $event)">
+          <app-select-control [showSearchInput]="false" [showHintSpace]="false" [options]="optionsMap['archived_events']" [formControl]="accessGroupsForm.controls.archived_events"></app-select-control>
+        </app-modules-list-element>
+        <span class="text-sm font-medium">Reports</span>
+        <div class="flex flex-col gap-2 ml-6">
+          <app-modules-list-element name="Top Driver" [value]="accessGroupsForm.controls.reports_top_driver.value !== ''" (clickCheck)="handleCheckModuleClick('reports_top_driver', $event)">
+            <app-select-control [showSearchInput]="false" [showHintSpace]="false" [options]="optionsMap['reports_top_driver']" [formControl]="accessGroupsForm.controls.reports_top_driver"></app-select-control>
+          </app-modules-list-element>
+          <app-modules-list-element name="Mileage" [value]="accessGroupsForm.controls.reports_mileage.value !== ''" (clickCheck)="handleCheckModuleClick('reports_mileage', $event)">
+            <app-select-control [showSearchInput]="false" [showHintSpace]="false" [options]="optionsMap['reports_mileage']" [formControl]="accessGroupsForm.controls.reports_mileage"></app-select-control>
+          </app-modules-list-element>
+          <app-modules-list-element name="Driving Time" [value]="accessGroupsForm.controls.reports_driving_time.value !== ''" (clickCheck)="handleCheckModuleClick('reports_driving_time', $event)">
+            <app-select-control [showSearchInput]="false" [showHintSpace]="false" [options]="optionsMap['reports_driving_time']" [formControl]="accessGroupsForm.controls.reports_driving_time"></app-select-control>
+          </app-modules-list-element>
+          <app-modules-list-element name="Vehicle Issues" [value]="accessGroupsForm.controls.reports_vehicle_issues.value !== ''" (clickCheck)="handleCheckModuleClick('reports_vehicle_issues', $event)">
+            <app-select-control [showSearchInput]="false" [showHintSpace]="false" [options]="optionsMap['reports_vehicle_issues']" [formControl]="accessGroupsForm.controls.reports_vehicle_issues"></app-select-control>
+          </app-modules-list-element>
+          <app-modules-list-element name="Distance Driven" [value]="accessGroupsForm.controls.reports_distance_driven.value !== ''" (clickCheck)="handleCheckModuleClick('reports_distance_driven', $event)">
+            <app-select-control [showSearchInput]="false" [showHintSpace]="false" [options]="optionsMap['reports_distance_driven']" [formControl]="accessGroupsForm.controls.reports_distance_driven"></app-select-control>
+          </app-modules-list-element>
+          <app-modules-list-element name="Events" [value]="accessGroupsForm.controls.reports_events.value !== ''" (clickCheck)="handleCheckModuleClick('reports_events', $event)">
+            <app-select-control [showSearchInput]="false" [showHintSpace]="false" [options]="optionsMap['reports_events']" [formControl]="accessGroupsForm.controls.reports_events"></app-select-control>
+          </app-modules-list-element>
+          <app-modules-list-element name="Accidents" [value]="accessGroupsForm.controls.reports_accidents.value !== ''" (clickCheck)="handleCheckModuleClick('reports_accidents', $event)">
+            <app-select-control [showSearchInput]="false" [showHintSpace]="false" [options]="optionsMap['reports_accidents']" [formControl]="accessGroupsForm.controls.reports_accidents"></app-select-control>
+          </app-modules-list-element>
+          <app-modules-list-element name="Trip Reports" [value]="accessGroupsForm.controls.reports_trips.value !== ''" (clickCheck)="handleCheckModuleClick('reports_trips', $event)">
+            <app-select-control [showSearchInput]="false" [showHintSpace]="false" [options]="optionsMap['reports_trips']" [formControl]="accessGroupsForm.controls.reports_trips"></app-select-control>
+          </app-modules-list-element>
+          <app-modules-list-element name="Vehicles Checks" [value]="accessGroupsForm.controls.reports_vehicles_checks.value !== ''" (clickCheck)="handleCheckModuleClick('reports_vehicles_checks', $event)">
+            <app-select-control [showSearchInput]="false" [showHintSpace]="false" [options]="optionsMap['reports_vehicles_checks']" [formControl]="accessGroupsForm.controls.reports_vehicles_checks"></app-select-control>
+          </app-modules-list-element>
+          <app-modules-list-element name="Vehicle Online Status" [value]="accessGroupsForm.controls.reports_vehicle_online_status.value !== ''" (clickCheck)="handleCheckModuleClick('reports_vehicle_online_status', $event)">
+            <app-select-control [showSearchInput]="false" [showHintSpace]="false" [options]="optionsMap['reports_vehicle_online_status']" [formControl]="accessGroupsForm.controls.reports_vehicle_online_status"></app-select-control>
+          </app-modules-list-element>
+          <app-modules-list-element name="Alarms" [value]="accessGroupsForm.controls.reports_alarms.value !== ''" (clickCheck)="handleCheckModuleClick('reports_alarms', $event)">
+            <app-select-control [showSearchInput]="false" [showHintSpace]="false" [options]="optionsMap['reports_alarms']" [formControl]="accessGroupsForm.controls.reports_alarms"></app-select-control>
+          </app-modules-list-element>
+          <app-modules-list-element name="User Logs" [value]="accessGroupsForm.controls.reports_user_logs.value !== ''" (clickCheck)="handleCheckModuleClick('reports_user_logs', $event)">
+            <app-select-control [showSearchInput]="false" [showHintSpace]="false" [options]="optionsMap['reports_user_logs']" [formControl]="accessGroupsForm.controls.reports_user_logs"></app-select-control>
+          </app-modules-list-element>
+        </div>
+        <app-modules-list-element name="Telematics" [value]="accessGroupsForm.controls.telematics.value !== ''" (clickCheck)="handleCheckModuleClick('telematics', $event)">
+          <app-select-control [showSearchInput]="false" [showHintSpace]="false" [options]="optionsMap['telematics']" [formControl]="accessGroupsForm.controls.telematics"></app-select-control>
+        </app-modules-list-element>
+
+        <span class="text-sm font-medium">Map view</span>
+        <div class="flex flex-col gap-2 ml-6">
+          <app-modules-list-element name="Map view" [value]="accessGroupsForm.controls.map_view.value !== ''" (clickCheck)="handleCheckModuleClick('map_view', $event)">
+            <app-select-control [showSearchInput]="false" [showHintSpace]="false" [options]="optionsMap['map_view']" [formControl]="accessGroupsForm.controls.map_view"></app-select-control>
+          </app-modules-list-element>
+        </div>
+
+        <span class="text-sm font-medium">Settings</span>
+        <div class="flex flex-col gap-2 ml-6">
+          <app-modules-list-element name="Profile" [value]="accessGroupsForm.controls.settings_profile.value !== ''" (clickCheck)="handleCheckModuleClick('settings_profile', $event)">
+            <app-select-control [showSearchInput]="false" [showHintSpace]="false" [options]="optionsMap['settings_profile']" [formControl]="accessGroupsForm.controls.settings_profile"></app-select-control>
+          </app-modules-list-element>
+          <app-modules-list-element name="Notifications" [value]="accessGroupsForm.controls.settings_notification_settings.value !== ''" (clickCheck)="handleCheckModuleClick('settings_notification_settings', $event)">
+            <app-select-control [showSearchInput]="false" [showHintSpace]="false" [options]="optionsMap['settings_notification_settings']" [formControl]="accessGroupsForm.controls.settings_notification_settings"></app-select-control>
+          </app-modules-list-element>
+          <app-modules-list-element name="Manage companies" [value]="accessGroupsForm.controls.settings_company_managements.value !== ''" (clickCheck)="handleCheckModuleClick('settings_company_managements', $event)">
+            <app-select-control [showSearchInput]="false" [showHintSpace]="false" [options]="optionsMap['settings_company_managements']" [formControl]="accessGroupsForm.controls.settings_company_managements"></app-select-control>
+          </app-modules-list-element>
+          <app-modules-list-element name="Manage fleets" [value]="accessGroupsForm.controls.settings_fleet_management.value !== ''" (clickCheck)="handleCheckModuleClick('settings_fleet_management', $event)">
+            <app-select-control [showSearchInput]="false" [showHintSpace]="false" [options]="optionsMap['settings_fleet_management']" [formControl]="accessGroupsForm.controls.settings_fleet_management"></app-select-control>
+          </app-modules-list-element>
+          <app-modules-list-element name="Manage roles" [value]="accessGroupsForm.controls.settings_role_management.value !== ''" (clickCheck)="handleCheckModuleClick('settings_role_management', $event)">
+            <app-select-control [showSearchInput]="false" [showHintSpace]="false" [options]="optionsMap['settings_role_management']" [formControl]="accessGroupsForm.controls.settings_role_management"></app-select-control>
+          </app-modules-list-element>
+          <app-modules-list-element name="Manage drivers" [value]="accessGroupsForm.controls.settings_driver_managements.value !== ''" (clickCheck)="handleCheckModuleClick('settings_driver_managements', $event)">
+            <app-select-control [showSearchInput]="false" [showHintSpace]="false" [options]="optionsMap['settings_driver_managements']" [formControl]="accessGroupsForm.controls.settings_driver_managements"></app-select-control>
+          </app-modules-list-element>
+          <app-modules-list-element name="Driver score weighting" [value]="accessGroupsForm.controls.settings_driver_score_weights.value !== ''" (clickCheck)="handleCheckModuleClick('settings_driver_score_weights', $event)">
+            <app-select-control [showSearchInput]="false" [showHintSpace]="false" [options]="optionsMap['settings_driver_score_weights']" [formControl]="accessGroupsForm.controls.settings_driver_score_weights"></app-select-control>
+          </app-modules-list-element>
+          <app-modules-list-element name="Automatic reports" [value]="accessGroupsForm.controls.settings_automated_reports.value !== ''" (clickCheck)="handleCheckModuleClick('settings_automated_reports', $event)">
+            <app-select-control [showSearchInput]="false" [showHintSpace]="false" [options]="optionsMap['settings_automated_reports']" [formControl]="accessGroupsForm.controls.settings_automated_reports"></app-select-control>
+          </app-modules-list-element>
+          <app-modules-list-element name="Admin Notices" [value]="accessGroupsForm.controls.settings_infotainment.value !== ''" (clickCheck)="handleCheckModuleClick('settings_infotainment', $event)">
+            <app-select-control [showSearchInput]="false" [showHintSpace]="false" [options]="optionsMap['settings_infotainment']" [formControl]="accessGroupsForm.controls.settings_infotainment"></app-select-control>
+          </app-modules-list-element>
+          <app-modules-list-element name="Vehicle Event Strategies" [value]="accessGroupsForm.controls.settings_vehicle_event_strategies.value !== ''" (clickCheck)="handleCheckModuleClick('settings_vehicle_event_strategies', $event)">
+            <app-select-control [showSearchInput]="false" [showHintSpace]="false" [options]="optionsMap['settings_vehicle_event_strategies']" [formControl]="accessGroupsForm.controls.settings_vehicle_event_strategies"></app-select-control>
+          </app-modules-list-element>
+          <app-modules-list-element name="Shared Clips Emails" [value]="accessGroupsForm.controls.settings_shared_clips_emails.value !== ''" (clickCheck)="handleCheckModuleClick('settings_shared_clips_emails', $event)">
+            <app-select-control [showSearchInput]="false" [showHintSpace]="false" [options]="optionsMap['settings_shared_clips_emails']" [formControl]="accessGroupsForm.controls.settings_shared_clips_emails"></app-select-control>
+          </app-modules-list-element>
+          <app-modules-list-element name="Vehicle commissions" [value]="accessGroupsForm.controls.settings_commission_editor.value !== ''" (clickCheck)="handleCheckModuleClick('settings_commission_editor', $event)">
+            <app-select-control [showSearchInput]="false" [showHintSpace]="false" [options]="optionsMap['settings_commission_editor']" [formControl]="accessGroupsForm.controls.settings_commission_editor"></app-select-control>
+          </app-modules-list-element>
+        </div>
+
+        <app-modules-list-element name="Notifications" [value]="accessGroupsForm.controls.notifications.value !== ''" (clickCheck)="handleCheckModuleClick('notifications', $event)">
+          <app-select-control [showSearchInput]="false" [showHintSpace]="false" [options]="optionsMap['notifications']" [formControl]="accessGroupsForm.controls.notifications"></app-select-control>
+        </app-modules-list-element>
+
+        <app-modules-list-element name="Task list" [value]="accessGroupsForm.controls.task_list.value !== ''" (clickCheck)="handleCheckModuleClick('task_list', $event)">
+          <app-select-control [showSearchInput]="false" [showHintSpace]="false" [options]="optionsMap['task_list']" [formControl]="accessGroupsForm.controls.task_list"></app-select-control>
+        </app-modules-list-element>
+      </div>
+    </div>
+    <div class="flex flex-col gap-8">
+      <div class="flex items-center gap-1 cursor-pointer" (click)="isOpen = !isOpen" (keydown.enter)="isOpen = !isOpen">
+        <span class="text-sm text-main-primary font-semibold">Give accesses to specific events</span>
+        <ng-container *ngIf="isOpen; then up; else down"></ng-container>
+        <ng-template #up>
+          <div class="text-main-primary">
+            <svg width="6" height="5" viewBox="0 0 6 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0.92313 4.22334C0.562863 4.22334 0.314464 4.05763 0.17793 3.72622C0.0413969 3.39482 0.0994052 3.10283 0.351955 2.85027L2.2212 0.981042C2.30839 0.893858 2.39749 0.831675 2.48851 0.794492C2.57954 0.757308 2.6789 0.738716 2.78658 0.738716C2.89428 0.738716 2.99364 0.757308 3.08465 0.794492C3.17569 0.831675 3.2648 0.893858 3.35198 0.981042L5.22121 2.85027C5.47377 3.10283 5.53179 3.39482 5.39526 3.72622C5.25871 4.05763 5.0103 4.22334 4.65005 4.22334H0.92313Z" fill="currentColor" />
+            </svg>
+          </div>
+        </ng-template>
+        <ng-template #down>
+          <div class="text-main-primary">
+            <svg width="7" height="5" viewBox="0 0 7 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3.0723 3.82935L1.20305 1.96013C0.950502 1.70756 0.892494 1.41558 1.02903 1.08418C1.16556 0.75276 1.41396 0.587051 1.77423 0.587051H5.50115C5.8614 0.587051 6.1098 0.75276 6.24635 1.08418C6.38289 1.41558 6.32487 1.70756 6.0723 1.96013L4.20308 3.82935C4.11589 3.91654 4.02679 3.97872 3.93575 4.0159C3.84474 4.05308 3.74538 4.07168 3.63768 4.07168C3.52999 4.07168 3.43064 4.05308 3.3396 4.0159C3.24859 3.97872 3.15949 3.91654 3.0723 3.82935Z" fill="currentColor" />
+            </svg>
+          </div>
+        </ng-template>
+      </div>
+      <div *ngIf="isOpen" class="flex flex-col">
+        <div class="flex items-center gap-4 border-b border-bright-gray">
+          <app-checkbox-control [ngModel]="allEvents" (ngModelChange)="handleAllEventsClick($event)"></app-checkbox-control>
+          <span class="text-xs text-manatee">Events</span>
+        </div>
+        <div class="h-52 flex flex-col overflow-y-auto">
+          <div *ngFor="let eventTypesGroup of configData.event_types_groups">
+            <span class="text-xs text-manatee">{{ eventTypesGroup.name }}</span>
+            <div *ngFor="let item of eventTypesGroup.items" class="flex items-center gap-4">
+              <app-checkbox-control [formControl]="getEventControl(item.default_name)"></app-checkbox-control>
+              <div class="flex items-center gap-2">
+                <app-event-icon [eventIcon]="item.event_icon"></app-event-icon>
+                <span class="text-sm">{{ item.name }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <span class="text-xs text-dim-gray">* - mandatory fields</span>
+    </div>
+  </div>
+  <div class="flex flex-1 justify-end" footer>
+    <app-button [disabled]="!name.valid" (buttonClick)="data.type === 'create' ? handleAddRoleClick() : handleEditRoleClick()">
+      <span class="text-sm text-white font-semibold">{{ data.type === 'create' ? 'Add role' : 'Save' }}</span>
+    </app-button>
+  </div>
+</app-dialog-container>

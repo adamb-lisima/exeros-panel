@@ -1,0 +1,13 @@
+<app-dialog-container>
+  <div class="flex flex-col p-4" body [formGroup]="form">
+    <app-text-control [error]="form.controls.name.invalid && form.controls.name.touched" errorText="Name is required" label="Name*" formControlName="name"> </app-text-control>
+    <app-text-control [error]="form.controls.email.invalid && form.controls.email.touched" errorText="Valid email is required" label="Email*" formControlName="email"> </app-text-control>
+    <app-select-control [error]="form.controls.company_ids.invalid && form.controls.company_ids.touched" errorText="Company access is required" [options]="(companyOptions$ | async) ?? []" [formControl]="form.controls.company_ids" [multiple]="true" [showHintSpace]="false" label="Companies*"></app-select-control>
+  </div>
+  <div footer class="flex flex-1 justify-end gap-4">
+    <app-button type="quaternary" (keydown.enter)="dialogRef.close()" (click)="dialogRef.close()">Cancel</app-button>
+    <app-button type="primary" (keydown.enter)="saveAdmin()" (click)="saveAdmin()">
+      {{ isEditMode ? 'Update' : 'Save' }}
+    </app-button>
+  </div>
+</app-dialog-container>

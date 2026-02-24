@@ -1,0 +1,47 @@
+<svg id="e2194d6d-295d-4fe4-94a5-e5c717786a1f" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80">
+  <defs>
+    <style>
+      .f55edf4b-75c9-414c-b330-b87ade7c47fd {
+        fill: #fadc0f;
+      }
+
+      .e0f50f57-29b4-424d-a279-0ab43f7a9eab {
+        fill: #fff;
+      }
+
+      .f2039701-efc2-4063-9cbf-0ed74b96119f {
+        font-size: 15.5px;
+        fill: #414042;
+        font-family: AvertaCY-Light;
+        font-weight: 300;
+      }
+
+      .ed8682a5-d6bc-4ab2-9d2e-5e9a54399dd3 {
+        fill: none;
+        stroke: #414042;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+    </style>
+  </defs>
+  <title>Accident-13</title>
+  <g>
+    <g>
+      <path class="f55edf4b-75c9-414c-b330-b87ade7c47fd" d="M23.54,48.83a3.63,3.63,0,1,1-3.62-3.62A3.62,3.62,0,0,1,23.54,48.83Z"/>
+      <path class="f55edf4b-75c9-414c-b330-b87ade7c47fd" d="M50.52,48.83a3.62,3.62,0,1,1-3.62-3.62A3.62,3.62,0,0,1,50.52,48.83Z"/>
+      <path class="e0f50f57-29b4-424d-a279-0ab43f7a9eab" d="M54.13,41.05v7.78H50.52a3.62,3.62,0,0,0-7.24,0H23.54a3.63,3.63,0,0,0-7.25,0H11.51V47.36c0-2.06,1-4.38,3-4.88C20.38,41,31.24,33.83,37,34.23,44.3,33.93,54.13,41.05,54.13,41.05Z"/>
+    </g>
+    <g>
+      <text class="f2039701-efc2-4063-9cbf-0ed74b96119f" transform="translate(14.87 11.31)">TYPE</text>
+      <g>
+        <circle class="ed8682a5-d6bc-4ab2-9d2e-5e9a54399dd3" cx="33.04" cy="43.23" r="26.93"/>
+        <line class="ed8682a5-d6bc-4ab2-9d2e-5e9a54399dd3" x1="53.41" y1="61.2" x2="73.78" y2="79.17"/>
+        <circle class="ed8682a5-d6bc-4ab2-9d2e-5e9a54399dd3" cx="19.91" cy="48.83" r="3.62"/>
+        <circle class="ed8682a5-d6bc-4ab2-9d2e-5e9a54399dd3" cx="46.9" cy="48.83" r="3.62"/>
+        <line class="ed8682a5-d6bc-4ab2-9d2e-5e9a54399dd3" x1="16.05" y1="48.83" x2="11.51" y2="48.83"/>
+        <line class="ed8682a5-d6bc-4ab2-9d2e-5e9a54399dd3" x1="43.12" y1="48.83" x2="23.78" y2="48.83"/>
+        <path class="ed8682a5-d6bc-4ab2-9d2e-5e9a54399dd3" d="M11.51,48.67V47.36c0-2.06,1-4.38,3-4.88C20.38,41,31.24,33.83,37,34.23c7.28-.3,17.1,6.82,17.1,6.82v7.78H50.74"/>
+      </g>
+    </g>
+  </g>
+</svg>

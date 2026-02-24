@@ -1,0 +1,23 @@
+<div id="video-h265-{{ _source.channel }}" class="max-h-[-webkit-fill-available] min-h-[200px] h-auto w-fit flex flex-col p-1 mx-auto" [ngClass]="{ 'loader loader--small': (firstPlaying$ | async) === false }">
+  <div class="w-full h-full flex flex-1 relative video-container" [class.zoom-mode]="isZoomMode" (wheel)="handleZoomWheel($event)" (mousedown)="handleZoomMouseDown($event)" (mousemove)="handleZoomMouseMove($event)" (mouseup)="handleZoomMouseUp()" (mouseleave)="handleZoomMouseUp()">
+    <video class="!hidden" #videoElement></video>
+
+    <div *ngIf="isZoomMode" class="absolute top-2 left-2 z-20 bg-white bg-opacity-70 rounded px-2 py-1 text-xs text-dark-electric-blue">{{ zoomScale * 100 | number : '1.0-0' }}%</div>
+
+    <div *ngIf="shouldShowControls" class="absolute bottom-2 right-2 z-20 flex gap-2">
+      <div [ngClass]="{ 'text-main-primary': isZoomMode, 'text-black': !isZoomMode }" class="bg-white bg-opacity-70 hover:bg-opacity-90 rounded-full p-2 flex items-center justify-center transition-colors cursor-pointer select-none" (click)="handleZoomToggle()" (keydown.enter)="handleZoomToggle()" title="Toggle zoom mode">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" fill="currentColor" />
+          <path d="M12 10h-2v2H9v-2H7V9h2V7h1v2h2v1z" fill="currentColor" />
+        </svg>
+      </div>
+
+      <button (click)="takeSnapshot()" class="bg-white bg-opacity-70 hover:bg-opacity-90 rounded-full p-2 flex items-center justify-center transition-colors">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10 13.8333C11.3807 13.8333 12.5 12.7141 12.5 11.3333C12.5 9.95258 11.3807 8.83333 10 8.83333C8.61925 8.83333 7.5 9.95258 7.5 11.3333C7.5 12.7141 8.61925 13.8333 10 13.8333Z" stroke="currentColor" stroke-width="1.06" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M15 5.83333H13.3333L12.5 4.16666H7.5L6.66667 5.83333H5C4.07953 5.83333 3.33333 6.57953 3.33333 7.49999V14.1667C3.33333 15.0871 4.07953 15.8333 5 15.8333H15C15.9205 15.8333 16.6667 15.0871 16.6667 14.1667V7.49999C16.6667 6.57953 15.9205 5.83333 15 5.83333Z" stroke="currentColor" stroke-width="1.06" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>

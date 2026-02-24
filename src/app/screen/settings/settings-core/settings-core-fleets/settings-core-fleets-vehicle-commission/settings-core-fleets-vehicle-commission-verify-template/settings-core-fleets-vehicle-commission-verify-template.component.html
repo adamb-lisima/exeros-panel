@@ -1,0 +1,96 @@
+<div>
+  <div class="gap-2 flex flex-col pb-6">
+    <p class="text-lg font-medium">Verify templates with device</p>
+    <p class="font-normal text-sm text-new-gray-700">Press the button on the front of the device to trigger a test event. Confirm if the videos look good. If there are issues, fix them and create another event.</p>
+  </div>
+  <div class="grid grid-cols-5 bg-new-gray-100 py-4 pr-4 pl-3 rounded-lg gap-6">
+    <div class="col-span-2">
+      <div class="max-h-96 overflow-y-auto">
+        <app-infinity-scroll [loading]="eventsLoading$ | async">
+          <ng-container list>
+            <ng-container *ngIf="events$ | async as events">
+              <div *ngFor="let event of events" class="bg-white rounded-lg grid grid-cols-2 h-[107px] cursor-pointer mb-2" [ngClass]="{ 'border-2 border-main-primary': isEventSelected(event.id) }" (click)="selectEvent(event)" (keydown.enter)="selectEvent(event)">
+                <div class="col-span-1 flex items-center justify-center pl-2">
+                  <ng-container *ngIf="event.thumbs[0] as thumb">
+                    <div class="w-[81px] h-[91px] rounded-md overflow-hidden flex items-center justify-center">
+                      <img height="90" width="120" class="rounded-md object-cover w-full h-full" [src]="thumb" alt="thumb" />
+                    </div>
+                  </ng-container>
+                </div>
+                <div class="col-span-1 gap-3 p-2">
+                  <span class="flex flex-row">
+                    <app-event-icon class="text-extra-two w-[12px] h-[12px]" [eventIcon]="event.event_icon"></app-event-icon>
+                    <p class="font-medium text-xs">{{ event.display_name }}</p>
+                  </span>
+                  <span class="flex flex-row items-center gap-1 text-xs">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <mask id="mask0_1886_2146" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="14" height="14">
+                        <rect width="14" height="14" fill="#D9D9D9" />
+                      </mask>
+                      <g mask="url(#mask0_1886_2146)">
+                        <path class="fill-black dark:fill-cultured" fill="currentColor" d="M3.27564 10.7917V11.3413C3.27564 11.5127 3.21561 11.6584 3.09554 11.7784C2.97547 11.8983 2.82964 11.9583 2.65804 11.9583C2.48654 11.9583 2.34095 11.8983 2.22127 11.7784C2.10159 11.6584 2.04175 11.5127 2.04175 11.3413V7.22662C2.04175 7.16605 2.04569 7.10548 2.05356 7.04491C2.06144 6.98434 2.07466 6.9263 2.09323 6.87079L3.13783 3.91737C3.20773 3.70727 3.33441 3.5366 3.51787 3.40535C3.70133 3.274 3.90666 3.20833 4.13387 3.20833H9.86629C10.0935 3.20833 10.2988 3.274 10.4823 3.40535C10.6657 3.5366 10.7924 3.70727 10.8623 3.91737L11.9069 6.87079C11.9255 6.9263 11.9387 6.98434 11.9466 7.04491C11.9545 7.10548 11.9584 7.16605 11.9584 7.22662V11.3413C11.9584 11.5127 11.8984 11.6584 11.7783 11.7784C11.6581 11.8983 11.5123 11.9583 11.3408 11.9583C11.1692 11.9583 11.0236 11.8983 10.9039 11.7784C10.7843 11.6584 10.7245 11.5127 10.7245 11.3413V10.7917H3.27564ZM3.27127 6.16991H10.7289L10.0379 4.20116C10.023 4.16373 10.0005 4.13476 9.97056 4.11424C9.94062 4.09363 9.90508 4.08333 9.86396 4.08333H4.13621C4.09508 4.08333 4.05955 4.09363 4.0296 4.11424C3.99966 4.13476 3.9772 4.16373 3.96223 4.20116L3.27127 6.16991ZM4.35394 9.24364C4.56617 9.24364 4.74618 9.16931 4.89396 9.02066C5.04164 8.87211 5.11548 8.69171 5.11548 8.47947C5.11548 8.26724 5.0412 8.08723 4.89264 7.93945C4.74399 7.79177 4.56355 7.71793 4.35131 7.71793C4.13907 7.71793 3.95912 7.79221 3.81144 7.94077C3.66366 8.08942 3.58977 8.26986 3.58977 8.4821C3.58977 8.69434 3.6641 8.87429 3.81275 9.02197C3.9613 9.16975 4.1417 9.24364 4.35394 9.24364ZM9.64885 9.24364C9.86109 9.24364 10.041 9.16931 10.1887 9.02066C10.3365 8.87211 10.4104 8.69171 10.4104 8.47947C10.4104 8.26724 10.3361 8.08723 10.1874 7.93945C10.0389 7.79177 9.85846 7.71793 9.64623 7.71793C9.43399 7.71793 9.25398 7.79221 9.10621 7.94077C8.95853 8.08942 8.88469 8.26986 8.88469 8.4821C8.88469 8.69434 8.95896 8.87429 9.10752 9.02197C9.25617 9.16975 9.43662 9.24364 9.64885 9.24364ZM2.91675 9.91666H11.0834V7.04491H2.91675V9.91666Z" />
+                      </g>
+                    </svg>
+                    <p class="text-xs font-normal">{{ event.registration_plate }}</p>
+                  </span>
+                  <ng-container *ngIf="isEventConfirmed(event.id); else toReviewTemplate">
+                    <span class="bg-extra-one--30 rounded-sm text-xs px-2 mt-auto">Confirmed</span>
+                  </ng-container>
+                  <ng-template #toReviewTemplate>
+                    <span class="bg-extra-four--30 rounded-sm text-xs px-2 mt-auto">To review</span>
+                  </ng-template>
+                </div>
+              </div>
+            </ng-container>
+          </ng-container>
+        </app-infinity-scroll>
+      </div>
+    </div>
+    <div class="col-span-3 overflow-y-auto">
+      <div class="flex flex-row gap-2 pb-4 pt-4">
+        <span (keydown.enter)="confirmEvent()" (click)="confirmEvent()" class="text-sm border-[2px] border-extra-one text-extra-one rounded-lg flex flex-row bg-white items-center py-1 px-2 cursor-pointer"
+          ><svg class="pr-2" width="20" height="20" viewBox="0 0 15 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4.76851 8.95827L13.5705 0.156267C13.6678 0.0589341 13.7826 0.00701644 13.9148 0.000516443C14.0468 -0.00581689 14.1678 0.0461008 14.278 0.156267C14.3883 0.266601 14.4435 0.385516 14.4435 0.513016C14.4435 0.640683 14.3883 0.7596 14.278 0.869767L5.33401 9.81977C5.17235 9.98127 4.98385 10.062 4.76851 10.062C4.55318 10.062 4.36468 9.98127 4.20301 9.81977L0.153015 5.76977C0.0556812 5.67243 0.00476451 5.55677 0.000264515 5.42277C-0.00423549 5.28877 0.0486809 5.1666 0.159014 5.05627C0.269181 4.9461 0.388015 4.89102 0.515515 4.89102C0.643181 4.89102 0.762098 4.9461 0.872264 5.05627L4.76851 8.95827Z" fill="#14A54D" />
+          </svg>
+          {{ isEventConfirmed(selectedEvent$.value?.id) ? 'Confirmed' : 'Confirm' }}
+        </span>
+        <span (keydown.enter)="fetchEvents()" (click)="fetchEvents()" class="text-sm border-[2px] border-new-gray-800 text-new-gray-800 rounded-lg flex flex-row bg-white items-center py-1 px-2 cursor-pointer"
+          ><svg class="pr-2" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 5C15.866 5 19 8.134 19 12C19 15.866 15.866 19 12 19C8.13401 19 5 15.866 5 12C5 9.80101 6.01397 7.83885 7.59985 6.55556" stroke="#1C1B1B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M5 6.16655H8.11111V9.27766" stroke="#1C1B1B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          Refresh
+        </span>
+      </div>
+
+      <ng-container *ngIf="event$ | async as event; else noEventSelected">
+        <p class="py-4">{{ event.occurence_time | dateFormat : 'serverDateTimeFormat' : 'clientDateTimeFormat' }} {{ event.display_name }}</p>
+
+        <ng-container *ngIf="cameras$ | async as cameras">
+          <ng-container *ngIf="cameras.length > 0">
+            <div class="flex flex-col gap-4">
+              <ng-container *ngFor="let camera of cameras; let i = index">
+                <app-smax-video-mp4 *ngIf="camera.stream; else noStream" class="max-w-[306px] w-full mx-auto" [source]="getCamera(camera)" (stateChange)="handleStateChange(i, $event)"> </app-smax-video-mp4> <ng-template #noStream> <p>Selected vehicle is in Driver mode</p> </ng-template>
+              </ng-container>
+            </div>
+          </ng-container>
+
+          <ng-container *ngIf="cameras.length === 0">
+            <div class="py-4">
+              <div class="bg-new-gray-300 rounded-2xl w-[306px] h-44 flex items-center justify-center">
+                <p class="text-center">Driver mode is enabled on this vehicle</p>
+              </div>
+            </div>
+          </ng-container>
+        </ng-container>
+      </ng-container>
+
+      <ng-template #noEventSelected>
+        <p class="py-4">Select an event from the list</p>
+        <div class="bg-new-gray-300 rounded-2xl w-[306px] h-44 flex items-center justify-center">
+          <p class="text-center">No event selected</p>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>

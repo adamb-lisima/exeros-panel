@@ -1,0 +1,14 @@
+<app-dialog-container title="Add vehicle to driver">
+  <div class="flex flex-col gap-8 p-5" body>
+    <div class="flex flex-col gap-4">
+      <ng-container>
+        <app-select-control *ngIf="filteredVehicleOptions$ | async as vehicleOptions" class="w-full" label="Vehicle" [prefixIcon]="'search'" [clearable]="true" [multiple]="false" [options]="vehicleOptions" [formControl]="paramsGroup.controls.vehicle_id!" (onSearch)="handleVehicleSearch($event)"> </app-select-control>
+      </ng-container>
+    </div>
+  </div>
+  <div class="flex flex-1 justify-end" footer>
+    <app-button (buttonClick)="handleAddVehicleClick()">
+      <span class="text-sm text-white font-semibold">Add vehicle</span>
+    </app-button>
+  </div>
+</app-dialog-container>

@@ -1,0 +1,80 @@
+<div class="flex-1 flex flex-col gap-4 pt-5">
+  <p class="font-bold">All vehicles</p>
+  <table class="table-auto">
+    <thead>
+      <th></th>
+      <tr class="border-b border-bright-gray">
+        <td class="px-1"></td>
+        <td class="px-1 py-2 text-xs text-manatee">Registration plate</td>
+        <td class="px-1 text-xs text-manatee">Brand, Model</td>
+        <td class="px-1 text-xs text-manatee" *appHasPermission="[[accessGroup.SETTINGS_COMMISSION_EDITOR]]">Commission</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let vehicle of data?.data" class="border-b border-bright-gray">
+        <td class="px-1 text-sm">{{ vehicle.id }}</td>
+        <td class="px-1 py-4 text-sm">{{ vehicle.registration_plate }}</td>
+        <td class="px-1 py-4 text-sm">{{ vehicle.brand_name }} {{ vehicle.model_name }}</td>
+        <td *appHasPermission="[[accessGroup.SETTINGS_COMMISSION_EDITOR]]" class="px-2 my-4 text-sm">
+          <div
+            class="rounded-sm inline-flex justify-center items-center text-center px-3 py-1 mx-auto"
+            [ngClass]="{
+              'bg-extra-one--30': vehicle.commission_status === 'PASSED',
+              'bg-extra-two--30': vehicle.commission_status === 'NOT_COMPLETE',
+              'bg-extra-four--30': vehicle.commission_status === 'REQUIRED'
+            }">
+            {{ vehicle.commission_status === 'NOT_COMPLETE' ? 'Not complete' : vehicle.commission_status === 'REQUIRED' ? 'Setup required' : vehicle.commission_status === 'PASSED' ? 'Passed' : vehicle.commission_status }}
+          </div>
+        </td>
+        <td class="px-2">
+          <div class="relative">
+            <div [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger" (click)="$event.stopPropagation()" (keydown.enter)="$event.stopPropagation()" class="flex flex-col items-center gap-1 py-3 px-1.5 rounded-md cursor-pointer hover:bg-anti-flash-white w-5">
+              <div class="w-[2.5px] h-[2.5px] rounded-full bg-main-primary"></div>
+              <div class="w-[2.5px] h-[2.5px] rounded-full bg-main-primary"></div>
+              <div class="w-[2.5px] h-[2.5px] rounded-full bg-main-primary"></div>
+            </div>
+
+            <mat-menu #menu="matMenu" [hasBackdrop]="true">
+              <div (click)="$event.stopPropagation()" (keydown.enter)="$event.stopPropagation()">
+                <button mat-menu-item (click)="handleEditVehicleClick(vehicle)">
+                  <div class="flex flex-row">
+                    <img class="color-main-primary" ngSrc="assets/svg/new-icons/edit.svg" width="20" height="20" alt="icon" />
+                    <p class="text-main-primary underline text-sm font-medium">Edit</p>
+                  </div>
+                </button>
+                <button *appHasPermission="[[accessGroup.SETTINGS_VEHICLE_EVENT_STRATEGIES]]" mat-menu-item (click)="handleManageStrategiesClick(vehicle)">
+                  <div class="flex flex-row">
+                    <img ngSrc="assets/svg/new-icons/edit.svg" width="20" height="20" alt="icon" />
+                    <p class="text-main-primary underline text-sm font-medium">Manage strategies</p>
+                  </div>
+                </button>
+                <button [disabled]="vehicle.commission_status === 'PASSED'" *appHasPermission="[[accessGroup.SETTINGS_COMMISSION_EDITOR]]" mat-menu-item (click)="handleCommissionClick(vehicle)">
+                  <div class="flex flex-row">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12.0371 10.7382C12.8092 10.7382 13.4634 11.0054 13.999 11.5409C14.5345 12.0765 14.8018 12.7308 14.8018 13.5028C14.8017 13.8256 14.7479 14.1338 14.6396 14.4276C14.5312 14.7215 14.3859 14.9769 14.2051 15.1942L15.3145 16.3036C15.3771 16.3661 15.4097 16.4451 15.4111 16.5399C15.4125 16.6346 15.3799 16.7147 15.3145 16.7802C15.249 16.8455 15.1695 16.8788 15.0762 16.8788C14.983 16.8787 14.9033 16.8456 14.8379 16.7802L13.7295 15.6708C13.5034 15.8574 13.2431 16.0038 12.9492 16.1093C12.6554 16.2147 12.3512 16.2674 12.0371 16.2675C11.265 16.2675 10.6109 15.9993 10.0752 15.4637C9.53983 14.9282 9.27154 14.2747 9.27148 13.5028C9.27148 12.7307 9.53961 12.0765 10.0752 11.5409C10.6109 11.0054 11.265 10.7382 12.0371 10.7382ZM12.0371 11.4159C11.4545 11.4159 10.9609 11.618 10.5566 12.0223C10.1523 12.4266 9.9502 12.9202 9.9502 13.5028C9.95025 14.0853 10.1523 14.579 10.5566 14.9833C10.9609 15.3875 11.4546 15.5897 12.0371 15.5897C12.6196 15.5897 13.1133 15.3875 13.5176 14.9833C13.9219 14.579 14.124 14.0853 14.124 13.5028C14.124 12.9203 13.9219 12.4266 13.5176 12.0223C13.1133 11.618 12.6197 11.4159 12.0371 11.4159ZM13.4258 2.76941C13.6781 2.76957 13.8828 2.97406 13.8828 3.22644V10.1913C13.8825 10.4434 13.6779 10.6472 13.4258 10.6473C13.1736 10.6473 12.9681 10.4435 12.9678 10.1913V3.68347H5.2334V14.2548H8.30469C8.55716 14.2548 8.7627 14.4603 8.7627 14.7128C8.76234 14.9649 8.55694 15.1688 8.30469 15.1688H4.77539C4.52323 15.1687 4.31871 14.9649 4.31836 14.7128V3.22644C4.31836 2.97403 4.52301 2.76952 4.77539 2.76941H13.4258ZM7.61621 10.7821C7.79474 10.6036 8.08515 10.6036 8.26367 10.7821C8.44148 10.9605 8.44145 11.2492 8.26367 11.4276L7.17773 12.5135C7.09169 12.5996 6.97421 12.6487 6.85254 12.6483C6.73094 12.6478 6.61372 12.5982 6.52832 12.5116L6.06445 12.0399C5.88733 11.8601 5.88954 11.5706 6.06934 11.3934C6.24924 11.2165 6.53875 11.2185 6.71582 11.3983L6.85645 11.5409L7.61621 10.7821ZM7.61621 8.21765C7.79474 8.03913 8.08515 8.03913 8.26367 8.21765C8.4417 8.39615 8.44187 8.68574 8.26367 8.86414L7.17773 9.9491C6.99921 10.1276 6.7088 10.1276 6.53027 9.9491L6.06641 9.48523C5.88826 9.30678 5.88827 9.0172 6.06641 8.83875C6.24487 8.66055 6.53443 8.66055 6.71289 8.83875L6.85352 8.97937L7.61621 8.21765ZM11.7686 8.62585C12.0209 8.62601 12.2256 8.83149 12.2256 9.08386C12.2254 9.33606 12.0208 9.54074 11.7686 9.54089H9.81836C9.56603 9.54088 9.36154 9.33614 9.36133 9.08386C9.36133 8.8314 9.5659 8.62587 9.81836 8.62585H11.7686ZM7.61621 5.48914C7.79474 5.31061 8.08515 5.31061 8.26367 5.48914C8.44168 5.66765 8.4419 5.95724 8.26367 6.13562L7.17773 7.22058C6.99921 7.39911 6.7088 7.39911 6.53027 7.22058L6.06641 6.75671C5.88824 6.57828 5.88829 6.2887 6.06641 6.11023C6.24487 5.93204 6.53443 5.93204 6.71289 6.11023L6.85352 6.25085L7.61621 5.48914ZM11.7686 5.89734C12.0209 5.8975 12.2256 6.10297 12.2256 6.35535C12.2254 6.60753 12.0208 6.81222 11.7686 6.81238H9.81836C9.56604 6.81236 9.36156 6.60761 9.36133 6.35535C9.36133 6.10288 9.5659 5.89736 9.81836 5.89734H11.7686Z" fill="#EE8444" />
+                    </svg>
+                    <p class="text-main-primary underline text-sm font-medium">Commission</p>
+                  </div>
+                </button>
+                <button [disabled]="vehicle.commission_status !== 'PASSED'" *appHasPermission="[[accessGroup.SETTINGS_COMMISSION_EDITOR]]" mat-menu-item (click)="handleDownloadReportClick(vehicle)">
+                  <div class="flex flex-row">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M10 12.5L14.1667 8.33333M10 12.5V3.33333M10 12.5L5.83333 8.33333M3.33333 13.3333L3.33333 15C3.33333 15.9205 4.07952 16.6667 5 16.6667L15 16.6667C15.9205 16.6667 16.6667 15.9205 16.6667 15L16.6667 13.3333" stroke="#EE8444" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    <p class="text-main-primary underline text-sm font-medium">Download report</p>
+                  </div>
+                </button>
+                <button mat-menu-item (click)="handleDeleteVehicleClick(vehicle)">
+                  <div class="flex flex-row">
+                    <img ngSrc="assets/svg/new-icons/trash.svg" width="20" height="20" alt="icon" />
+                    <p class="text-main-primary underline text-sm font-medium">Delete</p>
+                  </div>
+                </button>
+              </div>
+            </mat-menu>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

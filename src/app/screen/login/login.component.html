@@ -1,0 +1,17 @@
+<div *ngIf="(accessToken$ | async) === null || ((accessToken$ | async) === undefined && !this.iframeService.isIframe)">
+  <header class="flex pb-3 border-b border-solid items-center justify-center">
+    <img ngSrc="assets/svg/logo-icon.svg" width="122" height="31" alt="logo-icon" />
+  </header>
+  <form class="flex flex-col gap-3" [formGroup]="form" (ngSubmit)="handleFormSubmit()">
+    <span></span>
+    <app-text-control *ngIf="showLogin" label="Email" formControlName="email"></app-text-control>
+    <app-text-control *ngIf="showLogin" label="Password" type="password" formControlName="password"></app-text-control>
+    <app-checkbox-control *ngIf="showLogin" label="Remember me:" [labelPosition]="'before'" formControlName="remember_me"></app-checkbox-control>
+    <app-text-control *ngIf="showCode" label="MFA code" formControlName="code"></app-text-control>
+    <div class="flex justify-between pt-3 border-t border-solid border-dust-storm">
+      <a *ngIf="showLogin" class="text-sm" [routerLink]="['/', ROUTE_CONST.resetPassword]">Forgot password?</a>
+      <button *ngIf="showCode" type="button" class="py-1 px-3 rounded-xl border border-solid" (click)="handleBack()">Back</button>
+      <button class="py-1 px-3 rounded-xl border border-solid" type="submit">Login</button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,108 @@
+@use '@angular/material' as mat;
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+@include mat.core();
+
+.mdc-notched-outline__notch {
+  //tailwind <-> angular material controls conflict
+  border-right: none;
+}
+
+$dark-primary-text: var(--white);
+$light-primary-text: var(--white);
+
+$exeros-panel-primary: (
+  main: #ee8444,
+  lighter: #fadac7,
+  darker: #e7672d,
+  200: #ee8444,
+  // For slide toggle,
+  contrast:
+    (
+      main: $dark-primary-text,
+      lighter: $dark-primary-text,
+      darker: $dark-primary-text
+    )
+);
+$exeros-panel-primary-theme: mat.define-palette($exeros-panel-primary, main, lighter, darker);
+
+$exeros-panel-accent: (
+  main: #006bff,
+  lighter: #b3d3ff,
+  darker: #004eff,
+  200: #006bff,
+  // For slide toggle,
+  contrast:
+    (
+      main: $light-primary-text,
+      lighter: $dark-primary-text,
+      darker: $light-primary-text
+    )
+);
+$exeros-panel-accent-theme: mat.define-palette($exeros-panel-accent, main, lighter, darker);
+
+$exeros-panel-warn: (
+  main: #fe3c3c,
+  lighter: #ffc5c5,
+  darker: #fe2727,
+  200: #fe3c3c,
+  // For slide toggle,
+  contrast:
+    (
+      main: $light-primary-text,
+      lighter: $dark-primary-text,
+      darker: $light-primary-text
+    )
+);
+$exeros-panel-warn-theme: mat.define-palette($exeros-panel-warn, main, lighter, darker);
+
+$exeros-panel-theme-light: mat.define-light-theme(
+  (
+    color: (
+      primary: $exeros-panel-primary-theme,
+      accent: $exeros-panel-accent-theme,
+      warn: $exeros-panel-warn-theme
+    ),
+    typography: mat.define-typography-config(),
+    density: -2
+  )
+);
+
+$exeros-panel-theme-dark: mat.define-dark-theme(
+  (
+    color: (
+      primary: $exeros-panel-primary-theme,
+      accent: $exeros-panel-accent-theme,
+      warn: $exeros-panel-warn-theme
+    ),
+    typography: mat.define-typography-config(),
+    density: -2
+  )
+);
+
+// Apply typography and density styles once (shared between themes)
+@include mat.all-component-typographies($exeros-panel-theme-light);
+@include mat.all-component-densities($exeros-panel-theme-light);
+
+// Apply light theme colors as default
+@include mat.all-component-colors($exeros-panel-theme-light);
+
+// Apply dark theme colors only within .dark selector
+.dark {
+  @include mat.all-component-colors($exeros-panel-theme-dark);
+}
+
+.mat-mdc-form-field.mat-form-field-invalid .mdc-notched-outline__leading,
+.mat-mdc-form-field.mat-form-field-invalid .mdc-notched-outline__notch,
+.mat-mdc-form-field.mat-form-field-invalid .mdc-notched-outline__trailing {
+  border-color: var(--mdc-theme-error, #fe3c3c) !important;
+}
+
+.mat-mdc-form-field.mat-form-field-invalid .mat-mdc-form-field-label {
+  color: var(--mdc-theme-error, #fe3c3c) !important;
+}
+
+.mat-form-field-invalid .mat-error {
+  color: var(--mdc-theme-error, #fe3c3c) !important;
+  display: block !important;
+}

@@ -1,0 +1,23 @@
+<ng-container *ngIf="loggedInUser$ | async as loggedInUser">
+  <div *ngIf="selectedId$ | async" class="w-full flex mt-2">
+    <div class="gap-2 flex ml-auto">
+      <div [appTooltip]="'Message driver'" (keydown.enter)="handleMessageClick()" *appHasPermission="[[AccessGroup.STREAM_VIEWER]]" class="flex items-center justify-center mt-1 h-10 gap-1 px-3 border-extra-three border rounded-md cursor-pointer bg-anti-flash-white" (click)="handleMessageClick()">
+        <svg class="text-extra-three" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M11 3.61548V6.7463C11 7.02323 10.9706 7.28478 10.9043 7.52325C10.6321 8.65405 9.73437 9.36177 8.49816 9.36177H6.49669L4.27447 10.908C3.94334 11.1464 3.50184 10.8926 3.50184 10.4772V9.36177C2.75128 9.36177 2.12583 9.10023 1.69169 8.64638C1.25019 8.18482 1 7.53093 1 6.7463V3.61548C1 2.1539 1.86829 1.14617 3.20751 1.0154C3.30316 1.00771 3.39882 1 3.50184 1H8.49816C9.99927 1 11 2.0462 11 3.61548Z" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </div>
+
+      <app-select-control *ngIf="vehicleOptions$ | async as vehicleOptions" label="Vehicle" [options]="vehicleOptions" [formControl]="vehicleControl" [showHintSpace]="false" class="flex-1 [&_.select-container]:h-8 [&_.select-container]:px-2 [&_.select-container]:text-sm"> </app-select-control>
+
+      <div *ngIf="(isSuperAdmin$ | async) && (providerInfo$ | async) as provider" class="flex items-center h-8 px-2 py-1 bg-white border border-new-gray-300 rounded-md text-xs font-medium text-gray-700 whitespace-nowrap">
+        {{ provider }}
+      </div>
+
+      <app-select-control label="Stream type" [options]="streamOptions" [formControl]="streamTypeControl" [showHintSpace]="false" class="flex-1 [&_.select-container]:h-8 [&_.select-container]:px-2 [&_.select-container]:text-sm"> </app-select-control>
+
+      <div class="h-[48px] flex items-center gap-3 px-4 rounded-md cursor-pointer border border-main-primary bg-white" (click)="handleViewPlaybackClick()" (keydown.enter)="handleViewPlaybackClick()">
+        <p class="font-medium text-sm text-main-primary">Open playback</p>
+      </div>
+    </div>
+  </div>
+</ng-container>

@@ -1,0 +1,17 @@
+<svg id="a83f675a-bf4b-421a-8a6a-ef3138bc18ad" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80">
+  <title>50</title>
+  <g>
+    <g>
+      <polygon style="fill: #fff;" points="77.41 3.71 77.41 28.95 42.92 28.95 42.92 24.96 40.04 23.21 41.45 17.99 34.34 21.74 36.29 24.42 36.29 28.95 1.79 28.95 1.79 3.71 77.41 3.71"/>
+      <path style="fill: #fadc0f;" d="M46.15,52.55a6.54,6.54,0,0,1-13.08,0c0-3.61,4.59-10.64,6.54-13.65C41.56,42,46.15,48.94,46.15,52.55Z"/>
+      <path style="fill: #fadc0f;" d="M78.94,72.11c0,4-17.44,7.18-38.94,7.18S1.06,76.08,1.06,72.11,18.49,64.94,40,64.94,78.94,68.15,78.94,72.11Z"/>
+    </g>
+    <g>
+      <polyline style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" points="36.29 28.96 1.79 28.96 1.79 3.71 77.42 3.71 77.42 28.96 42.92 28.96"/>
+      <polyline style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" points="36.29 28.96 36.29 24.42 34.34 21.74 41.46 17.99 40.04 23.2 42.92 24.96 42.92 28.96"/>
+      <path style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" d="M46.15,52.55a6.55,6.55,0,0,1-13.09,0c0-3.61,4.59-10.64,6.55-13.64C41.56,42,46.15,48.94,46.15,52.55Z"/>
+      <ellipse style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" cx="40" cy="72.11" rx="38.94" ry="7.18"/>
+      <path style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" d="M67.22,71.42c0,2.39-12.19,4.32-27.22,4.32"/>
+    </g>
+  </g>
+</svg>

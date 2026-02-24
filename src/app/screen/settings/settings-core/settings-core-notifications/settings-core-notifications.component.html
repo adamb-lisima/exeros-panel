@@ -1,0 +1,137 @@
+<div class="flex flex-col gap-5 p-5">
+  <app-text-control class="w-[534px]" label="Search escalation or user" [prefixIcon]="'search'" [formControl]="searchControl"></app-text-control>
+  <div class="flex gap-5">
+    <ng-container *appHasPermission="[[accessGroup.SETTINGS_NOTIFICATION_SETTINGS]]">
+      <div class="w-72 flex flex-col gap-6 p-5 border-r border-bright-gray">
+        <div class="h-[500px] flex flex-col gap-2 overflow-y-auto">
+          <div class="flex items-center gap-1">
+            <div class="w-5 text-main-primary">
+              <svg width="6" height="4" viewBox="0 0 6 4" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2.56327 3.10069L0.927679 1.46511C0.706698 1.24412 0.655941 0.988631 0.775408 0.698656C0.894874 0.408667 1.11222 0.263672 1.42746 0.263672H4.68852C5.00374 0.263672 5.22109 0.408667 5.34057 0.698656C5.46003 0.988631 5.40927 1.24412 5.18827 1.46511L3.5527 3.10069C3.47642 3.17697 3.39845 3.23138 3.31879 3.26392C3.23915 3.29645 3.15221 3.31272 3.05798 3.31272C2.96375 3.31272 2.87682 3.29645 2.79716 3.26392C2.71752 3.23138 2.63956 3.17697 2.56327 3.10069Z" fill="currentColor" />
+              </svg>
+            </div>
+            <span class="text-main-primary text-sm font-medium cursor-pointer" (click)="handleCompanyClick(undefined)" (keydown.enter)="handleCompanyClick(undefined)">All companies</span>
+          </div>
+          <ng-container *ngFor="let company of companyElements$ | async">
+            <div class="flex items-center ml-4 gap-1 cursor-pointer" (click)="handleCompanyClick(company.id)" (keydown.enter)="handleCompanyClick(company.id)">
+              <span class="ml-5 text-sm font-medium" [ngClass]="selectedCompanyId === company.id ? 'text-main-primary' : 'text-dark-electric-blue'"> {{ company.name }}</span>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </ng-container>
+    <div class="flex-1 flex flex-col gap-4" *ngIf="selectedCompanyId">
+      <p class="font-bold">All escalations</p>
+      <table class="">
+        <thead>
+          <th></th>
+        </thead>
+        <tr class="text-left border-b border-bright-gray">
+          <td class="pl-2 py-2 w-full text-xs text-manatee">Event name</td>
+          <td class="text-sm text-manatee">Escalated&nbsp;with</td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tbody *ngIf="tempEscalations$ | async as escalations">
+          <ng-container *ngFor="let main of escalations.main">
+            <tr [ngClass]="openedEvent === main.id || openedTempEvent.includes(main.id) ? '' : 'border-b border-bright-gray'">
+              <td class="pl-2 py-4 w-full">
+                <div class="flex gap-2">
+                  <img [ngSrc]="main.icon" width="24" height="24" [alt]="main.name" />
+                  <span class="text-sm"> {{ main.name }} </span>
+                </div>
+              </td>
+              <td class="text-right text-sm">{{ main.length }}</td>
+              <td>
+                <div class="w-6 h-6 flex justify-center items-center cursor-pointer" (click)="handleOpenUsersClick(main.id)" (keydown.enter)="handleOpenUsersClick(main.id)">
+                  <ng-container *ngIf="openedEvent === main.id || openedTempEvent.includes(main.id); else closed">
+                    <svg width="7" height="4" viewBox="0 0 7 4" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M3.07229 3.32824L1.20304 1.45901C0.950495 1.20645 0.892486 0.914463 1.02902 0.583063C1.16555 0.251646 1.41395 0.0859375 1.77422 0.0859375H5.50114C5.86139 0.0859375 6.1098 0.251646 6.24635 0.583063C6.38288 0.914463 6.32486 1.20645 6.07229 1.45901L4.20307 3.32824C4.11589 3.41542 4.02678 3.4776 3.93574 3.51479C3.84473 3.55197 3.74537 3.57056 3.63767 3.57056C3.52999 3.57056 3.43063 3.55197 3.33959 3.51479C3.24858 3.4776 3.15948 3.41542 3.07229 3.32824Z" fill="#EE8444" />
+                    </svg>
+                  </ng-container>
+                  <ng-template #closed>
+                    <svg width="6" height="4" viewBox="0 0 6 4" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M0.923145 3.72291C0.562878 3.72291 0.314479 3.5572 0.177946 3.22578C0.0414122 2.89438 0.0994205 2.6024 0.351971 2.34983L2.22122 0.480607C2.3084 0.393423 2.3975 0.33124 2.48852 0.294057C2.57955 0.256873 2.67891 0.238281 2.7866 0.238281C2.8943 0.238281 2.99365 0.256873 3.08467 0.294057C3.1757 0.33124 3.26481 0.393423 3.352 0.480607L5.22122 2.34983C5.47379 2.6024 5.5318 2.89438 5.39527 3.22578C5.25872 3.5572 5.01032 3.72291 4.65007 3.72291H0.923145Z" fill="#EE8444" />
+                    </svg>
+                  </ng-template>
+                </div>
+              </td>
+              <td>
+                <span *ngIf="selectedSettingsId" class="text-sm text-main-primary font-semibold underline cursor-pointer" (click)="handleEditClick(main, main.users)" (keydown.enter)="handleEditClick(main, main.users)"> Edit </span>
+              </td>
+            </tr>
+            <tr *ngIf="openedEvent === main.id || openedTempEvent.includes(main.id)" class="border-b border-bright-gray" colspan="4">
+              <div class="flex flex-col gap-4 px-8 pb-4">
+                <span class="text-sm text-dark-electric-blue font-medium">Assigned users</span>
+                <div class="flex flex-wrap gap-y-4">
+                  <div *ngFor="let user of main.usersData" class="flex basis-1/2 gap-2">
+                    <div class="flex justify-center items-center">
+                      <svg width="6" height="7" viewBox="0 0 6 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="3" cy="3.5" r="3" fill="#1C1B1B" />
+                      </svg>
+                    </div>
+                    <p class="flex items-center text-sm">
+                      {{ user.name }}<span class="text-dark-electric-blue"> ({{ user.email }}) </span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </tr>
+          </ng-container>
+          <ng-container *ngFor="let eventGroup of escalations.groups">
+            <tr class>
+              <td class="pt-4 pl-2 border-b border-manatee" colspan="4">
+                <span class="text-xs text-dark-electric-blue"> {{ eventGroup.name }} </span>
+              </td>
+            </tr>
+            <ng-container *ngFor="let event of eventGroup.events">
+              <tr [ngClass]="openedEvent === event.id || openedTempEvent.includes(event.id) ? '' : 'border-b border-bright-gray'">
+                <td class="w-full pl-2 py-4">
+                  <div class="flex gap-2">
+                    <img [ngSrc]="event.icon" width="24" height="24" [alt]="event.name" />
+                    <span class="text-sm"> {{ event.name }} </span>
+                  </div>
+                </td>
+                <td class="text-right text-sm">{{ event.length }}</td>
+                <td>
+                  <div class="w-6 h-6 flex justify-center items-center cursor-pointer" (click)="handleOpenUsersClick(event.id)" (keydown.enter)="handleOpenUsersClick(event.id)">
+                    <ng-container *ngIf="openedEvent === event.id || openedTempEvent.includes(event.id); else closed">
+                      <svg width="6" height="4" viewBox="0 0 6 4" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0.923145 3.72291C0.562878 3.72291 0.314479 3.5572 0.177946 3.22578C0.0414122 2.89438 0.0994205 2.6024 0.351971 2.34983L2.22122 0.480607C2.3084 0.393423 2.3975 0.33124 2.48852 0.294057C2.57955 0.256873 2.67891 0.238281 2.7866 0.238281C2.8943 0.238281 2.99365 0.256873 3.08467 0.294057C3.1757 0.33124 3.26481 0.393423 3.352 0.480607L5.22122 2.34983C5.47379 2.6024 5.5318 2.89438 5.39527 3.22578C5.25872 3.5572 5.01032 3.72291 4.65007 3.72291H0.923145Z" fill="#EE8444" />
+                      </svg>
+                    </ng-container>
+                    <ng-template #closed>
+                      <svg width="7" height="4" viewBox="0 0 7 4" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3.07229 3.32824L1.20304 1.45901C0.950495 1.20645 0.892486 0.914463 1.02902 0.583063C1.16555 0.251646 1.41395 0.0859375 1.77422 0.0859375H5.50114C5.86139 0.0859375 6.1098 0.251646 6.24635 0.583063C6.38288 0.914463 6.32486 1.20645 6.07229 1.45901L4.20307 3.32824C4.11589 3.41542 4.02678 3.4776 3.93574 3.51479C3.84473 3.55197 3.74537 3.57056 3.63767 3.57056C3.52999 3.57056 3.43063 3.55197 3.33959 3.51479C3.24858 3.4776 3.15948 3.41542 3.07229 3.32824Z" fill="#EE8444" />
+                      </svg>
+                    </ng-template>
+                  </div>
+                </td>
+                <td>
+                  <span *ngIf="selectedSettingsId" class="text-sm text-main-primary font-semibold underline cursor-pointer" (click)="handleEditClick(event, event.users)" (keydown.enter)="handleEditClick(event, event.users)"> Edit </span>
+                </td>
+              </tr>
+              <tr *ngIf="openedEvent === event.id || openedTempEvent.includes(event.id)" class="border-b border-bright-gray" colspan="4">
+                <div class="flex flex-col gap-4 px-8 pb-4">
+                  <span class="text-sm text-dark-electric-blue font-medium">Assigned users</span>
+                  <div class="flex flex-wrap gap-y-4">
+                    <div *ngFor="let user of event.usersData" class="flex basis-1/2 gap-2">
+                      <div class="flex justify-center items-center">
+                        <svg width="6" height="7" viewBox="0 0 6 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <circle cx="3" cy="3.5" r="3" fill="#1C1B1B" />
+                        </svg>
+                      </div>
+                      <p class="flex items-center text-sm">
+                        {{ user.name }}<span class="text-dark-electric-blue"> ({{ user.email }}) </span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </tr>
+            </ng-container>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

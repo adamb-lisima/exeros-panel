@@ -1,0 +1,49 @@
+<div class="flex-1 flex flex-col pb-5 h-[calc(80vh-64px)]">
+  <div class="flex items-center gap-6">
+    <span class="text-xl font-medium">All providers</span>
+    <app-button [type]="'ternary'"><span class="text-sm font-semibold" (keydown.enter)="handleCreateProviderClick()" (click)="handleCreateProviderClick()">Add providers</span></app-button>
+  </div>
+  <table class="table-auto">
+    <thead>
+      <th></th>
+      <tr class="border-b border-bright-gray">
+        <td class="px-2"></td>
+        <td class="px-2 py-2 text-xs text-manatee">Id</td>
+        <td class="px-2 text-xs text-manatee">Name</td>
+        <td class="px-2 text-xs text-manatee">Type</td>
+        <td class="px-2"></td>
+      </tr>
+    </thead>
+
+    <tbody *ngIf="providers$ | async as response">
+      <tr *ngFor="let provider of response.data" class="border-b border-bright-gray">
+        <td class="px-2 text-sm"></td>
+        <td class="px-2 py-4 text-sm">{{ provider.id }}</td>
+        <td class="px-2 text-sm">{{ provider.name }}</td>
+        <td class="px-2 text-sm">{{ provider.type }}</td>
+
+        <td>
+          <div class="flex">
+            <span class="px-2 text-main-primary text-sm font-semibold underline cursor-pointer" (keydown.enter)="handleUpdateProvider(provider.id)" (click)="handleUpdateProvider(provider.id)">Edit</span>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="mt-auto">
+    <ng-container *ngIf="providers$ | async as response">
+      <ng-container *ngIf="perPage$ | async as perPage">
+        <app-paginator
+          class="flex justify-center"
+          *ngIf="response.data && response.data.length > 0"
+          [info]="{
+            page: currentPage || 1,
+            perPage: perPage,
+            totalItems: response.data.length
+          }"
+          (pageChange)="onPageChange($event)">
+        </app-paginator>
+      </ng-container>
+    </ng-container>
+  </div>
+</div>

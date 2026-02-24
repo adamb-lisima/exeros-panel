@@ -1,0 +1,297 @@
+<table class="w-full text-sm">
+  <thead>
+    <th></th>
+  </thead>
+
+  <tbody>
+    <tr class="align-middle h-8">
+      <td class="w-1/4">
+        <div class="flex items-center gap-1" [appTooltip]="'Speed'">
+          <svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <mask id="mask0_2343_3045" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="18" height="19">
+              <rect y="0.5" width="18" height="18" fill="#D9D9D9" />
+            </mask>
+            <g mask="url(#mask0_2343_3045)">
+              <path d="M7.95281 12.0097C8.21919 12.2759 8.56225 12.4024 8.982 12.389C9.40163 12.3755 9.70956 12.2241 9.90581 11.9347L12.9308 7.553C13.0381 7.39137 13.0259 7.24469 12.8942 7.11294C12.7624 6.98131 12.6156 6.96906 12.4538 7.07619L8.06531 10.0942C7.77119 10.2904 7.61231 10.5921 7.58869 10.9992C7.56519 11.4065 7.68656 11.7433 7.95281 12.0097ZM9 3.875C9.49325 3.875 9.96463 3.91975 10.4141 4.00925C10.8638 4.09862 11.302 4.23656 11.7289 4.42306C11.8808 4.48369 12.0319 4.59187 12.1824 4.74762C12.3329 4.90337 12.3714 5.05094 12.2978 5.19031C12.2243 5.32981 12.0654 5.42238 11.8211 5.468C11.5769 5.51375 11.375 5.50631 11.2155 5.44569C10.8645 5.29469 10.5068 5.18269 10.1423 5.10969C9.77788 5.03656 9.39713 5 9 5C7.3375 5 5.92188 5.58438 4.75313 6.75313C3.58438 7.92188 3 9.3375 3 11C3 11.525 3.07188 12.0437 3.21563 12.5562C3.35938 13.0687 3.5625 13.55 3.825 14H14.175C14.4625 13.525 14.6719 13.0312 14.8031 12.5188C14.9344 12.0063 15 11.475 15 10.925C15 10.5711 14.9647 10.2079 14.8941 9.83525C14.8233 9.46275 14.7124 9.10481 14.5614 8.76144C14.5009 8.60194 14.4884 8.44619 14.5239 8.29419C14.5596 8.14231 14.6437 8.0165 14.7763 7.91675C14.8994 7.82612 15.0339 7.801 15.1796 7.84137C15.3253 7.88175 15.4284 7.97019 15.489 8.10669C15.7053 8.57781 15.8634 9.0415 15.9634 9.49775C16.0634 9.954 16.1173 10.4221 16.125 10.9019C16.1326 11.5808 16.0562 12.2224 15.8957 12.8266C15.7351 13.431 15.4933 14.0221 15.1703 14.6C15.0711 14.7625 14.9317 14.8906 14.7519 14.9844C14.5721 15.0781 14.3798 15.125 14.175 15.125H3.825C3.625 15.125 3.43631 15.0769 3.25894 14.9808C3.08156 14.8846 2.9385 14.748 2.82975 14.5711C2.54325 14.0711 2.3125 13.5259 2.1375 12.9356C1.9625 12.3452 1.875 11.7 1.875 11C1.875 10.0202 2.06088 9.09919 2.43263 8.23681C2.80438 7.37444 3.31181 6.61913 3.95494 5.97088C4.59819 5.32263 5.35438 4.81125 6.2235 4.43675C7.09275 4.06225 8.01825 3.875 9 3.875Z" fill="#1C1B1F" />
+            </g>
+          </svg>
+          <ng-container *ngIf="telemetryData$ | async as telemetric; else noSpeedData">
+            <ng-container *ngIf="telemetric.speed !== null && telemetric.speed !== undefined">
+              <td *ngIf="telemetric.speed | unitConverter | async as speed" class="font-medium">{{ speed.value }} {{ speed.unit }}</td>
+            </ng-container>
+            <ng-container *ngIf="telemetric.speed === null || telemetric.speed === undefined">
+              <td class="text-sm leading-[16px] font-medium">-</td>
+            </ng-container>
+            <ng-container *ngIf="telemetric.speed_limit !== null && telemetric.speed_limit !== undefined">
+              <div *ngIf="telemetric.speed_limit | unitConverter | async as speed_limit" class="flex w-5 h-5 p-1.5 justify-center items-center gap-1 rounded-[40px] border-2 border-[#FE3C3C] bg-white text-[11px]">{{ speed_limit.value | number : '1.0-0' }}</div>
+            </ng-container>
+          </ng-container>
+          <ng-template #noSpeedData>
+            <td class="text-sm leading-[16px] font-medium">-</td>
+          </ng-template>
+        </div>
+      </td>
+
+      <td class="w-1/4">
+        <div class="flex items-center gap-1" [appTooltip]="'Fuel level'">
+          <svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <mask id="mask0_2343_3087" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="18" height="19">
+              <rect y="0.5" width="18" height="18" fill="#D9D9D9" />
+            </mask>
+            <g mask="url(#mask0_2343_3087)">
+              <path d="M3.375 15.197V4.48081C3.375 4.10194 3.50625 3.78125 3.76875 3.51875C4.03125 3.25625 4.35194 3.125 4.73081 3.125H8.76919C9.14806 3.125 9.46875 3.25625 9.73125 3.51875C9.99375 3.78125 10.125 4.10194 10.125 4.48081V9.35581H10.8461C11.219 9.35581 11.5382 9.48856 11.8037 9.75406C12.0692 10.0196 12.2019 10.3387 12.2019 10.7114V14.1153C12.2019 14.3567 12.2858 14.5612 12.4536 14.729C12.6213 14.8969 12.8259 14.9808 13.0673 14.9808C13.3086 14.9808 13.5132 14.8969 13.6809 14.729C13.8488 14.5612 13.9328 14.3567 13.9328 14.1153V8.85969C13.8203 8.92694 13.7015 8.97356 13.5765 8.99956C13.4515 9.02544 13.3203 9.03837 13.1828 9.03837C12.7224 9.03837 12.3332 8.87944 12.0152 8.56156C11.6973 8.24369 11.5384 7.85456 11.5384 7.39419C11.5384 7.02306 11.6442 6.69256 11.8558 6.40269C12.0673 6.11281 12.3471 5.91831 12.6953 5.81919L11.3192 4.44331C11.2307 4.35481 11.1853 4.25119 11.1829 4.13244C11.1805 4.01369 11.2266 3.907 11.3213 3.81237C11.4055 3.72812 11.5077 3.68412 11.6278 3.68037C11.7481 3.6765 11.8548 3.71737 11.9481 3.803L14.3076 6.128C14.4759 6.29625 14.6046 6.49119 14.6934 6.71281C14.7824 6.93444 14.8269 7.16156 14.8269 7.39419V14.1153C14.8269 14.6081 14.6569 15.0245 14.3169 15.3646C13.9771 15.7049 13.561 15.875 13.0688 15.875C12.5764 15.875 12.1598 15.7049 11.8189 15.3646C11.4781 15.0245 11.3078 14.6081 11.3078 14.1153V10.4808C11.3078 10.4134 11.2861 10.3581 11.2427 10.3149C11.1994 10.2716 11.1442 10.25 11.0769 10.25H10.125V15.197C10.125 15.3891 10.0603 15.5501 9.93094 15.68C9.80156 15.81 9.64125 15.875 9.45 15.875H4.04981C3.85856 15.875 3.69831 15.81 3.56906 15.68C3.43969 15.5501 3.375 15.3891 3.375 15.197ZM4.5 8.1875H9V4.48081C9 4.42306 8.97594 4.37019 8.92781 4.32219C8.87981 4.27406 8.82694 4.25 8.76919 4.25H4.73081C4.67306 4.25 4.62019 4.27406 4.57219 4.32219C4.52406 4.37019 4.5 4.42306 4.5 4.48081V8.1875ZM13.1828 8.14419C13.3953 8.14419 13.5734 8.07231 13.7171 7.92856C13.8609 7.78481 13.9328 7.60669 13.9328 7.39419C13.9328 7.18169 13.8609 7.00356 13.7171 6.85981C13.5734 6.71606 13.3953 6.64419 13.1828 6.64419C12.9703 6.64419 12.7921 6.71606 12.6484 6.85981C12.5046 7.00356 12.4328 7.18169 12.4328 7.39419C12.4328 7.60669 12.5046 7.78481 12.6484 7.92856C12.7921 8.07231 12.9703 8.14419 13.1828 8.14419ZM4.5 14.75H9V9.3125H4.5V14.75Z" fill="#1C1B1F" />
+            </g>
+          </svg>
+          <ng-container *ngIf="telemetryData$ | async as telemetric; else noFuelData">
+            <span class="font-medium">
+              <ng-container *ngIf="telemetric.fuel_percentage !== null && telemetric.fuel_percentage !== undefined">{{ telemetric.fuel_percentage + '%' }}</ng-container>
+              <ng-container *ngIf="telemetric.fuel_level !== null && telemetric.fuel_level !== undefined"> ({{ telemetric.fuel_level + 'L' }}) </ng-container>
+              <ng-container *ngIf="telemetric.fuel_percentage === null && telemetric.fuel_level === null"> - </ng-container>
+            </span>
+          </ng-container>
+          <ng-template #noFuelData>
+            <span class="font-medium">-</span>
+          </ng-template>
+        </div>
+      </td>
+      <td class="w-1/4">
+        <div class="flex items-center gap-1" [appTooltip]="'Eco driving'">
+          <svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <mask id="mask0_2343_3108" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="18" height="19">
+              <rect y="0.5" width="18" height="18" fill="#D9D9D9" />
+            </mask>
+            <g mask="url(#mask0_2343_3108)">
+              <path d="M4.30969 14.9368C3.78081 14.4055 3.36781 13.7946 3.07069 13.1041C2.77356 12.4136 2.625 11.6998 2.625 10.9625C2.625 10.2231 2.76663 9.4895 3.04988 8.76163C3.333 8.03375 3.79044 7.35394 4.42219 6.72219C5.22506 5.91931 6.36138 5.35894 7.83113 5.04106C9.30075 4.72331 10.9693 4.59331 12.8366 4.65106C13.0943 4.66831 13.3293 4.725 13.5418 4.82113C13.7543 4.91738 13.9404 5.04525 14.1 5.20475C14.2596 5.36438 14.3839 5.55 14.4727 5.76163C14.5618 5.97313 14.6125 6.20288 14.625 6.45088C14.65 7.34125 14.6315 8.20519 14.5695 9.04269C14.5075 9.88019 14.3954 10.6586 14.2333 11.3778C14.0713 12.0971 13.8545 12.7502 13.5829 13.3372C13.3112 13.9242 12.9721 14.4211 12.5653 14.8278C11.9461 15.4519 11.2838 15.9075 10.5786 16.1945C9.87331 16.4815 9.159 16.625 8.43563 16.625C7.67725 16.625 6.93219 16.4764 6.20044 16.1793C5.46869 15.8822 4.83844 15.468 4.30969 14.9368ZM5.99137 14.8134C6.36825 15.05 6.76656 15.2236 7.18631 15.3341C7.60606 15.4447 8.02313 15.5 8.4375 15.5C9.01575 15.5 9.58769 15.3856 10.1533 15.1567C10.7191 14.9278 11.2558 14.5548 11.7634 14.0375C11.9875 13.8125 12.2148 13.4969 12.4451 13.0906C12.6754 12.6844 12.8746 12.1531 13.0427 11.4969C13.2108 10.8406 13.3384 10.0469 13.4256 9.11563C13.5127 8.18438 13.5298 7.075 13.4769 5.7875C12.8644 5.7625 12.1714 5.7555 11.3978 5.7665C10.6243 5.77763 9.85263 5.84063 9.08288 5.9555C8.31325 6.07038 7.58588 6.25044 6.90075 6.49569C6.21563 6.74081 5.6615 7.07494 5.23838 7.49806C4.68075 8.05581 4.29325 8.6205 4.07588 9.19213C3.85863 9.76375 3.75 10.3058 3.75 10.8183C3.75 11.5269 3.88825 12.1678 4.16475 12.7409C4.44112 13.3139 4.72881 13.7394 5.02781 14.0173C5.44706 13.075 6.03625 12.1709 6.79538 11.3051C7.5545 10.4392 8.51631 9.68369 9.68081 9.03856C8.79994 9.80681 8.04556 10.6506 7.41769 11.5698C6.78981 12.4889 6.31438 13.5701 5.99137 14.8134Z" fill="#1C1B1F" />
+            </g>
+          </svg>
+          <ng-container *ngIf="telemetryData$ | async as telemetric; else noEcoScoreData">
+            <span class="font-medium">{{ telemetric.eco_score || '-' }}</span>
+          </ng-container>
+          <ng-template #noEcoScoreData>
+            <span class="font-medium">-</span>
+          </ng-template>
+        </div>
+      </td>
+      <td class="w-1/4">
+        <div class="flex items-center gap-1" [appTooltip]="'Action'">
+          <svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <mask id="mask0_2343_3096" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="18" height="19">
+              <rect y="0.5" width="18" height="18" fill="#D9D9D9" />
+            </mask>
+            <g mask="url(#mask0_2343_3096)">
+              <path d="M5.43842 15.125C4.86567 15.125 4.3786 14.9245 3.97723 14.5235C3.57573 14.1224 3.37498 13.6354 3.37498 13.0625H2.28898C2.1296 13.0625 1.99598 13.0086 1.8881 12.9007C1.78035 12.7928 1.72648 12.6592 1.72648 12.4998C1.72648 12.3403 1.78035 12.2067 1.8881 12.0991C1.99598 11.9914 2.1296 11.9375 2.28898 11.9375H3.7616C3.9356 11.6519 4.16998 11.4242 4.46473 11.2546C4.75935 11.0849 5.0836 11 5.43748 11C5.79135 11 6.11567 11.0849 6.41042 11.2546C6.70504 11.4242 6.93942 11.6519 7.11354 11.9375H10.4105L12.0217 5H4.48554C4.32617 5 4.1926 4.94606 4.08485 4.83819C3.97698 4.73031 3.92304 4.59669 3.92304 4.43731C3.92304 4.27781 3.97698 4.14425 4.08485 4.03662C4.1926 3.92887 4.32617 3.875 4.48554 3.875H12.5769C12.798 3.875 12.9764 3.96037 13.112 4.13112C13.2475 4.30175 13.2889 4.49381 13.236 4.70731L12.7774 6.6875H13.9759C14.1906 6.6875 14.394 6.7355 14.586 6.8315C14.7781 6.92762 14.9363 7.06037 15.0605 7.22975L16.4379 9.05731C16.561 9.21781 16.6401 9.38919 16.6751 9.57144C16.7102 9.75356 16.7115 9.94131 16.6789 10.1347L16.2015 12.5202C16.1687 12.6807 16.0895 12.8112 15.9637 12.9117C15.838 13.0122 15.6951 13.0625 15.5351 13.0625H14.9134C14.9134 13.6346 14.7129 14.1214 14.312 14.5228C13.9112 14.9243 13.4244 15.125 12.8518 15.125C12.2792 15.125 11.7921 14.9245 11.3906 14.5235C10.9892 14.1224 10.7885 13.6354 10.7885 13.0625H7.49998C7.49998 13.6346 7.29954 14.1214 6.89867 14.5228C6.49779 14.9243 6.01104 15.125 5.43842 15.125ZM11.9293 10.3438H15.4832L15.587 9.81294L14.0914 7.8125H12.5192L11.9293 10.3438ZM10.5202 11.4961L10.6299 11.0068C10.7029 10.6805 10.7957 10.2811 10.9082 9.80863C10.9553 9.6125 10.9988 9.43125 11.0387 9.26487C11.0785 9.0985 11.111 8.949 11.136 8.81637L11.2457 8.327C11.3188 8.00075 11.4116 7.60137 11.5241 7.12887C11.6365 6.65637 11.7292 6.257 11.8024 5.93075L11.912 5.44137L12.0217 5L10.4105 11.9375L10.5202 11.4961ZM1.51442 10.3711C1.35704 10.3711 1.22517 10.3172 1.11879 10.2093C1.01242 10.1014 0.959229 9.96781 0.959229 9.80844C0.959229 9.64894 1.0131 9.51537 1.12085 9.40775C1.2286 9.3 1.36217 9.24613 1.52154 9.24613H4.13942C4.29879 9.24613 4.43235 9.30006 4.5401 9.40794C4.64798 9.51581 4.70192 9.6495 4.70192 9.809C4.70192 9.96838 4.64798 10.1019 4.5401 10.2097C4.43235 10.3173 4.29879 10.3711 4.13942 10.3711H1.51442ZM3.01442 7.69137C2.85504 7.69137 2.72148 7.63744 2.61373 7.52956C2.50585 7.42169 2.45192 7.28806 2.45192 7.12869C2.45192 6.96919 2.50585 6.83556 2.61373 6.72781C2.72148 6.62019 2.85504 6.56637 3.01442 6.56637H6.38942C6.54879 6.56637 6.68235 6.62031 6.7901 6.72819C6.89798 6.83606 6.95192 6.96969 6.95192 7.12906C6.95192 7.28856 6.89798 7.42212 6.7901 7.52975C6.68235 7.6375 6.54879 7.69137 6.38942 7.69137H3.01442ZM5.43748 14C5.6981 14 5.91948 13.9089 6.1016 13.7266C6.28385 13.5445 6.37498 13.3231 6.37498 13.0625C6.37498 12.8019 6.28385 12.5805 6.1016 12.3984C5.91948 12.2161 5.6981 12.125 5.43748 12.125C5.17685 12.125 4.95548 12.2161 4.77335 12.3984C4.5911 12.5805 4.49998 12.8019 4.49998 13.0625C4.49998 13.3231 4.5911 13.5445 4.77335 13.7266C4.95548 13.9089 5.17685 14 5.43748 14ZM12.851 14C13.1115 14 13.3329 13.9089 13.5152 13.7266C13.6974 13.5445 13.7885 13.3231 13.7885 13.0625C13.7885 12.8019 13.6974 12.5805 13.5152 12.3984C13.3329 12.2161 13.1115 12.125 12.851 12.125C12.5904 12.125 12.369 12.2161 12.1867 12.3984C12.0045 12.5805 11.9134 12.8019 11.9134 13.0625C11.9134 13.3231 12.0045 13.5445 12.1867 13.7266C12.369 13.9089 12.5904 14 12.851 14Z" fill="#1C1B1F" />
+            </g>
+          </svg>
+          <ng-container *ngIf="telemetryData$ | async as telemetric; else noActionData">
+            <span class="font-medium">{{ telemetric.action || '-' }}</span>
+          </ng-container>
+          <ng-template #noActionData>
+            <span class="font-medium">-</span>
+          </ng-template>
+        </div>
+      </td>
+    </tr>
+
+    <tr class="align-middle h-8">
+      <td class="w-1/4">
+        <div class="flex items-center gap-1" [appTooltip]="'Direction'">
+          <svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <mask id="mask0_2343_3083" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="18" height="19">
+              <rect y="0.5" width="18" height="18" fill="#D9D9D9" />
+            </mask>
+            <g mask="url(#mask0_2343_3083)">
+              <path d="M9.00131 16.625C8.01581 16.625 7.0895 16.438 6.22237 16.064C5.35525 15.69 4.601 15.1824 3.95962 14.5413C3.31825 13.9002 2.81044 13.1463 2.43619 12.2795C2.06206 11.4128 1.875 10.4867 1.875 9.50131C1.875 8.51581 2.062 7.5895 2.436 6.72237C2.81 5.85525 3.31756 5.101 3.95869 4.45962C4.59981 3.81825 5.35375 3.31044 6.2205 2.93619C7.08725 2.56206 8.01331 2.375 8.99869 2.375C9.98419 2.375 10.9105 2.562 11.7776 2.936C12.6448 3.31 13.399 3.81756 14.0404 4.45869C14.6818 5.09981 15.1896 5.85375 15.5638 6.7205C15.9379 7.58725 16.125 8.51331 16.125 9.49869C16.125 10.4842 15.938 11.4105 15.564 12.2776C15.19 13.1448 14.6824 13.899 14.0413 14.5404C13.4002 15.1818 12.6463 15.6896 11.7795 16.0638C10.9128 16.4379 9.98669 16.625 9.00131 16.625ZM9 15.5C10.675 15.5 12.0938 14.9187 13.2563 13.7563C14.4187 12.5938 15 11.175 15 9.5C15 7.825 14.4187 6.40625 13.2563 5.24375C12.0938 4.08125 10.675 3.5 9 3.5C7.325 3.5 5.90625 4.08125 4.74375 5.24375C3.58125 6.40625 3 7.825 3 9.5C3 11.175 3.58125 12.5938 4.74375 13.7563C5.90625 14.9187 7.325 15.5 9 15.5ZM6.7485 12.6731L8.84569 11.7399C8.89856 11.7149 8.95194 11.7024 9.00581 11.7024C9.05969 11.7024 9.11306 11.7149 9.16594 11.7399L11.2515 12.6731C11.4073 12.7432 11.5466 12.7199 11.6696 12.6031C11.7928 12.4862 11.8192 12.3499 11.7489 12.1942L9.35044 6.35C9.28344 6.1895 9.16625 6.10925 8.99887 6.10925C8.83138 6.10925 8.71494 6.1895 8.64956 6.35L6.25106 12.1942C6.18081 12.3499 6.20725 12.4862 6.33037 12.6031C6.45337 12.7199 6.59275 12.7432 6.7485 12.6731Z" fill="#1C1B1F" />
+            </g>
+          </svg>
+          <ng-container *ngIf="telemetryData$ | async as telemetric; else noDirectionData">
+            <span class="font-medium">{{ telemetric.direction || '-' }}</span>
+          </ng-container>
+          <ng-template #noDirectionData>
+            <span class="font-medium">-</span>
+          </ng-template>
+        </div>
+      </td>
+
+      <td class="w-1/4">
+        <div class="flex items-center gap-1" [appTooltip]="'Battery level'">
+          <svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g clip-path="url(#clip0_3601_5489)">
+              <path d="M9.14941 7.56842H10.1072C11.5121 8.49343 12.4529 9.54643 13.0127 10.7878" stroke="black" stroke-width="0.643873" />
+              <path d="M11.2559 14.3291C11.2514 14.3711 11.249 14.4138 11.249 14.457C11.249 14.642 11.2918 14.8169 11.3662 14.9736H8.98828V14.3291H11.2559ZM13.3711 10.4795L13.8447 10.625C14.2903 10.7714 14.6555 10.9237 14.9443 11.1201C15.3505 11.3965 15.5946 11.7509 15.7363 12.2441L15.749 12.2881V14.9736H13.5459C13.6203 14.8169 13.6631 14.6421 13.6631 14.457C13.6631 14.4138 13.6607 14.3712 13.6562 14.3291H15.1055V12.3848C15.0012 12.0447 14.8435 11.8302 14.582 11.6523C14.2962 11.4579 13.8782 11.3005 13.2344 11.1104H8.98828V10.4658H13.3271L13.3711 10.4795Z" fill="black" />
+              <circle cx="12.5296" cy="14.329" r="1.28775" stroke="#1C1B1B" stroke-width="0.643873" />
+              <path d="M4.09375 13.375C4.09375 13.6166 4.30362 13.8125 4.5625 13.8125H7.375C7.63388 13.8125 7.84375 13.6166 7.84375 13.375L7.84375 9.4375C7.84375 9.19588 7.63388 9 7.375 9H4.5625C4.30362 9 4.09375 9.19588 4.09375 9.4375L4.09375 13.375Z" fill="#0F172A" />
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M2.21875 13.8125C2.21875 14.779 3.05822 15.5625 4.09375 15.5625H7.84375C8.87928 15.5625 9.71875 14.779 9.71875 13.8125L9.71875 5.0625C9.71875 4.096 8.87928 3.3125 7.84375 3.3125H7.82031C7.71173 2.81326 7.23882 2.4375 6.67188 2.4375H5.26563C4.69868 2.4375 4.22577 2.81326 4.11719 3.3125H4.09375C3.05822 3.3125 2.21875 4.096 2.21875 5.0625L2.21875 13.8125ZM3.15625 5.0625C3.15625 4.57925 3.57598 4.1875 4.09375 4.1875H7.84375C8.36152 4.1875 8.78125 4.57925 8.78125 5.0625L8.78125 13.8125C8.78125 14.2957 8.36152 14.6875 7.84375 14.6875H4.09375C3.57598 14.6875 3.15625 14.2957 3.15625 13.8125L3.15625 5.0625Z" fill="#0F172A" />
+            </g>
+            <defs>
+              <clipPath id="clip0_3601_5489">
+                <rect width="18" height="18" fill="white" transform="translate(0 0.5)" />
+              </clipPath>
+            </defs>
+          </svg>
+          <ng-container *ngIf="telemetryData$ | async as telemetric; else noBatteryData">
+            <span class="font-medium">{{ telemetric.hybrid_level || '-' }}</span>
+          </ng-container>
+          <ng-template #noBatteryData>
+            <span class="font-medium">-</span>
+          </ng-template>
+        </div>
+      </td>
+      <td class="w-1/4">
+        <div class="flex items-center gap-1" [appTooltip]="'Throttle position'">
+          <svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6.08091 9.02401C7.52488 9.09722 9.2488 8.8123 10.0905 7.96152C10.8769 7.29078 11.3798 7.20571 11.831 7.548C11.8935 7.59744 11.9379 7.66889 11.9564 7.74988C11.9749 7.83087 11.9664 7.91627 11.9323 7.9912C10.2747 11.5309 7.38122 12.0908 7.38122 12.0908L7.21361 12.2708L7.66669 12.7576L5.45654 14.839C4.50713 14.2366 3.71511 13.3857 3.1543 12.3658L3.24823 12.2649" stroke="#1C1B1B" stroke-width="0.795" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M1.55157 3.5L6.10633 8.92523C6.10633 8.92523 5.69745 10.8484 3.24971 12.2651L1.5 10.6604" stroke="#1C1B1B" stroke-width="0.795" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M12.8201 8.69934L12.0029 8.06641L9.99196 11.0628L10.8092 11.6958L12.8201 8.69934Z" stroke="#1C1B1B" stroke-width="0.795" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M15.7494 11.9381L15.2687 12.7295C15.2264 12.7992 15.1602 12.8483 15.0845 12.866C15.0465 12.8741 15.0073 12.8739 14.9693 12.8654C14.9313 12.8569 14.8954 12.8403 14.8635 12.8165L11.668 10.4521" stroke="#1C1B1B" stroke-width="0.795" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M12 9.9458L14.945 12.1262L15.7481 10.8025" stroke="#1C1B1B" stroke-width="0.795" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M1.56836 15.2528H13.2638C13.9237 15.2512 14.5561 14.9685 15.0223 14.4666C15.4884 13.9647 15.7502 13.2847 15.7502 12.5758V6.87354" stroke="#1C1B1B" stroke-width="0.795" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          <ng-container *ngIf="telemetryData$ | async as telemetric; else noThrottleData">
+            <span class="font-medium">{{ telemetric.throttle !== null && telemetric.throttle !== undefined ? telemetric.throttle + '%' : '-' }}</span>
+          </ng-container>
+          <ng-template #noThrottleData>
+            <span class="font-medium">-</span>
+          </ng-template>
+        </div>
+      </td>
+      <td class="w-1/4">
+        <div class="flex items-center gap-1" [appTooltip]="'RPM'">
+          <svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14 12.5L12.9286 14.75H5.42857L4.71429 13.25M14 12.5V10.25M14 12.5L15.4286 14.375H16.5V7.625H15.4286L14 10.25M14 10.25L12.9286 8.375H11.8571V7.25H4.71429V8.75M4.71429 13.25V8.75M4.71429 13.25H3V10.625M4.71429 8.75H3V10.625M3 10.625H1.5M1.5 10.625V9.125M1.5 10.625V12.125" stroke="#1C1B1B" stroke-width="0.8625" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M7.03846 7.25H6M6 7.25V4.25H10.5V7.25H6Z" stroke="#1C1B1B" stroke-width="0.8625" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M9 11.5625C9.31066 11.5625 9.5625 11.3107 9.5625 11C9.5625 10.6893 9.31066 10.4375 9 10.4375C8.68934 10.4375 8.4375 10.6893 8.4375 11C8.4375 11.3107 8.68934 11.5625 9 11.5625Z" stroke="#1C1B1B" stroke-width="0.45" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M7.125 11.1648V10.8348C7.125 10.6398 7.28438 10.4785 7.48125 10.4785C7.82063 10.4785 7.95937 10.2385 7.78875 9.94415C7.69125 9.7754 7.74937 9.55602 7.92 9.45852L8.24437 9.2729C8.3925 9.18477 8.58375 9.23727 8.67188 9.3854L8.6925 9.42102C8.86125 9.7154 9.13875 9.7154 9.30937 9.42102L9.33 9.3854C9.41813 9.23727 9.60938 9.18477 9.7575 9.2729L10.0819 9.45852C10.2525 9.55602 10.3106 9.7754 10.2131 9.94415C10.0425 10.2385 10.1813 10.4785 10.5206 10.4785C10.7156 10.4785 10.8769 10.6379 10.8769 10.8348V11.1648C10.8769 11.3598 10.7175 11.521 10.5206 11.521C10.1813 11.521 10.0425 11.761 10.2131 12.0554C10.3106 12.226 10.2525 12.4435 10.0819 12.541L9.7575 12.7266C9.60938 12.8148 9.41813 12.7623 9.33 12.6141L9.30937 12.5785C9.14062 12.2841 8.86312 12.2841 8.6925 12.5785L8.67188 12.6141C8.58375 12.7623 8.3925 12.8148 8.24437 12.7266L7.92 12.541C7.74937 12.4435 7.69125 12.2241 7.78875 12.0554C7.95937 11.761 7.82063 11.521 7.48125 11.521C7.28438 11.521 7.125 11.3598 7.125 11.1648Z" stroke="#1C1B1B" stroke-width="0.525" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          <ng-container *ngIf="telemetryData$ | async as telemetric; else noRpmData">
+            <span class="font-medium">{{ telemetric.rpm !== null && telemetric.rpm !== undefined ? telemetric.rpm + ' RPM' : '-' + ' RPM' }} {{ telemetric.ignition ? '(On)' : '(Off)' }}</span>
+          </ng-container>
+          <ng-template #noRpmData>
+            <span class="font-medium">-</span>
+          </ng-template>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<ng-container *ngIf="telemetryData$ | async as telemetric">
+  <div *ngFor="let alert of telemetric.vehicle_alerts; let i = index" class="flex border-t border-new-gray-300 flex-row text-sm py-2 gap-1 my-2">
+    <svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M9.05 18.05C8.874 18.05 8.70388 18.0156 8.53963 17.9469C8.37538 17.8781 8.22531 17.7808 8.08944 17.6548L2.39525 11.9606C2.26925 11.8247 2.17188 11.6746 2.10313 11.5104C2.03438 11.3461 2 11.176 2 11C2 10.824 2.03387 10.6519 2.10162 10.4836C2.1695 10.3154 2.26738 10.1673 2.39525 10.0395L8.08944 4.34526C8.22531 4.20776 8.37538 4.10751 8.53963 4.04451C8.70388 3.98151 8.874 3.95001 9.05 3.95001C9.226 3.95001 9.39813 3.98201 9.56638 4.04601C9.73463 4.10989 9.88269 4.20964 10.0106 4.34526L15.7048 10.0395C15.8404 10.1673 15.9401 10.3148 16.004 10.4819C16.068 10.6491 16.1 10.8218 16.1 11C16.1 11.176 16.0685 11.3461 16.0055 11.5104C15.9425 11.6746 15.8423 11.8247 15.7048 11.9606L10.0106 17.6548C9.88269 17.7826 9.73519 17.8805 9.56806 17.9484C9.40094 18.0161 9.22825 18.05 9.05 18.05ZM9.21594 16.8528L14.9028 11.166C14.9413 11.1275 14.9606 11.0721 14.9606 11C14.9606 10.9279 14.9413 10.8726 14.9028 10.8341L9.21594 5.1472C9.17744 5.1087 9.12213 5.08945 9.05 5.08945C8.97788 5.08945 8.92256 5.1087 8.88406 5.1472L3.19719 10.8341C3.15869 10.8726 3.13944 10.9279 3.13944 11C3.13944 11.0721 3.15869 11.1275 3.19719 11.166L8.88406 16.8528C8.92256 16.8913 8.97788 16.9106 9.05 16.9106C9.12213 16.9106 9.17744 16.8913 9.21594 16.8528ZM9.05019 11.8149C9.20969 11.8149 9.34325 11.761 9.45088 11.6533C9.55863 11.5454 9.6125 11.4118 9.6125 11.2524V8.16595C9.6125 8.00657 9.55856 7.87295 9.45069 7.76507C9.34281 7.65732 9.20919 7.60345 9.04981 7.60345C8.89031 7.60345 8.75675 7.65732 8.64913 7.76507C8.54138 7.87295 8.4875 8.00657 8.4875 8.16595V11.2524C8.4875 11.4118 8.54144 11.5454 8.64931 11.6533C8.75719 11.761 8.89081 11.8149 9.05019 11.8149ZM9.05 13.7765C9.22163 13.7765 9.3655 13.7185 9.48163 13.6023C9.59775 13.4862 9.65581 13.3423 9.65581 13.1707C9.65581 12.9991 9.59775 12.8552 9.48163 12.7391C9.3655 12.623 9.22163 12.5649 9.05 12.5649C8.87838 12.5649 8.7345 12.623 8.61838 12.7391C8.50225 12.8552 8.44419 12.9991 8.44419 13.1707C8.44419 13.3423 8.50225 13.4862 8.61838 13.6023C8.7345 13.7185 8.87838 13.7765 9.05 13.7765Z" fill="#1C1B1F" />
+    </svg>
+    <p class="flex-wrap gap-1">
+      <span>Alert:</span><span> {{ alert.name + ': ' + alert.text }}</span>
+    </p>
+  </div>
+</ng-container>
+
+<div *ngIf="isDetailsExpanded">
+  <div class="border-b border-new-gray-300 w-[100%] py-1"></div>
+
+  <div class="py-3">
+    <p class="text-xs text-new-gray-600 font-normal">Location - Latitude - Longitude</p>
+    <ng-container *ngIf="telemetryData$ | async as telemetric; else noLocationData">
+      <div class="font-medium text-sm">{{ telemetric.location ? telemetric.location : '-' }} | {{ telemetric.lat ? telemetric.lat : '-' }} | {{ telemetric.lng ? telemetric.lng : '-' }}</div>
+    </ng-container>
+    <ng-template #noLocationData>
+      <div class="font-medium text-sm">- | - | -</div>
+    </ng-template>
+    <div class="border-b border-new-gray-300 w-[100%] py-1"></div>
+  </div>
+
+  <table class="w-full text-sm mt-4">
+    <thead>
+      <tr class="align-middle pb-2">
+        <th class="w-1/4 text-left text-xs text-new-gray-600 font-normal">VIN</th>
+        <th class="w-1/4 text-left text-xs text-new-gray-600 font-normal">Millage</th>
+        <th class="w-1/4 text-left text-xs text-new-gray-600 font-normal">Battery</th>
+        <th class="w-1/4 text-left text-xs text-new-gray-600 font-normal">Air</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="align-middle h-8 pb-3">
+        <td class="w-1/4">
+          <ng-container *ngIf="telemetryData$ | async as telemetric; else noVinData">
+            <span class="font-medium">{{ telemetric.vin ? telemetric.vin : '-' }}</span>
+          </ng-container>
+          <ng-template #noVinData>
+            <span class="font-medium">-</span>
+          </ng-template>
+        </td>
+        <td class="w-1/4">
+          <ng-container *ngIf="telemetryData$ | async as telemetric; else noMillageData">
+            <span class="font-medium">{{ telemetric.millage ? (telemetric.millage | number : '1.0-0') : '-' }}</span>
+          </ng-container>
+          <ng-template #noMillageData>
+            <span class="font-medium">-</span>
+          </ng-template>
+        </td>
+        <td class="w-1/4">
+          <ng-container *ngIf="telemetryData$ | async as telemetric; else noBatteryTempData">
+            <span class="font-medium">{{ telemetric.battery_temperature ? telemetric.battery_temperature : '-' }}</span>
+          </ng-container>
+          <ng-template #noBatteryTempData>
+            <span class="font-medium">-</span>
+          </ng-template>
+        </td>
+        <td class="w-1/4">
+          <ng-container *ngIf="telemetryData$ | async as telemetric; else noAirTempData">
+            <span class="font-medium">{{ telemetric.temperature ? telemetric.temperature + '°C' : '-' }}</span>
+          </ng-container>
+          <ng-template #noAirTempData>
+            <span class="font-medium">-</span>
+          </ng-template>
+        </td>
+      </tr>
+      <tr class="align-middle h-8">
+        <td class="w-1/4"></td>
+        <td class="w-1/4">
+          <div class="flex flex-col">
+            <span class="text-new-gray-600 text-xs font-normal">Ignition</span>
+            <ng-container *ngIf="telemetryData$ | async as telemetric; else noIgnitionData">
+              <span class="font-medium">{{ telemetric.ignition !== null && telemetric.ignition !== undefined ? (telemetric.ignition ? 'ON' : 'OFF') : '-' }}</span>
+            </ng-container>
+            <ng-template #noIgnitionData>
+              <span class="font-medium">-</span>
+            </ng-template>
+          </div>
+        </td>
+        <td class="w-1/4">
+          <div class="flex flex-col">
+            <span class="text-new-gray-600 text-xs font-normal">Turbocharger</span>
+            <ng-container *ngIf="telemetryData$ | async as telemetric; else noTurboData">
+              <span class="font-medium">{{ telemetric.turbocharger_temperature ? telemetric.turbocharger_temperature : '-' }}</span>
+            </ng-container>
+            <ng-template #noTurboData>
+              <span class="font-medium">-</span>
+            </ng-template>
+          </div>
+        </td>
+        <td class="w-1/4">
+          <div class="flex flex-col">
+            <span class="text-new-gray-600 text-xs font-normal">Engine</span>
+            <ng-container *ngIf="telemetryData$ | async as telemetric; else noEngineData">
+              <span class="font-medium">{{ telemetric.engine_temperature ? telemetric.engine_temperature : '-' }}</span>
+            </ng-container>
+            <ng-template #noEngineData>
+              <span class="font-medium">-</span>
+            </ng-template>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="border-b border-new-gray-300 w-[100%] py-1"></div>
+<div class="py-2 items-center justify-center flex cursor-pointer" (click)="toggleDetails()" (keydown.enter)="toggleDetails()">
+  <p class="underline text-main-primary font-medium text-sm">{{ isDetailsExpanded ? 'Show less' : 'Show more' }}</p>
+  <svg [class.rotate-180]="!isDetailsExpanded" width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <mask id="mask0_3814_21259" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="21" height="21">
+      <rect x="0.929688" y="0.251465" width="20" height="20" fill="#D9D9D9" />
+    </mask>
+    <g mask="url(#mask0_3814_21259)">
+      <path d="M10.9319 8.97147L6.85888 13.0447C6.72038 13.1831 6.5463 13.2539 6.33663 13.2572C6.12713 13.2604 5.94988 13.1896 5.80488 13.0447C5.66005 12.8997 5.58763 12.7241 5.58763 12.5177C5.58763 12.3114 5.66005 12.1357 5.80488 11.9907L10.2991 7.49647C10.3928 7.40297 10.4915 7.33697 10.5954 7.29847C10.6992 7.25997 10.8114 7.24072 10.9319 7.24072C11.0524 7.24072 11.1645 7.25997 11.2684 7.29847C11.3722 7.33697 11.471 7.40297 11.5646 7.49647L16.0589 11.9907C16.1972 12.1292 16.268 12.3033 16.2714 12.513C16.2745 12.7225 16.2037 12.8997 16.0589 13.0447C15.9139 13.1896 15.7382 13.262 15.5319 13.262C15.3255 13.262 15.1499 13.1896 15.0049 13.0447L10.9319 8.97147Z" fill="#EE8444" />
+    </g>
+  </svg>
+</div>

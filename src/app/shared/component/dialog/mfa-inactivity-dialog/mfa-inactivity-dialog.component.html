@@ -1,0 +1,11 @@
+<div class="w-full h-full flex flex-col gap-6 p-6 rounded bg-white">
+  <div class="flex flex-col gap-2">
+    <p class="font-bold text-lg">{{ data.header }}</p>
+    <p *ngIf="data.content">{{ data.content }}</p>
+  </div>
+  <app-text-control label="MFA code" [(ngModel)]="text"></app-text-control>
+  <div class="flex gap-3">
+    <app-button (buttonClick)="handleYesClick()">Confirm</app-button>
+    <app-button [type]="'ternary'" (buttonClick)="handleNoClick()">Logout</app-button>
+  </div>
+</div>

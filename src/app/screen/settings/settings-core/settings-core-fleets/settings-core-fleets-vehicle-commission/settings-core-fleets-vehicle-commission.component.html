@@ -1,0 +1,54 @@
+<app-dialog-container>
+  <div class="flex flex-col p-5" body>
+    <div *ngIf="currentView === ViewMode.TEMPLATE_SELECTION" class="flex flex-col h-full">
+      <ng-container>
+        <div class="flex flex-col gap-6 mb-4">
+          <p class="text-lg font-medium">Choose event strategy templates</p>
+          <p class="font-normal text-sm text-new-gray-700">You can set up event strategy templates in the fleet settings.</p>
+          <div>
+            <app-tree-control label="Fleet*" *ngIf="fleetOptions$ | async as options" [options]="options" [formControl]="fleetIdControl"> </app-tree-control>
+            <app-text-control [showHintSpace]="false" [formControl]="searchControl" label="Search templates"> </app-text-control>
+          </div>
+        </div>
+
+        <div class="flex items-center pb-2 border-b border-b-bright-gray">
+          <div class="w-10">
+            <app-checkbox-control [ngModel]="allTemplatesSelected" (ngModelChange)="handleAllTemplatesClick($event)" class="text-xs text-manatee py-3 cursor-pointer"> </app-checkbox-control>
+          </div>
+          <p class="flex-1 text-xs text-manatee py-3 cursor-pointer">Template Name</p>
+          <p class="flex-1 text-xs text-manatee py-3 cursor-pointer">Event Type</p>
+        </div>
+      </ng-container>
+
+      <div class="overflow-y-auto flex-grow">
+        <ng-container *ngFor="let template of eventStrategyTemplates">
+          <div class="flex items-center py-3">
+            <div class="w-10">
+              <app-checkbox-control [ngModel]="templatesEnabled[template.id]" (ngModelChange)="handleTemplateCheckboxChange($event, template.id)"> </app-checkbox-control>
+            </div>
+            <p class="flex-1 font-normal text-sm">{{ template.name }}</p>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+
+    <app-settings-core-fleets-vehicle-commission-verify-template [vehicleId]="vehicleId" [confirmedEventId]="confirmedEventId" (eventSelected)="onEventSelected($event)" (eventConfirmed)="completeVehicleCommission($event)" *ngIf="currentView === ViewMode.COMMISSION_VERIFY"> </app-settings-core-fleets-vehicle-commission-verify-template>
+    <div *ngIf="currentView === ViewMode.COMPLETE" class="gap-6 flex flex-col">
+      <p class="text-lg font-medium">Vehicle setup finished!</p>
+      <p class="font-normal text-sm text-new-gray-700">All events are properly configured, and the vehicle is now visible to the client.</p>
+    </div>
+  </div>
+
+  <div footer class="flex flex-1 justify-end">
+    <div *ngIf="currentView === ViewMode.COMMISSION_VERIFY">
+      <app-button (click)="switchToComplete()" (keydown.enter)="switchToComplete()"> Complete </app-button>
+    </div>
+    <div class="flex flex-row" *ngIf="currentView === ViewMode.COMPLETE">
+      <app-button type="quaternary" (click)="downloadCommissionReport()" (keydown.enter)="downloadCommissionReport()">Download report</app-button>
+      <app-button (click)="closeDialog()" (keydown.enter)="closeDialog()"> Finish commission </app-button>
+    </div>
+    <div *ngIf="currentView === ViewMode.TEMPLATE_SELECTION">
+      <app-button [disabled]="!isFleetSelected" [appTooltip]="!isFleetSelected ? 'Please select a fleet before continuing' : ''" type="primary" (click)="switchToCommissionView()" (keydown.enter)="switchToCommissionView()">Verify templates</app-button>
+    </div>
+  </div>
+</app-dialog-container>

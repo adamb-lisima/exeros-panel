@@ -1,0 +1,41 @@
+<div class="h-full" *appHasPermission="[[accessGroup.STREAM_VIEWER]]">
+  <ng-container>
+    <div class="relative w-full h-screen">
+      <div class="absolute top-4 left-4 w-full max-w-[50%] z-10 bg-white rounded shadow-md p-2">
+        <mat-form-field class="w-full no-bottom" appearance="outline">
+          <mat-label>{{ 'Search' }}</mat-label>
+          <mat-select [multiple]="false" [disabled]="false" [ngModel]="value" (ngModelChange)="handleModelChange($event)" (click)="forceOpenDropdown()" (keydown.enter)="forceOpenDropdown()" panelClass="custom-dropdown">
+            <div class="sticky top-0 z-10 bg-white/95 backdrop-blur-sm">
+              <div class="border-b border-gray-200">
+                <input #searchInput class="w-full text-sm p-3 outline-none bg-transparent placeholder-gray-400" [(ngModel)]="search" (ngModelChange)="handleSearchChange($event)" (keydown)="$event.stopPropagation()" placeholder="Type to search..." (click)="$event.stopPropagation(); forceOpenDropdown()" />
+              </div>
+            </div>
+
+            <mat-option *ngIf="tempOptions.length === 0" [disabled]="true"> No results found </mat-option>
+
+            <mat-option *ngFor="let option of tempOptions; trackBy: trackByValue" [value]="option.display_name">
+              {{ option.display_name }}
+            </mat-option>
+          </mat-select>
+          <button matSuffix mat-icon-button (click)="handleClearClick($event)">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+      <div class="absolute top-4 right-4 z-10">
+        <button (click)="toggleMapType()" class="p-[10.5px] w-[42px] h-[42px] rounded-lg border border-new-gray-400 bg-white hover:bg-new-gray-200 transition-colors" [appTooltip]="currentMapType === 'terrain' ? 'Switch to Satellite view' : 'Switch to Terrain view'">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 2C5.73 2 2 5.73 2 10s3.73 8 8 8 8-3.73 8-8-3.73-8-8-8zm-0.8 14.34c-3.16-0.39-5.6-3.08-5.6-6.34 0-0.5 0.06-0.97 0.17-1.43L7.2 12v0.8c0 0.88 0.72 1.6 1.6 1.6v1.94zM15.52 13.17c-0.21-0.65-0.8-1.11-1.52-1.11h-0.8v-2.4c0-0.44-0.36-0.8-0.8-0.8H7.2v-1.6h1.6c0.44 0 0.8-0.36 0.8-0.8V5.6h1.6c0.88 0 1.6-0.72 1.6-1.6v-0.33C15.34 4.78 17 7.25 17 10c0 1.66-0.64 3.17-1.68 4.31z" fill="currentColor" />
+          </svg>
+        </button>
+      </div>
+      <app-map class="absolute inset-0" [markers]="markers$ | async" [center]="center" [zoom]="6" (mapReady)="onMapReady($event)"> </app-map>
+    </div>
+  </ng-container>
+</div>
+
+<style>
+  .no-bottom {
+    margin-bottom: -1.25em !important;
+  }
+</style>

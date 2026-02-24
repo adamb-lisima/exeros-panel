@@ -1,0 +1,65 @@
+<div class="p-6">
+  <div class="flex justify-between items-center mb-6">
+    <h2 class="text-xl font-bold">Assign Event Strategy Template</h2>
+    <button mat-icon-button (click)="onCancel()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <div class="mb-6">
+    <p class="text-sm text-manatee">
+      Vehicle: <span class="font-medium text-dark-electric-blue">{{ data.vehicle.registration_plate }}</span>
+    </p>
+  </div>
+
+  <div *ngIf="loading" class="flex justify-center items-center py-12">
+    <mat-spinner diameter="40"></mat-spinner>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="!loading" class="space-y-6">
+    <app-select-control [formControl]="$any(form.controls.event_strategy_id)" label="Event Strategy Template" [options]="selectOptions"> </app-select-control>
+
+    <div *ngIf="selectedStrategy" class="bg-anti-flash-white p-4 rounded-lg">
+      <h4 class="text-base font-semibold text-dark-electric-blue mb-4">Template Details</h4>
+      <div class="grid grid-cols-2 gap-4 text-sm">
+        <div>
+          <span class="font-medium text-manatee block mb-1">Template Name:</span>
+          <span class="text-dark-electric-blue">{{ selectedStrategy.name }}</span>
+        </div>
+        <div>
+          <span class="font-medium text-manatee block mb-1">Alarm Type:</span>
+          <span class="text-dark-electric-blue">{{ getAlarmTypeName(selectedStrategy.alarm_type_id) }}</span>
+        </div>
+        <div>
+          <span class="font-medium text-manatee block mb-1">Recording Time:</span>
+          <span class="text-dark-electric-blue">{{ selectedStrategy.time_before }}s before, {{ selectedStrategy.time_after }}s after</span>
+        </div>
+        <div>
+          <span class="font-medium text-manatee block mb-1">Stream Types:</span>
+          <span class="text-dark-electric-blue">
+            <span *ngIf="selectedStrategy.main_stream" class="inline-block bg-main-primary text-white px-2 py-1 rounded text-xs mr-1">Main</span>
+            <span *ngIf="selectedStrategy.sub_stream" class="inline-block bg-main-primary text-white px-2 py-1 rounded text-xs">Sub</span>
+            <span *ngIf="!selectedStrategy.main_stream && !selectedStrategy.sub_stream" class="text-gray-400">None selected</span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <div *ngIf="!loading && availableStrategies.length === 0" class="text-center py-12">
+    <div class="text-gray-400 mb-2">
+      <svg class="w-12 h-12 mx-auto" fill="currentColor" viewBox="0 0 20 20">
+        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+      </svg>
+    </div>
+    <p class="text-gray-500 font-medium">No event strategy templates available</p>
+    <p class="text-gray-400 text-sm mt-1">Contact your administrator to create templates</p>
+  </div>
+
+  <div class="flex justify-end gap-4 mt-6">
+    <span class="text-sm text-main-primary underline font-semibold cursor-pointer" (click)="onCancel()" (keydown.enter)="onCancel()"> Cancel </span>
+    <app-button [disabled]="form.invalid || loading" (buttonClick)="onSubmit()">
+      <span class="text-sm text-white font-semibold">Assign Template</span>
+    </app-button>
+  </div>
+</div>

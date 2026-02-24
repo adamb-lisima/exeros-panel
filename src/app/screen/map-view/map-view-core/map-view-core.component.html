@@ -1,0 +1,34 @@
+<div class="h-full relative" *appHasPermission="[[accessGroup.MAP_VIEW]]">
+  <div class="absolute top-4 left-4 z-[999]">
+    <div class="flex flex-row gap-2">
+      <div [appTooltip]="'Draw search area'" (click)="toggleDrawing()" (keydown.enter)="toggleDrawing()" class="rounded cursor-pointer bg-white w-12 h-12 items-center justify-center flex">
+        <span
+          ><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.4109 16.1995L19.6542 8.95621L18.5299 7.83188L11.2866 15.0752L12.4109 16.1995ZM6.76767 18.0806C5.32623 18.0085 4.25235 17.7058 3.54604 17.1725C2.83973 16.6391 2.48657 15.868 2.48657 14.8589C2.48657 13.922 2.87216 13.1616 3.64333 12.5778C4.41451 11.9941 5.48479 11.6445 6.85416 11.5292C7.41633 11.486 7.83795 11.3959 8.11903 11.2589C8.40011 11.122 8.54066 10.931 8.54066 10.6859C8.54066 10.3112 8.32804 10.0301 7.90281 9.8427C7.47759 9.65531 6.77488 9.51838 5.7947 9.43189L5.94605 7.70215C7.43074 7.81747 8.52264 8.11657 9.22174 8.59945C9.92084 9.08234 10.2704 9.77784 10.2704 10.6859C10.2704 11.4499 9.99292 12.0481 9.43796 12.4806C8.883 12.913 8.06498 13.1724 6.98389 13.2589C6.06136 13.331 5.36947 13.5004 4.90821 13.767C4.44694 14.0337 4.21631 14.3977 4.21631 14.8589C4.21631 15.3634 4.41811 15.7274 4.82172 15.9508C5.22532 16.1743 5.90281 16.3076 6.85416 16.3508L6.76767 18.0806ZM12.8218 18.2319L9.25417 14.6643L17.5137 6.40485C17.802 6.11656 18.1443 5.97241 18.5407 5.97241C18.9371 5.97241 19.2794 6.11656 19.5677 6.40485L21.0813 7.91837C21.3695 8.20666 21.5137 8.549 21.5137 8.9454C21.5137 9.3418 21.3695 9.68414 21.0813 9.97243L12.8218 18.2319ZM9.3839 18.9454C9.13886 19.0031 8.92264 18.9382 8.73525 18.7509C8.54786 18.5635 8.483 18.3472 8.54066 18.1022L9.25417 14.6643L12.8218 18.2319L9.3839 18.9454Z" fill="currentColor" />
+          </svg>
+        </span>
+      </div>
+      <div [appTooltip]="'Clear search area'" *ngIf="isDrawingEnabled" (click)="clearDrawings()" (keydown.enter)="clearDrawings()" class="rounded cursor-pointer bg-white w-12 h-12 items-center justify-center flex">
+        <span>
+          <svg width="18" height="16" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M6.43073 0.46582L0.752129 6.30307L4.44853 9.99952L8.42713 13.9691H0.498827V15.4691H13.5679L17.501 11.536L6.43073 0.46582ZM10.5509 13.9691L6.04013 9.46852L9.67613 5.83252L15.3797 11.536L12.9466 13.9691H10.5509Z" [attr.fill]="isPolygonDraw ? '#FF0000' : '#BDBDBD'" />
+          </svg>
+        </span>
+      </div>
+
+      <div [appTooltip]="mapComponent?.currentMapType === 'terrain' ? 'Switch to Satellite' : 'Switch to Terrain'" (click)="toggleMapType()" (keydown.enter)="toggleMapType()" class="rounded cursor-pointer bg-white w-12 h-12 items-center justify-center flex">
+        <span>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" fill="currentColor" />
+          </svg>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <ng-container>
+    <div class="relative w-full h-screen">
+      <app-map class="absolute inset-0" [drawingEnabled]="isDrawingEnabled" [markers]="markers$ | async" [center]="center" [zoom]="6" (shapeComplete)="onShapeComplete($event)" (mapReady)="onMapReady($event)"> </app-map>
+    </div>
+  </ng-container>
+</div>

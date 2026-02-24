@@ -1,0 +1,14 @@
+<div class="flex items-center gap-4 px-4 pb-3 pt-1">
+  <ol class="flex flex-wrap items-center gap-4">
+    <li *ngFor="let tab of timelineTabs" class="py-2 px-4 cursor-pointer border-b-4 font-semibold text-sm" [ngClass]="[selectedTab === tab.timelineTab ? 'border-b-main-primary' : 'border-b-transparent text-dim-gray', isTabDisabled(tab.timelineTab) ? 'opacity-50 pointer-events-none' : '']" (keydown.enter)="handleTabClick(tab.timelineTab)" (click)="handleTabClick(tab.timelineTab)">
+      {{ tab.timelineTabText }}
+    </li>
+  </ol>
+  <div class="flex-grow"></div>
+
+  <ng-content select="[timelineTabMenuItem]"></ng-content>
+</div>
+
+<ng-container *ngFor="let tab of timelineTabs">
+  <ng-container *ngIf="selectedTab === tab.timelineTab" [ngTemplateOutlet]="tab.template"></ng-container>
+</ng-container>

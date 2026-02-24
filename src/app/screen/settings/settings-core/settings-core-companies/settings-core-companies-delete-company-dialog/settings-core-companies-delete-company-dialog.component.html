@@ -1,0 +1,14 @@
+<app-dialog-container title="Delete company">
+  <div class="p-5" body>
+    <p class="text-sm">
+      Are you sure you want to delete
+      <span class="text-sm font-medium"> {{ data.name }} </span>? This action can not be reversed. All data assigned to this company will be deleted.
+    </p>
+  </div>
+  <div class="flex flex-1 items-center justify-end gap-9" footer>
+    <span class="text-sm text-main-primary underline font-semibold cursor-pointer" (click)="handleCloseClick()" (keydown.enter)="handleCloseClick()">Discard</span>
+    <app-button (buttonClick)="handleDeleteCompanyClick()">
+      <span class="text-sm text-white font-semibold">Delete company</span>
+    </app-button>
+  </div>
+</app-dialog-container>

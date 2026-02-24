@@ -1,0 +1,16 @@
+<div class="h-full" [ngClass]="{ 'loader loader--main': (vm$ | async)?.loadingNumber, 'bg-cultured': !iframeService.isIframe }">
+  <app-alert></app-alert>
+
+  <ng-container *ngIf="isGuidePage">
+    <router-outlet></router-outlet>
+  </ng-container>
+
+  <ng-container *ngIf="!isGuidePage && (vm$ | async) as vm">
+    <ng-container *ngIf="vm.accessToken && (!iframeService.isIframe || vm.iframeInit)">
+      <app-authenticated-container></app-authenticated-container>
+    </ng-container>
+    <ng-container *ngIf="vm.accessToken === null || vm.accessToken === undefined || (iframeService.isIframe && (vm.iframeInit === null || vm.iframeInit === undefined))">
+      <app-unauthenticated-container></app-unauthenticated-container>
+    </ng-container>
+  </ng-container>
+</div>

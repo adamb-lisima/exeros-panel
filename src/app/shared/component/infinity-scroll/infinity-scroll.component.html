@@ -1,0 +1,7 @@
+<div class="h-full flex flex-col gap-6 py-1 rounded" [class.bg-white]="!transparent" [ngClass]="{ 'loader loader--infinite-scroll': loading }">
+  <ng-content select="[header]"></ng-content>
+  <ng-content select="[filters]"></ng-content>
+  <div #listElement class="flex flex-col overflow-auto" [ngClass]="{ 'gap-3': listGap, 'divide-y divide-bright-gray': listDivider }" (scroll)="handleListScroll(listElement)">
+    <ng-content select="[list]"></ng-content>
+  </div>
+</div>

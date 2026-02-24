@@ -1,0 +1,60 @@
+<svg id="a1e48cb3-c1f8-458e-8a0f-6ca78a80ec73" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80">
+  <defs>
+    <style>
+      .a9082101-3be4-4896-a6e8-fcd48f28d4e7 {
+        fill: #fadc0f;
+      }
+
+      .b5c4b1d1-9cca-454e-aaa0-1d399c129388 {
+        fill: #fff;
+      }
+
+      .b23260fd-5b66-4108-b736-663a27e74911 {
+        fill: none;
+        stroke: #414042;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .b891af5e-6857-4ebd-b144-83a72bad0b6f, .f46557ad-373b-4966-aa88-aeda6e2036a6 {
+        fill: #414042;
+      }
+
+      .f46557ad-373b-4966-aa88-aeda6e2036a6 {
+        font-size: 8.87px;
+        font-family: MyriadPro-Regular, Myriad Pro;
+      }
+
+      .b1160a0f-0482-4312-b91a-73eceba78ee8 {
+        letter-spacing: 0.01em;
+      }
+    </style>
+  </defs>
+  <title>Accident-11</title>
+  <g>
+    <g>
+      <rect class="a9082101-3be4-4896-a6e8-fcd48f28d4e7" x="12.04" y="0.82" width="54.15" height="15.39"/>
+      <g>
+        <rect class="b5c4b1d1-9cca-454e-aaa0-1d399c129388" x="6.55" y="16.21" width="65.13" height="63.07"/>
+        <rect class="b5c4b1d1-9cca-454e-aaa0-1d399c129388" x="11.52" y="27.66" width="12.58" height="17.74"/>
+        <rect class="b5c4b1d1-9cca-454e-aaa0-1d399c129388" x="11.52" y="55.72" width="12.58" height="17.74"/>
+        <rect class="b5c4b1d1-9cca-454e-aaa0-1d399c129388" x="53.1" y="27.66" width="12.58" height="17.74"/>
+        <rect class="b5c4b1d1-9cca-454e-aaa0-1d399c129388" x="53.1" y="55.72" width="12.58" height="17.74"/>
+        <rect class="b5c4b1d1-9cca-454e-aaa0-1d399c129388" x="30.48" y="57.32" width="16.33" height="21.96"/>
+      </g>
+    </g>
+    <g>
+      <rect class="b23260fd-5b66-4108-b736-663a27e74911" x="12.04" y="0.82" width="54.15" height="15.39"/>
+      <g>
+        <rect class="b23260fd-5b66-4108-b736-663a27e74911" x="6.55" y="16.21" width="65.13" height="63.07"/>
+        <rect class="b23260fd-5b66-4108-b736-663a27e74911" x="11.52" y="27.66" width="12.58" height="17.74"/>
+        <rect class="b23260fd-5b66-4108-b736-663a27e74911" x="11.52" y="55.72" width="12.58" height="17.74"/>
+        <rect class="b23260fd-5b66-4108-b736-663a27e74911" x="53.1" y="27.66" width="12.58" height="17.74"/>
+        <rect class="b23260fd-5b66-4108-b736-663a27e74911" x="53.1" y="55.72" width="12.58" height="17.74"/>
+        <rect class="b23260fd-5b66-4108-b736-663a27e74911" x="30.48" y="57.32" width="16.33" height="21.96"/>
+        <circle class="b891af5e-6857-4ebd-b144-83a72bad0b6f" cx="34.95" cy="68.3" r="0.97"/>
+      </g>
+      <text class="f46557ad-373b-4966-aa88-aeda6e2036a6" transform="translate(17.28 11.26)">INSU<tspan class="b1160a0f-0482-4312-b91a-73eceba78ee8" x="18.07" y="0">R</tspan><tspan x="22.89" y="0">ANCE</tspan></text>
+    </g>
+  </g>
+</svg>

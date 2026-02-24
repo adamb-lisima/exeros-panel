@@ -1,0 +1,29 @@
+<svg id="bb7c78ba-c2b2-4bad-a046-71e02d92bc61" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80">
+  <title>11</title>
+  <g>
+    <g>
+      <path style="fill: #fff;" d="M79.09,29.63l-18.86,32a1.5,1.5,0,0,1-2,.55,38.57,38.57,0,0,0-36.42,0,1.5,1.5,0,0,1-2-.55L.91,29.63a1.51,1.51,0,0,1,.56-2.08,79.72,79.72,0,0,1,77.06,0A1.51,1.51,0,0,1,79.09,29.63Z"/>
+      <g>
+        <path style="fill: #fadc0f;" d="M43.56,31.2a35.7,35.7,0,0,1-1.65,8.54l-.67,2.61a1.28,1.28,0,0,1-1.24,1h0a1.29,1.29,0,0,1-1.25-1l-.66-2.61c-1.32-4.66-1.65-7.18-1.65-8.54A3.23,3.23,0,0,1,40,27.68,3.24,3.24,0,0,1,43.56,31.2Z"/>
+        <path style="fill: #fadc0f;" d="M38,47.43a2,2,0,1,1,2,2A2,2,0,0,1,38,47.43Z"/>
+      </g>
+    </g>
+    <g>
+      <path style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" d="M79.09,29.63l-18.86,32a1.5,1.5,0,0,1-2,.55,38.57,38.57,0,0,0-36.42,0,1.5,1.5,0,0,1-2-.55L.91,29.63a1.51,1.51,0,0,1,.56-2.08,79.72,79.72,0,0,1,77.06,0A1.51,1.51,0,0,1,79.09,29.63Z"/>
+      <g>
+        <polyline style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" points="48.19 23.37 50.69 23.37 50.69 25.87"/>
+        <line style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 4.85 4.85;" x1="50.69" y1="30.71" x2="50.69" y2="47.67"/>
+        <polyline style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" points="50.69 50.09 50.69 52.59 48.19 52.59"/>
+        <line style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 5.46 5.46;" x1="42.73" y1="52.59" x2="34.54" y2="52.59"/>
+        <polyline style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" points="31.81 52.59 29.31 52.59 29.31 50.09"/>
+        <line style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 4.85 4.85;" x1="29.31" y1="45.25" x2="29.31" y2="28.29"/>
+        <polyline style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" points="29.31 25.87 29.31 23.37 31.81 23.37"/>
+        <line style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 5.46 5.46;" x1="37.27" y1="23.37" x2="45.46" y2="23.37"/>
+      </g>
+      <g>
+        <path style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" d="M43.56,31.2a35.7,35.7,0,0,1-1.65,8.54l-.67,2.61a1.28,1.28,0,0,1-1.24,1h0a1.29,1.29,0,0,1-1.25-1l-.66-2.61c-1.32-4.66-1.65-7.18-1.65-8.54A3.23,3.23,0,0,1,40,27.68,3.24,3.24,0,0,1,43.56,31.2Z"/>
+        <path style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" d="M38,47.43a2,2,0,1,1,2,2A2,2,0,0,1,38,47.43Z"/>
+      </g>
+    </g>
+  </g>
+</svg>

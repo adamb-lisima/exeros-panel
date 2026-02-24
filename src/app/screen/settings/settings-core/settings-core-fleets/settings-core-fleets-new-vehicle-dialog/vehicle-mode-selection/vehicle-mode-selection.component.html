@@ -1,0 +1,10 @@
+<div class="p-5 bg-white inline-flex flex-col justify-start items-center gap-8">
+  <div class="inline-flex justify-start items-start gap-6">
+    <div class="w-56 px-5 py-2.5 rounded-lg flex justify-center items-center gap-1 cursor-pointer" (keydown.enter)="selectAddMode()" (click)="selectAddMode()">
+      <app-button type="primary" class="text-center justify-start text-white text-sm font-medium">Add a new vehicle</app-button>
+    </div>
+    <div class="px-5 py-2.5 bg-white rounded-lg flex justify-center items-center gap-1 cursor-pointer" (keydown.enter)="selectAssignMode()" (click)="selectAssignMode()">
+      <app-button type="ternary" class="text-center justify-start text-orange-400 text-sm font-medium">Assign an existing vehicle</app-button>
+    </div>
+  </div>
+</div>

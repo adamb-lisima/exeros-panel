@@ -1,0 +1,46 @@
+<svg id="f0b817b6-5375-4b86-88b0-d5e685b47b8c" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80">
+  <title>13</title>
+  <g>
+    <g>
+      <g>
+        <path style="fill: #fff;" d="M63.66,35.25A23.38,23.38,0,0,1,40.29,58.62a23.78,23.78,0,0,1-6.84-1A23.38,23.38,0,0,1,16.93,35.25c0-.5,0-1,.05-1.48a23.36,23.36,0,0,1,46.63,0C63.64,34.27,63.66,34.76,63.66,35.25Z"/>
+        <circle style="fill: #fadc0f;" cx="40.29" cy="35.26" r="2.64"/>
+        <rect style="fill: #fadc0f;" x="30.48" y="45.47" width="19.63" height="4.99" rx="2.49"/>
+      </g>
+      <g>
+        <path style="fill: #fff;" d="M79.44,50.92a17.18,17.18,0,0,1-32.88,7v-.14a23.37,23.37,0,0,0,17.1-22.51c0-.49,0-1,0-1.45h0A17.16,17.16,0,0,1,79.44,50.92Z"/>
+        <circle style="fill: #fadc0f;" cx="62.26" cy="50.92" r="1.94"/>
+      </g>
+      <g>
+        <path style="fill: #fff;" d="M33.45,57.6v.3A17.19,17.19,0,1,1,16.62,33.77H17c0,.49-.05,1-.05,1.48A23.38,23.38,0,0,0,33.45,57.6Z"/>
+        <circle style="fill: #fadc0f;" cx="17.75" cy="50.92" r="1.94"/>
+      </g>
+    </g>
+    <g>
+      <g>
+        <circle style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" cx="40.29" cy="35.26" r="23.36"/>
+        <circle style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" cx="40.29" cy="35.26" r="2.64"/>
+        <line style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" x1="26.41" y1="21.38" x2="23.78" y2="18.74"/>
+        <line style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" x1="40.29" y1="15.63" x2="40.29" y2="11.9"/>
+        <line style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" x1="54.17" y1="21.38" x2="56.81" y2="18.74"/>
+        <line style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" x1="59.92" y1="35.26" x2="63.65" y2="35.26"/>
+        <line style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" x1="39.41" y1="32.77" x2="35.36" y2="21.39"/>
+        <rect style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" x="30.48" y="45.47" width="19.63" height="4.99" rx="2.49"/>
+      </g>
+      <g>
+        <path style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" d="M63.65,33.79A17.18,17.18,0,1,1,46.56,57.9"/>
+        <circle style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" cx="62.26" cy="50.92" r="1.94"/>
+        <line style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" x1="72.47" y1="40.71" x2="74.41" y2="38.77"/>
+        <line style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" x1="76.7" y1="50.92" x2="79.44" y2="50.92"/>
+        <line style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" x1="64.09" y1="50.27" x2="72.47" y2="47.32"/>
+      </g>
+      <g>
+        <path style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" d="M33.45,57.9A17.19,17.19,0,1,1,16.62,33.77"/>
+        <circle style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" cx="17.75" cy="50.92" r="1.94"/>
+        <line style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" x1="3.31" y1="50.92" x2="0.56" y2="50.92"/>
+        <line style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" x1="7.54" y1="40.71" x2="5.6" y2="38.77"/>
+        <line style="fill: none; stroke: #414042; stroke-linecap: round; stroke-linejoin: round;" x1="16.09" y1="49.91" x2="8.49" y2="45.3"/>
+      </g>
+    </g>
+  </g>
+</svg>

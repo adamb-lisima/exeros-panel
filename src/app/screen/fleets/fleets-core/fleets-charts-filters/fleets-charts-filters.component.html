@@ -1,0 +1,29 @@
+<div class="flex flex-col w-full">
+  <div class="mt-5">
+    <div class="flex flex-row gap-2 items-center">
+      <p class="pb-5">Filters:</p>
+      <app-select-control-show-filter class="w-60" [firstFive]="true" *ngIf="eventTypes$ | async as types" label="Event type" [clearable]="true" [multiple]="true" [selectAll]="true" [mode]="''" [options]="types" [formControl]="bodyGroup.controls.event_types"></app-select-control-show-filter>
+      <app-select-control-show-filter class="w-60" label="Status" [oneOption]="true" [clearable]="true" [multiple]="true" [selectAll]="true" [mode]="''" [options]="statusOptions" [formControl]="bodyGroup.controls.statuses"></app-select-control-show-filter>
+    </div>
+  </div>
+  <div class="flex flex-row flex-wrap w-full">
+    <div *ngIf="selectedOptions.length > 0" class="flex flex-row gap-1 w-full flex-wrap">
+      <ng-container *ngFor="let option of selectedOptions">
+        <div *ngIf="!isStatusOption(option)" class="flex items-center space-x-1 rounded px-1 py-1 border border-solid border-chinese-silver bg-white">
+          <div class="p-1 rounded-full" [style.background-color]="getColorForType(option.value.toString())"></div>
+          <span class="text-xs">{{ option.label }}</span>
+          <button class="flex items-center" (click)="removeOption(option.value)">
+            <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <mask id="mask0_1670_12855" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="20" height="21">
+                <rect y="0.5" width="20" height="20" fill="#D9D9D9" />
+              </mask>
+              <g mask="url(#mask0_1670_12855)">
+                <path d="M10.2176 11.078L5.99003 15.3056C5.87465 15.421 5.72962 15.48 5.55494 15.4827C5.38028 15.4854 5.23258 15.4263 5.11186 15.3056C4.99112 15.1849 4.93076 15.0385 4.93076 14.8665C4.93076 14.6945 4.99112 14.5482 5.11186 14.4274L9.33942 10.1998L5.11186 5.97226C4.99647 5.85689 4.93744 5.71186 4.93478 5.53718C4.9321 5.36252 4.99112 5.21482 5.11186 5.0941C5.23258 4.97336 5.37894 4.91299 5.55094 4.91299C5.72294 4.91299 5.8693 4.97336 5.99003 5.0941L10.2176 9.32166L14.4452 5.0941C14.5606 4.97871 14.7056 4.91968 14.8803 4.91702C15.0549 4.91433 15.2026 4.97336 15.3234 5.0941C15.4441 5.21482 15.5045 5.36118 15.5045 5.53318C15.5045 5.70518 15.4441 5.85154 15.3234 5.97226L11.0958 10.1998L15.3234 14.4274C15.4387 14.5428 15.4978 14.6878 15.5004 14.8625C15.5031 15.0372 15.4441 15.1849 15.3234 15.3056C15.2026 15.4263 15.0563 15.4867 14.8843 15.4867C14.7123 15.4867 14.5659 15.4263 14.4452 15.3056L10.2176 11.078Z" fill="#1C1B1B" />
+              </g>
+            </svg>
+          </button>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
